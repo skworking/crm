@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import DynamicDropdown from "./components/DynamicDropdown";
 import CardFormate from "./components/cardFormate";
-
+import LatestModel from "./components/latestModel";
 export default function Home() {
   const BrandData = [
     {
@@ -48,6 +48,14 @@ export default function Home() {
           <CardFormate data={BrandData} />
         </div>
       </div>
+      <div className="max-w-7xl m-auto ">
+
+        <div className='border rounded-[16px]  mb-3 flex flex-col bg-white   relative'>
+
+          <LatestModel />
+        </div>
+      </div>
+
 
     </div>
   );
