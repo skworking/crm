@@ -24,6 +24,25 @@ export default function Home() {
     },
 
   ]
+  const segmentData = [
+    {
+      heading: 'Electric Commercial Vehicles',
+      image: 'https://truckcdn.cardekho.com/pwa/img/ev.jpg',
+    },
+    {
+      heading: `SCV Vehicles`,
+      image: 'https://truckcdn.cardekho.com/pwa/img/scv.jpg',
+    },
+    {
+      heading: `ILCV Vehicles`,
+      image: 'https://truckcdn.cardekho.com/pwa/img/lcv.jpg',
+    },
+    {
+      heading: `MHCV Vehicles`,
+      image: 'https://truckcdn.cardekho.com/pwa/img/mhcv.jpg',
+    },
+
+  ]
   return (
     <div className="max-w-[1440px] m-auto ">
       <Link href="/en/trucks/bharat-benz/2826-r" className="text-sky-500" >
@@ -53,6 +72,16 @@ export default function Home() {
         <div className='border rounded-[16px]  mb-3 flex flex-col bg-white   relative'>
 
           <LatestModel />
+        </div>
+      </div>
+
+      <div className="max-w-7xl m-auto ">
+
+        <div className='border rounded-[16px]  mb-3 flex flex-col p-4 bg-white gap-2  relative'>
+          <h2 className='p-[17px 20px 0px] text-xl font-bold '>
+            Vehicle Segment
+          </h2>
+          <CardFormate data={segmentData} />
         </div>
       </div>
 

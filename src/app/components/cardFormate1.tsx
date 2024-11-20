@@ -3,13 +3,14 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Image from 'next/image';
-
+import { GiElectric } from 'react-icons/gi';
 interface Card {
   id: number;
   name: string;
   price: string;
   offer: string;
   imageUrl: string;
+  isElectric?: boolean;
 }
 
 interface CardFormateProps {
@@ -46,17 +47,20 @@ const CardFormate1: React.FC<CardFormateProps> = ({ data }) => {
         {data.map((item, index) => (
           <div key={index} className="pt-2 pl-2 pr-2">
             <div className="lg:w-full  bg-white border rounded-lg shadow-md text-center flex flex-col">
-              <Image
-                data-autofit="true"
-                decoding="async"
-                alt={item?.name}
-                className="sm:w-full md:h-full rounded-t-md object-cover object-top"
-                src={item.imageUrl}
-                loading="eager"
-                width={580}
-                height={300}
-                quality={75}
-              />
+              <div className='relative'>
+                <Image
+                  data-autofit="true"
+                  decoding="async"
+                  alt={item?.name}
+                  className="sm:w-full md:h-full rounded-t-md object-cover object-top"
+                  src={item.imageUrl}
+                  loading="eager"
+                  width={580}
+                  height={300}
+                  quality={75}
+                />
+                {item.isElectric && <span className='absolute bottom-0 right-3 text-[10px] flex items-center text-white bg-[#32bea6] p-1 font-bold mb-1 rounded-lg'><GiElectric className='w-5 h-4 rotate-[-30deg]' /> Electric</span>}
+              </div>
               <div className="p-4  ">
                 <h2 className="font-bold text-start  text-[15px] whitespace-nowrap overflow-hidden text-ellipsis  ">{item.name}</h2>
                 <p className="text-[#24272c] font-bold text-start  text-[15px] whitespace-nowrap overflow-hidden text-ellipsis ">{item.price ? item.price : "Price Coming Soon"}</p>

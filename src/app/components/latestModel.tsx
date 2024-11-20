@@ -9,6 +9,7 @@ interface SliderItem {
     price: string;
     offer: string;
     imageUrl: string;
+    isElectric?: boolean;
 }
 
 // Define the structure of sliderData
@@ -20,7 +21,7 @@ interface SliderData {
     'tippers': SliderItem[];
     '3 wheeler': SliderItem[];
     'auto rickshaw': SliderItem[];
-    'e rickshaw':SliderItem[];
+    'e rickshaw': SliderItem[];
 }
 
 
@@ -98,6 +99,7 @@ const LatestModel = () => {
                 offer: "View All offers",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/i-board/tipper-elecy-v-3525/i-board-tipper-elecy-v-3525.jpg",
+                isElectric: true,
             },
             {
                 id: 2,
@@ -106,6 +108,7 @@ const LatestModel = () => {
                 offer: "View All offers",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/i-board/long-haulage-tt-5520/i-board-long-haulage-tt-5520.jpg",
+                isElectric: true,
             },
             {
                 id: 3,
@@ -114,6 +117,7 @@ const LatestModel = () => {
                 offer: "View All offers",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/i-board/ductor-5525/i-board-ductor-5525.jpg",
+                isElectric: true,
             },
             {
                 id: 4,
@@ -130,6 +134,7 @@ const LatestModel = () => {
                 offer: "Get On Road Price",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/i-board/rex-5525/i-board-rex-5525.jpg",
+                isElectric: true,
             },
         ],
         'mini trucks': [
@@ -140,6 +145,7 @@ const LatestModel = () => {
                 offer: "View All offers",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/mahindra/zeo/mahindra-zeo-78314.jpg",
+                isElectric: true,
             },
             {
                 id: 2,
@@ -148,6 +154,7 @@ const LatestModel = () => {
                 offer: "Get On Road Price",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/euler/storm-ev/euler-storm-ev.jpg",
+                isElectric: true,
             },
             {
                 id: 3,
@@ -224,6 +231,7 @@ const LatestModel = () => {
                 offer: "View All offers",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/sahyatri/e-cart/sahyatri-e-cart.jpg",
+                isElectric: true,
             },
             {
                 id: 2,
@@ -232,6 +240,7 @@ const LatestModel = () => {
                 offer: "View All offers",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/city-cab/loader/city-cab-loader.jpg",
+                isElectric: true,
             },
             {
                 id: 3,
@@ -240,6 +249,7 @@ const LatestModel = () => {
                 offer: "Get On Road Price",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/triton-ev/loader/triton-ev-loader.jpg",
+                isElectric: true,
             },
             {
                 id: 4,
@@ -248,6 +258,7 @@ const LatestModel = () => {
                 offer: "Get On Road Price",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/komaki/cat-3-0-nxt/komaki-cat-3-0-nxt.jpg",
+                isElectric: true,
             },
             {
                 id: 5,
@@ -256,6 +267,7 @@ const LatestModel = () => {
                 offer: "Get On Road Price",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/atul/atul-energie/atul-atul-energie.jpg",
+                isElectric: true,
             },
         ],
         'auto rickshaw': [
@@ -266,6 +278,7 @@ const LatestModel = () => {
                 offer: "View All offers",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/atul/mobili/atul-mobili.jpg",
+                isElectric: true,
             },
             {
                 id: 2,
@@ -282,6 +295,7 @@ const LatestModel = () => {
                 offer: "View All offers",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/thukral-electric/ea-2-auto/thukral-electric-ea-2-auto.jpg",
+                isElectric: true,
             },
             {
                 id: 4,
@@ -290,6 +304,7 @@ const LatestModel = () => {
                 offer: "View All offers",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/sniper-electric/l5-passenger/sniper-electric-l5-passenger.jpg",
+                isElectric: true,
             },
             {
                 id: 5,
@@ -298,9 +313,10 @@ const LatestModel = () => {
                 offer: "View All offers",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/mahindra/e-alfa-plus/mahindra-e-alfa-plus.jpg",
+                isElectric: true,
             },
         ],
-        'e rickshaw':[
+        'e rickshaw': [
             {
                 id: 1,
                 name: "Star Bull Stainless Steel Battery Operated E-rickshaw",
@@ -308,6 +324,7 @@ const LatestModel = () => {
                 offer: "View All offers",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/star-bull/stainless-steel-battery-operated-e-rickshaw/star-bull-stainless-steel-battery-operated-e-rickshaw.jpg",
+                isElectric: true,
             },
             {
                 id: 2,
@@ -316,6 +333,7 @@ const LatestModel = () => {
                 offer: "View All offers",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/sahyatri/sigma/sahyatri-sigma.jpg",
+                isElectric: true,
             },
             {
                 id: 3,
@@ -324,6 +342,7 @@ const LatestModel = () => {
                 offer: "View All offers",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/star-bull/blue-e-rickshaw/star-bull-blue-e-rickshaw.jpg",
+                isElectric: true,
             },
             {
                 id: 4,
@@ -332,6 +351,7 @@ const LatestModel = () => {
                 offer: "View All offers",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/star-bull/battery-operated-e-rickshaw/star-bull-battery-operated-e-rickshaw.jpg",
+                isElectric: true,
             },
             {
                 id: 5,
@@ -340,6 +360,7 @@ const LatestModel = () => {
                 offer: "View All offers",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/sahyatri/semi-steel-dlx/sahyatri-semi-steel-dlx.jpg",
+                isElectric: true,
             },
         ]
     }
