@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.no-scrollbar {
+    overflow: auto;
+    scrollbar-width: none; /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Edge */
+}
+
+
+ 
+
+
+
+  .slick-prev:before, .slick-next:before {
+    /* font-size: 50px !important; */
+    /* font-family: 'slick'; */
+    /* line-height: 1; */
+    /* opacity: .75; */
+    /* background: gray; */
+    /* width: '50px'; */
+    /* -webkit-font-smoothing: antialiased; */
+    /* -moz-osx-font-smoothing: grayscale; */
+
+   /* border: 1px solid rgba(36, 39, 44, .7); */
+
+    /* background: #fff; */
+    border-radius: 50%;
+    box-shadow: 0 8px 12px 0 rgba(36, 39, 44, .15);
+    cursor: pointer;
+    height: 48px;
+    left: -20px;
+    margin-top: -24px;
+    position: absolute;
+    text-indent: -9999px;
+    top: 50%;
+    width: 48px;
+    z-index: 99;
+}
+
+.slick-prev:after {
+  border: 1px solid rgba(36, 39, 44, .7);
+  border-width: 0 0 2px 2px;
+  content: "";
+  display: block;
+  font-size: 0;
+  height: 10px;
+  /* left: 50%; */
+  line-height: 0;
+  margin: -4px 0 0 -2px;
+  position: absolute;
+  top: 50%;
+  transform: rotate(-315deg);
+  width: 10px;
+}
+.slick-next::after{
+  border: 1px solid rgba(36, 39, 44, .7);
+  border-width: 0 0 2px 2px;
+  content: "";
+  display: block;
+  font-size: 0;
+  height: 10px;
+  /* left: 50%; */
+  line-height: 0;
+  margin: -4px 0 0 -2px;
+  position: absolute;
+  top: 50%;
+  transform: rotate(-135deg);
+  width: 10px;
+}
+
+.truck-slider .slick-slide {
+  opacity: .5;
+  transition: opacity 0.5s ease-in-out;
+}
+.truck-slider .slick-center {
+  opacity: 1; /* Fully visible for the active slide */
+  transition: opacity 0.5s ease-in-out;
+}
+.truck-slider .slick-active {
+  opacity: 1; 
+  transition: opacity 0.5s ease-in-out;
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-family: 'Roboto', sans-serif,Arial;
+  font-weight: 400; 
+  color: #24272c;
+  margin: 0px 0px 8px;
+}
+
+body{
+  font-family: roboto, Sans-Serif, Arial;
+}
+
