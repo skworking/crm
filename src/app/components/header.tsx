@@ -25,7 +25,7 @@ const Header = () => {
     const router = usePathname();
     console.log(router);
 
-    const [isLargeScreen, setIsLargeScreen] = useState(true);
+    const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 499);
     const toggleDropdown = () => setIsOpen(!isOpen);
 
     const [isModalOpen, setIsModalOpen] = useState(false);

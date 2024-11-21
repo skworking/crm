@@ -7,6 +7,7 @@ import LatestModel from "./components/latestModel";
 import PopulerModel from "./components/populerModel";
 import CardFormate2 from "./components/cardFormate2";
 import ViewAllButton from "./comman/buttonView";
+import CompareModel from "./components/compareModel";
 
 export default function Home() {
   const BrandData = [
@@ -158,7 +159,13 @@ export default function Home() {
           <ViewAllButton heading="Popular Trucks" link="/popular-trucks" />
         </div>
       </div>
+      <div className="max-w-7xl m-auto ">
 
+        <div className='border rounded-[16px]  mb-3 flex flex-col bg-white   relative'>
+
+          <CompareModel />
+        </div>
+      </div>
     </div>
   );
 }

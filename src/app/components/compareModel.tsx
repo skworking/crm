@@ -1,13 +1,13 @@
 'use client'
 import React, { useState } from 'react'
-import { FaAngleRight } from 'react-icons/fa';
-import CardFormate1 from './cardFormate1';
+import ViewAllButton from '../comman/buttonView';
+import CompareSlider from '../comman/compareSlider';
 // Define the structure of a slider item
 interface SliderItem {
     id: number;
     name: string;
     price: string;
-    offer: string;
+    offer?: string;
     imageUrl: string;
     isElectric?: boolean;
 }
@@ -20,14 +20,17 @@ interface SliderData {
     'mini trucks': SliderItem[];
     'tippers': SliderItem[];
     '3 wheeler': SliderItem[];
-    'auto rickshaw': SliderItem[];
     'e rickshaw': SliderItem[];
     'trailers': SliderItem[];
 }
 
 
-const PopulerModel = () => {
-    const [currentTab, setCurrentTab] = useState<'trucks' | 'pickup trucks' | 'mini trucks' | 'tippers' | 'trailers' | '3 wheeler' | 'transit mixer' | 'auto rickshaw' | 'e rickshaw'>('trucks');
+interface CompareData {
+    trucks: SliderItem[];
+    comparison: string;
+}
+const CompareModel = () => {
+    const [currentTab, setCurrentTab] = useState<'trucks' | 'pickup trucks' | 'mini trucks' | 'tippers' | 'trailers' | '3 wheeler' | 'e rickshaw'>('trucks');
     const handleTabChange = (tab: typeof currentTab) => {
         setCurrentTab(tab);
     }
@@ -79,84 +82,126 @@ const PopulerModel = () => {
             {
                 id: 1,
                 name: "Force Urbania",
-                price: "₹30.51 - ₹37.21 Lakh*",
-                offer: "Get On Road Price",
+                price: "₹30.51 - ₹37.21 Lakh *",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/force/urbania/force-urbania.jpg",
             },
             {
                 id: 2,
+                name: "Tata Winger Cargo",
+                price: "From ₹8.00 Lakh *",
+                imageUrl:
+                    "https://truckcdn.cardekho.com/in/tata/winger-cargo/tata-winger-cargo-67281.jpg",
+            },
+            {
+                id: 3,
                 name: "Ashok Leyland Dost +",
-                price: "₹7.75 - ₹8.25 Lakh*",
-                offer: "Get On Road Price",
+                price: "₹7.75 - ₹8.25 Lakh *",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/ashok-leyland/dost/ashok-leyland-dost-59041.jpg",
             },
             {
-                id: 3,
-                name: "Mahindra Supro Profit Truck Mini",
-                price: "₹6.12 - ₹7.15 Lakh*",
+                id: 4,
+                name: "Ashok Leyland Dost Strong Comparison",
+                price: "₹7.49 - ₹7.95 Lakh*",
                 offer: "Get On Road Price",
                 imageUrl:
-                    "https://truckcdn.cardekho.com/in/mahindra/supro-minitruck/mahindra-supro-minitruck-29980.jpg",
+                    "https://truckcdn.cardekho.com/in/ashok-leyland/dost-strong/ashok-leyland-dost-strong-33132.jpg",
             },
             {
-                id: 4,
-                name: "Tata Yodha Pickup",
+                id: 5,
+                name: "Isuzu D-MAX",
+                price: "₹8.32 - ₹8.36 Lakh*",
+                offer: "Get On Road Price",
+                imageUrl:
+                    "https://truckcdn.cardekho.com/in/isuzu/d-max/isuzu-d-max-48049.jpg",
+            },
+            {
+                id: 6,
+                name: "Tata Yodha Pickup Comparison",
                 price: "₹8.51 - ₹10.71 Lakh*",
                 offer: "Get On Road Price",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/tata/yodha/tata-yodha-46306.jpg",
             },
             {
-                id: 5,
-                name: "Mahindra Supro Profit Truck Maxi",
-                price: "₹7.13 - ₹7.73 Lakh*",
+                id: 7,
+                name: "Mahindra Bolero Maxx Pik-Up HD",
+                price: "₹9.79 - ₹9.85 Lakh *",
                 offer: "Get On Road Price",
                 imageUrl:
-                    "https://truckcdn.cardekho.com/in/mahindra/supro-maxitruck/mahindra-supro-maxitruck-62845.jpg",
+                    "https://truckcdn.cardekho.com/in/mahindra/bolero-maxx-pik-up-hd/mahindra-bolero-maxx-pik-up-hd-96009.jpg",
+            },
+            {
+                id: 8,
+                name: "Tata Yodha 2.0",
+                price: "₹9.99 - ₹10.00 Lakh *",
+                offer: "Get On Road Price",
+                imageUrl:
+                    "https://truckcdn.cardekho.com/in/tata/yodha-2-0/tata-yodha-2-0.jpg",
             },
         ],
         'trucks': [
             {
                 id: 1,
-                name: "Tata 407 Gold SFC",
-                price: "₹10.75 - ₹13.26 Lakh*",
-                offer: "Get On Road Price",
+                name: "Eicher Pro 2049",
+                price: "From ₹12.16 Lakh *",
                 imageUrl:
-                    "https://truckcdn.cardekho.com/in/tata/407-gold-sfc/tata-407-gold-sfc-15836.jpg",
+                    "https://truckcdn.cardekho.com/in/eicher/pro-2049/eicher-pro-2049-47454.jpg",
             },
             {
                 id: 2,
                 name: "Eicher Pro 2049",
                 price: "From ₹12.16 Lakh*",
-                offer: "Get On Road Price",
                 imageUrl:
-                    "https://truckcdn.cardekho.com/in/eicher/pro-2049/eicher-pro-2049-47454.jpg",
+                    "https://truckcdn.cardekho.com/in/tata/407-gold-sfc/tata-407-gold-sfc-15836.jpg",
 
             },
             {
                 id: 3,
-                name: "Eicher Pro 3015",
-                price: "₹21.00 - ₹29.80 Lakh*",
-                offer: "Get On Road Price",
+                name: "Mahindra JAYO",
+                price: "₹9.96 - ₹9.98 Lakh *",
+                // offer: "Get On Road Price",
                 imageUrl:
-                    "https://truckcdn.cardekho.com/in/eicher/pro-3015/eicher-pro-3015-65791.jpg",
+                    "https://truckcdn.cardekho.com/in/mahindra/di3200-jayo/mahindra-di3200-jayo-72694.jpg",
 
             },
             {
                 id: 4,
-                name: "Tata 1512 LPT",
-                price: "₹23.46 - ₹23.54 Lakh*",
-                offer: "Get On Road Price",
+                name: "Tata 407 Gold SFC",
+                price: "₹10.75 - ₹13.26 Lakh *",
+                // offer: "Get On Road Price",
                 imageUrl:
-                    "https://truckcdn.cardekho.com/in/tata/1512-lpt/tata-1512-lpt-84331.jpg",
+                    "https://truckcdn.cardekho.com/in/tata/407-gold-sfc/tata-407-gold-sfc-15836.jpg",
             },
             {
                 id: 5,
-                name: "I-BOARD REX 5525",
-                price: "₹41.30 - ₹43.90 Lakh*",
-                offer: "Get On Road Price",
+                name: "Ashok Leyland Ecome 1615",
+                price: "From ₹27.50 Lakh *",
+                imageUrl:
+                    "https://truckcdn.cardekho.com/in/ashok-leyland/ecomet-1615-he/ashok-leyland-ecomet-1615-he-32256.jpg",
+
+            },
+            {
+                id: 6,
+                name: "Tata 1512 LPT Comparison",
+                price: "₹23.46 - ₹23.54 Lakh*",
+                imageUrl:
+                    "https://truckcdn.cardekho.com/in/tata/1512-lpt/tata-1512-lpt-84331.jpg?impolicy=resize&imwidth=336",
+
+            },
+            {
+                id: 7,
+                name: "Eicher Pro 3018",
+                price: "₹28.50 - ₹31.20 Lakh *",
+                imageUrl:
+                    "https://truckcdn.cardekho.com/in/eicher/pro-3018/eicher-pro-3018.jpg",
+
+            },
+            {
+                id: 8,
+                name: "Eicher Pro 3018",
+                price: "₹25.15 - ₹28.17 Lakh*",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/eicher/pro-3019/eicher-pro-3019-48551.jpg",
 
@@ -165,54 +210,78 @@ const PopulerModel = () => {
         'mini trucks': [
             {
                 id: 1,
-                name: "Mahindra Jeeto",
-                price: "₹4.72 - ₹5.65 Lakh*",
+                name: "Maruti Suzuki Super Carry",
+                price: "₹5.26 - ₹6.41 Lakh *",
                 offer: "Get On Road Price",
                 imageUrl:
-                    "https://truckcdn.cardekho.com/in/mahindra/jeeto/mahindra-jeeto-65562.jpg",
+                    "https://truckcdn.cardekho.com/in/maruti-suzuki/super-carry/maruti-suzuki-super-carry-88671.jpg",
 
             },
             {
                 id: 2,
                 name: "Tata Ace gold",
-                price: "₹3.99 - ₹6.69 Lakh*",
+                price: "₹3.99 - ₹6.69 Lakh *",
                 offer: "Get On Road Price",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/tata/ace-gold/tata-ace-gold-21473.jpg",
             },
             {
                 id: 3,
-                name: "Maruti Suzuki Super Carry",
-                price: "₹5.26 - ₹6.41 Lakh*",
-                offer: "Get On Road Price",
-                imageUrl:
-                    "https://truckcdn.cardekho.com/in/maruti-suzuki/super-carry/maruti-suzuki-super-carry-88671.jpg",
-            },
-            {
-                id: 3,
-                name: "Tata Intra V10",
-                price: "₹6.55 - ₹6.76 Lakh*",
-                offer: "Get On Road Price",
-                imageUrl:
-                    "https://truckcdn.cardekho.com/in/tata/intra-v10/tata-intra-v10-18816.jpg",
-            },
-            {
-                id: 4,
                 name: "Tata Intra V30",
-                price: "₹7.30 - ₹7.62 Lakh*",
+                price: "₹7.30 - ₹7.62 Lakh *",
                 offer: "Get On Road Price",
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/tata/intra-v30-bs6/tata-intra-v30-bs6-67228.jpg",
+            },
+            {
+                id: 4,
+                name: "Tata Intra V50 ",
+                price: "₹6.55 - ₹6.76 Lakh*",
+                offer: "Get On Road Price",
+                imageUrl:
+                    "https://truckcdn.cardekho.com/in/tata/intra-v50/tata-intra-v50.jpg",
+            },
+            {
+                id: 5,
+                name: "Mahindra Jeeto",
+                price: "₹4.72 - ₹5.65 Lakh *",
+                offer: "Get On Road Price",
+                imageUrl:
+                    "https://truckcdn.cardekho.com/in/mahindra/jeeto/mahindra-jeeto-65562.jpg",
+            },
+            {
+                id: 6,
+                name: "Tata Ace gold ",
+                price: "₹3.99 - ₹6.69 Lakh *",
+                offer: "Get On Road Price",
+                imageUrl:
+                    "https://truckcdn.cardekho.com/in/tata/ace-gold/tata-ace-gold-21473.jpg",
+            },
+            {
+                id: 7,
+                name: "Mahindra Jeeto ",
+                price: "₹4.72 - ₹5.65 Lakh *",
+                offer: "Get On Road Price",
+                imageUrl:
+                    "https://truckcdn.cardekho.com/in/mahindra/jeeto/mahindra-jeeto-65562.jpg",
+            },
+            {
+                id: 8,
+                name: "Maruti Suzuki Super Carry ",
+                price: "₹5.26 - ₹6.41 Lakh *",
+                offer: "Get On Road Price",
+                imageUrl:
+                    "https://truckcdn.cardekho.com/in/maruti-suzuki/super-carry/maruti-suzuki-super-carry-88671.jpg",
             },
         ],
         'tippers': [
             {
                 id: 1,
-                name: "Ashok Leyland AVTR 2820-6x4",
-                price: "From ₹34.50 Lakh*",
+                name: "Tata Prima 3530.K",
+                price: "₹67.28 - ₹68.50 Lakh *",
                 offer: "Get On Road Price",
                 imageUrl:
-                    "https://truckcdn.cardekho.com/in/ashok-leyland/2820-tipper/ashok-leyland-2820-tipper-70163.jpg",
+                    "https://truckcdn.cardekho.com/in/tata/prima-fl-3530-k-bs6/tata-prima-fl-3530-k-bs6-54252.jpg",
             },
             {
                 id: 2,
@@ -224,27 +293,27 @@ const PopulerModel = () => {
             },
             {
                 id: 3,
-                name: "Tata Signa 1923.K",
-                price: "From ₹28.91 Lakh*",
+                name: "Ashok Leyland AVTR 2820-6x4",
+                price: "From ₹34.50 Lakh *",
                 offer: "Get On Road Price",
                 imageUrl:
-                    "https://truckcdn.cardekho.com/in/tata/signa-1923-k/tata-signa-1923-k-27351.jpg",
+                    "https://truckcdn.cardekho.com/in/ashok-leyland/2820-tipper/ashok-leyland-2820-tipper-70163.jpg",
             },
             {
                 id: 4,
-                name: "Tata 912 LPK",
-                price: "₹18.64 - ₹20.42 Lakh*",
+                name: "Tata Signa 2823.K HD 9S",
+                price: "From ₹36.26 Lakh *",
                 offer: "Get On Road Price",
                 imageUrl:
-                    "https://truckcdn.cardekho.com/in/tata/lpk-912/tata-lpk-912-48146.jpg",
+                    "https://truckcdn.cardekho.com/in/tata/signa-2823-k-hd-9s/tata-signa-2823-k-hd-9s-39314.jpg?impolicy=resize&imwidth=336",
             },
             {
                 id: 5,
-                name: "BharatBenz 1217C",
+                name: "Tata Prima 2830.K",
                 price: "From ₹23.85 Lakh*",
                 offer: "Get On Road Price",
                 imageUrl:
-                    "https://truckcdn.cardekho.com/in/bharat-benz/1217c/bharat-benz-1217c-60162.jpg",
+                    "https://truckcdn.cardekho.com/in/tata/prima-2530k/tata-prima-2530k-65252.jpg",
             },
         ],
         'trailers': [
@@ -330,53 +399,6 @@ const PopulerModel = () => {
                 isElectric: true,
             },
         ],
-        'auto rickshaw': [
-            {
-                id: 1,
-                name: "Atul Mobili",
-                price: "",
-                offer: "View All offers",
-                imageUrl:
-                    "https://truckcdn.cardekho.com/in/atul/mobili/atul-mobili.jpg",
-                isElectric: true,
-            },
-            {
-                id: 2,
-                name: "Mahindra ALFA DX DUO",
-                price: "",
-                offer: "View All offers",
-                imageUrl:
-                    "https://truckcdn.cardekho.com/in/mahindra/alfa-dx-duo/mahindra-alfa-dx-duo.jpg",
-
-            },
-            {
-                id: 3,
-                name: "Thukral Electric EA-2 Auto",
-                price: "",
-                offer: "View All offers",
-                imageUrl:
-                    "https://truckcdn.cardekho.com/in/thukral-electric/ea-2-auto/thukral-electric-ea-2-auto.jpg",
-                isElectric: true,
-            },
-            {
-                id: 4,
-                name: "Sniper Electric L5 Passenger",
-                price: "",
-                offer: "View All offers",
-                imageUrl:
-                    "https://truckcdn.cardekho.com/in/sniper-electric/l5-passenger/sniper-electric-l5-passenger.jpg",
-                isElectric: true,
-            },
-            {
-                id: 5,
-                name: "Mahindra e-Alfa Plus",
-                price: "",
-                offer: "View All offers",
-                imageUrl:
-                    "https://truckcdn.cardekho.com/in/mahindra/e-alfa-plus/mahindra-e-alfa-plus.jpg",
-                isElectric: true,
-            },
-        ],
         'e rickshaw': [
             {
                 id: 1,
@@ -436,28 +458,38 @@ const PopulerModel = () => {
         tippers: 'tippers',
         trailers: 'trailers',
         '3 wheeler': '3 wheeler',
-        'transit mixer': 'default',
-        'auto rickshaw': 'auto rickshaw',
         'e rickshaw': 'e rickshaw',
     };
     const renderSlider = (activeTag: typeof currentTab) => {
 
         const sliderKey = tabToKeyMap[activeTag];
         const sliderItems = sliderData[sliderKey] || sliderData.default;
+        // Function to generate comparison data
+        const generateCompareData = (trucks: SliderItem[]): CompareData[] => {
+            const compareData: CompareData[] = [];
+            for (let i = 0; i < trucks.length - 1; i += 2) {
+                compareData.push({
+                    trucks: [trucks[i], trucks[i + 1]],
+                    comparison: `${trucks[i].name} vs ${trucks[i + 1].name}`,
+                });
+            }
+            return compareData;
+        };
+        const compareData = generateCompareData(sliderItems);
 
         return (
             <>
-                <CardFormate1 data={sliderItems} />
+                <CompareSlider data={compareData} />
             </>
         )
     }
     return (
         <>
-            <h2 className='  px-4 pt-4 text-xl font-bold '>
-                Populer Models
+            <h2 className='px-4 pt-4 text-xl font-bold '>
+                Compare to buy the right truck
             </h2>
             <div className='flex border-b   overflow-auto no-scrollbar'>
-                {['trucks', 'pickup trucks', 'mini trucks', 'tippers', 'trailers', '3 wheeler', 'transit mixer', 'auto rickshaw', 'e rickshaw'].map((tab) => (
+                {['trucks', 'pickup trucks', 'mini trucks', 'tippers', 'trailers', '3 wheeler', 'e rickshaw'].map((tab) => (
                     <span
                         key={tab}
                         onClick={() => handleTabChange(tab as typeof currentTab)}
@@ -469,17 +501,12 @@ const PopulerModel = () => {
                 ))}
             </div>
             {renderSlider(currentTab)}
-            <div className='inline-flex  items-baseline pb-4 pl-4 pr-4'>
-                <span className='mr-2 text-[#d94025] text-[14px] font-bold'>View All Populer Trucks</span>
-                <div className="relative w-5 h-5 mt-4 bg-[#d94025] rounded-full flex justify-center items-center" >
-                    <FaAngleRight className="w-5 h-3 left-[-1px] mr-0  fill-white" />
-                </div>
-            </div>
-            <div className=' text-[10px] items-baseline py-1 rounded-b-lg bg-[#f1f1f1] px-4'>
-                Ex-showroom price
+            <div className='pb-4 pl-4'>
+
+                <ViewAllButton heading="Trucks Comparisions" link="/compare" />
             </div>
         </>
     )
 }
 
-export default PopulerModel;
+export default CompareModel;
