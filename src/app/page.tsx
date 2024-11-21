@@ -4,6 +4,10 @@ import Link from "next/link";
 import DynamicDropdown from "./components/DynamicDropdown";
 import CardFormate from "./components/cardFormate";
 import LatestModel from "./components/latestModel";
+import PopulerModel from "./components/populerModel";
+import CardFormate2 from "./components/cardFormate2";
+import ViewAllButton from "./comman/buttonView";
+
 export default function Home() {
   const BrandData = [
     {
@@ -43,6 +47,56 @@ export default function Home() {
     },
 
   ]
+  const populerBrand = [
+    {
+      heading: 'Ashok Leyland',
+      image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/ashok-leyland.jpg',
+    },
+    {
+      heading: 'tata',
+      image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/tata.jpg',
+    },
+    {
+      heading: 'mahindra',
+      image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/mahindra.jpg',
+    },
+    {
+      heading: 'eicher',
+      image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/eicher.jpg',
+    },
+    {
+      heading: 'bharat-benz',
+      image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/bharat-benz.jpg',
+    },
+    {
+      heading: 'piaggio',
+      image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/piaggio.jpg',
+    },
+    {
+      heading: 'altigreen',
+      image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/altigreen.jpg',
+    },
+    {
+      heading: 'deltic',
+      image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/deltic.jpg',
+    },
+    {
+      heading: 'osm',
+      image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/osm.jpg',
+    },
+    {
+      heading: 'bajaj',
+      image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/bajaj.jpg',
+    },
+    {
+      heading: 'sml-isuzu',
+      image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/sml-isuzu.jpg',
+    },
+    {
+      heading: 'toyota',
+      image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/toyota.jpg',
+    },
+  ]
   return (
     <div className="max-w-[1440px] m-auto ">
       <Link href="/en/trucks/bharat-benz/2826-r" className="text-sky-500" >
@@ -67,11 +121,20 @@ export default function Home() {
           <CardFormate data={BrandData} />
         </div>
       </div>
+
       <div className="max-w-7xl m-auto ">
 
         <div className='border rounded-[16px]  mb-3 flex flex-col bg-white   relative'>
 
           <LatestModel />
+        </div>
+      </div>
+
+      <div className="max-w-7xl m-auto ">
+
+        <div className='border rounded-[16px]  mb-3 flex flex-col bg-white   relative'>
+
+          <PopulerModel />
         </div>
       </div>
 
@@ -85,6 +148,16 @@ export default function Home() {
         </div>
       </div>
 
+      <div className="max-w-7xl m-auto ">
+
+        <div className='border rounded-[16px] p-4 mb-3 flex flex-col  bg-white gap-2  relative'>
+          <h2 className='p-[17px 20px 0px]  text-xl font-bold '>
+            Popular Truck Brands
+          </h2>
+          <CardFormate2 data={populerBrand} />
+          <ViewAllButton heading="Popular Trucks" link="/popular-trucks" />
+        </div>
+      </div>
 
     </div>
   );
