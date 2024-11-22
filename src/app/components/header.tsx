@@ -25,7 +25,7 @@ const Header = () => {
     const router = usePathname();
     console.log(router);
 
-    const [isLargeScreen, setIsLargeScreen] = useState(true);
+    // const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 499);
     const toggleDropdown = () => setIsOpen(!isOpen);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -81,16 +81,16 @@ const Header = () => {
         };
     }, []);
 
-    useEffect(() => {
-        const handleResize = () => {
-            setIsLargeScreen(window.innerWidth > 500);
-        };
+    // useEffect(() => {
+    //     const handleResize = () => {
+    //         setIsLargeScreen(window.innerWidth > 500);
+    //     };
 
-        window.addEventListener('resize', handleResize);
+    //     window.addEventListener('resize', handleResize);
 
-        // Clean up event listener on component unmount
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    //     // Clean up event listener on component unmount
+    //     return () => window.removeEventListener('resize', handleResize);
+    // }, []);
 
 
     //  header main 
@@ -267,7 +267,7 @@ const Header = () => {
     const [openSubMenu, setOpenSubMenu] = useState<number | null>(null);
 
     const [openSubMenuIndex, setOpenSubMenuIndex] = useState<number | null>(null);
-    const toggleSubMenu = (index:  number) => {
+    const toggleSubMenu = (index: number) => {
         setOpenSubMenuIndex(openSubMenuIndex === index ? null : index);
     };
 
@@ -299,27 +299,229 @@ const Header = () => {
 
     return (
         <>
+            {/* on large devices */}
+            <div className='w-full bg-white mb-[10px] shadow-md  hidden md:block'>
+                <div className='max-w-7xl m-auto'>
+                    <div className='sm:p-4 md:flex gap-4 '>
+                        <div className='sm:w-[25%]'>
 
-            {isLargeScreen ? (
-                <div className='w-full bg-white mb-[10px] shadow-md'>
-                    <div className='max-w-7xl m-auto'>
-                        <div className='sm:p-4 md:flex gap-4 '>
-                            <div className='sm:w-[25%]'>
+                            <Image src={'https://truckcdn.cardekho.com/pwa/img/TrucksDekho-NewLogov2.svg'} className='h-[42px]   w-fit text-start' width={100} height={100} alt='not found' />
+                        </div>
+                        <div className="flex md:w-[43.66%] lg:w-[42%]  rounded-md overflow-hidden  font-[sans-serif] ">
+                            <input type="text" placeholder="Search Trucks or Brands eg. Tata or Bajaj"
+                                className="w-full outline-none border-2 rounded-l-md shadow-sm bg-[#f7f7f7] text-gray-600 text-sm ml-4 px-4 py-3" />
+                            <button type='button' className="flex items-center justify-center md:w-[15%] w-[15%] sm:w-[10%] bg-black px-5">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192.904 192.904" width="16px" className="fill-white">
+                                    <path
+                                        d="m190.707 180.101-47.078-47.077c11.702-14.072 18.752-32.142 18.752-51.831C162.381 36.423 125.959 0 81.191 0 36.422 0 0 36.423 0 81.193c0 44.767 36.422 81.187 81.191 81.187 19.688 0 37.759-7.049 51.831-18.751l47.079 47.078a7.474 7.474 0 0 0 5.303 2.197 7.498 7.498 0 0 0 5.303-12.803zM15 81.193C15 44.694 44.693 15 81.191 15c36.497 0 66.189 29.694 66.189 66.193 0 36.496-29.692 66.187-66.189 66.187C44.693 147.38 15 117.689 15 81.193z">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div className='text-end m-auto right-0  md:w-[33.3%]'>
+                            <button
+                                onClick={toggleDropdown}
+                                ref={dropdownRef}
+                                className={`relative   text-gray-900 underline rounded-md  py-2 transition-colors  ${isOpen ? "" : "border-gray-300"
+                                    }`}
+                            >
+                                <span className='flex text-[12px] items-center'>
 
-                                <Image src={'https://truckcdn.cardekho.com/pwa/img/TrucksDekho-NewLogov2.svg'} className='h-[42px]   w-fit text-start' width={100} height={100} alt='not found' />
+                                    {selectedLanguage}
+                                    <TiArrowSortedDown />
+                                </span>
+                                {isOpen && (
+                                    <ul className="absolute right-0 mt-2 py-2  z-50 w-[120px]  bg-white rounded-md shadow-[2px_4px_12px_hsla(0,0%,45%,.25)]">
+                                        {languages.map((language, index) => (
+                                            <li
+                                                key={language}
+                                                onClick={() => handleSelect(language)}
+                                                className="px-4 py-1 cursor-pointer text-start text-gray-900"
+                                            >
+                                                {language}
+                                                {index < languages.length - 1 && <hr className='w-[97%] m-auto' />}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <nav className="relative max-w-7xl  m-auto flex justify-between">
+                    <ul className="flex max-w-6xl flex-wrap space-x-2  md:space-x-8 " onMouseLeave={handleMouseLeave}>
+                        {menuData.map((item, index) => (
+                            <li key={index} onMouseEnter={() => handleMenuMouseEnter(index)} className="relative p-2 sm:text-[14px] text-[12px] border-t-[3px]  border-white hover:border-t-[3px] hover:border-[#d94025] transition-colors duration-700">
+                                {item.link ? (
+                                    <Link href={item.link} className='flex '>
+                                        {item.title}
+                                        {item.offer && <span className="w-10  h-5 ml-2 text-center  bg-red-500 " >new</span>}
+                                    </Link>
+                                ) : (
+                                    <span className="flex sm:text-[14px] text-[12px] items-center cursor-pointer ">
+                                        {item.title}
+                                        {item.subMenu && <MdOutlineArrowDropDown className="w-5 h-5 ml-1" />}
+
+                                    </span>
+
+                                )}
+
+
+                                {item.subMenu && openMenu === index && (
+                                    <motion.ul
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -10 }}
+                                        transition={{ duration: 0.2 }}
+                                        className="absolute z-50 left-0 top-full bg-white text-gray-800 shadow-lg rounded-lg w-48"
+                                    >
+                                        {item.subMenu.map((subItem, subIndex) => (
+                                            <li
+                                                key={subIndex}
+                                                onMouseEnter={() => handleSubMenuMouseEnter(subIndex)}
+                                                className="relative bg-white border-[1px] "
+                                            >
+                                                {subItem.link ? (
+                                                    <Link href={subItem.link} className='block px-4 py-2 hover:bg-gray-100'>
+                                                        {subItem.title}
+
+                                                    </Link>
+                                                ) : (
+                                                    <span className="block px-4 py-2  cursor-pointer hover:bg-gray-100">
+                                                        <span className="flex items-center justify-between cursor-pointer">
+
+                                                            {subItem.title}
+                                                            {subItem.subMenu && (
+                                                                <>
+                                                                    <MdKeyboardArrowRight className="w-4 h-4 ml-2" />
+                                                                </>
+                                                            )}
+                                                        </span>
+                                                    </span>
+                                                )}
+
+                                                {subItem.subMenu && openSubMenu === subIndex && (
+                                                    <ul className="absolute left-full top-0  bg-white text-gray-800 shadow-lg rounded-lg w-48">
+                                                        {subItem.subMenu.map((nestedItem, nestedIndex) => (
+                                                            <li key={nestedIndex} className="border-[1px]">
+                                                                <Link href={nestedItem.link}>
+                                                                    <label className="block px-4 py-2 hover:bg-gray-100">
+                                                                        {nestedItem.title}
+                                                                    </label>
+                                                                </Link>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                )}
+                                            </li>
+                                        ))}
+                                    </motion.ul>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                    <div className='inline-flex max-w-1xl items-center mr-2  text-gray-500 absolute right-0 top-3'>
+                        <IoLocationOutline className='w-4 h-4 m-auto mr-2' />
+                        <button onClick={openModal} className='text-[14px]'> {selectedOption || "None"}</button>
+                        <span className='flex text-[12px] ml-1'>
+                            <TiArrowSortedDown />
+                        </span>
+                    </div>
+                </nav>
+
+                {isModalOpen && (
+                    <div
+                        id="modal-overlay"
+                        className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+                        onClick={handleOuterClick}
+                    >
+                        <div
+                            className="absolute top-32 bg-white w-[500px] h-[200px] rounded shadow-lg p-4 flex flex-col"
+                        // style={{ marginTop: "20px", marginBottom: "60px" }}
+                        >
+                            {/* Close icon */}
+                            <button
+                                className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
+                                onClick={closeModal}
+                            >
+                                ✕
+                            </button>
+
+                            {/* Modal content */}
+                            <h3 className="text-[#24272c] font-thin text-[16px] text-center">Which is your city ?</h3>
+
+                            <div className="max-w-sm mx-auto mt-10">
+
+                                <Box sx={{ minWidth: 400, mx: "auto" }}>
+                                    {/* Dropdown Label */}
+                                    <FormControl fullWidth>
+                                        <InputLabel id="city-select-label">
+                                            Type your city, e.g. Jaipur, New Delhi
+                                        </InputLabel>
+
+                                        {/* Material-UI Select Component */}
+                                        <Select
+                                            labelId="city-select-label"
+                                            id="city-select"
+                                            defaultOpen
+                                            value={selectedOption}
+                                            onChange={handleSelectCity}
+                                            label="Type your city, e.g. Jaipur, New Delhi"
+                                            MenuProps={{
+                                                PaperProps: {
+                                                    style: {
+                                                        maxHeight: 200, // Set the dropdown height
+                                                        overflowY: "auto", // Enable scrolling for overflow
+                                                    },
+                                                },
+                                            }}
+                                        >
+
+                                            {/* Map Over Options */}
+                                            {options.map((city, index) =>
+                                                city.isHeader ? (
+                                                    <MenuItem key={index} disabled>
+                                                        <span>{city.label}</span>
+                                                    </MenuItem>
+                                                ) : (
+                                                    <MenuItem key={index} value={city.value}>
+                                                        {city.label}
+                                                    </MenuItem>
+                                                )
+                                            )}
+
+                                        </Select>
+                                    </FormControl>
+                                </Box>
+
                             </div>
-                            <div className="flex md:w-[43.66%] lg:w-[42%]  rounded-md overflow-hidden  font-[sans-serif] ">
-                                <input type="text" placeholder="Search Trucks or Brands eg. Tata or Bajaj"
-                                    className="w-full outline-none border-2 rounded-l-md shadow-sm bg-[#f7f7f7] text-gray-600 text-sm ml-4 px-4 py-3" />
-                                <button type='button' className="flex items-center justify-center md:w-[15%] w-[15%] sm:w-[10%] bg-black px-5">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192.904 192.904" width="16px" className="fill-white">
-                                        <path
-                                            d="m190.707 180.101-47.078-47.077c11.702-14.072 18.752-32.142 18.752-51.831C162.381 36.423 125.959 0 81.191 0 36.422 0 0 36.423 0 81.193c0 44.767 36.422 81.187 81.191 81.187 19.688 0 37.759-7.049 51.831-18.751l47.079 47.078a7.474 7.474 0 0 0 5.303 2.197 7.498 7.498 0 0 0 5.303-12.803zM15 81.193C15 44.694 44.693 15 81.191 15c36.497 0 66.189 29.694 66.189 66.193 0 36.496-29.692 66.187-66.189 66.187C44.693 147.38 15 117.689 15 81.193z">
-                                        </path>
-                                    </svg>
-                                </button>
-                            </div>
-                            <div className='text-end m-auto right-0  md:w-[33.3%]'>
+                        </div>
+                    </div>
+                )}
+            </div>
+            {/* on small devices */}
+            <div className='w-full bg-white block md:hidden'>
+                <div className='max-w-[7xl] justify-between flex m-auto px-4 pt-4'>
+                    <div className='inline-flex '>
+                        <HiOutlineMenuAlt2 onClick={() => { setOpnSidebar(!opensidebar) }} className='w-5 h-5 text-black' />
+                        <Image src={'https://truckcdn.cardekho.com/pwa/img/TrucksDekho-NewLogov2.svg'} className='h-[21px] ml-2 w-fit text-start' width={100} height={100} alt='not found' />
+                    </div>
+                    <GoSearch />
+                    {/* Sidebar for mobile */}
+                    {opensidebar && (
+
+                        <motion.div
+                            ref={sidebarRef}
+                            className="fixed top-0 h-full left-0 w-[64vw] z-50 bg-white shadow-lg overflow-scroll"
+                            initial={{ x: "-100%" }} // Initial position (off-screen)
+                            animate={{ x: opensidebar ? 0 : "-100%" }} // Animate to either open or off-screen
+                            exit={{ x: "-100%" }} // Exit animation (off-screen)
+                            transition={{ type: "spring", stiffness: 300, damping: 30 }} // Smooth spring animation
+                        >
+                            <div className='h-20 bg-sky-200 w-full flex justify-between items-center p-5' >
+                                <Image src={'https://truckcdn.cardekho.com/pwa/img/TrucksDekho-NewLogov2.svg'} className='h-[21px] ml-2 w-fit text-start' width={100} height={100} alt='not found' />
                                 <button
                                     onClick={toggleDropdown}
                                     ref={dropdownRef}
@@ -332,7 +534,7 @@ const Header = () => {
                                         <TiArrowSortedDown />
                                     </span>
                                     {isOpen && (
-                                        <ul className="absolute right-0 mt-2 py-2  z-50 w-[120px]  bg-white rounded-md shadow-[2px_4px_12px_hsla(0,0%,45%,.25)]">
+                                        <ul className="absolute right-0 mt-2 py-2  z-50 w-[120px]   bg-white rounded-md  shadow-[2px_4px_12px_hsla(0,0%,45%,.25)]">
                                             {languages.map((language, index) => (
                                                 <li
                                                     key={language}
@@ -346,264 +548,59 @@ const Header = () => {
                                         </ul>
                                     )}
                                 </button>
-
                             </div>
-                        </div>
-                    </div>
-                    <hr />
-                    <nav className="relative max-w-7xl  m-auto flex justify-between">
-                        <ul className="flex max-w-6xl flex-wrap space-x-2  md:space-x-8 " onMouseLeave={handleMouseLeave}>
-                            {menuData.map((item, index) => (
-                                <li key={index} onMouseEnter={() => handleMenuMouseEnter(index)} className="relative p-2 sm:text-[14px] text-[12px] border-t-[3px]  border-white hover:border-t-[3px] hover:border-[#d94025] transition-colors duration-700">
-                                    {item.link ? (
-                                        <Link href={item.link} className='flex '>
-                                            {item.title}
-                                            {item.offer && <span className="w-10  h-5 ml-2 text-center  bg-red-500 " >new</span>}
-                                        </Link>
-                                    ) : (
-                                        <span className="flex sm:text-[14px] text-[12px] items-center cursor-pointer ">
-                                            {item.title}
-                                            {item.subMenu && <MdOutlineArrowDropDown className="w-5 h-5 ml-1" />}
+                            <div >
 
-                                        </span>
-
-                                    )}
-
-
-                                    {item.subMenu && openMenu === index && (
-                                        <motion.ul
-                                            initial={{ opacity: 0, y: -10 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0, y: -10 }}
-                                            transition={{ duration: 0.2 }}
-                                            className="absolute z-50 left-0 top-full bg-white text-gray-800 shadow-lg rounded-lg w-48"
-                                        >
-                                            {item.subMenu.map((subItem, subIndex) => (
-                                                <li
-                                                    key={subIndex}
-                                                    onMouseEnter={() => handleSubMenuMouseEnter(subIndex)}
-                                                    className="relative bg-white border-[1px] "
-                                                >
-                                                    {subItem.link ? (
-                                                        <Link href={subItem.link} className='block px-4 py-2 hover:bg-gray-100'>
-                                                            {subItem.title}
-
-                                                        </Link>
-                                                    ) : (
-                                                        <span className="block px-4 py-2  cursor-pointer hover:bg-gray-100">
-                                                            <span className="flex items-center justify-between cursor-pointer">
-
-                                                                {subItem.title}
-                                                                {subItem.subMenu && (
-                                                                    <>
-                                                                        <MdKeyboardArrowRight className="w-4 h-4 ml-2" />
-                                                                    </>
-                                                                )}
-                                                            </span>
-                                                        </span>
-                                                    )}
-
-                                                    {subItem.subMenu && openSubMenu === subIndex && (
-                                                        <ul className="absolute left-full top-0  bg-white text-gray-800 shadow-lg rounded-lg w-48">
-                                                            {subItem.subMenu.map((nestedItem, nestedIndex) => (
-                                                                <li key={nestedIndex} className="border-[1px]">
-                                                                    <Link href={nestedItem.link}>
-                                                                        <label className="block px-4 py-2 hover:bg-gray-100">
-                                                                            {nestedItem.title}
-                                                                        </label>
-                                                                    </Link>
-                                                                </li>
-                                                            ))}
-                                                        </ul>
-                                                    )}
-                                                </li>
-                                            ))}
-                                        </motion.ul>
-                                    )}
-                                </li>
-                            ))}
-                        </ul>
-                        <div className='inline-flex max-w-1xl items-center mr-2  text-gray-500 absolute right-0 top-3'>
-                            <IoLocationOutline className='w-4 h-4 m-auto mr-2' />
-                            <button onClick={openModal} className='text-[14px]'> {selectedOption || "None"}</button>
-                            <span className='flex text-[12px] ml-1'>
-                                <TiArrowSortedDown />
-                            </span>
-                        </div>
-                    </nav>
-
-                    {isModalOpen && (
-                        <div
-                            id="modal-overlay"
-                            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-                            onClick={handleOuterClick}
-                        >
-                            <div
-                                className="absolute top-32 bg-white w-[500px] h-[200px] rounded shadow-lg p-4 flex flex-col"
-                            // style={{ marginTop: "20px", marginBottom: "60px" }}
-                            >
-                                {/* Close icon */}
-                                <button
-                                    className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
-                                    onClick={closeModal}
-                                >
-                                    ✕
-                                </button>
-
-                                {/* Modal content */}
-                                <h3 className="text-[#24272c] font-thin text-[16px] text-center">Which is your city ?</h3>
-
-                                <div className="max-w-sm mx-auto mt-10">
-
-                                    <Box sx={{ minWidth: 400, mx: "auto" }}>
-                                        {/* Dropdown Label */}
-                                        <FormControl fullWidth>
-                                            <InputLabel id="city-select-label">
-                                                Type your city, e.g. Jaipur, New Delhi
-                                            </InputLabel>
-
-                                            {/* Material-UI Select Component */}
-                                            <Select
-                                                labelId="city-select-label"
-                                                id="city-select"
-                                                defaultOpen
-                                                value={selectedOption}
-                                                onChange={handleSelectCity}
-                                                label="Type your city, e.g. Jaipur, New Delhi"
-                                                MenuProps={{
-                                                    PaperProps: {
-                                                        style: {
-                                                            maxHeight: 200, // Set the dropdown height
-                                                            overflowY: "auto", // Enable scrolling for overflow
-                                                        },
-                                                    },
-                                                }}
+                                <ul>
+                                    {sidebarItems.map((item, index) => (
+                                        <li key={index} className="relative ">
+                                            <div
+                                                className={`flex items-center justify-between cursor-pointer px-4 py-2 hover:bg-gray-100  ${openSubMenuIndex === index ? "active:bg-sky-500  " : ""} `}
+                                                onClick={() => item.subMenu && toggleSubMenu(index)}
                                             >
-
-                                                {/* Map Over Options */}
-                                                {options.map((city, index) =>
-                                                    city.isHeader ? (
-                                                        <MenuItem key={index} disabled>
-                                                            <span>{city.label}</span>
-                                                        </MenuItem>
-                                                    ) : (
-                                                        <MenuItem key={index} value={city.value}>
-                                                            {city.label}
-                                                        </MenuItem>
-                                                    )
+                                                <span>{item.title}</span>
+                                                {item.subMenu && (
+                                                    <MdKeyboardArrowRight
+                                                        className={`transform transition-transform duration-300 ${openSubMenuIndex === index ? "rotate-90" : ""
+                                                            }`}
+                                                    />
                                                 )}
+                                            </div>
 
-                                            </Select>
-                                        </FormControl>
-                                    </Box>
+                                            {item.subMenu && openSubMenuIndex === index && (
+                                                <motion.ul
+                                                    className="pl-4 border-l-[1px] mt-2 ml-4 space-y-1 overflow-hidden"
+                                                    initial={{ maxHeight: 0, opacity: 0, translateY: 4 }}
+                                                    animate={{ maxHeight: "1000px", opacity: 1, translateY: 0 }}
+                                                    exit={{ maxHeight: 0, opacity: 0, translateY: 4 }}
+                                                    transition={{ duration: 0.7, ease: "easeInOut" }}
+                                                >
+                                                    {item.subMenu.map((subItem, subIndex) => {
+                                                        const isActive = router === `/${subItem.title.toLowerCase().replace(/\s+/g, "-")}`;
+                                                        console.log(isActive);
 
-                                </div>
+                                                        return (
+                                                            <li key={subIndex} >
+                                                                <Link href={`/${subItem.title.toLowerCase().replace(/\s+/g, "-")}`}>
+                                                                    <span className={`block px-4 py-2 text-[#24272c]  hover:bg-gray-100  ${isActive ? "bg-sky-500 text-white" : ""
+                                                                        }`}>
+                                                                        {subItem.title}
+                                                                    </span>
+                                                                </Link>
+                                                            </li>
+                                                        )
+                                                    })}
+                                                </motion.ul>
+                                            )}
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
-                        </div>
+
+                        </motion.div>
                     )}
                 </div>
-            ) : (
-                <div className='w-full bg-white '>
-                    <div className='max-w-[7xl] justify-between flex m-auto px-4 pt-4'>
-                        <div className='inline-flex '>
-                            <HiOutlineMenuAlt2 onClick={() => { setOpnSidebar(!opensidebar) }} className='w-5 h-5 text-black' />
-                            <Image src={'https://truckcdn.cardekho.com/pwa/img/TrucksDekho-NewLogov2.svg'} className='h-[21px] ml-2 w-fit text-start' width={100} height={100} alt='not found' />
-                        </div>
-                        <GoSearch />
-                        {/* Sidebar for mobile */}
-                        {opensidebar && (
-
-                            <motion.div
-                                ref={sidebarRef}
-                                className="fixed top-0 h-full left-0 w-[64vw] z-50 bg-white shadow-lg overflow-scroll"
-                                initial={{ x: "-100%" }} // Initial position (off-screen)
-                                animate={{ x: opensidebar ? 0 : "-100%" }} // Animate to either open or off-screen
-                                exit={{ x: "-100%" }} // Exit animation (off-screen)
-                                transition={{ type: "spring", stiffness: 300, damping: 30 }} // Smooth spring animation
-                            >
-                                <div className='h-20 bg-sky-200 w-full flex justify-between items-center p-5' >
-                                    <Image src={'https://truckcdn.cardekho.com/pwa/img/TrucksDekho-NewLogov2.svg'} className='h-[21px] ml-2 w-fit text-start' width={100} height={100} alt='not found' />
-                                    <button
-                                        onClick={toggleDropdown}
-                                        ref={dropdownRef}
-                                        className={`relative   text-gray-900 underline rounded-md  py-2 transition-colors  ${isOpen ? "" : "border-gray-300"
-                                            }`}
-                                    >
-                                        <span className='flex text-[12px] items-center'>
-
-                                            {selectedLanguage}
-                                            <TiArrowSortedDown />
-                                        </span>
-                                        {isOpen && (
-                                            <ul className="absolute right-0 mt-2 py-2  z-50 w-[120px]   bg-white rounded-md  shadow-[2px_4px_12px_hsla(0,0%,45%,.25)]">
-                                                {languages.map((language, index) => (
-                                                    <li
-                                                        key={language}
-                                                        onClick={() => handleSelect(language)}
-                                                        className="px-4 py-1 cursor-pointer text-start text-gray-900"
-                                                    >
-                                                        {language}
-                                                        {index < languages.length - 1 && <hr className='w-[97%] m-auto' />}
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        )}
-                                    </button>
-                                </div>
-                                <div >
-
-                                    <ul>
-                                        {sidebarItems.map((item, index) => (
-                                            <li key={index} className="relative ">
-                                                <div
-                                                    className={`flex items-center justify-between cursor-pointer px-4 py-2 hover:bg-gray-100  ${openSubMenuIndex === index ? "active:bg-sky-500  " : ""} `}
-                                                    onClick={() => item.subMenu && toggleSubMenu(index)}
-                                                >
-                                                    <span>{item.title}</span>
-                                                    {item.subMenu && (
-                                                        <MdKeyboardArrowRight
-                                                            className={`transform transition-transform duration-300 ${openSubMenuIndex === index ? "rotate-90" : ""
-                                                                }`}
-                                                        />
-                                                    )}
-                                                </div>
-
-                                                {item.subMenu && openSubMenuIndex === index && (
-                                                    <motion.ul
-                                                        className="pl-4 border-l-[1px] mt-2 ml-4 space-y-1 overflow-hidden"
-                                                        initial={{ maxHeight: 0, opacity: 0, translateY: 4 }}
-                                                        animate={{ maxHeight: "1000px", opacity: 1, translateY: 0 }}
-                                                        exit={{ maxHeight: 0, opacity: 0, translateY: 4 }}
-                                                        transition={{ duration: 0.7, ease: "easeInOut" }}
-                                                    >
-                                                        {item.subMenu.map((subItem, subIndex) => {
-                                                            const isActive = router === `/${subItem.title.toLowerCase().replace(/\s+/g, "-")}`;
-                                                            console.log(isActive);
-
-                                                            return (
-                                                                <li key={subIndex} >
-                                                                    <Link href={`/${subItem.title.toLowerCase().replace(/\s+/g, "-")}`}>
-                                                                        <span className={`block px-4 py-2 text-[#24272c]  hover:bg-gray-100  ${isActive ? "bg-sky-500 text-white" : ""
-                                                                            }`}>
-                                                                            {subItem.title}
-                                                                        </span>
-                                                                    </Link>
-                                                                </li>
-                                                            )
-                                                        })}
-                                                    </motion.ul>
-                                                )}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-
-                            </motion.div>
-                        )}
-                    </div>
-                </div>
-
-            )}
+            </div>
         </>
     )
 }
