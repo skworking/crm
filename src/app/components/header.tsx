@@ -300,7 +300,7 @@ const Header = () => {
     return (
         <>
             {/* on large devices */}
-            <div className='w-full bg-white mb-[10px] shadow-md  hidden md:block'>
+            <div className='w-full bg-white mb-[10px] shadow-md  hidden lg:block'>
                 <div className='max-w-7xl m-auto'>
                     <div className='sm:p-4 md:flex gap-4 '>
                         <div className='sm:w-[25%]'>
@@ -502,7 +502,7 @@ const Header = () => {
                 )}
             </div>
             {/* on small devices */}
-            <div className='w-full bg-white block md:hidden'>
+            <div className='w-full bg-white block lg:hidden'>
                 <div className='max-w-[7xl] justify-between flex m-auto px-4 pt-4'>
                     <div className='inline-flex '>
                         <HiOutlineMenuAlt2 onClick={() => { setOpnSidebar(!opensidebar) }} className='w-5 h-5 text-black' />

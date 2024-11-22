@@ -9,7 +9,7 @@ import React from 'react'
 
 const Page = () => {
 
- 
+
   return (
     <div className='bg-slate-50'>
       <Navbar />

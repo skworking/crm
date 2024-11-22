@@ -240,64 +240,8 @@ export default function Home() {
         </div>
 
       </div>
-      {/* 
-      <div className="max-w-7xl m-auto ">
-
-        <div className='border rounded-[16px]  mb-3 flex flex-col bg-white   relative'>
-
-          <LatestModel />
-        </div>
-      </div> */}
-
-      {/* <div className="max-w-7xl m-auto ">
-
-        <div className='border rounded-[16px]  mb-3 flex flex-col bg-white   relative'>
-
-          <PopulerModel />
-        </div>
-      </div> */}
-
-      {/* <div className="max-w-7xl m-auto ">
-
-        <div className='border rounded-[16px]  mb-3 flex flex-col p-4 bg-white gap-2  relative'>
-          <h2 className='p-[17px 20px 0px] text-xl font-bold '>
-            Vehicle Segment
-          </h2>
-          <CardFormate data={segmentData} />
-        </div>
-      </div> */}
-
-      {/* <div className="max-w-7xl m-auto ">
-
-        <div className='border rounded-[16px] p-4 mb-3 flex flex-col  bg-white gap-2  relative'>
-          <h2 className='p-[17px 20px 0px]  text-xl font-bold '>
-            Popular Truck Brands
-          </h2>
-          <CardFormate2 data={populerBrand} />
-          <ViewAllButton heading="Popular Trucks" link="/popular-trucks" />
-        </div>
-      </div> */}
-
-      {/* <div className="max-w-7xl m-auto ">
-
-        <div className='border rounded-[16px]  mb-3 flex flex-col bg-white   relative'>
-          <CompareModel />
-        </div>
-      </div> */}
-
-      {/* <div className="max-w-7xl m-auto ">
-
-        <div className='border rounded-[16px] p-4 mb-3 flex flex-col  bg-white gap-2  relative'>
-          <h2 className='p-[17px 20px 0px]  text-xl font-bold '>
-            News on trucks that you like
-          </h2>
-          <NewsFormate data={newsArray} />
-          <ViewAllButton heading="Truck news" link="/truck-news" />
-        </div>
-      </div> */}
-
-
-
+     
+     
     </div>
   );
 }
