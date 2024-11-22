@@ -1,15 +1,15 @@
 'use client'
 import Image from "next/image";
-import DynamicDropdown from "./components/DynamicDropdown";
-import CardFormate from "./components/cardFormate";
-import LatestModel from "./components/latestModel";
-import PopulerModel from "./components/populerModel";
-import CardFormate2 from "./components/cardFormate2";
-import ViewAllButton from "./comman/buttonView";
-import CompareModel from "./components/compareModel";
-import NewsFormate from "./components/newsFormate";
-import VideoCard from "./components/videocard";
-import ToolsCard from "./comman/toolsCard";
+import DynamicDropdown from "../components/DynamicDropdown";
+import CardFormate from "../components/cardFormate";
+import LatestModel from "../components/latestModel";
+import PopulerModel from "../components/populerModel";
+import CardFormate2 from "../components/cardFormate2";
+import ViewAllButton from "../comman/buttonView";
+import CompareModel from "../components/compareModel";
+import NewsFormate from "../components/newsFormate";
+import VideoCard from "../components/videocard";
+import ToolsCard from "../comman/toolsCard";
 
 export default function Home() {
   const BrandData = [
@@ -170,6 +170,9 @@ export default function Home() {
   ]
   return (
     <div className="max-w-[1440px] m-auto ">
+      {/* <Link href="/en/trucks/bharat-benz/2826-r" className="text-sky-500" >
+        Trucks page url
+      </Link> */}
       <div className="relative sm:p-0 p-5 ">
         <Image src={'https://truckcdn.cardekho.com/pwa/TrD/01_TD_MasterHead_Desktop_1.jpg'} alt="" width={0}
           height={0}
@@ -237,7 +240,7 @@ export default function Home() {
 
       </div>
      
-     
+
     </div>
   );
 }

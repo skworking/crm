@@ -12,6 +12,9 @@ const Page = () => {
 
   return (
     <div className='bg-slate-50'>
+      <div className='h-10 w-10 '>
+      addsons
+      </div>
       <Navbar />
       <Overview />
       <Breadcrums />
