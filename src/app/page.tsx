@@ -1,6 +1,5 @@
 'use client'
 import Image from "next/image";
-import Link from "next/link";
 import DynamicDropdown from "./components/DynamicDropdown";
 import CardFormate from "./components/cardFormate";
 import LatestModel from "./components/latestModel";

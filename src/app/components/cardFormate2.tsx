@@ -50,7 +50,7 @@ const CardFormate2: React.FC<CardFormateProps> = ({ data }) => {
                   data-autofit="true"
                   decoding="async"
                   alt={item?.heading}
-                  className="w-full h-full rounded-t-md object-none "
+                  className="w-full h-full rounded-t-md object-contain "
                   src={item.image}
                   loading="eager"
                   width={100}
