@@ -66,9 +66,9 @@ const CompareSlider: React.FC<CompareSliderProps> = ({ data }) => {
                                             className="w-full sm:h-[130px] h-[77px] rounded-t-md object-cover"
                                             src={truck.imageUrl}
                                             loading="eager"
-                                            width={0}
-                                            height={0}
-                                            sizes="10vw"
+                                            width={100}
+                                            height={100}
+                                            sizes="100vw"
                                             quality={75}
                                         />
                                     </div>

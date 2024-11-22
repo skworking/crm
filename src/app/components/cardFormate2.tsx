@@ -53,8 +53,8 @@ const CardFormate2: React.FC<CardFormateProps> = ({ data }) => {
                   className="w-full h-full rounded-t-md object-none "
                   src={item.image}
                   loading="eager"
-                  width={0}
-                  height={0}
+                  width={100}
+                  height={100}
                   sizes="100vw"
                   quality={75}
                 />

@@ -171,9 +171,6 @@ export default function Home() {
   ]
   return (
     <div className="max-w-[1440px] m-auto ">
-      <Link href="/en/trucks/bharat-benz/2826-r" className="text-sky-500" >
-        Trucks page url
-      </Link>
       <div className="relative sm:p-0 p-5 ">
         <Image src={'https://truckcdn.cardekho.com/pwa/TrD/01_TD_MasterHead_Desktop_1.jpg'} alt="" width={0}
           height={0}

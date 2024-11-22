@@ -10,6 +10,7 @@ interface SliderItem {
     offer: string;
     imageUrl: string;
     isElectric?: boolean;
+    url?:string;
 }
 
 // Define the structure of sliderData
@@ -160,6 +161,15 @@ const PopulerModel = () => {
                 imageUrl:
                     "https://truckcdn.cardekho.com/in/eicher/pro-3019/eicher-pro-3019-48551.jpg",
 
+            },
+            {
+                id: 6,
+                name: "BharatBenz 2826R",
+                price: "₹41.20 - ₹43.50 Lakh*",
+                offer: "Get On Road Price",
+                imageUrl:
+                    "https://truckcdn.cardekho.com/in/bharat-benz/2826-r/bharat-benz-2826-r.jpg",
+                url:'/en/trucks/bharat-benz/2826-r'
             },
         ],
         'mini trucks': [
@@ -460,6 +470,7 @@ const PopulerModel = () => {
                 {['trucks', 'pickup trucks', 'mini trucks', 'tippers', 'trailers', '3 wheeler', 'transit mixer', 'auto rickshaw', 'e rickshaw'].map((tab) => (
                     <span
                         key={tab}
+                        title={tab}
                         onClick={() => handleTabChange(tab as typeof currentTab)}
                         className={`flex-shrink-0 ml-4 mr-4 max-w-fit hover:text-[#24272c] text-[14px] text-center py-2 ${currentTab === tab ? 'border-b-4  border-[#d94025] font-bold' : 'text-gray-400 '
                             }`}

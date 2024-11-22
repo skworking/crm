@@ -37,10 +37,6 @@ const Header = () => {
         { value: "option1", label: "Option 1" },
         { value: "option2", label: "Option 2" },
         { value: "option3", label: "Option 3" },
-        { value: "option3", label: "Option 3" },
-        { value: "option3", label: "Option 3" },
-        { value: "option3", label: "Option 3" },
-        { value: "option3", label: "Option 3" },
     ];
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
@@ -300,7 +296,7 @@ const Header = () => {
     return (
         <>
             {/* on large devices */}
-            <div className='w-full bg-white mb-[10px] shadow-md  hidden lg:block'>
+            <div className='w-full bg-white shadow-md  hidden lg:block'>
                 <div className='max-w-7xl m-auto'>
                     <div className='sm:p-4 md:flex gap-4 '>
                         <div className='sm:w-[25%]'>
@@ -357,7 +353,7 @@ const Header = () => {
                                 {item.link ? (
                                     <Link href={item.link} className='flex '>
                                         {item.title}
-                                        {item.offer && <span className="w-10  h-5 ml-2 text-center  bg-red-500 " >new</span>}
+                                        {item.offer && <span className="w-10  h-5 ml-2 text-center text-white bg-red-500 " >new</span>}
                                     </Link>
                                 ) : (
                                     <span className="flex sm:text-[14px] text-[12px] items-center cursor-pointer ">
