@@ -24,7 +24,7 @@ const RootLayout = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  const data = true;
+
   return (
     <html lang="en">
       <body
