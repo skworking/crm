@@ -314,7 +314,7 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                         <div className='sm:p-4 md:flex gap-4 '>
                             <div className='sm:w-[25%]'>
 
-                                <Image src={'https://truckcdn.cardekho.com/pwa/img/TrucksDekho-NewLogov2.svg'} className='h-[42px]   w-fit text-start' width={100} height={100} alt='not found' />
+                                <Image src={'https://truckcdn.cardekho.com/pwa/img/TrucksDekho-NewLogov2.svg'} className='h-[42px]   w-fit text-start' title='truck-dekho logo' width={100} height={100} alt='not found' />
                             </div>
                             <div className="flex md:w-[43.66%] lg:w-[42%]  rounded-md overflow-hidden  font-[sans-serif] ">
                                 <input type="text" placeholder="Search Trucks or Brands eg. Tata or Bajaj"
@@ -344,6 +344,7 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                                             {languages.map((language, index) => (
                                                 <li
                                                     key={language}
+                                                    title={language}
                                                     onClick={() => handleSelect(language)}
                                                     className="px-4 py-1 cursor-pointer text-start text-gray-900"
                                                 >
@@ -362,14 +363,14 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                     <nav className="relative max-w-7xl  m-auto flex justify-between">
                         <ul className="flex max-w-6xl flex-wrap space-x-2  md:space-x-8 " onMouseLeave={handleMouseLeave}>
                             {menuData.map((item, index) => (
-                                <li key={index} onMouseEnter={() => handleMenuMouseEnter(index)} className="relative p-2 sm:text-[14px] text-[12px] border-t-[3px]  border-white hover:border-t-[3px] hover:border-[#d94025] transition-colors duration-700">
+                                <li key={index} onMouseEnter={() => handleMenuMouseEnter(index)} className="relative p-2 sm:text-[14px] text-[12px] border-t-[3px]  border-white hover:border-t-[3px] hover:border-[#d94025]">
                                     {item.link ? (
-                                        <Link href={item.link} className='flex '>
+                                        <Link href={item.link} className='flex  transition duration-700' title={item.title}>
                                             {item.title}
-                                            {item.offer && <span className="w-10  h-5 ml-2 text-center text-white bg-red-500 " >new</span>}
+                                            {item.offer && <span className="w-10  h-5 ml-2 text-center text-white bg-[#d94025] " >new</span>}
                                         </Link>
                                     ) : (
-                                        <span className="flex sm:text-[14px] text-[12px] items-center cursor-pointer ">
+                                        <span className="flex sm:text-[14px] text-[12px] items-center cursor-pointer  transition duration-700 " >
                                             {item.title}
                                             {item.subMenu && <MdOutlineArrowDropDown className="w-5 h-5 ml-1" />}
 
@@ -393,13 +394,13 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                                                     className="relative bg-white border-[1px] "
                                                 >
                                                     {subItem.link ? (
-                                                        <Link href={subItem.link} className='block px-4 py-2 hover:bg-gray-100'>
+                                                        <Link href={subItem.link} className='block px-4 py-2 hover:bg-gray-100' title={subItem.title}>
                                                             {subItem.title}
 
                                                         </Link>
                                                     ) : (
                                                         <span className="block px-4 py-2  cursor-pointer hover:bg-gray-100">
-                                                            <span className="flex items-center justify-between cursor-pointer">
+                                                            <span className="flex items-center justify-between cursor-pointer" title={subItem.title}>
 
                                                                 {subItem.title}
                                                                 {subItem.subMenu && (
@@ -415,7 +416,7 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                                                         <ul className="absolute left-full top-0  bg-white text-gray-800 shadow-lg rounded-lg w-48">
                                                             {subItem.subMenu.map((nestedItem, nestedIndex) => (
                                                                 <li key={nestedIndex} className="border-[1px]">
-                                                                    <Link href={nestedItem.link}>
+                                                                    <Link href={nestedItem.link} title={nestedItem.title}>
                                                                         <label className="block px-4 py-2 hover:bg-gray-100">
                                                                             {nestedItem.title}
                                                                         </label>
