@@ -147,7 +147,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className={`shadow-sm w-full mt-5 z-40  transition-colors duration-300  animate-fadeInDown  ${isScrolled ? 'bg-black text-white  top-0 fixed' : 'bg-white'} ${isNavbarVisible ? 'sm:sticky lg:top-0  ' : 'hidden'} `}>
+            <nav className={`shadow-sm w-full z-40  transition-colors duration-300  animate-fadeInDown  ${isScrolled ? 'bg-black text-white  top-0 fixed' : 'bg-white'} ${isNavbarVisible ? 'sm:sticky lg:top-0  ' : 'hidden'} `}>
                 <ul className={`flex items-center uppercase space-x-6  p-4 max-w-7xl m-auto  sm:overflow-visible  overflow-auto no-scrollbar `}>
 
                     {menuItems.map((item, index) => (
