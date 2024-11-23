@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import FooterNav from './footerNav'
 import FooterLink from './foooterLinks';
 import Link from 'next/link';
+import useDeviceType from '../comman/deviceDetect';
 
 interface LinkItem {
     name: string;
@@ -81,103 +82,118 @@ const Footer = () => {
             ]
         }
     ];
+    const deviceType = useDeviceType();
     return (
         <div className='w-full bg-white '>
-            <hr className='sm:block hidden' />
-            <FooterNav />
+            {deviceType === 'desktop' &&
+                (<>
+                    <hr className='sm:block hidden' />
+                    <FooterNav />
+                </>
+                )}
             <hr />
             <footer className="p-4 m-auto max-w-[1280px]">
                 <div className="container mx-auto sm:flex sm:flex-row flex-col justify-between space-y-4 sm:space-y-0">
-                    {footerData.map((section, index) => (
-                        <div key={index} className="sm:flex-1 sm:block hidden">
-                            <h3 className="text-[#24272c] text-[14px]-500 mb-2">{section.title}</h3>
-                            <ul className="space-y-2">
-                                {section.title === "CarDekho Group Ventures" ? (
-                                    <div className="grid grid-cols-2 gap-2">
-                                        {section.links.map((link, idx) => (
-                                            <li key={idx} className="text-[rgba(36,39,44,.5)] cursor-pointer">
-                                                <Link href={link.url} rel="noopener noreferrer">
-                                                    <img src={link.img} alt={link.name} className=" w-full h-[50px]" />
-                                                </Link>
-                                            </li>
-                                        ))}
+                    {deviceType === 'desktop' ?
+                        (
+                            <>
+                                {footerData.map((section, index) => (
+                                    <div key={index} className="sm:flex-1">
+                                        <h3 className="text-[#24272c] text-[14px]-500 mb-2">{section.title}</h3>
+                                        <ul className="space-y-2">
+                                            {section.title === "CarDekho Group Ventures" ? (
+                                                <div className="grid grid-cols-2 gap-2">
+                                                    {section.links.map((link, idx) => (
+                                                        <li key={idx} className="text-[rgba(36,39,44,.5)] cursor-pointer">
+                                                            <Link href={link.url} rel="noopener noreferrer">
+                                                                <img src={link.img} alt={link.name} className=" w-full h-[50px]" />
+                                                            </Link>
+                                                        </li>
+                                                    ))}
+                                                </div>
+                                            ) : (
+                                                section.links.map((link, idx) => (
+                                                    <li key={idx} className="text-[rgba(36,39,44,.5)] hover:text-gray-800 cursor-pointer w-fit">
+                                                        <Link href={link.url} rel="noopener noreferrer">
+                                                            {link.name}
+                                                        </Link>
+                                                    </li>
+                                                ))
+                                            )}
+                                        </ul>
                                     </div>
-                                ) : (
-                                    section.links.map((link, idx) => (
-                                        <li key={idx} className="text-[rgba(36,39,44,.5)] hover:text-gray-800 cursor-pointer w-fit">
-                                            <Link href={link.url} rel="noopener noreferrer">
-                                                {link.name}
-                                            </Link>
-                                        </li>
-                                    ))
-                                )}
-                            </ul>
-                        </div>
-                    ))}
-                    {footerData.map((section, index) => (
-                        <div key={index} className=" border-gray-300 sm:hidden block">
-                            <button
-                                className="flex justify-between items-center w-full  text-left"
-                                onClick={() => toggleAccordion(index)}
-                            >
-                                <h3 className="text-[#24272c] text-[14px]-500">{section.title}</h3>
-                                <span className="text-gray-500">
-                                    {activeIndex === index ? (
-                                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M5 15l7-7 7 7"
-                                            />
-                                        </svg>
-                                    ) : (
-                                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M19 9l-7 7-7-7"
-                                            />
-                                        </svg>
-                                    )}
-                                </span>
-                            </button>
-                            <div
-                                className={`transition-max-height duration-300 overflow-hidden ${activeIndex === index ? 'max-h-screen' : 'max-h-0'
-                                    }`}
-                            >
-                                <ul className="space-y-2 pl-4">
-                                    {section.title === "CarDekho Group Ventures" ? (
-                                        <div className="grid grid-cols-2 gap-2">
-                                            {section.links.map((link, idx) => (
-                                                <li key={idx} className="text-[rgba(36,39,44,.5)] cursor-pointer">
-                                                    <Link href={link.url} rel="noopener noreferrer">
-                                                        <img
-                                                            src={link.img}
-                                                            alt={link.name}
-                                                            className="w-full h-[50px]"
+                                ))}
+                            </>)
+                        : (
+                            <>
+                                {footerData.map((section, index) => (
+                                    <div key={index} className=" border-gray-300 sm:hidden block">
+                                        <button
+                                            className="flex justify-between items-center w-full  text-left"
+                                            onClick={() => toggleAccordion(index)}
+                                        >
+                                            <h3 className="text-[#24272c] text-[14px]-500">{section.title}</h3>
+                                            <span className="text-gray-500">
+                                                {activeIndex === index ? (
+                                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            strokeWidth={2}
+                                                            d="M5 15l7-7 7 7"
                                                         />
-                                                    </Link>
-                                                </li>
-                                            ))}
+                                                    </svg>
+                                                ) : (
+                                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            strokeWidth={2}
+                                                            d="M19 9l-7 7-7-7"
+                                                        />
+                                                    </svg>
+                                                )}
+                                            </span>
+                                        </button>
+                                        <div
+                                            className={`transition-max-height duration-300 overflow-hidden ${activeIndex === index ? 'max-h-screen' : 'max-h-0'
+                                                }`}
+                                        >
+                                            <ul className="space-y-2 pl-4">
+                                                {section.title === "CarDekho Group Ventures" ? (
+                                                    <div className="grid grid-cols-2 gap-2">
+                                                        {section.links.map((link, idx) => (
+                                                            <li key={idx} className="text-[rgba(36,39,44,.5)] cursor-pointer">
+                                                                <Link href={link.url} rel="noopener noreferrer">
+                                                                    <img
+                                                                        src={link.img}
+                                                                        alt={link.name}
+                                                                        className="w-full h-[50px]"
+                                                                    />
+                                                                </Link>
+                                                            </li>
+                                                        ))}
+                                                    </div>
+                                                ) : (
+                                                    section.links.map((link, idx) => (
+                                                        <li
+                                                            key={idx}
+                                                            className="text-[rgba(36,39,44,.5)] hover:text-gray-800 cursor-pointer w-fit"
+                                                        >
+                                                            <Link href={link.url} rel="noopener noreferrer">
+                                                                {link.name}
+                                                            </Link>
+                                                        </li>
+                                                    ))
+                                                )}
+                                            </ul>
                                         </div>
-                                    ) : (
-                                        section.links.map((link, idx) => (
-                                            <li
-                                                key={idx}
-                                                className="text-[rgba(36,39,44,.5)] hover:text-gray-800 cursor-pointer w-fit"
-                                            >
-                                                <Link href={link.url} rel="noopener noreferrer">
-                                                    {link.name}
-                                                </Link>
-                                            </li>
-                                        ))
-                                    )}
-                                </ul>
-                            </div>
-                        </div>
-                    ))}
+                                    </div>
+                                ))}
+                            </>)
+                    }
+
+
                 </div>
             </footer>
             <hr />

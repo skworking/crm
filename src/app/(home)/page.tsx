@@ -10,8 +10,9 @@ import CompareModel from "../components/compareModel";
 import NewsFormate from "../components/newsFormate";
 import VideoCard from "../components/videocard";
 import ToolsCard from "../comman/toolsCard";
-
-export default function Home() {
+import useDeviceType from "../comman/deviceDetect";
+const Home = () => {
+  const deviceType = useDeviceType();
   const BrandData = [
     {
       heading: 'Tata Intra V30: Answers to 13 Most Asked Questions on Google',
@@ -130,7 +131,7 @@ export default function Home() {
       time: "01:03 PM"
     }
   ];
-  const toolsArray=[
+  const toolsArray = [
     {
       heading: 'Dealers',
       image: 'https://truckcdn.cardekho.com/pwa/img/iconDealers-1.svg',
@@ -170,16 +171,24 @@ export default function Home() {
   ]
   return (
     <div className="max-w-[1440px] m-auto ">
+        <div>
+      {deviceType === 'mobile' && <p>You are on a mobile device!</p>}
+      {deviceType === 'tablet' && <p>You are using a tablet!</p>}
+      {deviceType === 'desktop' && <p>You are on a desktop device!</p>}
+    </div>
       {/* <Link href="/en/trucks/bharat-benz/2826-r" className="text-sky-500" >
         Trucks page url
       </Link> */}
-      <div className="relative sm:p-0 p-5 ">
-        <Image src={'https://truckcdn.cardekho.com/pwa/TrD/01_TD_MasterHead_Desktop_1.jpg'} alt="" width={0}
-          height={0}
-          sizes="100vw"
-          className="object-cover w-full lg:h-[546px] sm:rounded-none rounded-lg"
-        // style={{ width: '100%', height: '546px' }} 
-        />
+      <div className="relative  ">
+        <div className=" sm:p-0 p-5">
+
+          <Image src={'https://truckcdn.cardekho.com/pwa/TrD/01_TD_MasterHead_Desktop_1.jpg'} alt="" width={0}
+            height={0}
+            sizes="100vw"
+            className="object-cover  w-full lg:h-[546px] sm:rounded-none rounded-lg"
+          // style={{ width: '100%', height: '546px' }} 
+          />
+        </div>
 
         <DynamicDropdown />
       </div>
@@ -239,8 +248,10 @@ export default function Home() {
         </div>
 
       </div>
-     
+
 
     </div>
   );
 }
+
+export default Home;

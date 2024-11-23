@@ -416,8 +416,8 @@ const DynamicDropdown: React.FC = () => {
   };
 
   return (
-    <div className="max-w-7xl rounded-lg bg-white lg:ml-[90px] lg:p-[20px] lg:w-[348px] left-0 lg:absolute top-[54px] z-20 shadow-['0 0 70px 0 rgba(36,39,44,.3)'] lg990:block ">
-      <h1 className="text-2xl font-extrabold text-[#24272c]">Search the right truck</h1>
+    <div className="max-w-7xl rounded-lg bg-white lg:ml-[90px] p-[20px] lg:w-[348px] left-0 lg:absolute top-[54px] z-20 shadow-['0 0 70px 0 rgba(36,39,44,.3)'] lg:border-none border-2 lg990:block ">
+      <h1 className="text-2xl font-semibold text-[#24272c]">Search the right truck</h1>
 
       {/* Tabs */}
       <div className="flex border-b mb-4">
