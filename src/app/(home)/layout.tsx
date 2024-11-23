@@ -26,15 +26,14 @@ const RootLayout = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-
+  const data = true;
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-50`}
       >
-        <div className={`w-full bg-white lg:sticky lg:top-0  z-50 shadow-md  `}>
-          <Header />
-        </div>
+
+        <Header isSticky={data} />
         {children}
         <Footer />
       </body>

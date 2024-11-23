@@ -10,9 +10,7 @@ import CompareModel from "../components/compareModel";
 import NewsFormate from "../components/newsFormate";
 import VideoCard from "../components/videocard";
 import ToolsCard from "../comman/toolsCard";
-import useDeviceType from "../comman/deviceDetect";
 const Home = () => {
-  const deviceType = useDeviceType();
   const BrandData = [
     {
       heading: 'Tata Intra V30: Answers to 13 Most Asked Questions on Google',
@@ -171,11 +169,7 @@ const Home = () => {
   ]
   return (
     <div className="max-w-[1440px] m-auto ">
-        <div>
-      {deviceType === 'mobile' && <p>You are on a mobile device!</p>}
-      {deviceType === 'tablet' && <p>You are using a tablet!</p>}
-      {deviceType === 'desktop' && <p>You are on a desktop device!</p>}
-    </div>
+
       {/* <Link href="/en/trucks/bharat-benz/2826-r" className="text-sky-500" >
         Trucks page url
       </Link> */}

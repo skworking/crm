@@ -15,7 +15,10 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import useDeviceType from "../comman/deviceDetect";
-const Header = () => {
+interface HeaderProps {
+    isSticky?: boolean;
+}
+const Header: React.FC<HeaderProps> = ({ isSticky }) => {
     const [selectedLanguage, setSelectedLanguage] = useState("English");
     const [isOpen, setIsOpen] = useState(false);
     const [opensidebar, setOpnSidebar] = useState(false)
@@ -298,7 +301,15 @@ const Header = () => {
         <>
             {deviceType === 'desktop' ? (
 
-                <div className='w-full bg-white  shadow-md  '>
+                <div className='w-full bg-white  shadow-md  '
+                    style={{
+                        position: isSticky ? "sticky" : "static",
+                        top: isSticky ? 0 : undefined,
+                        zIndex: isSticky ? 50 : undefined,
+                        boxShadow: isSticky ? "0 2px 4px rgba(0, 0, 0, 0.1)" : undefined,
+                        background: "white",
+                    }}
+                >
                     <div className='max-w-7xl m-auto'>
                         <div className='sm:p-4 md:flex gap-4 '>
                             <div className='sm:w-[25%]'>
