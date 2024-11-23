@@ -30,7 +30,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-50`}
       >
-        <div className="w-full bg-white sticky top-0 z-50 shadow-md  ">
+         <div className="w-full bg-white lg:sticky lg:top-0 z-50 shadow-md  ">
         <Header />
         </div>
         {children}

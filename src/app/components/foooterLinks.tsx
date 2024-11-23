@@ -60,22 +60,28 @@ const footerLinks = [
 
 const FooterLink = () => {
     return (
-        <footer className="footer max-w-7xl flex m-auto bg-neutral justify-between  p-4">
-            <aside className=" items-center text-[rgba(36,39,44,.5)] text-[12px]">
+        <>
+            <footer className="footer max-w-7xl  m-auto bg-neutral justify-between hidden lg:flex p-4">
+                <aside className=" items-center text-[rgba(36,39,44,.5)] text-[12px]">
 
-                <p>Copyright © {new Date().getFullYear()} - All rights reserved</p>
-            </aside>
-            <nav className=" gap-4 flex ">
-                <h1 className=' font-bold sm:mr-6'>
-                    Contact:
-                </h1>
-                {footerLinks.map((link, index) => (
-                    <a key={index} href={link.href} target="_blank" rel="noopener noreferrer">
-                        {link.icon}
-                    </a>
-                ))}
-            </nav>
-        </footer>
+                    <p>Copyright © {new Date().getFullYear()} - All rights reserved</p>
+                </aside>
+                <nav className=" gap-4 flex ">
+                    <h1 className=' font-bold sm:mr-6'>
+                        Contact:
+                    </h1>
+                    {footerLinks.map((link, index) => (
+                        <a key={index} href={link.href} target="_blank" rel="noopener noreferrer">
+                            {link.icon}
+                        </a>
+                    ))}
+                </nav>
+            </footer>
+            <div className='lg:hidden block p-4 text-center text-[rgba(36,39,44,.5)] text-[12px]'>
+
+            <p>Copyright © {new Date().getFullYear()} - All rights reserved</p>
+            </div>
+        </>
     );
 };
 
