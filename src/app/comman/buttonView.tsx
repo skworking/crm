@@ -1,4 +1,4 @@
-import { useRouter } from 'next/navigation';
+
 import React from 'react';
 import { FaAngleRight } from 'react-icons/fa';
 
@@ -8,10 +8,11 @@ interface ViewAllButtonProps {
 }
 
 const ViewAllButton: React.FC<ViewAllButtonProps> = ({ heading, link }) => {
-  const router = useRouter();
+
+console.log(link);
 
   const handleClick = () => {
-    router.push(link);
+   
   };
 
   return (
