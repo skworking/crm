@@ -15,6 +15,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import useDeviceType from "../comman/deviceDetect";
+import SearchBarWithAutocomplete from '../comman/searchSuggession';
 interface HeaderProps {
     isSticky?: boolean;
 }
@@ -297,11 +298,14 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
         };
     }, [opensidebar]);
     const deviceType = useDeviceType();
+    const truckBrands = ["Tata", "Bajaj", "Mahindra", "Ashok Leyland", "Eicher", "Volvo", "Force"];
+
+
     return (
         <>
             {deviceType === 'desktop' ? (
 
-                <div className='w-full bg-white  shadow-md  '
+                <div className=' w-full bg-white  shadow-md  '
                     style={{
                         position: isSticky ? "sticky" : "static",
                         top: isSticky ? 0 : undefined,
@@ -316,7 +320,8 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
 
                                 <Image src={'https://truckcdn.cardekho.com/pwa/img/TrucksDekho-NewLogov2.svg'} className='h-[42px]   w-fit text-start' title='truck-dekho logo' width={100} height={100} alt='not found' />
                             </div>
-                            <div className="flex md:w-[43.66%] lg:w-[42%]  rounded-md overflow-hidden  font-[sans-serif] ">
+                            <SearchBarWithAutocomplete suggestions={truckBrands} />
+                            {/* <div className="flex md:w-[43.66%] lg:w-[42%]  rounded-md overflow-hidden  font-[sans-serif] ">
                                 <input type="text" placeholder="Search Trucks or Brands eg. Tata or Bajaj"
                                     className="w-full outline-none border-2 rounded-l-md shadow-sm bg-[#f7f7f7] text-gray-600 text-sm ml-4 px-4 py-3" />
                                 <button type='button' className="flex items-center justify-center md:w-[15%] w-[15%] sm:w-[10%] bg-black px-5">
@@ -326,7 +331,7 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                                         </path>
                                     </svg>
                                 </button>
-                            </div>
+                            </div> */}
                             <div className='text-end m-auto right-0  md:w-[33.3%]'>
                                 <button
                                     onClick={toggleDropdown}
@@ -448,10 +453,10 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                             onClick={handleOuterClick}
                         >
                             <div
-                                className="absolute top-32 bg-white w-[500px] h-[200px] rounded shadow-lg p-4 flex flex-col"
+                                className="absolute top-32  bg-white w-[600px] h-[200px] rounded shadow-lg p-4 flex flex-col"
                             // style={{ marginTop: "20px", marginBottom: "60px" }}
                             >
-                                {/* Close icon */}
+                                
                                 <button
                                     className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
                                     onClick={closeModal}
@@ -459,23 +464,22 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                                     ✕
                                 </button>
 
-                                {/* Modal content */}
+                   
                                 <h3 className="text-[#24272c] font-thin text-[16px] text-center">Which is your city ?</h3>
 
                                 <div className="max-w-sm mx-auto mt-10">
 
                                     <Box sx={{ minWidth: 400, mx: "auto" }}>
-                                        {/* Dropdown Label */}
+                                     
                                         <FormControl fullWidth>
                                             <InputLabel id="city-select-label">
                                                 Type your city, e.g. Jaipur, New Delhi
                                             </InputLabel>
-
-                                            {/* Material-UI Select Component */}
+                    
                                             <Select
                                                 labelId="city-select-label"
                                                 id="city-select"
-                                                defaultOpen
+                                                defaultOpen={isModalOpen ? true : false}
                                                 value={selectedOption}
                                                 onChange={handleSelectCity}
                                                 label="Type your city, e.g. Jaipur, New Delhi"
@@ -489,7 +493,6 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                                                 }}
                                             >
 
-                                                {/* Map Over Options */}
                                                 {options.map((city, index) =>
                                                     city.isHeader ? (
                                                         <MenuItem key={index} disabled>
