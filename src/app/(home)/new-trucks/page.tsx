@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 
-const page = () => {
+const Page = () => {
     const [currentTab, setCurrentTab] = useState<'brand' | 'body' | 'budget' | 'fuel' | 'tonnage'>('brand');
     const handleTabChange = (tab: typeof currentTab) => {
         setCurrentTab(tab);
@@ -73,4 +73,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page;
