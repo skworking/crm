@@ -100,7 +100,7 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
             title: "New Truck",
 
             subMenu: [
-                { title: "Search", link: "/new-truck/search" },
+                { title: "Search", link: "/new-trucks" },
                 {
                     title: "Popular Brands",
                     subMenu: [
@@ -316,10 +316,10 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                 >
                     <div className='max-w-7xl m-auto'>
                         <div className='sm:p-4 md:flex gap-4 '>
-                            <div className='sm:w-[25%]'>
+                            <Link href='/' className='sm:w-[25%]'>
 
                                 <Image src={'https://truckcdn.cardekho.com/pwa/img/TrucksDekho-NewLogov2.svg'} className='h-[42px]   w-fit text-start' title='truck-dekho logo' width={100} height={100} alt='not found' />
-                            </div>
+                            </Link>
                             <SearchBarWithAutocomplete suggestions={truckBrands} />
                             {/* <div className="flex md:w-[43.66%] lg:w-[42%]  rounded-md overflow-hidden  font-[sans-serif] ">
                                 <input type="text" placeholder="Search Trucks or Brands eg. Tata or Bajaj"
@@ -453,7 +453,7 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                             onClick={handleOuterClick}
                         >
                             <div
-                                className="absolute top-32  bg-white w-[600px] h-[200px] rounded shadow-lg p-4 flex flex-col"
+                                className="md:absolute md:top-32  bg-white md:w-[600px] md:h-[200px] w-full h-full rounded shadow-lg p-4 flex flex-col"
                             // style={{ marginTop: "20px", marginBottom: "60px" }}
                             >
                                 
