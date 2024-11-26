@@ -1,25 +1,32 @@
-import React from 'react';
-import { FormControl, InputLabel, Select, MenuItem, SelectChangeEvent } from '@mui/material';
-
+import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 interface OptionType {
-  value: string;
+  value?: string;
   label: string;
-  isHeader?: boolean;
+  isHeader?: boolean; // Optional flag for headers
 }
 
 interface DropdownProps {
-  value: string | null;
-  label: string;
   options: OptionType[];
-  onChange: (e:SelectChangeEvent<string | null>, field: string) => void;
-  field: string;
+  value: string | null;
+  onChange: (event: SelectChangeEvent<string | null>) => void;
+  placeholder: string;
+  ariaLabel: string;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ value, label, options, onChange, field }) => {
+const Dropdown: React.FC<DropdownProps> = ({ options, value, onChange, placeholder, ariaLabel }) => {
   return (
-    <FormControl fullWidth margin="normal">
-      <InputLabel>{label}</InputLabel>
-      <Select value={value || ''} onChange={(e) => onChange(e, field)} label={label}>
+    <FormControl variant="standard" fullWidth margin="normal">
+      <Select
+        value={value}
+        displayEmpty
+        onChange={onChange}
+        inputProps={{ 'aria-label': ariaLabel }}
+        renderValue={(selected) => {
+          if (!selected) return <span>{placeholder}</span>;
+          const selectedOption = options.find((option) => option.value === selected);
+          return selectedOption ? selectedOption.label : selected;
+        }}
+      >
         {options.map((option) =>
           option.isHeader ? (
             <MenuItem disabled key={option.label}>

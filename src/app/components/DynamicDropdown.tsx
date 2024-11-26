@@ -228,11 +228,11 @@ const DynamicDropdown: React.FC = () => {
         return (
           <>
             <FormControl fullWidth margin="normal">
-              <InputLabel>Brand</InputLabel>
               <Select
                 value={selectedBrand}
                 onChange={(e) => handleDropdownChange(e, 'brand')}
-                label="Brand"
+                // label="Brand"
+                inputProps={{ 'aria-label': 'Without label' }}
               >
                 {brandOptions.map((option) =>
                   option.isHeader ? (
@@ -249,11 +249,12 @@ const DynamicDropdown: React.FC = () => {
             </FormControl>
             {
               <FormControl fullWidth margin="normal">
-                <InputLabel>Model</InputLabel>
+                {/* <InputLabel>Model</InputLabel> */}
                 <Select
                   value={selectedModel || ''}
                   onChange={(e) => handleDropdownChange(e, 'model')}
-                  label="Model"
+                  // label="Model"
+                  inputProps={{ 'aria-label': 'Without label' }}
                 >
 
                   {selectedBrand && modelOptions[selectedBrand]?.map((option) => (
