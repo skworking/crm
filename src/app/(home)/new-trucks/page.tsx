@@ -3,6 +3,9 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import { SelectChangeEvent } from '@mui/material';
 import Dropdown from '@/app/comman/dorpdown';
+import Breadcrumbs from '@/app/comman/breadCrumbs';
+import { generateBreadcrumbs } from '@/app/comman/commanFunctions';
+import ToggleTable from '@/app/comman/toggleTable';
 interface OptionType {
     value?: string;
     label: string;
@@ -399,7 +402,14 @@ const Page = () => {
                 return null;
         }
     }
-
+    const breadcrumbItems = generateBreadcrumbs();
+    const truckData = [
+        { Model: "Force Urbania", Price: "₹30.51 - ₹37.21 Lakh" },
+        { Model: "Isuzu D-MAX", Price: "₹8.32 - ₹8.36 Lakh" },
+        { Model: "Tata Magic Express Bi Fuel", Price: "From ₹7.62 Lakh" },
+        { Model: "Tata Magic Mantra Bi Fuel", Price: "From ₹7.01 Lakh" },
+        { Model: "Isuzu V-Cross", Price: "₹19.98 - ₹30.96 Lakh" },
+    ];
     return (
         <div className='relative'>
             <div className='lg:h-[400px] h-[200px] relative w-full'>
@@ -448,7 +458,7 @@ const Page = () => {
 
             </div>
 
-            <div className='max-w-7xl relative'>
+            <div className='max-w-7xl relative m-auto'>
                 <div className="lg:absolute p-4 lg:hidden block mt-[-15%] overflow-visible text-[14px]  lg:w-fit  font-bold left-0 ">
 
                     <div className="flex border-b w-fit">
@@ -467,9 +477,38 @@ const Page = () => {
                         {renderDropdown()}
                     </div>
                 </div>
-                <h1>
+
+                <Image
+                    width={0}
+                    height={20}
+                    sizes="100vw"
+                    className="object-none  w-full "
+                    src={'https://tpc.googlesyndication.com/simgad/2186141005922165001'} alt='' />
+
+
+            </div>
+            <hr />
+            <div className='max-w-7xl m-auto'>
+                <Breadcrumbs items={breadcrumbItems} />
+                <h2 className='p-[17px 20px 0px] text-xl font-bold mb-5 '>
                     New Trucks
-                </h1>
+                </h2>
+                <div className='border rounded-[16px]  mb-3 flex flex-col p-4 bg-white gap-2  '>
+                    <p className='text-[15px] text-[rgba(36,39,44,.7)]'>TrucksDekho brings a complete range of new trucks in India in 2024. You can search trucks by applying filters such as price, bodytype, Number of tyres, GVW, fuel & more. Also, compare trucks & stay tuned with our latest news.</p>
+
+                    <ToggleTable
+                        title="New Trucks Price In India"
+                        columns={["Model", "Price"]}
+                        data={truckData}
+                    />
+
+                </div>
+
+                <div className='border rounded-[16px]  mb-3 flex flex-col p-4 bg-white gap-2  '>
+                    <h2 className='p-[17px 20px 0px] text-xl font-bold mb-5 '>
+                        All Truck Brands In India
+                    </h2>
+                </div>
             </div>
         </div>
     )

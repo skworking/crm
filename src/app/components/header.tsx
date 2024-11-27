@@ -100,7 +100,7 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
             title: "New Truck",
 
             subMenu: [
-                { title: "Search", link: "/new-trucks" },
+                { title: "Search", link: "/en/new-trucks" },
                 {
                     title: "Popular Brands",
                     subMenu: [

@@ -1,23 +1,33 @@
+'use client'
+import Breadcrumbs from '@/app/comman/breadCrumbs';
+import { generateBreadcrumbs } from '@/app/comman/commanFunctions';
 import Body from '@/app/components/body';
-import Breadcrums from '@/app/components/breadcrums';
 import Navbar from '@/app/components/navbar';
 
 import Overview from '@/app/components/overview';
+import Image from 'next/image';
 import React from 'react'
 
 
 
 const Page = () => {
 
-
+  const breadcrumbItems = generateBreadcrumbs();
   return (
     <div className='bg-slate-50'>
-      <div className='h-10 w-10 '>
-      addsons
+      <div className='max-w-7xl m-auto '>
+        <Image
+          width={0}
+          height={5}
+          sizes="100vw"
+          className="object-none  w-full "
+          src={'https://tpc.googlesyndication.com/simgad/2186141005922165001'} alt='' />
+
+
       </div>
       <Navbar />
       <Overview />
-      <Breadcrums />
+      <Breadcrumbs items={breadcrumbItems} />
       <Body />
     </div>
   )
