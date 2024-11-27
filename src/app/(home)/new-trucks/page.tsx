@@ -16,16 +16,7 @@ interface OptionType {
     isHeader?: boolean;
 }
 
-interface brandItem {
-    id: number;
-    name: string;
-    imageUrl: string;
-    url?: string;
-}
-interface brands {
-    'new trucks': brandItem[];
-    '3 Wheeler': brandItem[];
-}
+
 type TabType = 'new trucks' | '3 Wheeler';
 
 const Page = () => {
