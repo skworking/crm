@@ -6,11 +6,28 @@ import Dropdown from '@/app/comman/dorpdown';
 import Breadcrumbs from '@/app/comman/breadCrumbs';
 import { GenerateBreadcrumbs } from '@/app/comman/commanFunctions';
 import ToggleTable from '@/app/comman/toggleTable';
+import TabComponent from '@/app/comman/tabComponent';
+import { FaAngleRight } from 'react-icons/fa';
+import PopulerModel from '@/app/components/populerModel';
+import LatestModel from '@/app/components/latestModel';
 interface OptionType {
     value?: string;
     label: string;
     isHeader?: boolean;
 }
+
+interface brandItem {
+    id: number;
+    name: string;
+    imageUrl: string;
+    url?: string;
+}
+interface brands {
+    'new trucks': brandItem[];
+    '3 Wheeler': brandItem[];
+}
+type TabType = 'new trucks' | '3 Wheeler';
+
 const Page = () => {
     const [currentTab, setCurrentTab] = useState<'brand' | 'body' | 'budget' | 'fuel' | 'tonnage'>('brand');
     const [selectedBrand, setSelectedBrand] = useState<string | null>('');
@@ -403,13 +420,126 @@ const Page = () => {
         }
     }
     const breadcrumbItems = GenerateBreadcrumbs();
-    const truckData = [
+    const trucksData = [
         { Model: "Force Urbania", Price: "₹30.51 - ₹37.21 Lakh" },
         { Model: "Isuzu D-MAX", Price: "₹8.32 - ₹8.36 Lakh" },
         { Model: "Tata Magic Express Bi Fuel", Price: "From ₹7.62 Lakh" },
         { Model: "Tata Magic Mantra Bi Fuel", Price: "From ₹7.01 Lakh" },
         { Model: "Isuzu V-Cross", Price: "₹19.98 - ₹30.96 Lakh" },
     ];
+    const [showMore, setShowMore] = useState(false);
+    const handleToggle = () => setShowMore((prev) => !prev);
+    const getDisplayData = (key: TabType) =>
+        showMore ? truckData[key] : truckData[key].slice(0, 6);
+
+
+    const truckData = {
+        'new trucks': [
+            {
+                heading: 'Ashok Leyland',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/ashok-leyland.jpg',
+            },
+            {
+                heading: 'tata',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/tata.jpg',
+            },
+            {
+                heading: 'mahindra',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/mahindra.jpg',
+            },
+            {
+                heading: 'eicher',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/eicher.jpg',
+            },
+            {
+                heading: 'bharat-benz',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/bharat-benz.jpg',
+            },
+            {
+                heading: 'piaggio',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/piaggio.jpg',
+            },
+            {
+                heading: 'altigreen',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/altigreen.jpg',
+            },
+            {
+                heading: 'deltic',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/deltic.jpg',
+            },
+            {
+                heading: 'osm',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/osm.jpg',
+            },
+            {
+                heading: 'bajaj',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/bajaj.jpg',
+            },
+            {
+                heading: 'sml-isuzu',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/sml-isuzu.jpg',
+            },
+            {
+                heading: 'toyota',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/toyota.jpg',
+            },
+        ],
+        '3 Wheeler': [
+
+            {
+                heading: 'mahindra',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/mahindra.jpg',
+            },
+            {
+                heading: 'piaggio',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/piaggio.jpg',
+            },
+            {
+                heading: 'altigreen',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/altigreen.jpg',
+            },
+            {
+                heading: 'deltic',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/deltic.jpg',
+            },
+            {
+                heading: 'Ashok Leyland',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/ashok-leyland.jpg',
+            },
+            {
+                heading: 'tata',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/tata.jpg',
+            },
+            {
+                heading: 'eicher',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/eicher.jpg',
+            },
+            {
+                heading: 'bharat-benz',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/bharat-benz.jpg',
+            },
+
+
+
+            {
+                heading: 'osm',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/osm.jpg',
+            },
+            {
+                heading: 'bajaj',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/bajaj.jpg',
+            },
+            {
+                heading: 'sml-isuzu',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/sml-isuzu.jpg',
+            },
+            {
+                heading: 'toyota',
+                image: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/toyota.jpg',
+            },
+        ],
+    };
+
     return (
         <div className='relative'>
             <div className='lg:h-[400px] h-[200px] relative w-full'>
@@ -421,9 +551,9 @@ const Page = () => {
                 />
 
                 {/* Red Circle & Content */}
-                <div className="absolute inset-0 flex items-center overflow-hidden ">
+                <div className="absolute max-w-7xl m-auto inset-0 flex items-center overflow-hidden ">
                     {/* Red Semi-Transparent Circle */}
-                    <div className="relative lg:ml-[101px] flex items-center justify-center lg:w-[600px] lg:h-[600px] w-[350px] lg:bottom-20 h-[350px] bg-[#d94025] bg-opacity-[.8] rounded-full ">
+                    <div className="relative  lg:ml-[50px] flex items-center justify-center lg:w-[600px] lg:h-[600px] w-[350px] lg:bottom-20 h-[350px] bg-[#d94025] bg-opacity-[.8] rounded-full ">
 
                     </div>
                 </div>
@@ -488,7 +618,7 @@ const Page = () => {
 
             </div>
             <hr />
-            <div className='max-w-7xl m-auto'>
+            <div className='max-w-7xl m-auto relative'>
                 <Breadcrumbs items={breadcrumbItems} />
                 <h2 className='p-[17px 20px 0px] text-xl font-bold mb-5 '>
                     New Trucks
@@ -499,15 +629,87 @@ const Page = () => {
                     <ToggleTable
                         title="New Trucks Price In India"
                         columns={["Model", "Price"]}
-                        data={truckData}
+                        data={trucksData}
                     />
 
                 </div>
 
-                <div className='border rounded-[16px]  mb-3 flex flex-col p-4 bg-white gap-2  '>
-                    <h2 className='p-[17px 20px 0px] text-xl font-bold mb-5 '>
+                <div className='border rounded-[16px]  mb-3 flex flex-col  bg-white gap-2  '>
+                    <h2 className='p-[17px 20px 0px] p-4 text-xl font-bold '>
                         All Truck Brands In India
                     </h2>
+                    <TabComponent
+                        tabs={['new trucks', '3 Wheeler']}
+                        tabContent={{
+                            'new trucks': (
+                                <div className='grid lg:grid-cols-6 grid-cols-3'>
+                                    {getDisplayData('new trucks').map((item, index) => (
+                                        <div key={index} className="lg:p-1">
+                                            <div key={index} className="bg-white border rounded-lg shadow-md text-center ">
+                                                <Image
+                                                    data-autofit="true"
+                                                    decoding="async"
+                                                    alt={item?.heading}
+                                                    className="h-20 w-full rounded-t-md object-contain"
+                                                    src={item.image}
+                                                    loading="eager"
+                                                    width={0}
+                                                    height={0}
+                                                    sizes="100vw"
+                                                    quality={75}
+                                                />
+                                                <h2 className="sm:text-md font-lite text-center line-clamp-1 overflow-hidden text-ellipsis">
+                                                    {item.heading}
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            ),
+                            '3 Wheeler': (
+                                <div className='grid lg:grid-cols-6 grid-cols-3'>
+                                    {getDisplayData('3 Wheeler').map((item, index) => (
+                                        <div key={index} className="lg:p-1">
+                                            <div key={index} className="bg-white border rounded-lg shadow-md text-center ">
+                                                <Image
+                                                    data-autofit="true"
+                                                    decoding="async"
+                                                    alt={item?.heading}
+                                                    className="h-20 w-full rounded-t-md object-contain"
+                                                    src={item.image}
+                                                    loading="eager"
+                                                    width={0}
+                                                    height={0}
+                                                    sizes="100vw"
+                                                    quality={75}
+                                                />
+                                                <h2 className="sm:text-md font-lite text-center line-clamp-1 overflow-hidden text-ellipsis">
+                                                    {item.heading}
+                                                </h2>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            ),
+                        }}
+                    />
+                    <div
+                        onClick={handleToggle}
+                        className="inline-flex p-4 items-baseline  cursor-pointer"
+                    >
+                        <span className="mr-2 text-[#d94025] text-[14px] font-bold">{showMore ? 'Show Less' : 'Show More'}</span>
+
+                        <div className="relative w-5 h-5 bg-[#d94025] rounded-full flex justify-center items-center">
+                            <FaAngleRight className="w-5 h-3 fill-white" />
+                        </div>
+                    </div>
+                </div>
+                <div className='border rounded-[16px]  mb-3 flex flex-col bg-white   relative'>
+                    <PopulerModel />
+                </div>
+
+                <div className='border rounded-[16px]  mb-3 flex flex-col bg-white   relative'>
+                    <LatestModel />
                 </div>
             </div>
         </div>
