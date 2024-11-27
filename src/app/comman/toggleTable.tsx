@@ -18,7 +18,7 @@ const ToggleTable: React.FC<ToggleTableProps> = ({ title, columns, data }) => {
         <div>
             {showAll && (
                 <>
-                    <h1 className="text-2xl text-[#24272c] font-bold mb-4">New Trucks Price In India</h1>
+                    <h1 className="text-2xl text-[#24272c] font-bold mb-4">{title}</h1>
                     <table className="table-auto w-full border-collapse border border-gray-200 mt-4">
                         <thead>
                             <tr>
