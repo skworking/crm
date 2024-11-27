@@ -1,6 +1,6 @@
 'use client'
 import Breadcrumbs from '@/app/comman/breadCrumbs';
-import { generateBreadcrumbs } from '@/app/comman/commanFunctions';
+import { GenerateBreadcrumbs } from '@/app/comman/commanFunctions';
 import Body from '@/app/components/body';
 import Navbar from '@/app/components/navbar';
 
@@ -12,7 +12,7 @@ import React from 'react'
 
 const Page = () => {
 
-  const breadcrumbItems = generateBreadcrumbs();
+  const breadcrumbItems = GenerateBreadcrumbs();
   return (
     <div className='bg-slate-50'>
       <div className='max-w-7xl m-auto '>

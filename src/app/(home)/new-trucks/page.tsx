@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { SelectChangeEvent } from '@mui/material';
 import Dropdown from '@/app/comman/dorpdown';
 import Breadcrumbs from '@/app/comman/breadCrumbs';
-import { generateBreadcrumbs } from '@/app/comman/commanFunctions';
+import { GenerateBreadcrumbs } from '@/app/comman/commanFunctions';
 import ToggleTable from '@/app/comman/toggleTable';
 interface OptionType {
     value?: string;
@@ -402,7 +402,7 @@ const Page = () => {
                 return null;
         }
     }
-    const breadcrumbItems = generateBreadcrumbs();
+    const breadcrumbItems = GenerateBreadcrumbs();
     const truckData = [
         { Model: "Force Urbania", Price: "₹30.51 - ₹37.21 Lakh" },
         { Model: "Isuzu D-MAX", Price: "₹8.32 - ₹8.36 Lakh" },

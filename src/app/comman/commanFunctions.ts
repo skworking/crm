@@ -7,7 +7,7 @@ interface BreadcrumbItem {
   path: string;
 }
 
-export const generateBreadcrumbs = (): BreadcrumbItem[] => {
+export const GenerateBreadcrumbs = (): BreadcrumbItem[] => {
   const pathname = usePathname(); // Correct way to get the current path
   const paths = pathname.split('/').filter(Boolean);
 
