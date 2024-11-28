@@ -10,12 +10,18 @@ import TabComponent from '@/app/comman/tabComponent';
 import { FaAngleRight } from 'react-icons/fa';
 import PopulerModel from '@/app/components/populerModel';
 import LatestModel from '@/app/components/latestModel';
+import BudgetModel from '@/app/components/budgetModel';
+import { BsFuelPumpDiesel } from 'react-icons/bs';
+import { PiPlugChargingLight } from 'react-icons/pi';
+import { SlFire } from 'react-icons/sl';
+import CompareModel from '@/app/components/compareModel';
+import ToolsCard from '@/app/comman/toolsCard';
+import CollabseContent from '@/app/comman/collapseComponent';
 interface OptionType {
     value?: string;
     label: string;
     isHeader?: boolean;
 }
-
 
 type TabType = 'new trucks' | '3 Wheeler';
 
@@ -530,7 +536,82 @@ const Page = () => {
             },
         ],
     };
+    const fueltype = [
+        {
+            name: "Diesel",
+            image: <BsFuelPumpDiesel className='h-20 w-full rounded-t-md p-1 object-contain' />
+        },
+        {
+            name: "Electric",
+            image: <PiPlugChargingLight className='h-20 w-full rounded-t-md p-1 object-contain' />
+        },
+        {
+            name: "Petrol",
+            image: <img src='https://cdn-icons-png.flaticon.com/512/10466/10466005.png' className='h-20 w-full rounded-t-md p-1 object-contain' />
+        },
+        {
+            name: "CNG",
+            image: <SlFire className='h-20 w-full rounded-t-md p-1 object-contain' />
+        },
+        {
+            name: "Hydrogen",
+            image: <img src={'https://cdn-icons-png.flaticon.com/512/3274/3274111.png'} className='h-20 w-full rounded-t-md p-1 object-contain' />
+        },
+        {
+            name: "LPG",
+            image: <img src={'https://cdn-icons-png.flaticon.com/512/4459/4459019.png'} className='h-20 w-full rounded-t-md p-1 object-contain' />
+        },
+        {
+            name: "LNG",
+            image: <img src={'https://cdn-icons-png.flaticon.com/512/5830/5830031.png'} className='h-20 w-full rounded-t-md p-1 object-contain' />
+        }
+    ]
 
+    const toolsArray = [
+        {
+            heading: 'Dealers',
+            image: 'https://truckcdn.cardekho.com/pwa/img/iconDealers-1.svg',
+        },
+        {
+            heading: 'Service Centers',
+            image: 'https://truckcdn.cardekho.com/pwa/img/iconServiceCenters-1.svg',
+        },
+        {
+            heading: 'Spare Parts',
+            image: 'https://truckcdn.cardekho.com/pwa/img/iconSpareParts-1.svg',
+        },
+        {
+            heading: 'Body Makers',
+            image: 'https://truckcdn.cardekho.com/pwa/img/iconBodyMakers-1.svg',
+        },
+        {
+            heading: 'Videos',
+            image: 'https://truckcdn.cardekho.com/pwa/img/iconVideos-1.svg',
+        },
+        {
+            heading: 'Brochures',
+            image: 'https://truckcdn.cardekho.com/pwa/img/iconBrochures-1.svg',
+        },
+        {
+            heading: 'Emi Calculator',
+            image: 'https://truckcdn.cardekho.com/pwa/img/iconEmiCalculator-1.svg',
+        },
+        {
+            heading: 'Compare Trucks',
+            image: 'https://truckcdn.cardekho.com/pwa/img/iconCompareTrucks-1.svg',
+        },
+        {
+            heading: 'Ask For Price',
+            image: 'https://truckcdn.cardekho.com/pwa/img/iconAskForPrice-1.svg',
+        },
+    ]
+
+    const tabData = [
+        { title: 'What is the cost of new truck in India?', content: 'The price range of the latest truck Komaki CAT 3.0 NXT is starting at Rs ₹1.20 Lakh In India.' },
+        { title: 'What are the new Trucks in 2024 ?', content: 'The new trucks in India are Tata Prima 4040.K, I-BOARD Tipper Elecy V3525, I-BOARD Long Haulage TT 5520, I-BOARD REX 5525 and I-BOARD Ductor 5525.' },
+        { title: 'What are the best trucks to buy in 2024 ?', content: 'The best trucks to buy are Tata 407 Gold SFC, Eicher Pro 2049, Eicher Pro 3015, Tata 1512 LPT and Eicher Pro 3019 In India with starting price Rs ₹1.20 Lakh' },
+        { title: 'What are the latest truck brands in India?', content: 'New truck brands in India are Tata, I-BOARD, Force, Isuzu and Mahindra.' },
+    ];
     return (
         <div className='relative'>
             <div className='lg:h-[400px] h-[200px] relative w-full'>
@@ -702,6 +783,48 @@ const Page = () => {
                 <div className='border rounded-[16px]  mb-3 flex flex-col bg-white   relative'>
                     <LatestModel />
                 </div>
+                <div className='border rounded-[16px]  mb-3 flex flex-col bg-white   relative'>
+                    <BudgetModel />
+                </div>
+                <div className='border rounded-[16px]  mb-3 flex flex-col bg-white   relative'>
+                    <h2 className='  px-4 pt-4 text-xl font-bold '>
+                        Search New Truck By Fuel Type
+                    </h2>
+                    <div className='lg:grid lg:grid-cols-6 p-4 gap-2 flex  overflow-auto no-scrollbar '>
+                        {fueltype.map((item, index) => {
+                            return (
+                                <div key={index} className="m-auto w-full h-full border rounded-lg ">
+                                    <div key={index} className="p-4 shadow-md text-center ">
+                                        <span className="">
+                                            {item.image}
+                                        </span>
+                                        <p className="sm:text-md font-lite text-center line-clamp-1 overflow-hidden text-ellipsis">
+                                            {item.name}
+                                        </p>
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div>
+
+                <div className='border rounded-[16px]  mb-3 flex flex-col bg-white   relative'>
+                    <CompareModel />
+                </div>
+                <div className='border rounded-[16px] p-4 mb-3 flex flex-col  bg-white gap-2  relative'>
+                    <h2 className='p-[17px 20px 0px]  text-xl font-bold '>
+                        Tools & Services
+                    </h2>
+                    <ToolsCard data={toolsArray} />
+                </div>
+
+                <div className='border rounded-[16px] p-4 mb-3 flex flex-col  bg-white gap-2  relative'>
+                    <h2 className='p-[17px 20px 0px]  text-xl font-bold '>
+                        Frequently Asked Question on New Trucks
+                    </h2>
+                    <CollabseContent tabContent={tabData} />
+                </div>
+
             </div>
         </div>
     )
