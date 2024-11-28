@@ -4,18 +4,28 @@ import React, { useState } from "react";
 import { FaAngleRight, FaAngleDown } from "react-icons/fa";
 
 interface ToggleTableProps {
+    content?: string[];
     title: string;
     columns: string[];
     data: { [key: string]: string }[];
 }
 
-const ToggleTable: React.FC<ToggleTableProps> = ({ title, columns, data }) => {
+const ToggleTable: React.FC<ToggleTableProps> = ({ content = [], title, columns, data }) => {
     const [showAll, setShowAll] = useState(false);
 
     const handleToggle = () => setShowAll((prev) => !prev);
 
     return (
         <div>
+            <div
+                className={`${showAll ? "line-clamp-none" : "line-clamp-2"
+                    } text-[#24272c] text-base space-y-4 mb-4`}
+            >
+                {content.map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                ))}
+            </div>
+
             {showAll && (
                 <>
                     <h1 className="text-2xl text-[#24272c] font-bold mb-4">{title}</h1>
