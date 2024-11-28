@@ -625,13 +625,13 @@ const Page = () => {
                 {/* Red Circle & Content */}
                 <div className="absolute max-w-7xl m-auto inset-0 flex items-center overflow-hidden ">
                     {/* Red Semi-Transparent Circle */}
-                    <div className="relative  lg:ml-[50px] flex items-center justify-center lg:w-[600px] lg:h-[600px] w-[350px] lg:bottom-20 h-[350px] bg-[#d94025] bg-opacity-[.8] rounded-full ">
+                    <div className="relative  lg:ml-[50px] flex items-center justify-center lg:w-[600px] lg:h-[600px] w-[350px] lg:bottom-20 h-[350px] bg-[#d94025]  mix-blend-multiply bg-opacity-[.95] rounded-full ">
 
                     </div>
                 </div>
 
             </div>
-            <div className='absolute inset-0  lg:top-[32px] space-y-10 max-w-7xl p-4 m-auto'>
+            <div className='absolute inset-0  lg:top-[32px] space-y-10 max-w-7xl  p-4 m-auto'>
 
                 <div className="  lg:text-[48px] text-2xl px-7 text-white font-bold left-0">
                     Want To Earn More?
