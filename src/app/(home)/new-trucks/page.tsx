@@ -661,7 +661,7 @@ const Page = () => {
             </div>
 
             <div className='max-w-7xl relative m-auto'>
-                <div className="lg:absolute p-4 lg:hidden block mt-[-15%] overflow-visible text-[14px]  lg:w-fit  font-bold left-0 ">
+                <div className="lg:absolute sm:p-4 overflow-auto no-scrollbar lg:hidden block mt-[-15%] sm:overflow-visible text-[14px]  lg:w-fit  font-bold left-0 ">
 
                     <div className="flex border-b w-fit">
                         {['brand', 'body', 'budget', 'fuel', 'tonnage'].map((tab) => (
