@@ -39,8 +39,8 @@ const ElectricTrucks = () => {
         </>,
         <>
             Electrification of the automotive sector is on the rise worldwide, and commercial vehicles
-            are not behind in this monumental transition. Like the rest of the world, the Indian commercial vehicle
-            industry is also gearing up toward EVs. However, unlike any other country, the Indian trucking industryes
+            aren't behind in this monumental transition. Like the rest of the world, the Indian commercial vehicle
+            industry is also gearing up toward EVs. However, unlike any other country, the Indian trucking industry's
             adoption of electrification is starting uniquely from the last-mile cargo and people carrier-mainly catered
             by the three-wheeler, also known as auto-rickshaws. So, the higher penetration of EVs
             is happening at the bottom of the vehicle segments, in the auto-rickshaw segment in India. The key reason
@@ -183,43 +183,263 @@ const ElectricTrucks = () => {
             imageUrl: "https://truckcdn.cardekho.com/in/mahindra/treo/mahindra-treo-67242.jpg",
             variants: [
                 {
-                  label: "3-Seater/HRT (Electric)",
-                  details: [
-                    { label: "Power", value: "8 kW" },
-                    { label: "GVW", value: "350" },
-                  ],
+                    label: "3-Seater/HRT (Electric)",
+                    details: [
+                        { label: "Power", value: "8 kW" },
+                        { label: "GVW", value: "350" },
+                    ],
                 },
                 {
-                  label: "3-Seater/SFT (Electric)",
-                  details: [
-                    { label: "Power", value: "8 kW" },
-                    { label: "GVW", value: "350" },
-                  ],
+                    label: "3-Seater/SFT (Electric)",
+                    details: [
+                        { label: "Power", value: "8 kW" },
+                        { label: "GVW", value: "350" },
+                    ],
                 },
-              ],
+            ],
         },
         {
             name: "Tata Ace EV",
             price: "From ₹8.72 Lakh*",
             isElectric: true,
             budget: [
-              { label: "Power", value: "36 hp" },
-              { label: "GVW", value: "1840" },
-              { label: "Engine", value: "21.3" },
-              { label: "Payload", value: "600" },
-              { label: "Fuel Type", value: "Electric" },
+                { label: "Power", value: "36 hp" },
+                { label: "GVW", value: "1840" },
+                { label: "Engine", value: "21.3" },
+                { label: "Payload", value: "600" },
+                { label: "Fuel Type", value: "Electric" },
             ],
             imageUrl: "https://truckcdn.cardekho.com/in/tata/ace-ev/tata-ace-ev.jpg", // Replace with actual image URL
             variants: [
-              {
-                label: "2100/Electric (Electric)",
-                details: [
-                  { label: "Power", value: "36 hp" },
-                  { label: "GVW", value: "1840" },
-                ],
-              },
+                {
+                    label: "2100/Electric (Electric)",
+                    details: [
+                        { label: "Power", value: "36 hp" },
+                        { label: "GVW", value: "1840" },
+                    ],
+                },
             ],
-          },
+        },
+        {
+            name: "Piaggio Ape E City",
+            price: "From ₹1.95 Lakh*",
+            isElectric: true,
+            budget: [
+                { label: "Power", value: "7.3 Hp" },
+                { label: "GVW", value: "689" },
+                { label: "Fuel Type", value: "Electric" },
+            ],
+            imageUrl: "https://truckcdn.cardekho.com/in/piaggio/ape-e-city/piaggio-ape-e-city.jpg", // Replace with actual image URL
+            variants: [
+                {
+                    label: "3-Seater/1920/Electric/Swappable (Electric)",
+                    details: [
+                        { label: "Power", value: "7.3 Hp" },
+                        { label: "GVW", value: "689" },
+                    ],
+                },
+            ],
+        },
+        {
+            name: "Mahindra Treo Yaari",
+            price: "₹1.79 - ₹2.04 Lakh*",
+            isElectric: true,
+            budget: [
+                { label: "Power", value: "2 hp" },
+                { label: "GVW", value: "740" },
+                { label: "Fuel Type", value: "Electric" },
+            ],
+            imageUrl: 'https://truckcdn.cardekho.com/in/mahindra/treo-yaari/mahindra-treo-yaari-62610.jpg',
+            variants: [
+                {
+                    label: "4-Seater/SFT (Electric)",
+                    details: [
+                        { label: "Power", value: "2 hp" },
+                        { label: "GVW", value: "740" },
+                    ],
+                },
+                {
+                    label: "4-Seater/HRT (Electric)",
+                    details: [
+                        { label: "Power", value: "2 hp" },
+                        { label: "GVW", value: "740" },
+                    ],
+                },
+            ],
+        },
+        {
+            name: "Mahindra Treo Zor",
+            price: "Price Coming Soon",
+            isElectric: true,
+            budget: [
+                { label: "Power", value: "8 kW" },
+                { label: "GVW", value: "995" },
+                { label: "Payload", value: "550" },
+                { label: "Fuel Type", value: "Electric" },
+            ],
+            imageUrl: 'https://truckcdn.cardekho.com/in/mahindra/treo-zor/mahindra-treo-zor-46219.jpg',
+            variants: [
+                {
+                    label: "2216/Pickup (Electric)",
+                    details: [
+                        { label: "Power", value: "8 kW" },
+                        { label: "GVW", value: "995" },
+                    ],
+                },
+                {
+                    label: "2216/Flat Bed (Electric)",
+                    details: [
+                        { label: "Power", value: "8 kW" },
+                        { label: "GVW", value: "995" },
+                    ],
+                },
+                {
+                    label: "2216/Delivery Van (Electric)",
+                    details: [
+                        { label: "Power", value: "8 kW" },
+                        { label: "GVW", value: "995" },
+                    ],
+                },
+            ],
+        },
+        {
+            name: "Montra Electric Super Auto",
+            price: "₹3.02 - ₹3.50 Lakh*",
+            isElectric: true,
+            budget: [
+                { label: "Power", value: "13 hp" },
+                { label: "GVW", value: "770" },
+                { label: "Fuel Type", value: "Electric" },
+            ],
+            imageUrl: 'https://truckcdn.cardekho.com/in/montra/super-auto/montra-super-auto.jpg',
+            variants: [
+                {
+                    label: "ePX (Electric)",
+                    details: [
+                        { label: "Power", value: "13 hp" },
+                        { label: "GVW", value: "770" },
+                    ],
+                },
+                {
+                    label: "ePV (Electric)",
+                    details: [
+                        { label: "Power", value: "13 hp" },
+                        { label: "GVW", value: "749" },
+                    ],
+                },
+                {
+                    label: "ePV 2.0 (Electric)",
+                    details: [
+                        { label: "Power", value: "13 hp" },
+                        { label: "GVW", value: "756" },
+                    ],
+                },
+            ],
+        },
+        {
+            name: "YC Electric Yatri Super",
+            price: "From ₹1.69 Lakh*",
+            isElectric: true,
+            budget: [
+                { label: "Power", value: "2 hp" },
+                { label: "GVW", value: "693" },
+                { label: "Fuel Type", value: "Electric" },
+            ],
+            imageUrl: 'https://truckcdn.cardekho.com/in/yc-electric/yatri-super/yc-electric-yatri-super.jpg',
+            variants: [
+                {
+                    label: "4-Seater/Electric (Electric)",
+                    details: [
+                        { label: "Power", value: "2 hp" },
+                        { label: "GVW", value: "693" },
+                    ],
+                },
+            ],
+        },
+        {
+            name: "Mahindra Treo Plus",
+            price: "Price Coming Soon",
+            isElectric: true,
+            budget: [
+                { label: "Power", value: "8 kW" },
+                { label: "GVW", value: "720" },
+                { label: "Fuel Type", value: "Electric" },
+            ],
+            imageUrl: 'https://truckcdn.cardekho.com/in/mahindra/treo-plus/mahindra-treo-plus-82328.jpg',
+            variants: [
+                {
+                    label: "2073/SFT (Electric)",
+                    details: [
+                        { label: "Power", value: "8 kW" },
+                        { label: "GVW", value: "720" },
+                    ],
+                },
+                {
+                    label: "2073/HRT (Electric)",
+                    details: [
+                        { label: "Power", value: "8 kW" },
+                        { label: "GVW", value: "720" },
+                    ],
+                },
+            ],
+        },
+        {
+            name: "Mahindra Zor Grand",
+            price: "Price Coming Soon",
+            isElectric: true,
+            budget: [
+                { label: "Power", value: "12 kW" },
+                { label: "GVW", value: "998" },
+                { label: "Payload", value: "400" },
+                { label: "Fuel Type", value: "Electric" }
+            ],
+            imageUrl: "https://truckcdn.cardekho.com/in/mahindra/treo-zor-grand/mahindra-treo-zor-grand-51184.jpg",
+            variants: [
+                {
+                    label: "2200/Delivery Van (Electric)",
+                    details: [
+                        { label: "Power", value: "12 kW" },
+                        { label: "GVW", value: "998" }
+                    ]
+                },
+                {
+                    label: "2200/Delivery Van Plus (Electric)",
+                    details: [
+                        { label: "Power", value: "12 kW" },
+                        { label: "GVW", value: "998" }
+                    ]
+                },
+                {
+                    label: "2200/Pikup (Electric)",
+                    details: [
+                        { label: "Power", value: "12 kW" },
+                        { label: "GVW", value: "998" }
+                    ]
+                }
+            ]
+        },
+        {
+            name: "Tata Magic EV",
+            price: "From ₹5.00 Lakh*",
+            isElectric: true,
+            budget: [
+                { label: "Power", value: "34 hp" },
+                { label: "GVW", value: "2180" },
+                { label: "Payload", value: "825" },
+                { label: "Fuel Type", value: "Electric" }
+            ],
+            imageUrl: "https://truckcdn.cardekho.com/in/tata/magic-ev/tata-magic-ev-78339.jpg",
+            variants: [
+                {
+                    label: "10 Seater/2100 (Electric)",
+                    details: [
+                        { label: "Power", value: "34 hp" },
+                        { label: "GVW", value: "2180" }
+                    ]
+                }
+            ]
+        }
+
 
     ]
 
@@ -271,6 +491,7 @@ const ElectricTrucks = () => {
                             />
                         </div>
                         <TruckCard data={truckCard} />
+                        
 
                     </div>
 

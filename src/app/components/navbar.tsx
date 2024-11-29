@@ -147,7 +147,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className={`shadow-sm w-full z-40  transition-colors duration-300  animate-fadeInDown  ${isScrolled ? 'bg-black text-white  top-0 fixed' : 'bg-white'} ${isNavbarVisible ? 'sm:sticky lg:top-0  ' : 'hidden'} `}>
+            <nav className={`shadow-sm w-full  z-40  transition-colors duration-300  animate-fadeInDown  ${isScrolled ? 'bg-black text-white  top-0 fixed' : 'bg-white'} ${isNavbarVisible ? 'sm:sticky lg:top-0  ' : 'hidden'} `}>
                 <ul className={`flex items-center uppercase space-x-6  p-4 max-w-7xl m-auto  sm:overflow-visible  overflow-auto no-scrollbar `}>
 
                     {menuItems.map((item, index) => (
@@ -177,7 +177,7 @@ const Navbar = () => {
                                     {item.hasDropdown && isCompareDropdownOpen && (
                                         <div className=' top-full w-full inset-0 normal-case    bg-white shadow-lg z-10'>
                                             <MdOutlineArrowDropUp className='sm:absolute sm:w-20 sm:h-10 top-8 hidden sm:block font-bold' fill='#F3F4F6' />
-                                            <div className='sm:absolute border-b-[1px] rounded-b-lg fixed right-0 left-0 mx-auto mt-[52vh] sm:mt-4  max-w-[1280px] bg-white border border-gray-300 shadow-md z-10'>
+                                            <div className='sm:absolute border-b-[1px] rounded-b-lg fixed right-0 left-0 mx-auto mt-[40vh] sm:mt-4  max-w-[1280px] bg-white border border-gray-300 shadow-md z-10'>
                                                 <span className='right-2 top-2 text-end mr-2 block sm:hidden cursor-pointer ' onClick={() => { setCompareDropdownOpen(false) }}>
                                                     x
                                                     {/* <IoMdClose onClick={() => {setCompareDropdownOpen(false) }} /> */}
