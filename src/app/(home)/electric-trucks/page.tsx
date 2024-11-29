@@ -39,8 +39,8 @@ const ElectricTrucks = () => {
         </>,
         <>
             Electrification of the automotive sector is on the rise worldwide, and commercial vehicles
-            aren't behind in this monumental transition. Like the rest of the world, the Indian commercial vehicle
-            industry is also gearing up toward EVs. However, unlike any other country, the Indian trucking industry's
+            are not behind in this monumental transition. Like the rest of the world, the Indian commercial vehicle
+            industry is also gearing up toward EVs. However, unlike any other country, the Indian trucking industryes
             adoption of electrification is starting uniquely from the last-mile cargo and people carrier-mainly catered
             by the three-wheeler, also known as auto-rickshaws. So, the higher penetration of EVs
             is happening at the bottom of the vehicle segments, in the auto-rickshaw segment in India. The key reason
