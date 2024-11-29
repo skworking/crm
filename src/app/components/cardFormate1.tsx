@@ -3,8 +3,8 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Image from 'next/image';
-import { GiElectric } from 'react-icons/gi';
 import Link from 'next/link';
+import { GiElectric } from 'react-icons/gi';
 
 interface Card {
   id: number;
@@ -44,6 +44,8 @@ const CardFormate1: React.FC<CardFormateProps> = ({ data }) => {
       },
     ],
   };
+  console.log(data);
+
 
   return (
     <div className="truck-slider p-4">

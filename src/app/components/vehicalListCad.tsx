@@ -5,7 +5,7 @@ import Slider from "react-slick";
 // Define the types for the props
 interface Vehicle {
     name: string;
-    priceRange: string;
+    priceRange?: string;
     imageUrl?: string; // Optional field
 }
 
@@ -13,7 +13,7 @@ interface VehicleListCardProps {
     title: string;
     vehicleData: Vehicle[];
     viewAllText: string;
-    onViewAllClick: () => void;
+    onViewAllClick?: () => void;
 }
 
 const VehicleListCard: React.FC<VehicleListCardProps> = ({ title, vehicleData, viewAllText, onViewAllClick }) => {

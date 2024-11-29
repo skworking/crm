@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { FaAngleRight, FaAngleDown } from "react-icons/fa";
 
 interface ToggleTableProps {
-    content?: string[];
+    content?: JSX.Element[];
     title: string;
     columns: string[];
     data: { [key: string]: string }[];
@@ -19,7 +19,7 @@ const ToggleTable: React.FC<ToggleTableProps> = ({ content = [], title, columns,
         <div>
             <div
                 className={`${showAll ? "line-clamp-none" : "line-clamp-2"
-                    } text-[#24272c] text-base space-y-4 mb-4`}
+                    } text-[rgba(36,39,44,.7)] text-base space-y-4 text-[14px] mb-4`}
             >
                 {content.map((paragraph, index) => (
                     <p key={index}>{paragraph}</p>
@@ -28,14 +28,14 @@ const ToggleTable: React.FC<ToggleTableProps> = ({ content = [], title, columns,
 
             {showAll && (
                 <>
-                    <h1 className="text-2xl text-[#24272c] font-bold mb-4">{title}</h1>
+                    <h1 className="text-[23px] text-[#24272c] font-medium mb-4">{title}</h1>
                     <table className="table-auto w-full border-collapse border border-gray-200 mt-4">
                         <thead>
                             <tr>
                                 {columns.map((col) => (
                                     <th
                                         key={col}
-                                        className="border border-gray-300 px-4 py-2 bg-[#fafafa] text-[#24272c] text-left"
+                                        className="border font-semibold border-gray-300 px-4 py-2 bg-[#fafafa] text-[#24272c] text-left"
                                     >
                                         {col}
                                     </th>
@@ -48,7 +48,7 @@ const ToggleTable: React.FC<ToggleTableProps> = ({ content = [], title, columns,
                                     {columns.map((col) => (
                                         <td
                                             key={col}
-                                            className="border border-gray-300 px-4 py-2"
+                                            className="border text-[rgba(36,39,44,.7)] border-gray-300 px-4 py-2"
                                         >
                                             {row[col]}
                                         </td>
