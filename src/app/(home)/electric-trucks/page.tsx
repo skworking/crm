@@ -589,7 +589,7 @@ const ElectricTrucks = () => {
                         <ResearchList title="Explore Fuel Types" data={truckInfo} />
 
                         <BrandList title="Popular Electric Vehicle Brands" data={brandInfo} />
-                        <img src='https://tpc.googlesyndication.com/simgad/17644868341984738745' className="brightness-100 lg:block hidden  w-full  object-fill h-[250px]" />
+                        <img alt='not found' src='https://tpc.googlesyndication.com/simgad/17644868341984738745' className="brightness-100 lg:block hidden  w-full  object-fill h-[250px]" />
 
                         <VehicleListCard
                             title="Best Auto Rickshaw"

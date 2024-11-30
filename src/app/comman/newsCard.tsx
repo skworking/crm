@@ -18,7 +18,7 @@ interface CardFormateProps {
 
 const NewsCard: React.FC<CardFormateProps> = ({ data }) => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(5);
+    const itemsPerPage = 5
     const totalPages = Math.ceil(data.length / itemsPerPage);
 
     // Calculate the visible items based on the current page
@@ -30,7 +30,7 @@ const NewsCard: React.FC<CardFormateProps> = ({ data }) => {
     return (
         <div className='space-y-4'>
             {visibleItems.map((item, index) => (
-                <div className="md:flex border rounded-lg bg-white shadow-md">
+                <div key={index} className="md:flex border rounded-lg bg-white shadow-md">
                     <div className='relative md:w-1/3'>
                         <Image
                             title={item.name}

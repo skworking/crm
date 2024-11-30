@@ -234,7 +234,7 @@ const News = () => {
                     // onViewAllClick={handleViewAll}
                     />
                     <BrandList title="Popular Electric Vehicle Brands" data={brandInfo} />
-                    <img src='https://tpc.googlesyndication.com/simgad/17644868341984738745' className="brightness-100 lg:block hidden  w-full  object-fill h-[250px]" />
+                    <img alt='' src='https://tpc.googlesyndication.com/simgad/17644868341984738745' className="brightness-100 lg:block hidden  w-full  object-fill h-[250px]" />
                 </div>
             </div>
         </div>

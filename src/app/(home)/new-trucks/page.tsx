@@ -555,15 +555,15 @@ const Page = () => {
         },
         {
             name: "Hydrogen",
-            image: <img src={'https://cdn-icons-png.flaticon.com/512/3274/3274111.png'} className='h-20 w-full rounded-t-md p-1 object-contain' />
+            image: <img alt='Hydrogen' src={'https://cdn-icons-png.flaticon.com/512/3274/3274111.png'} className='h-20 w-full rounded-t-md p-1 object-contain' />
         },
         {
             name: "LPG",
-            image: <img src={'https://cdn-icons-png.flaticon.com/512/4459/4459019.png'} className='h-20 w-full rounded-t-md p-1 object-contain' />
+            image: <img alt='LPG' src={'https://cdn-icons-png.flaticon.com/512/4459/4459019.png'} className='h-20 w-full rounded-t-md p-1 object-contain' />
         },
         {
             name: "LNG",
-            image: <img src={'https://cdn-icons-png.flaticon.com/512/5830/5830031.png'} className='h-20 w-full rounded-t-md p-1 object-contain' />
+            image: <img alt='LNG' src={'https://cdn-icons-png.flaticon.com/512/5830/5830031.png'} className='h-20 w-full rounded-t-md p-1 object-contain' />
         }
     ]
 
