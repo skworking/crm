@@ -6,6 +6,7 @@ import Image from 'next/image';
 const Slider = dynamic(() => import('react-slick'), { ssr: false });
 
 interface Truck {
+
     name: string;
     price: string;
     imageUrl: string;
@@ -18,15 +19,17 @@ interface ComparisonData {
 
 interface CompareSliderProps {
     data: ComparisonData[];
+    heading?: string;
+    setSlide?: number;
     // onViewAllClick?: () => void; // Optional callback for the "View All" button
 }
 
-const CompareSlider: React.FC<CompareSliderProps> = ({ data }) => {
+const CompareSlider: React.FC<CompareSliderProps> = ({ data, heading, setSlide }) => {
     const settings = {
         dots: false,
         infinite: false,
         speed: 500,
-        slidesToShow: 3,
+        slidesToShow: setSlide || 3,
         slidesToScroll: 1,
         responsive: [
             {
@@ -54,6 +57,9 @@ const CompareSlider: React.FC<CompareSliderProps> = ({ data }) => {
 
     return (
         <div className="md:p-3 p-0 truck-slider">
+            <p className='pt-4 px-2 text-xl font-bold  '>
+                {heading}
+            </p>
             <Slider {...settings}>
                 {data.map((comparisonItem, index) => (
                     <div key={index} className="flex flex-wrap justify-center sm:p-4 p-2 gap-6">
@@ -94,8 +100,8 @@ const CompareSlider: React.FC<CompareSliderProps> = ({ data }) => {
                                     </div>
                                 ))}
                             </div>
-                            <p className="sm:p-4 text-center">
-                                <span className="text-center text-[#d94025] mb-2 p-2 border border-[#d94025] w-full rounded-md sm:text-[14px] text-[11px] sm:font-bold whitespace-nowrap overflow-hidden line-clamp-1 text-ellipsis">
+                            <p className="p-4 text-center">
+                                <span className="p-3 text-[#d94025]  border border-[#d94025]  rounded-md sm:text-[14px] text-[11px] sm:font-bold whitespace-nowrap overflow-hidden line-clamp-1 text-ellipsis ">
                                     {comparisonItem.comparison}
                                 </span>
                             </p>

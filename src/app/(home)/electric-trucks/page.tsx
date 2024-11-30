@@ -1,7 +1,10 @@
 'use client'
 import BrandList from '@/app/comman/brandList';
 import Breadcrumbs from '@/app/comman/breadCrumbs';
-import { GenerateBreadcrumbs } from '@/app/comman/commanFunctions';
+import ViewAllButton from '@/app/comman/buttonView';
+import CollabseContent from '@/app/comman/collapseComponent';
+import { GenerateBreadcrumbs, generateCompareData } from '@/app/comman/commanFunctions';
+import CompareSlider from '@/app/comman/compareSlider';
 import ResearchList from '@/app/comman/researchList';
 import ToggleTable from '@/app/comman/toggleTable';
 import TruckCard from '@/app/comman/truckCards';
@@ -442,7 +445,78 @@ const ElectricTrucks = () => {
 
 
     ]
+    const sliderItems = [
+        {
+            id: 1,
+            name: "Force Urbania",
+            price: "₹30.51 - ₹37.21 Lakh *",
+            imageUrl:
+                "https://truckcdn.cardekho.com/in/force/urbania/force-urbania.jpg",
+        },
+        {
+            id: 2,
+            name: "Tata Winger Cargo",
+            price: "From ₹8.00 Lakh *",
+            imageUrl:
+                "https://truckcdn.cardekho.com/in/tata/winger-cargo/tata-winger-cargo-67281.jpg",
+        },
+        {
+            id: 3,
+            name: "Ashok Leyland Dost +",
+            price: "₹7.75 - ₹8.25 Lakh *",
+            imageUrl:
+                "https://truckcdn.cardekho.com/in/ashok-leyland/dost/ashok-leyland-dost-59041.jpg",
+        },
+        {
+            id: 4,
+            name: "Ashok Leyland Dost Strong Comparison",
+            price: "₹7.49 - ₹7.95 Lakh*",
+            offer: "Get On Road Price",
+            imageUrl:
+                "https://truckcdn.cardekho.com/in/ashok-leyland/dost-strong/ashok-leyland-dost-strong-33132.jpg",
+        },
+        {
+            id: 5,
+            name: "Isuzu D-MAX",
+            price: "₹8.32 - ₹8.36 Lakh*",
+            offer: "Get On Road Price",
+            imageUrl:
+                "https://truckcdn.cardekho.com/in/isuzu/d-max/isuzu-d-max-48049.jpg",
+        },
+        {
+            id: 6,
+            name: "Tata Yodha Pickup Comparison",
+            price: "₹8.51 - ₹10.71 Lakh*",
+            offer: "Get On Road Price",
+            imageUrl:
+                "https://truckcdn.cardekho.com/in/tata/yodha/tata-yodha-46306.jpg",
+        },
+        {
+            id: 7,
+            name: "Mahindra Bolero Maxx Pik-Up HD",
+            price: "₹9.79 - ₹9.85 Lakh *",
+            offer: "Get On Road Price",
+            imageUrl:
+                "https://truckcdn.cardekho.com/in/mahindra/bolero-maxx-pik-up-hd/mahindra-bolero-maxx-pik-up-hd-96009.jpg",
+        },
+        {
+            id: 8,
+            name: "Tata Yodha 2.0",
+            price: "₹9.99 - ₹10.00 Lakh *",
+            offer: "Get On Road Price",
+            imageUrl:
+                "https://truckcdn.cardekho.com/in/tata/yodha-2-0/tata-yodha-2-0.jpg",
+        },
+    ]
+    const compareData = generateCompareData(sliderItems);
 
+    const faqData = [
+        { title: 'Latest Electric Commercial Vehicles', content: 'Altigreen NeEV TEZ, OSM Stream City, Tata Ace EV, Piaggio Ape E-City, EKA E9, Atul Auto Elite Plus, Kinetic Green Safar Smart, Mahindra Zor Grand, Switch EiV 12, and Euler HiLoad EV 2023 are some of the latest electric commercial vehicles in India.' },
+        { title: 'Best Electric Commercial Vehicles', content: 'Altigreen NeEV TEZ, Mahindra Zor Grand, Mahindra Treo, Kinetic Green Safar Smart, OSM Rage Plus, and Tata Ace EV are some of India\'s best electric commercial vehicles.' },
+        { title: 'Top Commercial EV Brands in India', content: 'Altigreen, Mahindra Electric, Omega Seiki Mobility, Tata Motors, Piaggio, Switch Mobility, Kinetic Green, and Atul Auto are the top commercial EV brands in India.' },
+        { title: 'Electric Vehicles Under ₹5 Lakh', content: 'Altigreen NeEV TEZ, Mahindra Treo, Kinetic Safar Shakti, OSM Rage Plus, Mahindra E-Alfa Mini, and Mahindra Zor Grand are electric vehicles under ₹5 lakh.' },
+        { title: 'Long-Range Electric Three-Wheelers', content: 'Altigreen NeEV TEZ, OSM Rage Plus, Mahindra Treo, and OSM Stream are long-range electric three-wheelers in India.' }
+    ];
     return (
         <div className='relative'>
             <div className='lg:h-[400px] h-[200px] relative w-full'>
@@ -478,7 +552,7 @@ const ElectricTrucks = () => {
                 <Breadcrumbs items={breadcrumbItems} />
 
                 <div className="lg:flex border-b-2  rounded-b-md border-gray-100 gap-4 ">
-                    <div className="w-full lg:w-8/12 xl:w-[73.50%]   md:p-5 xl:p-0 " >
+                    <div className="w-full lg:w-8/12 xl:w-[73.50%] space-y-4 mb-4 md:p-5 xl:p-0 " >
                         <h2 className='p-[17px 20px 0px] text-xl font-bold mb-5 '>
                             Electric Commercial Vehicles
                         </h2>
@@ -491,8 +565,24 @@ const ElectricTrucks = () => {
                             />
                         </div>
                         <TruckCard data={truckCard} />
-                        
+                        <div className='border rounded-[16px]   mb-3 bg-white'>
 
+                            <CompareSlider
+                                data={compareData}
+                                heading={' Popular Electric Vehicles Comparisons'}
+                                setSlide={2}
+                            />
+                            <div className='pb-4 pl-4'>
+
+                                <ViewAllButton heading="Trucks Comparisions" link="/compare" />
+                            </div>
+                        </div>
+                        <div className='border rounded-[16px] p-4  flex flex-col  bg-white gap-2  relative'>
+                            <h2 className='p-[17px 20px 0px]  text-xl font-bold '>
+                                Frequently Asked Question on Electric Vehicles
+                            </h2>
+                            <CollabseContent tabContent={faqData} />
+                        </div>
                     </div>
 
                     <div className="w-full lg:w-4/12 xl:w-[25%] h-auto flex flex-col  sm:p-5 xl:p-0 mr-2 gap-2">

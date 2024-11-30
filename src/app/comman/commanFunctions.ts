@@ -24,3 +24,26 @@ export const GenerateBreadcrumbs = (): BreadcrumbItem[] => {
     return { label, path: fullPath };
   });
 };
+
+interface SliderItem {
+  id: number;
+  name: string;
+  price: string;
+  offer?: string;
+  imageUrl: string;
+  isElectric?: boolean;
+}
+interface CompareData {
+  trucks: SliderItem[];
+  comparison: string;
+}
+export const generateCompareData = (trucks: SliderItem[]): CompareData[] => {
+  const compareData: CompareData[] = [];
+  for (let i = 0; i < trucks.length - 1; i += 2) {
+    compareData.push({
+      trucks: [trucks[i], trucks[i + 1]],
+      comparison: `${trucks[i].name} vs ${trucks[i + 1].name}`,
+    });
+  }
+  return compareData;
+};
