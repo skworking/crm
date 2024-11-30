@@ -127,6 +127,7 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                 { title: "Body Makers", link: "/body-makers" },
             ],
         },
+        { title: "News & Reviews", link: "/en/news" },
         { title: "Loan Offers", link: "/loan-offers", offer: true },
         {
             title: "More",
@@ -366,7 +367,7 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                     </div>
                     <hr />
                     <nav className="relative max-w-7xl  m-auto flex justify-between">
-                        <ul className="flex max-w-6xl flex-wrap space-x-2  md:space-x-8 " onMouseLeave={handleMouseLeave}>
+                        <ul className="flex max-w-6xl flex-wrap space-x-2  md:space-x-6 " onMouseLeave={handleMouseLeave}>
                             {menuData.map((item, index) => (
                                 <li key={index} onMouseEnter={() => handleMenuMouseEnter(index)} className="relative p-2 sm:text-[14px] text-[12px] border-t-[3px]  border-white hover:border-t-[3px] hover:border-[#d94025]">
                                     {item.link ? (
@@ -456,7 +457,7 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                                 className="md:absolute md:top-32  bg-white md:w-[600px] md:h-[200px] w-full h-full rounded shadow-lg p-4 flex flex-col"
                             // style={{ marginTop: "20px", marginBottom: "60px" }}
                             >
-                                
+
                                 <button
                                     className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
                                     onClick={closeModal}
@@ -464,18 +465,18 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                                     ✕
                                 </button>
 
-                   
+
                                 <h3 className="text-[#24272c] font-thin text-[16px] text-center">Which is your city ?</h3>
 
                                 <div className="max-w-sm mx-auto mt-10">
 
                                     <Box sx={{ minWidth: 400, mx: "auto" }}>
-                                     
+
                                         <FormControl fullWidth>
                                             <InputLabel id="city-select-label">
                                                 Type your city, e.g. Jaipur, New Delhi
                                             </InputLabel>
-                    
+
                                             <Select
                                                 labelId="city-select-label"
                                                 id="city-select"
