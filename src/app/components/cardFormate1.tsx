@@ -19,14 +19,15 @@ interface Card {
 
 interface CardFormateProps {
   data: Card[]; // Accept data as a prop
+  cards?:number;
 }
 
-const CardFormate1: React.FC<CardFormateProps> = ({ data }) => {
+const CardFormate1: React.FC<CardFormateProps> = ({ data,cards }) => {
   const settings = {
     dots: false,
     infinite: false,
     speed: 0,
-    slidesToShow: 4,
+    slidesToShow: cards || 4,
     slidesToScroll: 1,
     cssEase: 'linear',
     responsive: [

@@ -2,6 +2,8 @@ import { Avatar } from '@mui/material';
 import Image from 'next/image';
 import React, { useState } from 'react'
 import { MdExpandLess } from 'react-icons/md';
+import { useRouter } from "next/navigation";
+import Link from 'next/link';
 
 interface Card {
     id?: number;
@@ -11,12 +13,14 @@ interface Card {
     imageUrl: string;
     name: string;
     date: string;
+    url?: string;
 }
 interface CardFormateProps {
     data: Card[]; // Accept data as a prop
 }
 
 const NewsCard: React.FC<CardFormateProps> = ({ data }) => {
+    const router = useRouter();
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5
     const totalPages = Math.ceil(data.length / itemsPerPage);
@@ -26,11 +30,14 @@ const NewsCard: React.FC<CardFormateProps> = ({ data }) => {
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
     };
-
+    const handleImageClick = (link: string) => {
+        router.push(`${link}`)
+    }
     return (
         <div className='space-y-4'>
             {visibleItems.map((item, index) => (
                 <div key={index} className="md:flex border rounded-lg bg-white shadow-md">
+                    {/* <Link href={item?.url ?? '#'} ></Link> */}
                     <div className='relative md:w-1/3'>
                         <Image
                             title={item.name}
@@ -43,13 +50,16 @@ const NewsCard: React.FC<CardFormateProps> = ({ data }) => {
                             width={580}
                             height={300}
                             quality={75}
+                            onClick={() => handleImageClick(item?.url ?? '#')}
                         />
 
                         {/* {item.isElectric && <span className='absolute bottom-0 right-3 text-[10px] flex items-center text-white bg-[#32bea6] p-1 font-bold mb-1 rounded-lg'><GiElectric className='w-5 h-4 rotate-[-30deg]' /> Electric</span>} */}
                     </div>
                     <div className="flex flex-col justify-between flex-1 p-4">
                         <div>
-                            <h2 className="text-[14px] font-bold ">{item.heading}</h2>
+                            <Link href={item?.url ?? '#'} >
+                                <h2 className="text-[14px] font-bold ">{item.heading}</h2>
+                            </Link>
                             <p className='text-[12px] text-[rgba(36,39,44,.7)]'>{item.description}</p>
                         </div>
                         <div className='text-[12px] text-[rgba(36,39,44,.7)]'>

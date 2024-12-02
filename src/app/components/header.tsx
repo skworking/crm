@@ -9,13 +9,10 @@ import { MdKeyboardArrowRight, MdOutlineArrowDropDown } from 'react-icons/md';
 import { TiArrowSortedDown } from 'react-icons/ti';
 import { motion } from "framer-motion";
 import { IoLocationOutline } from 'react-icons/io5';
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { SelectChangeEvent } from "@mui/material/Select";
 import useDeviceType from "../comman/deviceDetect";
 import SearchBarWithAutocomplete from '../comman/searchSuggession';
+import Modal from '../comman/modelSelect';
 interface HeaderProps {
     isSticky?: boolean;
 }
@@ -37,26 +34,31 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
     const [selectedOption, setSelectedOption] = useState('');
 
 
-    const options = [
-        { label: "POPULAR CITIES", isHeader: true },
-        { value: "option1", label: "Option 1" },
-        { value: "option2", label: "Option 2" },
-        { value: "option3", label: "Option 3" },
-    ];
+    // const options = [
+    //     { label: "POPULAR CITIES", isHeader: true },
+    //     { value: "option1", label: "Option 1" },
+    //     { value: "option2", label: "Option 2" },
+    //     { value: "option3", label: "Option 3" },
+    // ];
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
+
     const handleSelectCity = (event: SelectChangeEvent) => {
         setSelectedOption(event.target.value as string);
         closeModal();
     };
 
+    // const handleSelectCity = (city: string) => {
+    //     setSelectedOption(city);
+    //     closeModal();
+    //   };
 
-    const handleOuterClick = (e: React.MouseEvent) => {
-        // Close only if the click is outside the modal content
-        if ((e.target as HTMLElement).id === "modal-overlay") {
-            closeModal();
-        }
-    };
+    // const handleOuterClick = (e: React.MouseEvent) => {
+    //     // Close only if the click is outside the modal content
+    //     if ((e.target as HTMLElement).id === "modal-overlay") {
+    //         closeModal();
+    //     }
+    // };
 
     const handleSelect = (language: React.SetStateAction<string>) => {
         setSelectedLanguage(language);
@@ -446,8 +448,18 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                             </span>
                         </div>
                     </nav>
-
                     {isModalOpen && (
+                        <>
+                            <Modal
+                                isModalOpen={isModalOpen}
+                                selectedOption={selectedOption}
+                                options={[{ label: "Jaipur", value: "jaipur" }, { label: "New Delhi", value: "delhi" }]} // Example data
+                                closeModal={closeModal}
+                                handleSelectCity={handleSelectCity}
+                            />
+                        </>
+                    )}
+                    {/* {isModalOpen && (
                         <div
                             id="modal-overlay"
                             className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
@@ -513,7 +525,7 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                                 </div>
                             </div>
                         </div>
-                    )}
+                    )} */}
                 </div>
             ) : (
                 <div className='w-full bg-white '>

@@ -94,6 +94,7 @@ const News = () => {
             imageUrl: "https://truckcdn.cardekho.com/news/25891732939573.jpg", // Add actual image URL if available
             name: "Dheeraj Nair",
             date: "Nov 30, 2024 09:32 AM",
+            url:'/en/news/detail/top-7-technologies-for-logistical-fleet-efficiency-2592'
         },
         {
             id: 2,
