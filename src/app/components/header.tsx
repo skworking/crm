@@ -13,6 +13,7 @@ import { SelectChangeEvent } from "@mui/material/Select";
 import useDeviceType from "../comman/deviceDetect";
 import SearchBarWithAutocomplete from '../comman/searchSuggession';
 import Modal from '../comman/modelSelect';
+
 interface HeaderProps {
     isSticky?: boolean;
 }
@@ -114,6 +115,15 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                     ],
                 },
                 { title: "Electric Truck", link: "/new-truck/electric" },
+                {
+                    title:"Vehicle Segment",
+                    subMenu:[
+                        {title:"SCVs and Pick Ups", link:'/en/scv'},
+                        {title:"LCVs and ICVs", link:'/en/lcv'},
+                        {title:"MHCV Vehicles", link:'/en/mhcv'},
+                        {title:"Three Vehicles", link:'/en/mhcv'},
+                    ]
+                }
             ],
 
         },
@@ -200,10 +210,10 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
         {
             title: "Vehicle Segment",
             subMenu: [
-                { title: "SCVs and Pick Ups", link: "/scvs-and-pick-ups" },
-                { title: "LCVs and ICVs", link: "/lcvs-and-icvs" },
-                { title: "MHCV Vehicles", link: "/mhcv-vehicles" },
-                { title: "Three Wheelers", link: "/three-wheelers" },
+                { title: "SCVs and Pick Ups", link: "/en/scv" },
+                { title: "LCVs and ICVs", link: "/en/lcv" },
+                { title: "MHCV Vehicles", link: "/en/mhcv" },
+                { title: "Three Wheelers", link: "/en/populer-truck/three-wheelers" },
             ],
         },
         {

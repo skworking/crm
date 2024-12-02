@@ -1,85 +1,39 @@
-'use client'
-import BrandList from '@/app/comman/brandList';
-import Breadcrumbs from '@/app/comman/breadCrumbs';
-import ViewAllButton from '@/app/comman/buttonView';
-import CollabseContent from '@/app/comman/collapseComponent';
-import { GenerateBreadcrumbs, generateCompareData } from '@/app/comman/commanFunctions';
-import CompareSlider from '@/app/comman/compareSlider';
-import ResearchList from '@/app/comman/researchList';
-import ToggleTable from '@/app/comman/toggleTable';
-import TruckCard from '@/app/comman/truckCards';
-import VehicleListCard from '@/app/components/vehicalListCad';
-
 import Image from 'next/image';
 import React from 'react'
-import { BsFuelPumpDiesel } from 'react-icons/bs';
-import { PiPlugChargingLight } from 'react-icons/pi';
-import { SlFire } from 'react-icons/sl';
+import TopBanner from '../(Banners)/topbanner';
+import Breadcrumbs from '@/app/comman/breadCrumbs';
+import { GenerateBreadcrumbs, generateCompareData } from '@/app/comman/commanFunctions';
+import ResearchList from '@/app/comman/researchList';
+import BrandList from '@/app/comman/brandList';
+import VehicleListCard from '../vehicalListCad';
+import ToggleTable from '@/app/comman/toggleTable';
+import TruckCard from '@/app/comman/truckCards';
+import CompareSlider from '@/app/comman/compareSlider';
+import ViewAllButton from '@/app/comman/buttonView';
 
-const ElectricTrucks = () => {
+const ScvComponent = () => {
     const breadcrumbItems = GenerateBreadcrumbs();
-    const trucksData = [
-        { Model: "Tata Ace EV", Price: "From ₹8.72 Lakh" },
-        { Model: "Piaggio Ape E City", Price: "From ₹1.95 Lakh" },
-        { Model: "Mahindra Treo Yaari", Price: "₹1.79 - ₹2.04 Lakh" },
-        { Model: "Montra Electric Super Auto", Price: "₹3.02 - ₹3.50 Lakh" },
-        { Model: "YC Electric Yatri Super", Price: "From ₹1.69 Lakh" },
-        { Model: "Tata Magic EV", Price: "From ₹5.00 Lakh" },
-        { Model: "Mini Metro E Rickshaw", Price: "From ₹1.10 Lakh" },
-        { Model: "Euler Motors HiLoad EV", Price: "₹3.94 - ₹4.20 Lakh" },
-        { Model: "Piaggio Ape E Xtra FX", Price: "From ₹3.12 Lakh" },
-        { Model: "Bajaj Maxima XL Cargo E-TEC 12.0", Price: "From ₹4.68 Lakh" }
-    ];
-    const content: JSX.Element[] = [
-        <>
-            There are 756 electric trucks on sale in India. Of these,
-            SN Solar Energy Standard E-Rickshaw is the cheapest EV while the
-            Propel 470 HEV is the most expensive EV truck in India. Most Popular electric vehicles
-            are Tata Ace EV, Piaggio Ape E City, Mahindra Treo Yaari, Montra Electric Super Auto
-            and YC Electric Yatri Super. Explore the list of <strong className='text-[#24272c] font-light'>best electric trucks</strong> with prices in India
-            and Compare trucks to find the right <strong className='text-[#24272c] font-light'>commercial vehicle</strong> for you. These Electric Commercial Vehicles include
-            <strong className='text-[#24272c] font-light'>Mini Trucks, Auto Rickshaw, E Rickshaw, Pickup Trucks</strong> and   <strong className='text-[#24272c] font-light'>3 Wheeler</strong>
-        </>,
-        <>
-            Electrification of the automotive sector is on the rise worldwide, and commercial vehicles
-            are not behind in this monumental transition. Like the rest of the world, the Indian commercial vehicle
-            industry is also gearing up toward EVs. However, unlike any other country, the Indian trucking industry
-            adoption of electrification is starting uniquely from the last-mile cargo and people carrier-mainly catered
-            by the three-wheeler, also known as auto-rickshaws. So, the higher penetration of EVs
-            is happening at the bottom of the vehicle segments, in the auto-rickshaw segment in India. The key reason
-            is that an electric three-wheeler makes a compelling value proposition to the cost-conscious buyer, who
-            can run this tiny electric vehicle within a shorter geographical area without much need for superior
-            infrastructure. Moreover, the EVs are cheaper to operate, which means potentially higher earnings.
-        </>,
-        <>
-            Targeting this entry-level electric three-wheeler market, Indian established OEMs and
-            start-ups have already launched locally designed and developed electric three-wheelers for Indian operating
-            conditions. Some of the top players include Piaggio, Mahindra, and Atul Auto, and the new
-            companies that are aggressively expanding into these emerging vehicle segments are
-            Euler Motors, Altigreen, and Omega Seiki among others. There are several electric
-            three-wheelers available at different price points, ranges, and features in the passenger and cargo carrier segments.
-        </>,
-    ];
+    const updatedMenuItems = breadcrumbItems.map(item =>
+        item.path === "/en/scv"
+            ? { ...item, label: "Small Commercial Vehicles" }
+            : item
+    );
+
     const truckInfo = [
         {
-            icon: <BsFuelPumpDiesel />,
-            title: 'tata',
-            link: '/truck- specs',
+            icon: <img src='https://cdn-icons-png.flaticon.com/512/3502/3502954.png' alt='' />,
+            title: 'Mini Trucks',
+            link: '#',
         },
         {
-            icon: <PiPlugChargingLight />,
-            title: 'Electric',
-            link: '/maintenance-tips',
+            icon: <img src="https://cdn-icons-png.flaticon.com/512/4502/4502386.png" alt='' />,
+            title: 'Pickup Trucks',
+            link: '#',
         },
         {
-            icon: <img src='https://cdn-icons-png.flaticon.com/512/10466/10466005.png' className='h-7  w-7 rounded-t-md p-1 object-contain' />,
-            title: 'CNG',
-            link: '/maintenance-tips',
-        },
-        {
-            icon: <SlFire />,
-            title: 'CNG',
-            link: '/maintenance-tips',
+            icon: <img src='https://cdn-icons-png.flaticon.com/512/17184/17184971.png' alt='' />,
+            title: 'Auto Rikshaw',
+            link: '#',
         },
 
     ];
@@ -116,33 +70,32 @@ const ElectricTrucks = () => {
         },
 
     ];
-    const carData = [
+    const truckData = [
         {
-            name: "Mahindra Treo",
-            priceRange: "₹2.34 - ₹2.36 Lakh*",
-            imageUrl: "https://truckcdn.cardekho.com/in/mahindra/treo/mahindra-treo-67242.jpg",
+            name: "Tata Ace Gold",
+            priceRange: "₹3.99 - ₹6.69 Lakh*",
+            imageUrl: "https://truckcdn.cardekho.com/in/tata/ace-gold/tata-ace-gold-21473.jpg",
         },
         {
-            name: "Bajaj RE",
-            priceRange: "₹2.34 - ₹2.36 Lakh*",
-            imageUrl: "https://truckcdn.cardekho.com/in/bajaj/compact-4s/bajaj-compact-4s-48935.jpg",
+            name: "Mahindra Jeeto",
+            priceRange: "₹4.72 - ₹5.65 Lakh*",
+            imageUrl: "https://truckcdn.cardekho.com/in/mahindra/jeeto/mahindra-jeeto-65562.jpg",
         },
         {
-            name: "Piaggio Ape E City",
-            priceRange: "From ₹1.95 Lakh*",
-            imageUrl: "https://truckcdn.cardekho.com/in/piaggio/ape-e-city/piaggio-ape-e-city.jpg",
+            name: "Force Urbania",
+            priceRange: "₹30.51 - ₹37.21 Lakh*",
+            imageUrl: "https://truckcdn.cardekho.com/in/force/urbania/force-urbania.jpg",
         },
         {
-            name: "TVS King Deluxe",
-            priceRange: "₹1.20 - ₹1.35 Lakh*",
-            imageUrl: "https://truckcdn.cardekho.com/in/tvs/deluxe/tvs-deluxe.jpg",
+            name: "Maruti Suzuki Super Carry",
+            priceRange: "₹5.26 - ₹6.41 Lakh*",
+            imageUrl: "https://truckcdn.cardekho.com/in/maruti-suzuki/super-carry/maruti-suzuki-super-carry-88671.jpg",
         },
         {
-            name: "Bajaj Maxima Z",
-            priceRange: "₹1.96 - ₹1.98 Lakh*",
-            imageUrl: "https://truckcdn.cardekho.com/in/bajaj/maxima/bajaj-maxima-74420.jpg",
+            name: "Tata Intra V10",
+            priceRange: "₹6.55 - ₹6.76 Lakh*",
+            imageUrl: "https://truckcdn.cardekho.com/in/tata/intra-v10/tata-intra-v10-18816.jpg",
         },
-
     ];
     const rikshawData = [
         {
@@ -170,6 +123,25 @@ const ElectricTrucks = () => {
             priceRange: "From ₹1.12 Lakh*",
             imageUrl: "https://truckcdn.cardekho.com/in/atul/elite/atul-elite-44395.jpg",
         },
+
+    ];
+
+    const content: JSX.Element[] = [
+        <>
+            Like the rest of the truck segments, the small commercial vehicle (SCVs) of trucks are highly critical in the growth of the overall truck market. As the same suggests, the SCVs are the smallest category of trucks, these entry-level four-wheeler trucks help deliver the cargo to the customer doorsteps faster, quicker and most efficiently. The SCVs comprises mini-trucks, pickups between 1450 Kg to 7000 Kg GVW, the price ranging between ₹3.91 Lakh - ₹37.21 Lakh.
+        </>,
+        <>
+            Small trucks have become necessary for today’s dynamic transportation needs with the emergence of e-commerce and home delivery models of logistics. Expanding cities and towns that need faster delivery of cargo/logistics, and big trucks are forbidden entry due to pollution and congestion, the small/micro and compact trucks become indispensable for businesses to reach to their customers. The vibrant SCV truck market has some of the most popular truck brands in India that are omnipresent across cities, towns and villages. The iconic Tata Ace gold, Mahindra Jeeto, Force Urbania, Maruti Suzuki Super Carry, Tata Intra V10, Tata Intra V30, Ashok Leyland Dost + and Tata Ace EV are some of the most recognized trucks in the category.
+        </>,
+    ];
+
+    const trucksData = [
+        { Model: "Tata Ace EV", Price: "₹3.99 - ₹6.69 Lakh" },
+        { Model: "Mahindra Jeeto", Price: "₹4.72 - ₹5.65 Lakh" },
+        { Model: "Force Urbania", Price: "	₹30.51 - ₹37.21 Lakh" },
+        { Model: "Montra Electric Super Auto", Price: "₹3.02 - ₹3.50 Lakh" },
+        { Model: "Maruti Suzuki Super Carry", Price: "₹5.26 - ₹6.41 Lakh" },
+        { Model: "Tata Intra V10", Price: "₹6.55 - ₹6.76 Lakh" },
 
     ];
     const truckCard = [
@@ -442,9 +414,8 @@ const ElectricTrucks = () => {
                 }
             ]
         }
-
-
     ]
+
     const sliderItems = [
         {
             id: 1,
@@ -509,43 +480,13 @@ const ElectricTrucks = () => {
         },
     ]
     const compareData = generateCompareData(sliderItems);
-
-    const faqData = [
-        { title: 'Latest Electric Commercial Vehicles', content: 'Altigreen NeEV TEZ, OSM Stream City, Tata Ace EV, Piaggio Ape E-City, EKA E9, Atul Auto Elite Plus, Kinetic Green Safar Smart, Mahindra Zor Grand, Switch EiV 12, and Euler HiLoad EV 2023 are some of the latest electric commercial vehicles in India.' },
-        { title: 'Best Electric Commercial Vehicles', content: 'Altigreen NeEV TEZ, Mahindra Zor Grand, Mahindra Treo, Kinetic Green Safar Smart, OSM Rage Plus, and Tata Ace EV are some of India\'s best electric commercial vehicles.' },
-        { title: 'Top Commercial EV Brands in India', content: 'Altigreen, Mahindra Electric, Omega Seiki Mobility, Tata Motors, Piaggio, Switch Mobility, Kinetic Green, and Atul Auto are the top commercial EV brands in India.' },
-        { title: 'Electric Vehicles Under ₹5 Lakh', content: 'Altigreen NeEV TEZ, Mahindra Treo, Kinetic Safar Shakti, OSM Rage Plus, Mahindra E-Alfa Mini, and Mahindra Zor Grand are electric vehicles under ₹5 lakh.' },
-        { title: 'Long-Range Electric Three-Wheelers', content: 'Altigreen NeEV TEZ, OSM Rage Plus, Mahindra Treo, and OSM Stream are long-range electric three-wheelers in India.' }
-    ];
     return (
         <div className='relative'>
-            <div className='lg:h-[400px] h-[200px] relative w-full'>
-                <Image src={'https://truckcdn.cardekho.com/pwa/img/electric-banner.jpg'} alt="" width={0}
-                    height={0}
-                    fill
-                    sizes="100vw"
-                    className="object-cover  w-full lg:h-full"
-                />
-
-                {/* Red Circle & Content */}
-                <div className="absolute max-w-7xl m-auto inset-0 flex items-center overflow-hidden ">
-                    {/* Red Semi-Transparent Circle */}
-                    <div className="relative  lg:ml-[50px] flex items-center justify-center lg:w-[600px] lg:h-[600px] w-[350px] lg:bottom-20 h-[350px] bg-[#d94025] bg-opacity-[.95] mix-blend-multiply rounded-full ">
-                    </div>
-
-                    <div className='absolute hidden lg:flex inset-y-20 items-center  space-y-10 max-w-3xl p-4 m-auto'>
-                        <div className="flex max-w-xl lg:text-[47px] text-[20px]    px-7 text-white font-bold left-0">
-                            Electric Commercial Vehicles
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div className='absolute lg:hidden inset-y-20 items-center  space-y-10 max-w-3xl p-4 m-auto'>
-                <div className="flex max-w-4xl lg:text-[47px] text-[20px] lg:ml-[57px]   px-7 text-white font-bold left-0">
-                    Electric Commercial Vehicles
-                </div>
-            </div>
+            <TopBanner
+                imageUrl="https://truckcdn.cardekho.com/pwa/img/scv-banner.jpg"
+                title="India's Small Commercial Vehicles"
+                height={400}
+            />
             <Image
                 width={0}
                 height={10}
@@ -553,18 +494,18 @@ const ElectricTrucks = () => {
                 className="object-none  w-full "
                 src={'https://tpc.googlesyndication.com/simgad/2186141005922165001'} alt='' />
             <div className='max-w-7xl m-auto relative'>
-
-                <Breadcrumbs items={breadcrumbItems} />
-
+                <Breadcrumbs items={updatedMenuItems} />
                 <div className="lg:flex border-b-2  rounded-b-md border-gray-100 gap-4 ">
+
+                    {/* left part */}
                     <div className="w-full lg:w-8/12 xl:w-[73.50%] space-y-4 mb-4 md:p-5 xl:p-0 " >
                         <h2 className='p-[17px 20px 0px] text-xl lg:text-[30px] font-bold mb-5 '>
-                            Electric Commercial Vehicles
+                            Small Commercial Vehicles in India
                         </h2>
                         <div className='border rounded-[16px] lg:p-5 p-5 mb-3 bg-white'>
                             <ToggleTable
                                 content={content}
-                                title="Top 10 Electric Trucks in 2024 With Price list"
+                                title="Top 5 small commercial vehicles in India"
                                 columns={["Model", "Price"]}
                                 data={trucksData}
                             />
@@ -574,41 +515,35 @@ const ElectricTrucks = () => {
 
                             <CompareSlider
                                 data={compareData}
-                                heading={' Popular Electric Vehicles Comparisons'}
+                                heading={' Popular SCV Vehicles Comparisons'}
                                 setSlide={2}
                             />
                             <div className='pb-4 pl-4'>
-
                                 <ViewAllButton heading="Trucks Comparisions" link="/compare" />
                             </div>
                         </div>
-                        <div className='border rounded-[16px] p-4  flex flex-col  bg-white gap-2  relative'>
-                            <h2 className='p-[17px 20px 0px]  text-xl font-bold '>
-                                Frequently Asked Question on Electric Vehicles
-                            </h2>
-                            <CollabseContent tabContent={faqData} />
-                        </div>
+
                     </div>
 
+                    {/* right part */}
                     <div className="w-full lg:w-4/12 xl:w-[25%] h-auto flex flex-col  sm:p-5 xl:p-0 mr-2 gap-2">
-                        <ResearchList title="Explore Fuel Types" data={truckInfo} />
-
-                        <BrandList title="Popular Electric Vehicle Brands" data={brandInfo} />
-                        <img alt='not found' src='https://tpc.googlesyndication.com/simgad/17644868341984738745' className="brightness-100 lg:block hidden  w-full  object-fill h-[250px]" />
-
                         <VehicleListCard
-                            title="Best Auto Rickshaw"
-                            vehicleData={carData}
-                            viewAllText="View All Electric Commercial Vehicles"
-                        // onViewAllClick={handleViewAll}
+                            title="Latest Trucks"
+                            vehicleData={truckData}
+                            viewAllText="View All Latest Trucks"
+
                         />
+                        <BrandList title="SCVs By Popular Brands" data={brandInfo} />
+                        <ResearchList title="Explore Body Types" data={truckInfo} />
+
 
                         <VehicleListCard
                             title="Best E-Rickshaw"
                             vehicleData={rikshawData}
                             viewAllText="View All Best E Rikshaw"
-                        // onViewAllClick={handleViewAll}
+
                         />
+                        <img alt='not found' src='https://tpc.googlesyndication.com/simgad/9767680614922265990' className="brightness-100 lg:block hidden  w-full  object-fill h-[250px]" />
                     </div>
                 </div>
             </div>
@@ -616,4 +551,4 @@ const ElectricTrucks = () => {
     )
 }
 
-export default ElectricTrucks;
+export default ScvComponent;
