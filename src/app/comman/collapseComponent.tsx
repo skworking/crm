@@ -5,28 +5,28 @@ import { MdMinimize } from 'react-icons/md';
 // import Accordion from './Accordion'; // Assume you have an Accordion component
 
 interface TabContentProps {
-  tabContent: { title: string; content: string }[]; // Content directly passed as an array
+  tabContent: { title: string; content: JSX.Element | string }[]; // Content directly passed as an array
 }
 
 const Accordion = ({ title, children }: { title: string, children: React.ReactNode }) => {
-    const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-    return (
-        <div className="">
-            <button
-                className="w-full text-left  p-4 focus:outline-none"
-                onClick={() => setIsOpen(!isOpen)}
-            >
-                <div className="flex justify-between items-center">
-                    <span className="text-md w-5/6 font-bold text-[17px]">{title}</span>
-                    <span>{isOpen ? <MdMinimize />
-                        : <AiOutlinePlus />}</span>
-                </div>
-            </button>
-            {isOpen && <div className="px-4 pb-4 text-[15px]  text-[rgba(36,39,44,.7)]">{children}</div>}
-            
+  return (
+    <div className="">
+      <button
+        className="w-full text-left  p-4 focus:outline-none"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <div className="flex justify-between items-center">
+          <span className="text-md w-5/6 font-bold text-[17px]">{title}</span>
+          <span>{isOpen ? <MdMinimize />
+            : <AiOutlinePlus />}</span>
         </div>
-    );
+      </button>
+      {isOpen && <div className="px-4 pb-4 text-[15px]  text-[rgba(36,39,44,.7)]">{children}</div>}
+
+    </div>
+  );
 };
 const CollabseContent: React.FC<TabContentProps> = ({ tabContent }) => {
   return (

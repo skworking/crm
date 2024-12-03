@@ -10,6 +10,10 @@ import ToggleTable from '@/app/comman/toggleTable';
 import TruckCard from '@/app/comman/truckCards';
 import CompareSlider from '@/app/comman/compareSlider';
 import ViewAllButton from '@/app/comman/buttonView';
+import NewsSlider from '@/app/comman/sliderNews';
+import RatingCards from '@/app/comman/ratingCards';
+import CollabseContent from '@/app/comman/collapseComponent';
+import { title } from 'process';
 
 const ScvComponent = () => {
     const breadcrumbItems = GenerateBreadcrumbs();
@@ -125,13 +129,107 @@ const ScvComponent = () => {
         },
 
     ];
-
+    const cards = [
+        {
+            id: 1,
+            heading: "How To Maintain Truck Gearbox 101: Things You Need To Know",
+            description:
+                "Like your truck’s engine, axle, suspension, and other parts, it is important to maintain the truck’s gearbox. So, here are a few things you need to be aware of. Read on:",
+            profile: 'data:image/png;base64,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', // Add actual profile URL if available
+            imageUrl: "https://truckcdn.cardekho.com/news/25891732939573.jpg", // Add actual image URL if available
+            name: "Dheeraj Nair",
+            date: "Nov 30, 2024 09:32 AM",
+            url: '/en/news/detail/top-7-technologies-for-logistical-fleet-efficiency-2592'
+        },
+        {
+            id: 2,
+            heading: "Rilox EV Introduces Bijli Trio E-Cart At An Initial Price Of Rs 1.35 Lakh",
+            description:
+                "Rilox EV has unveiled the Bijli Trio e-cart for logistical businesses which aims to revolutionise urban logistics and last-mile cargo deliveries. Read on.",
+            profile: "K",
+            imageUrl: "https://truckcdn.cardekho.com/news/25871732873240.jpg",
+            name: "Ketan Birla",
+            date: "Nov 29, 2024 03:01 PM",
+        },
+        {
+            id: 3,
+            heading: "How To Handle Tailgating? Here’s A List Of Things To Avoid",
+            description:
+                "Tired of vehicles tailgating your truck? Worried you might get into an accident? These steps to avoid tailgating can come in handy.",
+            profile: "D",
+            imageUrl: "https://truckcdn.cardekho.com/news/25001729072020.jpg",
+            name: "Dheeraj Nair",
+            date: "Nov 29, 2024 12:30 PM",
+        },
+        {
+            id: 4,
+            heading: "Engine Warning Signs And Their Causes Explained",
+            description:
+                "As a truck driver, you should not ignore these engine warning signs. Here’s why.",
+            profile: "D",
+            imageUrl: "https://truckcdn.cardekho.com/news/25861732857488.jpg",
+            name: "Dheeraj Nair",
+            date: "Nov 29, 2024 10:39 AM",
+        },
+        {
+            id: 5,
+            heading:
+                "Valvoline Introduces All Fleet Pro CK-4 Diesel Engine Oil For Commercial Vehicles",
+            description:
+                "Valvoline Cummins has launched All Fleet Pro CK-4 diesel engine oil which suits a variety of fleet sizes and comes in packages ranging from 1 litre to 210 litres.",
+            profile: "K",
+            imageUrl: "https://truckcdn.cardekho.com/news/25851732786335.jpg",
+            name: "Ketan Birla",
+            date: "Nov 28, 2024 02:45 PM",
+        },
+        {
+            id: 6,
+            heading: "Guide To Create A Preventive Fleet Maintenance Checklist",
+            description:
+                "As a truck fleet owner or manager, it is important to create a preventive fleet maintenance checklist. So, here are a few tips to create one:",
+            profile: "D",
+            imageUrl: "https://truckcdn.cardekho.com/news/25841732767919.jpg",
+            name: "Dheeraj Nair",
+            date: "Nov 28, 2024 09:52 AM",
+        },
+        {
+            id: 7,
+            heading:
+                "ZF Commercial Vehicle Solutions India Launches Electronic Stability Control Test Track In Chennai",
+            description:
+                "ZF India opened a new ESC (Electronic Stability Control) test track in Chennai to enhance its vehicle safety testing capabilities. Read more.",
+            profile: "K",
+            imageUrl: "https://truckcdn.cardekho.com/news/25831732708166.jpg",
+            name: "Ketan Birla",
+            date: "Nov 27, 2024 05:09 PM",
+        },
+        {
+            id: 8,
+            heading: "Switch Mobility Joins Hands With Vertelo For Rapid Electric Vehicle Adoption",
+            description:
+                "With this strategic partnership, Switch Mobility will offer its cutting-edge EV technology, and Vertelo will lease and fund the electric commercial vehicles.",
+            profile: "K",
+            imageUrl: "https://truckcdn.cardekho.com/news/25821732702775.jpg",
+            name: "Ketan Birla",
+            date: "Nov 27, 2024 03:43 PM",
+        },
+        {
+            id: 9,
+            heading: "Mahindra Zeo: Through the Urban Jungle",
+            description:
+                "We drove the Mahindra Zeo in real-world conditions and achieved a range of over 170kms. And that’s not all, there are more features worth exploring.",
+            profile: "R",
+            imageUrl: "https://truckcdn.cardekho.com/news/25811732781251.jpg",
+            name: "Ritvik Gupta",
+            date: "Nov 27, 2024 01:40 PM",
+        },
+    ]
     const content: JSX.Element[] = [
         <>
             Like the rest of the truck segments, the small commercial vehicle (SCVs) of trucks are highly critical in the growth of the overall truck market. As the same suggests, the SCVs are the smallest category of trucks, these entry-level four-wheeler trucks help deliver the cargo to the customer doorsteps faster, quicker and most efficiently. The SCVs comprises mini-trucks, pickups between 1450 Kg to 7000 Kg GVW, the price ranging between ₹3.91 Lakh - ₹37.21 Lakh.
         </>,
         <>
-            Small trucks have become necessary for today’s dynamic transportation needs with the emergence of e-commerce and home delivery models of logistics. Expanding cities and towns that need faster delivery of cargo/logistics, and big trucks are forbidden entry due to pollution and congestion, the small/micro and compact trucks become indispensable for businesses to reach to their customers. The vibrant SCV truck market has some of the most popular truck brands in India that are omnipresent across cities, towns and villages. The iconic Tata Ace gold, Mahindra Jeeto, Force Urbania, Maruti Suzuki Super Carry, Tata Intra V10, Tata Intra V30, Ashok Leyland Dost + and Tata Ace EV are some of the most recognized trucks in the category.
+            Small trucks have become necessary for todays dynamic transportation needs with the emergence of e-commerce and home delivery models of logistics. Expanding cities and towns that need faster delivery of cargo/logistics, and big trucks are forbidden entry due to pollution and congestion, the small/micro and compact trucks become indispensable for businesses to reach to their customers. The vibrant SCV truck market has some of the most popular truck brands in India that are omnipresent across cities, towns and villages. The iconic Tata Ace gold, Mahindra Jeeto, Force Urbania, Maruti Suzuki Super Carry, Tata Intra V10, Tata Intra V30, Ashok Leyland Dost + and Tata Ace EV are some of the most recognized trucks in the category.
         </>,
     ];
 
@@ -479,6 +577,68 @@ const ScvComponent = () => {
                 "https://truckcdn.cardekho.com/in/tata/yodha-2-0/tata-yodha-2-0.jpg",
         },
     ]
+    const reviews = [
+        {
+            productName: "Astro Motors Triyaan Navya",
+            reviewerName: "Lakshya Ostwal",
+            reviewDate: "Aug 04, 2024",
+            rating: 4.9,
+            heading: "Great speed with gear changing technology.",
+            reviewText: "Great speed with gear changing technology. The potholes and slopes were the main concern for me when buying an electric vehicle, but they proved me wrong."
+        },
+        {
+            productName: "Tata Magic EV",
+            reviewerName: "Chandrapal Singh",
+            reviewDate: "Aug 16, 2023",
+            rating: 5,
+            heading: "EV magic truck.",
+            reviewText: "Very good quality please I buy me please contact me 9910238194 nice looking EV magic please share me pics and prize.",
+            classes: "line-clamp-3"
+        },
+        {
+            productName: "Force Urbania",
+            reviewerName: "Udit Sarkar",
+            reviewDate: "Dec 23, 2022",
+            rating: 5,
+            heading: "The perfect room on wheels with all the needed features.",
+            reviewText: "Most reliable family tourer, added safety, premium comfort, wide road visibility, punchy low-end torque delivery.",
+            classes: "line-clamp-3"
+        },
+        {
+            productName: "Mahindra Bolero Maxx Pik-Up",
+            reviewerName: "Imran Vhora",
+            reviewDate: "Dec 07, 2022",
+            rating: 4.1,
+            heading: "Best Bolero pickup.",
+            reviewText: "Thar ka baap hai Bolero pickup. Best n best off-roading mileage. Comfortable.",
+            classes: "line-clamp-3"
+        },
+        {
+            productName: "Tata Intra V50",
+            reviewerName: "Neeraj Ahat",
+            reviewDate: "Oct 17, 2022",
+            rating: 4.3,
+            heading: "Capable engine.",
+            reviewText: "I have personally driven quite a few trucks in the 1.5 tonnes segment, but the Tata Intra V50 is quite exceptional. The vehicle is powerful and reliable.",
+            classes: "line-clamp-3"
+        },
+        {
+            productName: "Tata Yodha 2.0",
+            reviewerName: "Sudarshan M",
+            reviewDate: "Oct 11, 2022",
+            rating: 4.3,
+            heading: "A superb package with great capacity pickup.",
+            reviewText: "The Tata Yodha 2.0 is a very good package in the 2 tonnes segment, and I think it is a great package that comes with excellent capacity and performance.",
+            classes: "line-clamp-3"
+        }
+    ];
+
+    const faqData = [
+        { title: 'Which are the most popular SCVs manufacturers in India?', content: (<>The popular small commercial vehicle manufacturers are <span className='text-blue-400'>Tata,Ashok Leyland,Mahindra</span> & more in India.</>) },
+        { title: 'Which are the best small commercial vehicles In India?', content: 'Tata Ace gold, Mahindra Jeeto, Force Urbania, Maruti Suzuki Super Carry, Tata Intra V10, Tata Intra V30, Ashok Leyland Dost + and Tata Ace EV are popular small trucks in India with starting price at ₹3.91 Lakh.' },
+        { title: "What bodytypes are offered in SCVs?", content: 'Mini Trucks and Pickup Trucks are offered in SCV trucks.' },
+        { title: "How many wheelers are in small commercial vehicles?", content: "SCVs comes from 4 - 6 Wheelers" }
+    ];
     const compareData = generateCompareData(sliderItems);
     return (
         <div className='relative'>
@@ -523,6 +683,18 @@ const ScvComponent = () => {
                             </div>
                         </div>
 
+                        <div className='border rounded-[16px]   mb-3 bg-white'>
+                            <NewsSlider data={cards} slidesShow={1} heading=" News on trucks that you like" />
+                        </div>
+                        <div className='border rounded-[16px]   mb-31 bg-white'>
+                            <RatingCards data={reviews} slidesShow={3} heading="Small Commercial Vehicles User Reviews" />
+                        </div>
+                        <div className='border rounded-[16px] p-4  flex flex-col  bg-white gap-2  relative'>
+                            <h2 className='p-[17px 20px 0px]  text-xl font-bold '>
+                                Frequently Asked Question on SCV Vehicles
+                            </h2>
+                            <CollabseContent tabContent={faqData} />
+                        </div>
                     </div>
 
                     {/* right part */}

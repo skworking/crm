@@ -9,10 +9,10 @@ interface ViewAllButtonProps {
 
 const ViewAllButton: React.FC<ViewAllButtonProps> = ({ heading, link }) => {
 
-console.log(link);
+
 
   const handleClick = () => {
-   
+    
   };
 
   return (
