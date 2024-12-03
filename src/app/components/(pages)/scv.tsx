@@ -13,7 +13,6 @@ import ViewAllButton from '@/app/comman/buttonView';
 import NewsSlider from '@/app/comman/sliderNews';
 import RatingCards from '@/app/comman/ratingCards';
 import CollabseContent from '@/app/comman/collapseComponent';
-import { title } from 'process';
 
 const ScvComponent = () => {
     const breadcrumbItems = GenerateBreadcrumbs();

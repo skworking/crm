@@ -1,4 +1,5 @@
 
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { FaAngleRight } from 'react-icons/fa';
 
@@ -9,16 +10,15 @@ interface ViewAllButtonProps {
 
 const ViewAllButton: React.FC<ViewAllButtonProps> = ({ heading, link }) => {
 
-
-
-  const handleClick = () => {
-    
+  const router = useRouter();
+  const handleClick = (link:string) => {
+    router.push(link)
   };
 
   return (
     <div
       className="inline-flex items-baseline  cursor-pointer"
-      onClick={handleClick}
+      onClick={()=>handleClick(link)}
     >
       <span className="mr-2 text-[#d94025] text-[14px] font-bold">View All {heading}</span>
       <div className="relative w-5 h-5 bg-[#d94025] rounded-full flex justify-center items-center">
