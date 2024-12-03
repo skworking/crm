@@ -25,7 +25,7 @@ const TopBanner: React.FC<BannerProps> = ({ imageUrl, title, height = 400 }) => 
 
                     {/* Title */}
                     <div className="absolute hidden lg:flex inset-y-20 items-center max-w-3xl p-4 m-auto">
-                        <h1 className="text-white font-bold lg:text-[47px] text-[20px] px-7">
+                        <h1 className="text-white font-bold lg:text-[49px] text-[20px] px-7">
                             {title}
                         </h1>
                     </div>

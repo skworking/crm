@@ -64,7 +64,7 @@ const NewsSlider: React.FC<ListProps> = ({ data, slidesShow, heading }) => {
             </h2>
             <Slider {...settings}>
                 {data.map((item, index) => (
-                    <div key={index}>
+                    <div key={index} className='p-2'>
                         {/* <Link href={item?.url ?? '#'} ></Link> */}
                         <div className="lg:flex border rounded-lg bg-white shadow-md ">
 

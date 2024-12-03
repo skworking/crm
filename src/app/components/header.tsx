@@ -121,7 +121,7 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                         {title:"SCVs and Pick Ups", link:'/en/scv'},
                         {title:"LCVs and ICVs", link:'/en/lcv'},
                         {title:"MHCV Vehicles", link:'/en/mhcv'},
-                        {title:"Three Vehicles", link:'/en/mhcv'},
+                        {title:"Three Vehicles", link:'/en/populer-truck/3-wheeler'},
                     ]
                 }
             ],
@@ -213,7 +213,7 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                 { title: "SCVs and Pick Ups", link: "/en/scv" },
                 { title: "LCVs and ICVs", link: "/en/lcv" },
                 { title: "MHCV Vehicles", link: "/en/mhcv" },
-                { title: "Three Wheelers", link: "/en/populer-truck/three-wheelers" },
+                { title: "Three Wheelers", link: "/en/populer-truck/3-wheelers" },
             ],
         },
         {

@@ -1,22 +1,16 @@
 'use client'
 
-import LcvComponent from '@/app/components/(pages)/lcv';
-import MhcvComponent from '@/app/components/(pages)/mhcv';
-import ScvComponent from '@/app/components/(pages)/scv';
+import ThreeWheelers from '@/app/components/(pages)/threeWheelers';
 import { usePathname } from 'next/navigation';
 import React from 'react'
 
 
 const renderContent = (category: string | undefined) => {
     switch (category) {
-        case 'lcv':
-            return <LcvComponent />;
-        case 'scv':
-            return <ScvComponent />;
-        case 'mhcv':
-            return <MhcvComponent />;
+        case '3-wheeler':
+            return <ThreeWheelers />;
         default:
-            return <h1>Not Found page</h1>;
+            return <h1>Unknown Category</h1>;
     }
 };
 const CategoryPage = () => {

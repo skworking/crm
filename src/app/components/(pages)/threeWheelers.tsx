@@ -13,17 +13,16 @@ import ViewAllButton from '@/app/comman/buttonView';
 import NewsSlider from '@/app/comman/sliderNews';
 import RatingCards from '@/app/comman/ratingCards';
 import CollabseContent from '@/app/comman/collapseComponent';
-const MhcvComponent = () => {
+const ThreeWheelers = () => {
     const breadcrumbItems = GenerateBreadcrumbs();
-    const updatedMenuItems = breadcrumbItems.map(item =>
-        item.path === "/en/lcv"
-            ? { ...item, label: "Intermediate & LCV Vehicles" }
-            : item
+
+    const updatedBreadcrumbs = breadcrumbItems.filter(
+        item => item.label !== "POPULER TRUCK"
     );
 
     const truckInfo = [
         {
-            icon: <img src='https://cdn-icons-png.flaticon.com/512/3502/3502954.png' alt='' />,
+            icon: <img src='https://truckcdn.cardekho.com/pwa/img/three-wheeler-banner.jpeg' alt='' />,
             title: 'Mini Trucks',
             link: '#',
         },
@@ -215,7 +214,7 @@ const MhcvComponent = () => {
             id: 9,
             heading: "Mahindra Zeo: Through the Urban Jungle",
             description:
-                "We drove the Mahindra Zeo in real-world conditions and achieved a range of over 170kms. And that’s not all, there are more features worth exploring.",
+                "We drove the Mahindra Zeo in real-world conditions and achieved a range of over 170kms. And that is not all, there are more features worth exploring.",
             profile: "R",
             imageUrl: "https://truckcdn.cardekho.com/news/25811732781251.jpg",
             name: "Ritvik Gupta",
@@ -224,19 +223,25 @@ const MhcvComponent = () => {
     ]
     const content: JSX.Element[] = [
         <>
-            The medium and heavy commercial vehicle segment of the truck market in India is the most significant in terms of value and value. This makes the MHCV segment intensely competitive, and also the key battleground for truck makers. The segment comprises trucks starting from 19T to all the way 55T GVW. The giant trucks help steer the wheels of the Indian economy by moving heavy volume cargo across the length and breadth of the country. Over decades, this segment has been dominated by two home-grown truck brands- Tata Motors and Ashok Leyland. However, given the growth potential of this segment, other key brands such as Eicher, Mahindra Trucks and Buses, BharatBenz are eyeing snatch market share from the leaders by offering equally compelling trucks.
+            <h1 className='font-bold text-[20px]'>Three Wheelers - Cargo</h1>
+            <p>The three-wheelers, famously known as auto-rickshaws in India, is a vital vehicle segment in the overall commercial vehicle market. The auto-rickshaw is categorized into cargo and passenger. What makes the Cargo three-wheeler a key vehicle segment? Auto-Rickshaws are compact in size, affordable, easy to navigate and lower on operating costs, thus making them the most suitable vehicle type to reach the consumer door-steps- fast and efficiently. Cargo three-wheeler offers approximately in the range of up to 500-600 kg of payload with a GVW range of 900-1300 kg.</p>
+            <p>Despite the immense popularity of entry-level cargo four-wheelers, India is three-wheeler remains the choice of first-time buyer/transport entrepreneur. To cater to the discerning value-seeking consumer brands like Bajaj Auto, Piaggio, TVS Motors, Mahindra & Mahindra, Atul Auto offers some of the most compelling, value for money vehicles. The cargo auto rickshaw price ranges between ₹ 2-4 lakh, ex-showroom, packed with features, strong built quality and larger cargo deck. Some of the top brands in the cargo 3W include Piaggio Ape Xtra LDX, Mahindra Alfa Plus, Bajaj Maxima C, Atul Shakti, GEM, TVS King Kargo. You can buy a cargo three-wheeler with fuel options like diesel, petrol, CNG, LPG and battery-operated full-electric.</p>
         </>,
         <>
-            The MHCV segment includes multi-axle rigid trucks, haulage trucks, tippers, tractor-trailers used in diverse applications like long-haul distribution, bulk cargo transportations, close container, flat-bed trailer, mining & construction tippers and tractor-trailer for over-dimension cargo movement. Some of the most famous brands in M&HCV trucks are Ashok Leyland AVTR 2820-6x4, Tata Signa 5530.S, Tata Signa 3523.TK, Tata Signa 1923.K and Tata Signa 4018.S. The MHCV are big in size and higher cargo carrying capacities make them highly pricey-ranging ₹6.78 Lakh - ₹78.03 Lakh plus.
+            <h1 className='font-bold text-[20px]'>Three-wheeler- Passenger</h1>
+            <p>Passenger three-wheelers, commonly referred to as auto-rickshaws, are synonymous with India is mass mobility. Millions of Indians use these auto-rickshaws as the most easily accessible, affordable and efficient mode of transportation. Auto-Rickshaws are the heart of India is mass mobility needs and a preferred vehicle across urban, semi-urban and rural areas. Auto Rickshaws offer the convenience of carrying 3/4 passengers with an average mileage of over 30 kmpl on all kinds of terrain.</p>
+            <p>
+                Top brands like Bajaj Auto-the pioneers and market leader, Piaggio, Mahindra & Mahindra, Atul Auto, TVS Motors cater this segment in several variants, price points and fuel options such as petrol, CNG, LPG, diesel and electric. Priced in the range of ₹ 1.2-4 lakh, the top auto-rickshaw brand in the passenger is category includes the leader Compact RE, Maxima D, Ape City, Ape DX, Mahindra Alfa, TVS King, Atul Pax, Rik.
+            </p>
         </>,
     ];
 
     const trucksData = [
-        { Model: "Ashok Leyland AVTR 2820-6x4", Price: "From ₹34.50 Lakh" },
-        { Model: "Tata Signa 5530.S", Price: "From ₹39.03 Lakh" },
-        { Model: "Tata Signa 3523.TK", Price: "From ₹49.23 Lakh" },
-        { Model: "Tata Signa 1923.K", Price: "From ₹28.91 Lakh" },
-        { Model: "Tata Signa 4018.S", Price: "From ₹29.89 Lakh" }
+        { Model: "Piaggio Ape Xtra LDX", Price: "₹2.45 - ₹2.48 Lakh" },
+        { Model: "Bajaj Maxima C", Price: "₹2.83 - ₹2.84 Lakh" },
+        { Model: "Mahindra Alfa Plus", Price: "₹2.59 - ₹2.85 Lakh" },
+        { Model: "Euler Motors HiLoad EV", Price: "₹3.94 - ₹4.20 Lakh" },
+        { Model: "Piaggio Ape E Xtra FX", Price: "From ₹3.12 Lakh" }
 
     ];
     const truckCard = [
@@ -639,8 +644,8 @@ const MhcvComponent = () => {
     return (
         <div className='relative'>
             <TopBanner
-                imageUrl="https://truckcdn.cardekho.com/pwa/img/mhcv-banner.jpg"
-                title="Medium & Heavy Commercial Vehicles"
+                imageUrl="https://truckcdn.cardekho.com/pwa/img/three-wheeler-banner.jpeg"
+                title="India's Three Wheelers Vehicles"
                 height={400}
             />
             <Image
@@ -650,22 +655,25 @@ const MhcvComponent = () => {
                 className="object-none  w-full "
                 src={'https://tpc.googlesyndication.com/simgad/8786713658401501329'} alt='' />
             <div className='max-w-7xl m-auto relative'>
-                <Breadcrumbs items={updatedMenuItems} />
+                <Breadcrumbs items={updatedBreadcrumbs} />
                 <div className="lg:flex border-b-2  rounded-b-md border-gray-100 gap-4 ">
 
                     {/* left part */}
                     <div className="w-full lg:w-8/12 xl:w-[73.50%] space-y-4 mb-4 md:p-5 xl:p-0 " >
                         <h2 className='p-[17px 20px 0px] text-xl lg:text-[30px] font-bold mb-5 '>
-                            Light Commercial Vehicles (I & LCV)
+                            Three Wheelers - Cargo & Passenger Vehicle
                         </h2>
                         <div className='border rounded-[16px] lg:p-5 p-5 mb-3 bg-white'>
                             <ToggleTable
                                 content={content}
-                                title="Top 5 small commercial vehicles in India"
+                                title="Three Wheelers Price list In 2024"
                                 columns={["Model", "Price"]}
                                 data={trucksData}
                             />
                         </div>
+                        <h2 className='p-[17px 20px 0px] text-xl lg:text-[30px] font-bold mb-5 '>
+                            3 Wheeler Vehicles in India
+                        </h2>
                         <TruckCard data={truckCard} />
                         <div className='border rounded-[16px]   mb-3 bg-white'>
 
@@ -687,7 +695,7 @@ const MhcvComponent = () => {
                         </div>
                         <div className='border rounded-[16px] p-4  flex flex-col  bg-white gap-2  relative'>
                             <h2 className='p-[17px 20px 0px]  text-xl font-bold '>
-                                Frequently Asked Question on SCV Vehicles
+                                Frequently Asked Questions on Three Wheelers
                             </h2>
                             <CollabseContent tabContent={faqData} />
                         </div>
@@ -719,4 +727,4 @@ const MhcvComponent = () => {
     )
 }
 
-export default MhcvComponent;
+export default ThreeWheelers;
