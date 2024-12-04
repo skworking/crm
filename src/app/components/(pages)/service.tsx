@@ -16,7 +16,7 @@ interface OptionType {
     isHeader?: boolean;
 }
 
-const DealersComponent = () => {
+const ServiceComponent = () => {
     const { location, handleSelectCitybypass } = useLocation();
     console.log("access loc", location);
 
@@ -118,6 +118,11 @@ const DealersComponent = () => {
             icon: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/eicher.jpg',
             title: 'Eicher',
             link: '/truck-specs/eicher',
+        },
+        {
+            icon: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/bharat-benz.jpg',
+            title: 'BharatBenz',
+            link: '/truck-specs/bharatbenz',
         },
         {
             icon: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/piaggio.jpg',
@@ -228,7 +233,7 @@ const DealersComponent = () => {
     return (
         <div className='relative'>
             <div className='lg:h-[400px] h-[200px] relative w-full'>
-                <Image src={'https://truckcdn.cardekho.com/pwa/img/dealer_banner.jpg'} alt=""
+                <Image src={'https://truckcdn.cardekho.com/pwa/img/service_center_banner.jpg'} alt=""
                     width={0}
                     height={0}
                     fill
@@ -249,8 +254,8 @@ const DealersComponent = () => {
 
                 <div className="  lg:text-[48px] text-2xl px-7 text-white font-bold left-0">
                     Helping you connect to the
-                    <span className="hidden lg:block"> <br /> right dealers</span>
-                    <span className="lg:hidden inline-flex"> right dealers</span>
+                    <span className="hidden lg:block"> <br /> right service center</span>
+                    <span className="lg:hidden inline-flex"> right service center</span>
                 </div>
                 <div className="lg:block hidden text-[14px] max-w-2xl bg-white rounded-lg font-bold left-0 ">
 
@@ -324,10 +329,10 @@ const DealersComponent = () => {
                 <div className="lg:flex border-b-2  rounded-b-md border-gray-100 gap-4 ">
                     <div className="w-full lg:w-8/12 xl:w-[73.50%] space-y-4 mb-4 md:p-5 xl:p-0 " >
                         <h2 className='p-[17px 20px 0px] text-xl lg:text-[30px] font-bold mb-5 '>
-                            Truck Dealers and Showrooms
+                            Truck Service Centers
                         </h2>
                         <BrandToggleList
-                            title="Truck Showrooms by Brand"
+                            title="Truck Service Centers by Brand"
                             data={brandInfo}
                             gridcols="grid-cols-4"  // Customize the number of columns
                             gap="gap-6"             // Customize the gap between items
@@ -337,9 +342,9 @@ const DealersComponent = () => {
 
                         <div className='border rounded-[16px]  mb-3 flex flex-col p-4 bg-white gap-2  relative'>
                             <h2 className='p-[17px 20px 0px] text-xl font-bold '>
-                                Truck Dealers in India
+                                Truck Service Centers in India
                             </h2>
-                            <p>
+                            <p className='text-[rgba(36,39,44,.7)]'>
                                 TrucksDekho lists 8476 truck dealers in India spread across 702 cities. Complete listing of Dealerships available across 37 brands. Locate authorized truck showrooms in your own city in India by just clicking on your preferred truck brand.
                             </p>
                         </div>
@@ -368,4 +373,4 @@ const DealersComponent = () => {
     )
 }
 
-export default DealersComponent
+export default ServiceComponent;

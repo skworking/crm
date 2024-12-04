@@ -118,9 +118,9 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
         {
             title: "Dealers & Services",
             subMenu: [
-                { title: "Dealers", link: "/dealers" },
-                { title: "Service Centers", link: "/service-centers" },
-                { title: "Spare Parts", link: "/spare-parts" },
+                { title: "Dealers", link: "/en/dealers" },
+                { title: "Service Centers", link: "/en/service" },
+                { title: "Spare Parts", link: "/en/spare" },
                 { title: "Body Makers", link: "/body-makers" },
             ],
         },
@@ -220,7 +220,7 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
         {
             title: "Dealers & Services",
             subMenu: [
-                { title: "Dealers", link: "/dealers" },
+                { title: "Dealers", link: "/en/dealers" },
                 { title: "Service Centers", link: "/service-centers" },
                 { title: "Spare Parts", link: "/spare-parts" },
                 { title: "Body Makers", link: "/body-makers" },

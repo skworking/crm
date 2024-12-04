@@ -16,7 +16,7 @@ interface OptionType {
     isHeader?: boolean;
 }
 
-const DealersComponent = () => {
+const SpareComponent = () => {
     const { location, handleSelectCitybypass } = useLocation();
     console.log("access loc", location);
 
@@ -110,81 +110,12 @@ const DealersComponent = () => {
             link: '/truck-specs/tata',
         },
         {
-            icon: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/mahindra.jpg',
-            title: 'Mahindra',
-            link: '/truck-specs/mahindra',
-        },
-        {
             icon: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/eicher.jpg',
             title: 'Eicher',
             link: '/truck-specs/eicher',
         },
-        {
-            icon: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/piaggio.jpg',
-            title: 'Piaggio',
-            link: '/truck-specs/piaggio',
-        },
-        {
-            icon: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/altigreen.jpg',
-            title: 'Altigreen',
-            link: '/truck-specs/altigreen',
-        },
-        {
-            icon: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/osm.jpg',
-            title: 'OSM',
-            link: '/truck-specs/osm',
-        },
-        {
-            icon: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/bajaj.jpg',
-            title: 'Bajaj',
-            link: '/truck-specs/bajaj',
-        },
-        {
-            icon: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/sml-isuzu.jpg',
-            title: 'SML Isuzu',
-            link: '/truck-specs/sml-isuzu',
-        },
-        {
-            icon: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/scania.jpg',
-            title: 'Scania',
-            link: '/truck-specs/scania',
-        },
-        {
-            icon: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/man.jpg',
-            title: 'Man',
-            link: '/truck-specs/man',
-        },
-        {
-            icon: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/kamaz.jpg',
-            title: 'Kamaz',
-            link: '/truck-specs/kamaz',
-        },
-        {
-            icon: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/force.jpg',
-            title: 'Force',
-            link: '/truck-specs/force',
-        },
-        {
-            icon: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/isuzu.jpg',
-            title: 'Isuzu',
-            link: '/truck-specs/isuzu',
-        },
-        {
-            icon: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/atul.jpg',
-            title: 'Atul',
-            link: '/truck-specs/atul',
-        },
-        {
-            icon: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/lohia.jpg',
-            title: 'Lohia',
-            link: '/truck-specs/lohia',
-        },
-        {
-            icon: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/maruti-suzuki.jpg',
-            title: 'Maruti Suzuki',
-            link: '/truck-specs/maruti-suzuki',
-        },
 
+    
     ];
 
     const toolsArray = [
@@ -249,8 +180,8 @@ const DealersComponent = () => {
 
                 <div className="  lg:text-[48px] text-2xl px-7 text-white font-bold left-0">
                     Helping you connect to the
-                    <span className="hidden lg:block"> <br /> right dealers</span>
-                    <span className="lg:hidden inline-flex"> right dealers</span>
+                    <span className="hidden lg:block"> <br />spare part center</span>
+                    <span className="lg:hidden inline-flex">spare part center</span>
                 </div>
                 <div className="lg:block hidden text-[14px] max-w-2xl bg-white rounded-lg font-bold left-0 ">
 
@@ -324,22 +255,22 @@ const DealersComponent = () => {
                 <div className="lg:flex border-b-2  rounded-b-md border-gray-100 gap-4 ">
                     <div className="w-full lg:w-8/12 xl:w-[73.50%] space-y-4 mb-4 md:p-5 xl:p-0 " >
                         <h2 className='p-[17px 20px 0px] text-xl lg:text-[30px] font-bold mb-5 '>
-                            Truck Dealers and Showrooms
+                            Truck Spare Parts
                         </h2>
                         <BrandToggleList
-                            title="Truck Showrooms by Brand"
+                            title="Truck Spare Parts by Brand"
                             data={brandInfo}
                             gridcols="grid-cols-4"  // Customize the number of columns
                             gap="gap-6"             // Customize the gap between items
                             pad="p-4"               // Customize padding
-                            initialVisible={12}      // Show 6 items initially
+                            initialVisible={2}      // Show 6 items initially
                         />
 
                         <div className='border rounded-[16px]  mb-3 flex flex-col p-4 bg-white gap-2  relative'>
                             <h2 className='p-[17px 20px 0px] text-xl font-bold '>
-                                Truck Dealers in India
+                                Truck Service Centers in India
                             </h2>
-                            <p>
+                            <p className='text-[rgba(36,39,44,.7)]'>
                                 TrucksDekho lists 8476 truck dealers in India spread across 702 cities. Complete listing of Dealerships available across 37 brands. Locate authorized truck showrooms in your own city in India by just clicking on your preferred truck brand.
                             </p>
                         </div>
@@ -368,4 +299,4 @@ const DealersComponent = () => {
     )
 }
 
-export default DealersComponent
+export default SpareComponent;
