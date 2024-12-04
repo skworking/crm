@@ -1,5 +1,6 @@
 'use client'
 
+import DealersComponent from '@/app/components/(pages)/dealers';
 import LcvComponent from '@/app/components/(pages)/lcv';
 import MhcvComponent from '@/app/components/(pages)/mhcv';
 import ScvComponent from '@/app/components/(pages)/scv';
@@ -15,6 +16,8 @@ const renderContent = (category: string | undefined) => {
             return <ScvComponent />;
         case 'mhcv':
             return <MhcvComponent />;
+        case 'dealers':
+            return <DealersComponent />
         default:
             return <h1>Not Found page</h1>;
     }

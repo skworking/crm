@@ -7,7 +7,7 @@ interface ModalProps {
     isModalOpen: boolean;
     options: { label: string; value: string }[];
     selectedOption: string;
-    handleSelectCity: (event: SelectChangeEvent) => void;
+    handleSelectCity: (city: { label: string; value: string }) => void;
     closeModal: () => void;
 }
 
@@ -28,6 +28,16 @@ const Modal: React.FC<ModalProps> = ({
     const handleDropdownOpen = () => {
         setOpen(true); // Open the dropdown when the user interacts with it
     };
+    const handleChange = (event: SelectChangeEvent<string>) => {
+        
+        const selectedValue = event.target.value;
+        const selectedCity = options.find((city) => city.value === selectedValue);
+        
+        if (selectedCity) {
+          handleSelectCity(selectedCity);
+        }
+        closeModal(); // Close modal after selection
+      };
     return (
         <>
             {isModalOpen && (
@@ -60,7 +70,7 @@ const Modal: React.FC<ModalProps> = ({
                                     labelId="city-select-label"
                                     id="city-select"
                                     value={selectedOption}
-                                    onChange={handleSelectCity}
+                                    onChange={handleChange}
                                     displayEmpty
                                     open={open} 
                                     onOpen={handleDropdownOpen}

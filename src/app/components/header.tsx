@@ -9,10 +9,11 @@ import { MdKeyboardArrowRight, MdOutlineArrowDropDown } from 'react-icons/md';
 import { TiArrowSortedDown } from 'react-icons/ti';
 import { motion } from "framer-motion";
 import { IoLocationOutline } from 'react-icons/io5';
-import { SelectChangeEvent } from "@mui/material/Select";
+
 import useDeviceType from "../comman/deviceDetect";
 import SearchBarWithAutocomplete from '../comman/searchSuggession';
 import Modal from '../comman/modelSelect';
+import { useLocation } from '../context/locationContext';
 
 interface HeaderProps {
     isSticky?: boolean;
@@ -26,40 +27,34 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
     const dropdownRef = useRef<HTMLButtonElement | null>(null);;
     const languages = ["English", "हिन्दी"]
     const router = usePathname();
-    console.log(router);
 
-    // const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 499);
+    const { location, handleSelectCitybypass } = useLocation();
+
     const toggleDropdown = () => setIsOpen(!isOpen);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState('');
+    const [selectedOption, setSelectedOption] = useState(location.label);
 
+    useEffect(() => {
+        setSelectedOption(location.label); // Update selected city when location changes
+    }, [location]);
 
-    // const options = [
-    //     { label: "POPULAR CITIES", isHeader: true },
-    //     { value: "option1", label: "Option 1" },
-    //     { value: "option2", label: "Option 2" },
-    //     { value: "option3", label: "Option 3" },
-    // ];
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
-    const handleSelectCity = (event: SelectChangeEvent) => {
-        setSelectedOption(event.target.value as string);
-        closeModal();
+
+    const handleSelectCity = (city: { label: string; value: string }) => {
+        handleSelectCitybypass(city)
+        setSelectedOption(city.label); // You can set the selected city if needed
     };
 
-    // const handleSelectCity = (city: string) => {
-    //     setSelectedOption(city);
-    //     closeModal();
-    //   };
+    // const handleSelectCity = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    //     console.log(event.target);
 
-    // const handleOuterClick = (e: React.MouseEvent) => {
-    //     // Close only if the click is outside the modal content
-    //     if ((e.target as HTMLElement).id === "modal-overlay") {
-    //         closeModal();
-    //     }
+    //     setSelectedOption(event.target.value as string);
+    //     closeModal();
     // };
+
 
     const handleSelect = (language: React.SetStateAction<string>) => {
         setSelectedLanguage(language);
@@ -85,16 +80,6 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
         };
     }, []);
 
-    // useEffect(() => {
-    //     const handleResize = () => {
-    //         setIsLargeScreen(window.innerWidth > 500);
-    //     };
-
-    //     window.addEventListener('resize', handleResize);
-
-    //     // Clean up event listener on component unmount
-    //     return () => window.removeEventListener('resize', handleResize);
-    // }, []);
 
 
     //  header main 
@@ -116,12 +101,12 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                 },
                 { title: "Electric Truck", link: "/new-truck/electric" },
                 {
-                    title:"Vehicle Segment",
-                    subMenu:[
-                        {title:"SCVs and Pick Ups", link:'/en/scv'},
-                        {title:"LCVs and ICVs", link:'/en/lcv'},
-                        {title:"MHCV Vehicles", link:'/en/mhcv'},
-                        {title:"Three Vehicles", link:'/en/populer-truck/3-wheeler'},
+                    title: "Vehicle Segment",
+                    subMenu: [
+                        { title: "SCVs and Pick Ups", link: '/en/scv' },
+                        { title: "LCVs and ICVs", link: '/en/lcv' },
+                        { title: "MHCV Vehicles", link: '/en/mhcv' },
+                        { title: "Three Vehicles", link: '/en/populer-truck/3-wheeler' },
                     ]
                 }
             ],
@@ -158,27 +143,27 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
         {
             title: "Search by Body Type",
             subMenu: [
-                { title: "Trucks" },
-                { title: "Tippers" },
-                { title: "Trailer" },
-                { title: "Mini Trucks" },
-                { title: "Pickup Trucks" },
-                { title: "3 Wheeler" },
-                { title: "Auto Rickshaw" },
+                { title: "Trucks", link: '' },
+                { title: "Tippers", link: '' },
+                { title: "Trailer", link: '' },
+                { title: "Mini Trucks", link: '' },
+                { title: "Pickup Trucks", link: '' },
+                { title: "3 Wheeler", link: '' },
+                { title: "Auto Rickshaw", link: '' },
             ],
         },
         {
             title: "Search by Brand",
             subMenu: [
-                { title: "Tata" },
-                { title: "Ashok Leyland" },
-                { title: "Mahindra" },
-                { title: "Eicher" },
-                { title: "BharatBenz" },
-                { title: "View All" },
+                { title: "Tata", link: '' },
+                { title: "Ashok Leyland", link: '' },
+                { title: "Mahindra", link: '' },
+                { title: "Eicher", link: '' },
+                { title: "BharatBenz", link: '' },
+                { title: "View All", link: '' },
             ],
         },
-        { title: "Latest Commercial" },
+        { title: "Latest Commercial", link: '' },
         {
             title: "Vehicles",
             subMenu: [
@@ -213,7 +198,7 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                 { title: "SCVs and Pick Ups", link: "/en/scv" },
                 { title: "LCVs and ICVs", link: "/en/lcv" },
                 { title: "MHCV Vehicles", link: "/en/mhcv" },
-                { title: "Three Wheelers", link: "/en/populer-truck/3-wheelers" },
+                { title: "Three Wheelers", link: "/en/populer-truck/3-wheeler" },
             ],
         },
         {
@@ -334,17 +319,7 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                                 <Image src={'https://truckcdn.cardekho.com/pwa/img/TrucksDekho-NewLogov2.svg'} className='h-[42px]   w-fit text-start' title='truck-dekho logo' width={100} height={100} alt='not found' />
                             </Link>
                             <SearchBarWithAutocomplete suggestions={truckBrands} />
-                            {/* <div className="flex md:w-[43.66%] lg:w-[42%]  rounded-md overflow-hidden  font-[sans-serif] ">
-                                <input type="text" placeholder="Search Trucks or Brands eg. Tata or Bajaj"
-                                    className="w-full outline-none border-2 rounded-l-md shadow-sm bg-[#f7f7f7] text-gray-600 text-sm ml-4 px-4 py-3" />
-                                <button type='button' className="flex items-center justify-center md:w-[15%] w-[15%] sm:w-[10%] bg-black px-5">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192.904 192.904" width="16px" className="fill-white">
-                                        <path
-                                            d="m190.707 180.101-47.078-47.077c11.702-14.072 18.752-32.142 18.752-51.831C162.381 36.423 125.959 0 81.191 0 36.422 0 0 36.423 0 81.193c0 44.767 36.422 81.187 81.191 81.187 19.688 0 37.759-7.049 51.831-18.751l47.079 47.078a7.474 7.474 0 0 0 5.303 2.197 7.498 7.498 0 0 0 5.303-12.803zM15 81.193C15 44.694 44.693 15 81.191 15c36.497 0 66.189 29.694 66.189 66.193 0 36.496-29.692 66.187-66.189 66.187C44.693 147.38 15 117.689 15 81.193z">
-                                        </path>
-                                    </svg>
-                                </button>
-                            </div> */}
+
                             <div className='text-end m-auto right-0  md:w-[33.3%]'>
                                 <button
                                     onClick={toggleDropdown}
@@ -462,8 +437,12 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                         <>
                             <Modal
                                 isModalOpen={isModalOpen}
-                                selectedOption={selectedOption}
-                                options={[{ label: "Jaipur", value: "jaipur" }, { label: "New Delhi", value: "delhi" }]} // Example data
+                                selectedOption={location.value}
+                                options={[
+                                    { label: "Jaipur", value: "jaipur" },
+                                    { label: "New Delhi", value: "delhi" },
+                                    { label: "India", value: "india" }
+                                ]} // Example data
                                 closeModal={closeModal}
                                 handleSelectCity={handleSelectCity}
                             />
@@ -615,12 +594,12 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                                                         transition={{ duration: 0.7, ease: "easeInOut" }}
                                                     >
                                                         {item.subMenu.map((subItem, subIndex) => {
-                                                            const isActive = router === `/${subItem.title.toLowerCase().replace(/\s+/g, "-")}`;
+                                                            const isActive = router === `/${subItem.link}`;
                                                             console.log(isActive);
 
                                                             return (
                                                                 <li key={subIndex} >
-                                                                    <Link href={`/${subItem.title.toLowerCase().replace(/\s+/g, "-")}`}>
+                                                                    <Link href={`${subItem.link}`}>
                                                                         <span className={`block px-4 py-2 text-[#24272c]  hover:bg-gray-100  ${isActive ? "bg-sky-500 text-white" : ""
                                                                             }`}>
                                                                             {subItem.title}
