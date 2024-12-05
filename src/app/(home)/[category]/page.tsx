@@ -1,6 +1,8 @@
 'use client'
 
+import BodyMarkerComponent from '@/app/components/(pages)/body-marker';
 import DealersComponent from '@/app/components/(pages)/dealers';
+import LatestTruckComponent from '@/app/components/(pages)/latestTruck';
 import LcvComponent from '@/app/components/(pages)/lcv';
 import MhcvComponent from '@/app/components/(pages)/mhcv';
 import ScvComponent from '@/app/components/(pages)/scv';
@@ -9,12 +11,11 @@ import SpareComponent from '@/app/components/(pages)/spareparts';
 import { usePathname } from 'next/navigation';
 import React from 'react'
 
-
 const renderContent = (category: string | undefined) => {
     // make a cases to match endpoints to render the pages dynamic ways
     switch (category) {
         case 'lcv':
-            return <LcvComponent />;
+            return <LcvComponent />
         case 'scv':
             return <ScvComponent />;
         case 'mhcv':
@@ -25,6 +26,10 @@ const renderContent = (category: string | undefined) => {
             return <ServiceComponent />
         case 'spare':
             return <SpareComponent />
+        case 'body-maker':
+            return <BodyMarkerComponent />
+        case 'latest-truck':
+            return <LatestTruckComponent />
         default:
             return <h1>Not Found page</h1>;
     }
@@ -32,9 +37,11 @@ const renderContent = (category: string | undefined) => {
 const CategoryPage = () => {
     const pathname = usePathname();
     const category = pathname.split('/').pop();
-    console.log(category);
-
-    return <div >{renderContent(category)}</div>;
+    return (
+        <>
+            {renderContent(category)}
+        </>
+    )
 }
 
 export default CategoryPage;

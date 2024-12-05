@@ -89,10 +89,11 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
 
             subMenu: [
                 { title: "Search", link: "/en/new-trucks" },
+                { title: "Latest Truck", link: "/en/latest-truck" },
                 {
                     title: "Popular Brands",
                     subMenu: [
-                        { title: "Tata Commercial Vehicles", link: "/brand/tata" },
+                        { title: "Tata Commercial Vehicles", link: "/en/brands/tata" },
                         { title: "Ashok Leyland Commercial Vehicles", link: "/brand/ashok-leyland" },
                         { title: "Eicher Commercial Vehicles", link: "/brand/eicher" },
                         { title: "Bharat Benz Commercial Vehicles", link: "/brand/bharat-benz" },
@@ -121,7 +122,7 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                 { title: "Dealers", link: "/en/dealers" },
                 { title: "Service Centers", link: "/en/service" },
                 { title: "Spare Parts", link: "/en/spare" },
-                { title: "Body Makers", link: "/body-makers" },
+                { title: "Body Makers", link: "/en/body-maker" },
             ],
         },
         { title: "News & Reviews", link: "/en/news" },
