@@ -5,15 +5,18 @@ import VehicleListCard from '../vehicalListCad';
 import ToggleTable from '@/app/comman/toggleTable';
 import TruckCard from '@/app/comman/truckCards';
 import FilterCollapsible from '@/app/comman/collasefilter';
+import SortDropdown from '@/app/comman/shortDropdown';
 interface Item {
     label: string;
     count: number;
+    icon?: string;
 }
 interface FilterSection {
     title: string;
+    type?: string | undefined;
     items: Item[];
 }
-
+type SelectedFilters = Record<string, string[]>;
 const LatestTruckComponent = () => {
     const breadcrumbItems = GenerateBreadcrumbs();
     breadcrumbItems.splice(1, 0, { label: "New Trucks", path: "/en/new-trucks" });
@@ -325,7 +328,67 @@ const LatestTruckComponent = () => {
     ])
     const filters: FilterSection[] = [
         {
+            title: 'Body Type',
+            type: 'icon', // Icon Grid
+            items: [
+                { label: 'Truck', count: 229, icon: '🚚' },
+                { label: 'Pickup', count: 26, icon: '🛻' },
+                { label: 'Mini Truck', count: 48, icon: '🚛' },
+                { label: 'Tipper', count: 77, icon: '🚜' },
+                { label: 'Trailer', count: 35, icon: '🚒' },
+                { label: '3 Wheeler', count: 322, icon: '🛺' },
+                { label: 'Transit Mixer', count: 10, icon: '🚑' },
+                { label: 'Auto Rickshaw', count: 79, icon: '🛵' },
+                { label: 'E Rickshaw', count: 376, icon: '⚡' },
+            ],
+        },
+        {
+            title: 'Price Range',
+            type: 'checkbox', // Checkbox List
+            items: [
+                { label: 'less than 5 lakh', count: 556 },
+                { label: '5 lakh-10 lakh', count: 59 },
+                { label: '10 lakh-15 lakh', count: 41 },
+                { label: '15 lakh-20 lakh', count: 54 },
+            ],
+        },
+        {
+            title: "brands",
+            items: [
+                { label: 'Tata', count: 18 },
+                { label: 'Ashok Leyland', count: 24 },
+                { label: 'Eicher', count: 10 },
+                { label: 'Mahindra', count: 15 },
+                { label: 'Bharat Benz', count: 27 },
+                { label: 'Sml Isuzu', count: 9 },
+                { label: 'Piaggio', count: 4 },
+                { label: 'Isuzu', count: 2 },
+                { label: 'EBUZZ', count: 2 },
+                { label: 'Jangid', count: 4 },
+                { label: 'Veectero', count: 4 },
+                { label: 'Hexall', count: 4 },
+                { label: 'E-Ashwa', count: 1 },
+                { label: 'Gkon', count: 4 },
+                { label: 'Joy', count: 1 },
+                { label: 'Olectra', count: 1 },
+                { label: 'Sahyatri', count: 6 },
+                { label: 'YC Electric', count: 1 },
+                { label: 'Badshah', count: 5 },
+                { label: 'TVS', count: 1 },
+                { label: 'Gayatri Electric', count: 1 },
+                { label: 'BHM Safari', count: 7 },
+                { label: 'Mac Auto', count: 10 },
+                { label: 'City Cab', count: 3 },
+                { label: 'Maruti Suzuki', count: 1 },
+                { label: 'Shaktimaan', count: 3 },
+                { label: 'Statix Electric', count: 2 },
+                { label: 'Electeca', count: 4 },
+                { label: 'Log 9', count: 1 }
+            ]
+        },
+        {
             title: 'Fuel Type',
+            type: 'checkbox',
             items: [
                 { label: 'Diesel', count: 120 },
                 { label: 'Petrol', count: 80 },
@@ -335,6 +398,7 @@ const LatestTruckComponent = () => {
         },
         {
             title: 'Carrier Type',
+            type: 'checkbox',
             items: [
                 { label: 'Open', count: 95 },
                 { label: 'Closed', count: 67 },
@@ -343,6 +407,7 @@ const LatestTruckComponent = () => {
         },
         {
             title: 'GVW',
+            type: 'checkbox',
             items: [
                 { label: '3.5 Ton', count: 40 },
                 { label: '7.5 Ton', count: 25 },
@@ -351,6 +416,7 @@ const LatestTruckComponent = () => {
         },
         {
             title: 'Industry Segment',
+            type: 'checkbox',
             items: [
                 { label: 'Logistics', count: 50 },
                 { label: 'Construction', count: 30 },
@@ -359,6 +425,7 @@ const LatestTruckComponent = () => {
         },
         {
             title: 'Family',
+            type: 'checkbox',
             items: [
                 { label: 'Heavy Duty', count: 55 },
                 { label: 'Light Duty', count: 70 },
@@ -366,6 +433,7 @@ const LatestTruckComponent = () => {
         },
         {
             title: 'Emission Norms',
+            type: 'checkbox',
             items: [
                 { label: 'BS6', count: 120 },
                 { label: 'BS4', count: 90 },
@@ -373,6 +441,7 @@ const LatestTruckComponent = () => {
         },
         {
             title: 'Number of Tyre',
+            type: 'checkbox',
             items: [
                 { label: '4', count: 35 },
                 { label: '6', count: 50 },
@@ -397,23 +466,90 @@ const LatestTruckComponent = () => {
         });
         setTruckCard(sortedData);
     };
+    const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({});
 
+
+    const handleSelect = (title: string, item: string) => {
+        setSelectedFilters((prev) => ({
+            ...prev,
+            [title]: prev[title]?.includes(item)
+                ? prev[title].filter((i) => i !== item)
+                : [...(prev[title] || []), item],
+        }));
+    };
+
+    const handleRemoveFilter = (filter: string) => {
+        // Assuming selectedFilters is an object where each key maps to an array of filters
+        const updatedFilters = Object.keys(selectedFilters).reduce((acc: SelectedFilters, key) => {
+
+            acc[key] = selectedFilters[key].filter((item) => item !== filter);
+            return acc;
+
+        }, {});
+
+        setSelectedFilters(updatedFilters); // Update state to reflect the changes
+    };
 
     return (
         <div className='relative'>
             <div className='max-w-7xl m-auto relative'>
                 <Breadcrumbs items={breadcrumbItems} />
                 <div className="lg:flex border-b-2  rounded-b-md border-gray-100 gap-4 ">
+
+                    {/* right container */}
+                    <div className="order-1 sm:order-2 w-full lg:w-8/12 xl:w-[73.50%] space-y-4 mb-4 md:p-5 xl:p-0 " >
+                        <div className='border rounded-[16px] lg:p-5 p-5 mb-3 bg-white'>
+                            <ToggleTable
+                                content={content}
+                                title=""
+                                columns={[]}
+                                data={[]}
+                            />
+                        </div>
+                        <div>
+
+                            <div className='lg:flex justify-between hidden'>
+                                <div className=''>
+                                    <h2 className='p-[17px 20px 0px] text-xl lg:text-[30px] font-bold mb-5 '>
+                                        {truckCard.length} Commercial Vehicles
+                                    </h2>
+                                    <p className='max-w-2xl'>
+                                        {Object.values(selectedFilters).flat().map((item, index) => (
+                                            <div key={index} className='text-[rgba(36,39,44,.7)] inline-flex items-center p-2 mr-4 border bg-white'>
+                                                <label className=' mr-2'>{item}</label>
+                                                <button
+                                                    onClick={() => handleRemoveFilter(item)}
+                                                    className='bg-none cursor-pointer text-[16px] font-bold '
+
+                                                >
+                                                    ×
+                                                </button>
+                                            </div>
+                                        ))}
+                                    </p>
+                                </div>
+                                <SortDropdown handleSort={handleSort} />
+
+                            </div>
+                        </div>
+                        <TruckCard data={truckCard} />
+                    </div>
                     {/* left container */}
-                    <div className="w-full lg:w-4/12 xl:w-[25%] h-auto flex flex-col  sm:p-5 xl:p-0 mr-2 gap-2">
+                    <div className="order-2 sm:order-1 w-full lg:w-4/12 xl:w-[25%] h-auto flex flex-col  sm:p-5 xl:p-0 mr-2 gap-2">
                         <div className='border hidden lg:block rounded-[16px] p-5 lg:p-0 mb-3 bg-white'>
+
                             {filters.map((filter, index) => (
                                 <div
                                     key={index}
                                     className={`${index !== filters.length - 1 ? 'border-b border-gray-300' : ''
                                         }`}
                                 >
-                                    <FilterCollapsible key={index} title={filter.title} items={filter.items} />
+                                    <FilterCollapsible
+                                        title={filter.title}
+                                        items={filter.items}
+                                        type={filter.type}
+                                        onSelect={handleSelect}
+                                    />
                                 </div>
                             ))}
                         </div>
@@ -423,34 +559,6 @@ const LatestTruckComponent = () => {
                             viewAllText="View All Latest Trucks"
                         />
 
-                    </div>
-                    {/* right container */}
-                    <div className="w-full lg:w-8/12 xl:w-[73.50%] space-y-4 mb-4 md:p-5 xl:p-0 " >
-                        <div className='border rounded-[16px] lg:p-5 p-5 mb-3 bg-white'>
-                            <ToggleTable
-                                content={content}
-                                title=""
-                                columns={[]}
-                                data={[]}
-                            />
-                        </div>
-                        <div className='flex justify-between'>
-                            <h2 className='p-[17px 20px 0px] text-xl lg:text-[30px] font-bold mb-5 '>
-                                {truckCard.length} Commercial Vehicles
-                            </h2>
-                            <div>
-                                <label htmlFor="sort" className="mr-2 font-semibold">Sort by Price:</label>
-                                <select
-                                    id="sort"
-                                    onChange={(e) => handleSort(e.target.value as 'asc' | 'desc')}
-                                    className="p-2 border border-gray-300 rounded-md"
-                                >
-                                    <option value="asc">Price: Low to High</option>
-                                    <option value="desc">Price: High to Low</option>
-                                </select>
-                            </div>
-                        </div>
-                        <TruckCard data={truckCard} />
                     </div>
                 </div>
             </div>
