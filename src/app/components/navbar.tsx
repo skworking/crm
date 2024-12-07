@@ -4,21 +4,43 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { MdOutlineArrowDropDown, MdOutlineArrowDropUp } from 'react-icons/md';
-import { BsShopWindow, BsTruckFront } from 'react-icons/bs';
-import { IoBodyOutline } from 'react-icons/io5';
-import { PiCalculatorLight, PiVideoThin } from 'react-icons/pi';
-import { VscNotebook } from 'react-icons/vsc';
+// import { BsShopWindow, BsTruckFront } from 'react-icons/bs';
+// import { IoBodyOutline } from 'react-icons/io5';
+// import { PiCalculatorLight, PiVideoThin } from 'react-icons/pi';
+// import { VscNotebook } from 'react-icons/vsc';
 import CompareSlider from './compareSlider';
+import Image from 'next/image';
 
 
-const Navbar = () => {
+interface MenuItem {
+    path: string;
+    label: string;
+    activeClass?: string;
+    hasDropdown?: boolean;
+}
+
+interface LinkItem {
+    href: string;
+    label: string;
+    icon: string;
+}
+// interface PropTypes {
+//     menuItems: MenuItem[],
+//     links: LinkItem[],
+// }
+const Navbar = (/* { menuItems, links } */) => {
     const pathname = usePathname(); // Get the current pathname
+    const brand = pathname.split("/")[3];
+    const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+    const [links, setLinks] = useState<LinkItem[]>([]);
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false); // New state to track scroll
     const [isCompareDropdownOpen, setCompareDropdownOpen] = useState(false);
     const [lastScrollY, setLastScrollY] = useState(0);
     const [isNavbarVisible, setIsNavbarVisible] = useState(true); // State to control navbar visibility
 
+    // const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+    // const [links, setLinks] = useState<LinkItem[]>([]);
 
     const handleMouseEnter = () => setDropdownOpen(true);
     const handleMouseLeave = () => setDropdownOpen(false);
@@ -41,11 +63,11 @@ const Navbar = () => {
     }, [isCompareDropdownOpen, isDropdownOpen]);
 
     useEffect(() => {
-     
+
 
         const handleScroll = () => {
             const scrollPosition = window.scrollY; // Current scroll position
-            
+
             // Set isScrolled based on the scroll position relative to the threshold
             if (scrollPosition > 150) {
                 setIsScrolled(true);
@@ -73,77 +95,106 @@ const Navbar = () => {
         };
     }, [lastScrollY]);
 
-    const links = [
-        {
-            href: '/en/bharat-benz-dealers-in-new-delhi.html?model=2826-r',
-            label: 'Dealers',
-            icon: <BsShopWindow className='w-4 h-4 text-gray-400 hover:text-black' />,
-        },
-        // Add more link objects here
-        {
-            href: '/en/bharat-benz-service-in-new-delhi.html?model=2826-r',
-            label: 'Service Centers',
-            icon: <BsTruckFront className='w-4 h-4 text-gray-400 hover:text-black' />, // Replace with the appropriate icon if needed
-        },
-        {
-            href: 'https://trucks.cardekho.com/en/body-maker.html',
-            label: 'Body Makers',
-            icon: <IoBodyOutline className='w-4 h-4 text-gray-400 hover:text-black' />,
-        },
-        {
-            href: '/en/trucks/bharat-benz/2826-r/videos',
-            label: 'Videos',
-            icon: <PiVideoThin className='w-4 h-4 text-gray-400 hover:text-black' />,
-        },
-        {
-            href: '/en/trucks/bharat-benz/2826-r/emi-calculator',
-            label: 'EMI Calculator',
-            icon: <PiCalculatorLight className='w-4 h-4 text-gray-400 hover:text-black' />,
-        },
-        {
-            href: '/en/download-brochure/bharat-benz/2826-r.html',
-            label: 'Brochure',
-            icon: <VscNotebook className='w-4 h-4 text-gray-400 hover:text-black' />,
-        },
-    ];
+    useEffect(() => {
+        const fetchMenuData = async () => {
+            try {
+                const response = await fetch(`/api/navbar?endpoint=${pathname}`);
+                const data = await response.json();
+                setMenuItems(data.menuItems || []);
+                setLinks(data.links || []);
+            } catch (error) {
+                console.error('Failed to fetch navbar data:', error);
+            }
+        };
 
-    const menuItems = [
-        {
-            path: '/en/trucks/bharat-benz/2826-r',
-            label: '2826R',
-            activeClass: 'border-b-2 p-3 border-red-700',
-            defaultClass: (isScrolled: boolean) =>
-                isScrolled
-                    ? 'text-white bg-black hover:text-gray-100 hover:bg-gray-800'
-                    : 'text-black hover:text-red-500',
-        },
-        {
-            path: '/en/trucks/bharat-benz/2826-r/price-in-new-delhi',
-            label: 'Price',
-            activeClass: 'text-red-700',
-            defaultClass: 'text-gray-500',
-        },
-        {
-            path: '/en/trucks/bharat-benz/2826-r/pictures',
-            activeClass: 'text-red-500',
-            defaultClass: 'text-gray-500',
-            label: 'Compare',
-            hasDropdown: true,
-        },
-        {
-            path: '/en/trucks/bharat-benz/2826-r/specifications',
-            label: 'Specifications',
-            activeClass: 'text-red-500',
-            defaultClass: 'text-gray-500',
-        },
-        {
-            path: '/en/trucks/bharat-benz/2826-r/pictures',
-            label: 'Pictures',
-            activeClass: 'text-red-500',
-            defaultClass: 'text-gray-500',
-        },
+        fetchMenuData();
+    }, [brand]);
 
-    ];
+
+
+    // const links = [
+    //     {
+    //         href: '/en/bharat-benz-dealers-in-new-delhi.html?model=2826-r',
+    //         label: 'Dealers',
+    //         icon: <BsShopWindow className='w-4 h-4 text-gray-400 hover:text-black' />,
+    //     },
+    //     // Add more link objects here
+    //     {
+    //         href: '/en/bharat-benz-service-in-new-delhi.html?model=2826-r',
+    //         label: 'Service Centers',
+    //         icon: <BsTruckFront className='w-4 h-4 text-gray-400 hover:text-black' />, // Replace with the appropriate icon if needed
+    //     },
+    //     {
+    //         href: 'https://trucks.cardekho.com/en/body-maker.html',
+    //         label: 'Body Makers',
+    //         icon: <IoBodyOutline className='w-4 h-4 text-gray-400 hover:text-black' />,
+    //     },
+    //     {
+    //         href: '/en/trucks/bharat-benz/2826-r/videos',
+    //         label: 'Videos',
+    //         icon: <PiVideoThin className='w-4 h-4 text-gray-400 hover:text-black' />,
+    //     },
+    //     {
+    //         href: '/en/trucks/bharat-benz/2826-r/emi-calculator',
+    //         label: 'EMI Calculator',
+    //         icon: <PiCalculatorLight className='w-4 h-4 text-gray-400 hover:text-black' />,
+    //     },
+    //     {
+    //         href: '/en/download-brochure/bharat-benz/2826-r.html',
+    //         label: 'Brochure',
+    //         icon: <VscNotebook className='w-4 h-4 text-gray-400 hover:text-black' />,
+    //     },
+    // ];
+
+    // const menuItems = [
+    //     {
+    //         path: '/en/trucks/bharat-benz/2826-r',
+    //         label: '2826R',
+    //         activeClass: 'border-b-2 p-3 border-red-700',
+    //         defaultClass: (isScrolled: boolean) =>
+    //             isScrolled
+    //                 ? 'text-white bg-black hover:text-gray-100 hover:bg-gray-800'
+    //                 : 'text-black hover:text-red-500',
+    //     },
+    //     {
+    //         path: '/en/trucks/bharat-benz/2826-r/price-in-new-delhi',
+    //         label: 'Price',
+    //         activeClass: 'text-red-700',
+    //         defaultClass: 'text-gray-500',
+    //     },
+    //     {
+    //         path: '#',
+    //         activeClass: 'text-red-500',
+    //         defaultClass: 'text-gray-500',
+    //         label: 'Compare',
+    //         hasDropdown: true,
+    //     },
+    //     {
+    //         path: '/en/trucks/bharat-benz/2826-r/specifications',
+    //         label: 'Specifications',
+    //         activeClass: 'text-red-500',
+    //         defaultClass: 'text-gray-500',
+    //     },
+    //     {
+    //         path: '/en/trucks/bharat-benz/2826-r/milenge',
+    //         label: 'Milenge',
+    //         activeClass: 'text-red-500',
+    //         defaultClass: 'text-gray-500',
+    //     },
+    //     {
+    //         path: '/en/trucks/bharat-benz/2826-r/user-reviews',
+    //         label: 'User Reviews',
+    //         activeClass: 'text-red-500',
+    //         defaultClass: 'text-gray-500',
+    //     },
+    //     {
+    //         path: '/en/trucks/bharat-benz/2826-r/pictures',
+    //         label: 'Pictures',
+    //         activeClass: 'text-red-500',
+    //         defaultClass: 'text-gray-500',
+    //     },
+
+    // ];
 
     return (
         <>
@@ -155,7 +206,7 @@ const Navbar = () => {
                             {item.path ? (
                                 <>
                                     <Link
-                                        href={'#'}
+                                        href={item.path}
                                         className={`${pathname === item.path
                                             ? isScrolled
                                                 ? 'bg-black text-white  lg:text-[14px] text-[14px] font-medium border-b-[3px] py-4 border-[#d94025] transition-colors duration-300 ' // If active and scrolled
@@ -232,7 +283,8 @@ const Navbar = () => {
                                             <li key={link.label} className="hover:bg-gray-50 p-2">
                                                 <Link href={link.href} className="flex text-gray-500 items-center">
                                                     <span className='font-[22px] mr-[13px] ml-[13px]'>
-                                                        {link.icon}
+                                                        {/* {link.icon} */}
+                                                        <Image src={link.icon} width="20" height="20" alt="" />
                                                     </span>
                                                     <span className='text-[15px] capitalize text-black'>
                                                         {link.label}

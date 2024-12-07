@@ -2,10 +2,9 @@
 import Breadcrumbs from '@/app/comman/breadCrumbs';
 import { GenerateBreadcrumbs } from '@/app/comman/commanFunctions';
 import Body from '@/app/components/body';
-import Navbar from '@/app/components/navbar';
-
+// import Navbar from '@/app/components/navbar';
 import Overview from '@/app/components/overview';
-import Image from 'next/image';
+// import Image from 'next/image';
 import React from 'react'
 
 
@@ -15,7 +14,7 @@ const Page = () => {
   const breadcrumbItems = GenerateBreadcrumbs();
   return (
     <div className='bg-slate-50'>
-      <div className='max-w-7xl m-auto '>
+      {/* <div className='max-w-7xl m-auto '>
         <Image
           width={0}
           height={5}
@@ -25,7 +24,7 @@ const Page = () => {
 
 
       </div>
-      <Navbar />
+      <Navbar /> */}
       <Overview />
       <Breadcrumbs items={breadcrumbItems} />
       <Body />

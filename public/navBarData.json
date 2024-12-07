@@ -1,0 +1,103 @@
+{
+    "/en/trucks/bharat-benz/2826-r": {
+        "menuItems": [
+            {
+                "path": "/en/trucks/bharat-benz/2826-r",
+                "label": "2826R",
+                "activeClass": "border-b-2 p-3 border-red-700"
+            },
+            {
+                "path": "/en/trucks/bharat-benz/2826-r/price-in-new-delhi",
+                "label": "Price",
+                "activeClass": "text-red-700"
+            },
+            {
+                "path": "#",
+                "label": "Compare",
+                "hasDropdown": true
+            },
+            {
+                "path": "/en/trucks/bharat-benz/2826-r/specifications",
+                "label": "Specifications",
+                "activeClass": "text-red-500"
+            }
+        ],
+        "links": [
+            {
+                "href": "/en/bharat-benz-dealers-in-new-delhi.html?model=2826-r",
+                "label": "Dealers",
+                "icon": "https://cdn-icons-png.flaticon.com/512/12341/12341343.png"
+            },
+            {
+                "href": "/en/bharat-benz-service-in-new-delhi.html?model=2826-r",
+                "label": "Service Center",
+                "icon": "https://cdn-icons-png.flaticon.com/512/4410/4410666.png"
+            },
+            {
+                "href": "https://trucks.cardekho.com/en/body-maker.html",
+                "label": "Body Makers",
+                "icon": "https://cdn-icons-png.flaticon.com/512/1085/1085392.png"
+            },
+            {
+                "href": "/en/trucks/bharat-benz/2826-r/videos",
+                "label": "Videos",
+                "icon": "https://cdn-icons-png.flaticon.com/512/2859/2859706.png"
+            },
+            {
+                "href": "/en/trucks/bharat-benz/2826-r/emi-calculator",
+                "label": "EMI Calculator",
+                "icon": "https://cdn-icons-png.flaticon.com/512/6884/6884209.png"
+            }
+        ]
+    },
+    "/en/trucks/tata/ace-gold": {
+        "menuItems": [
+            {
+                "path": "/en/trucks/tata/ace-gold",
+                "label": "Ace Gold",
+                "activeClass": "border-b-2 p-3 border-blue-700"
+            },
+            {
+                "path": "/en/trucks/tata/ace-gold/price-in-new-delhi",
+                "label": "Price",
+                "activeClass": "text-blue-700"
+            },
+            {
+                "path": "#",
+                "label": "Compare",
+                "hasDropdown": true
+            },
+            {
+                "path": "/en/trucks/tata/ace-gold/specifications",
+                "label": "Specifications",
+                "activeClass": "text-blue-500"
+            }
+        ],
+        "links": [
+            {
+                "href": "/en/tata-dealers-in-new-delhi.html?model=ace-gold",
+                "label": "Dealers"
+            }
+        ]
+    },
+    "default": {
+        "menuItems": [
+            {
+                "path": "/",
+                "label": "Home",
+                "activeClass": "text-red-700"
+            },
+            {
+                "path": "/about",
+                "label": "About",
+                "activeClass": "text-red-700"
+            },
+            {
+                "path": "/contact",
+                "label": "Contact",
+                "activeClass": "text-red-700"
+            }
+        ],
+        "links": []
+    }
+}

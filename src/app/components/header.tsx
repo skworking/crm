@@ -102,6 +102,15 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                 },
                 { title: "Electric Truck", link: "/new-truck/electric" },
                 {
+                    title: "Best Comercial Vehicle",
+                    subMenu: [
+                        { title: "Tata Ace Gold", link: '/en/trucks/tata/ace-gold' },
+                        { title: "LCVs and ICVs", link: '/en/lcv' },
+                        { title: "MHCV Vehicles", link: '/en/mhcv' },
+                        { title: "Three Vehicles", link: '/en/populer-truck/3-wheeler' },
+                    ]
+                },
+                {
                     title: "Vehicle Segment",
                     subMenu: [
                         { title: "SCVs and Pick Ups", link: '/en/scv' },
