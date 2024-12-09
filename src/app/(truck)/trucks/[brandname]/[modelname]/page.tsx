@@ -2,14 +2,34 @@
 import Breadcrumbs from '@/app/comman/breadCrumbs';
 import { GenerateBreadcrumbs } from '@/app/comman/commanFunctions';
 import Body from '@/app/components/body';
+
 // import Navbar from '@/app/components/navbar';
 import Overview from '@/app/components/overview';
+import { usePathname } from 'next/navigation';
 // import Image from 'next/image';
-import React from 'react'
-
+import React, { useEffect, useState } from 'react'
 
 
 const Page = () => {
+  const pathname = usePathname(); // Get the current pathname
+  const brand = pathname.split("/")[3];
+
+  const [overview, setOverView] = useState();
+  console.log(overview);
+
+  useEffect(() => {
+    const fetchMenuData = async () => {
+      try {
+        const response = await fetch(`/api/navbar?endpoint=${pathname}`);
+        const data = await response.json();
+        setOverView(data.overview);
+      } catch (error) {
+        console.error('Failed to fetch navbar data:', error);
+      }
+    };
+
+    fetchMenuData();
+  }, [brand]);
 
   const breadcrumbItems = GenerateBreadcrumbs();
   return (
@@ -25,7 +45,8 @@ const Page = () => {
 
       </div>
       <Navbar /> */}
-      <Overview />
+
+      <Overview data={overview && overview} />
       <Breadcrumbs items={breadcrumbItems} />
       <Body />
     </div>

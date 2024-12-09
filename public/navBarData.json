@@ -48,7 +48,31 @@
                 "label": "EMI Calculator",
                 "icon": "https://cdn-icons-png.flaticon.com/512/6884/6884209.png"
             }
-        ]
+        ],
+        "overview": {
+                "image": "http://localhost:3000/_next/image?url=https%3A%2F%2Ftruckcdn.cardekho.com%2Fin%2Fbharat-benz%2F2826-r%2Fbharat-benz-2826-r.jpg%3Fimwidth%3D480%26impolicy%3Dresize&w=640&q=75",
+                "heading": "BharatBenz 2826R",
+                "recommendedTruck": [
+                    {
+                        "name": "Isuzu D-MAX",
+                        "image": "",
+                        "priceRange": "₹8.32 - ₹8.36 Lakh*"
+                    },
+                    {
+                        "name": "Mahindra Bolero Camper",
+                        "image": "",
+                        "priceRange": "From ₹10.61 Lakh*"
+                    },
+                    {
+                        "name": "Ashok Leyland Dost +",
+                        "image": "",
+                        "priceRange": "₹7.75 - ₹8.25 Lakh*"
+                    }
+                ],
+                "rating": "4.5",
+                "reviews": 118,
+                "price": "₹8.51 - ₹10.71 Lakh*"
+        }
     },
     "/en/trucks/tata/ace-gold": {
         "menuItems": [
@@ -78,7 +102,33 @@
                 "href": "/en/tata-dealers-in-new-delhi.html?model=ace-gold",
                 "label": "Dealers"
             }
-        ]
+        ],
+        "overview": {
+                "image": [
+                    "https://truckcdn.cardekho.com/in/tata/ace-gold/tata-ace-gold-21473.jpg?imwidth=480&impolicy=resize"
+                ],
+                "heading": "Tata Ace gold",
+                "recommendedTruck": [
+                    {
+                        "name": "Isuzu D-MAX",
+                        "image": "",
+                        "priceRange": "₹8.32 - ₹8.36 Lakh*"
+                    },
+                    {
+                        "name": "Mahindra Bolero Camper",
+                        "image": "",
+                        "priceRange": "From ₹10.61 Lakh*"
+                    },
+                    {
+                        "name": "Ashok Leyland Dost +",
+                        "image": "",
+                        "priceRange": "₹7.75 - ₹8.25 Lakh*"
+                    }
+                ],
+                "rating": "4.2",
+                "reviews": 86,
+                "price": "₹3.99 - ₹6.69 Lakh*"
+            }
     },
     "default": {
         "menuItems": [
@@ -98,6 +148,7 @@
                 "activeClass": "text-red-700"
             }
         ],
-        "links": []
+        "links": [],
+        "overview": {}
     }
 }

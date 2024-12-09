@@ -39,9 +39,6 @@ const Navbar = (/* { menuItems, links } */) => {
     const [lastScrollY, setLastScrollY] = useState(0);
     const [isNavbarVisible, setIsNavbarVisible] = useState(true); // State to control navbar visibility
 
-    // const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-    // const [links, setLinks] = useState<LinkItem[]>([]);
-
     const handleMouseEnter = () => setDropdownOpen(true);
     const handleMouseLeave = () => setDropdownOpen(false);
 

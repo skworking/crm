@@ -394,7 +394,7 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                                             animate={{ opacity: 1, y: 0 }}
                                             exit={{ opacity: 0, y: -10 }}
                                             transition={{ duration: 0.2 }}
-                                            className="absolute z-50 left-0 top-full bg-white text-gray-800 shadow-lg rounded-lg w-48"
+                                            className="absolute z-50 left-0 top-full bg-white text-gray-800 shadow-lg rounded-lg w-[250px]"
                                         >
                                             {item.subMenu.map((subItem, subIndex) => (
                                                 <li
@@ -422,12 +422,12 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                                                     )}
 
                                                     {subItem.subMenu && openSubMenu === subIndex && (
-                                                        <ul className="absolute left-full top-0  bg-white text-gray-800 shadow-lg rounded-lg w-48">
+                                                        <ul className="absolute left-full top-0  bg-white text-gray-800 shadow-lg rounded-lg w-[250px]">
                                                             {subItem.subMenu.map((nestedItem, nestedIndex) => (
                                                                 <li key={nestedIndex} className="border-[1px]">
                                                                     <Link href={nestedItem.link} title={nestedItem.title}>
-                                                                        <label className="block px-4 py-2 hover:bg-gray-100">
-                                                                            {nestedItem.title}
+                                                                        <label className="block px-4 py-2 hover:bg-gray-100 text-[rgba(36,39,44,.7)]">
+                                                                            {nestedItem.title} 
                                                                         </label>
                                                                     </Link>
                                                                 </li>
