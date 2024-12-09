@@ -1,9 +1,11 @@
 'use client'
 import React, { useState } from 'react';
-import { PiCarBatteryBold, PiEngine, PiGreaterThanLight, PiVideo } from 'react-icons/pi';
+import {
+    //  PiCarBatteryBold, PiEngine,
+      PiGreaterThanLight, PiVideo } from 'react-icons/pi';
 import TruckSlider from './slidercard';
-import Chasis from '@/assets/icons/chassis.svg'
-import Tire from '@/assets/icons/tyre-number.svg'
+// import Chasis from '@/assets/icons/chassis.svg'
+// import Tire from '@/assets/icons/tyre-number.svg'
 import { FaAngleRight } from 'react-icons/fa'; // Import the necessary icons
 import Link from 'next/link';
 import VehicleListCard from './vehicalListCad';
@@ -15,60 +17,79 @@ import NewsCard from './newscard';
 import UseCard from './usagcard';
 import VideoCard from './videocard';
 import MultiTabs from './tabbar';
-import { ImPower } from 'react-icons/im';
-import { GiFuelTank } from 'react-icons/gi';
+// import { ImPower } from 'react-icons/im';
+// import { GiFuelTank } from 'react-icons/gi';
 import { HiOutlineCurrencyRupee } from 'react-icons/hi';
 import { RiFileTextLine } from 'react-icons/ri';
 import { CiImageOn } from 'react-icons/ci';
-const Body = () => {
+import Image from 'next/image';
+type TruckDetail = {
+    logo: string;
+    value: string;
+    icon: string;
+};
 
-    const truckDetails = [
-        {
-            logo: 'Battery Capacity',
-            value: '120 Ah',
-            icon: <PiCarBatteryBold className="w-5 h-5" /> // Example icon
-        },
-        {
-            logo: 'Number of Tyre',
-            value: '10',
-            icon: <Tire className="w-5 h-5" />
-        },
-        {
-            logo: 'Power',
-            value: '250 hp',
-            icon: <ImPower className="w-5 h-5" />
-        },
-        {
-            logo: 'Engine',
-            value: '6700 cc',
-            icon: <PiEngine className="w-5 h-5" />
-        },
-        {
-            logo: 'Fuel Tank',
-            value: '380/355 Ltr',
-            icon: <GiFuelTank className="w-5 h-5" />
-        },
-        {
-            logo: 'Chassis Type',
-            value: 'Chassis with Cabin',
-            icon: <Chasis className="w-5 h-5 object-contain" />
+type TruckVariant = {
+    variantName: string;
+    gvw: string;
+};
 
-        },
-    ];
-    const truckVariants = [
-        {
-            variantName: "BharatBenz 2826R 5175/CBC/Sleeper Tanker",
-            gvw: "Get On Road Price",
-        },
-        {
-            variantName: "BharatBenz 2826R 5775/CBC/Sleeper",
-            gvw: "Get On Road Price",
-        },
-        {
-            variantName: "BharatBenz 2826R 6375/CBC/Sleeper",
-            gvw: "Get On Road Price",
-        },
-    ];
+type OverviewProps = {
+    data: {
+        truckDetails: TruckDetail[];
+        truckVariants: TruckVariant[];
+    };
+};
+const Body: React.FC<OverviewProps> = ({ data = { truckDetails: [], truckVariants: [] } }) => {
+    console.log(data);
+
+    // const truckDetails = [
+    //     {
+    //         logo: 'Battery Capacity',
+    //         value: '120 Ah',
+    //         icon: <PiCarBatteryBold className="w-5 h-5" /> // Example icon
+    //     },
+    //     {
+    //         logo: 'Number of Tyre',
+    //         value: '10',
+    //         icon: <Tire className="w-5 h-5" />
+    //     },
+    //     {
+    //         logo: 'Power',
+    //         value: '250 hp',
+    //         icon: <ImPower className="w-5 h-5" />
+    //     },
+    //     {
+    //         logo: 'Engine',
+    //         value: '6700 cc',
+    //         icon: <PiEngine className="w-5 h-5" />
+    //     },
+    //     {
+    //         logo: 'Fuel Tank',
+    //         value: '380/355 Ltr',
+    //         icon: <GiFuelTank className="w-5 h-5" />
+    //     },
+    //     {
+    //         logo: 'Chassis Type',
+    //         value: 'Chassis with Cabin',
+    //         icon: <Chasis className="w-5 h-5 object-contain" />
+
+    //     },
+    // ];
+    // const truckVariants = [
+    //     {
+    //         variantName: "BharatBenz 2826R 5175/CBC/Sleeper Tanker",
+    //         gvw: "Get On Road Price",
+    //     },
+    //     {
+    //         variantName: "BharatBenz 2826R 5775/CBC/Sleeper",
+    //         gvw: "Get On Road Price",
+    //     },
+    //     {
+    //         variantName: "BharatBenz 2826R 6375/CBC/Sleeper",
+    //         gvw: "Get On Road Price",
+    //     },
+    // ];
     const [showAllVariants, setShowAllVariants] = useState(false);
     const handleShowAllVariants = () => {
         setShowAllVariants(!showAllVariants);
@@ -152,7 +173,7 @@ const Body = () => {
             priceRange: "₹3.13 - ₹3.48 Lakh*",
             imageUrl: "https://truckcdn.cardekho.com/in/mahindra/treo-zor/mahindra-treo-zor-46219.jpg",
         },
-        
+
     ];
     const handleViewAll = () => {
         console.log("View all vehicles clicked");
@@ -173,10 +194,11 @@ const Body = () => {
                 <div className='border rounded-[16px] lg:p-5 p-5 mb-3 bg-white'>
                     <h2 className='pt-17px pr-20px pb-0 pl-20px text-xl font-bold '>Key Specs of BharatBenz 2826R</h2>
                     <div className="grid sm:grid-cols-1 md:grid-cols-2  xl:grid-cols-2  pt-4 sm:gap-6 gap-4">
-                        {truckDetails.map((detail, index) => (
+                        {data?.truckDetails.map((detail, index) => (
                             <div key={index} className="flex justify-between">
                                 <div className="inline-flex items-center gap-2 text-gray-400">
-                                    {detail.icon && detail.icon}
+                                    {/* {detail.icon && detail.icon} */}
+                                    <Image src={detail.icon} alt='' width="20" height="20" />
                                     <span className=' text-[rgba(36,39,44,.7)]'>{detail.logo}</span>
                                 </div>
                                 <span className='text-sm sm:font-bold text-[#24272c]'>{detail.value}</span>
@@ -218,7 +240,7 @@ const Body = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {truckVariants.slice(0, 2).map((variant, index) => (
+                                {data?.truckVariants.slice(0, 2).map((variant, index) => (
                                     <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 items-center ">
                                         <td className=" pl-6 sm:px-6 py-4 lg:font-medium lg:text-[17px] text-gray-900 dark:text-white">
                                             {variant.variantName}
@@ -232,7 +254,7 @@ const Body = () => {
                                 ))}
 
                                 {showAllVariants &&
-                                    truckVariants.slice(2).map((variant, index) => (
+                                    data?.truckVariants.slice(2).map((variant, index) => (
                                         <tr key={index + 3} className="bg-white border-b dark:bg-gray-700 dark:border-gray-700 items-center ">
                                             <td className="px-6 py-4 lg:font-medium lg:text-[17px] text-gray-900 dark:text-white ">
                                                 {variant.variantName}
@@ -382,7 +404,7 @@ const Body = () => {
                 </div>
 
 
-              
+
 
                 <VehicleListCard
                     title="Popular Electric Vehicles"

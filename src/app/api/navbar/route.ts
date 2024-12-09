@@ -3,6 +3,16 @@ import { NextResponse } from 'next/server';
 // import path from 'path';
 // import { promises as fs } from 'fs';
 // import navbarData from '@/../../public/navBarData.json'
+type TruckDetail = {
+  logo: string;
+  value: string;
+  icon: string;
+};
+
+type TruckVariant = {
+  variantName: string;
+  gvw: string;
+};
 type NavbarItem = {
   menuItems: {
     path: string;
@@ -26,6 +36,10 @@ type NavbarItem = {
     rating?: string;
     reviews?: number;
     price?: string;
+  };
+  body: {
+    truckDetails: TruckDetail[];
+    truckVariants: TruckVariant[];
   };
 };
 
@@ -85,7 +99,9 @@ export async function GET(request: Request) {
         }
       ],
       "overview": {
-        "image": "http://localhost:3000/_next/image?url=https%3A%2F%2Ftruckcdn.cardekho.com%2Fin%2Fbharat-benz%2F2826-r%2Fbharat-benz-2826-r.jpg%3Fimwidth%3D480%26impolicy%3Dresize&w=640&q=75",
+        "image": [
+          "https://truckcdn.cardekho.com/in/bharat-benz/2826-r/bharat-benz-2826-r.jpg?imwidth=360&impolicy=resize"
+        ],
         "heading": "BharatBenz 2826R",
         "recommendedTruck": [
           {
@@ -107,6 +123,56 @@ export async function GET(request: Request) {
         "rating": "4.5",
         "reviews": 118,
         "price": "₹8.51 - ₹10.71 Lakh*"
+      },
+      "body": {
+        "truckDetails": [
+          {
+            logo: 'Battery Capacity',
+            value: '120 Ah',
+            icon: "https://cdn-icons-png.flaticon.com/512/2087/2087628.png"
+          },
+          {
+            logo: 'Number of Tyre',
+            value: '10',
+            icon: "https://cdn-icons-png.flaticon.com/512/4606/4606838.png"
+          },
+          {
+            logo: 'Power',
+            value: '250 hp',
+            icon: "https://cdn-icons-png.flaticon.com/512/3596/3596171.png"
+          },
+          {
+            logo: 'Engine',
+            value: '6700 cc',
+            icon: "https://cdn-icons-png.flaticon.com/512/8049/8049675.png"
+          },
+          {
+            logo: 'Fuel Tank',
+            value: '380/355 Ltr',
+            icon: "https://cdn-icons-png.flaticon.com/512/4906/4906874.png"
+          },
+          {
+            logo: 'Chassis Type',
+            value: 'Chassis with Cabin',
+            icon: "https://cdn-icons-png.flaticon.com/512/810/810006.png"
+
+          },
+        ],
+        "truckVariants": [
+          
+          {
+            variantName: "BharatBenz 2826R 5175/CBC/Sleeper Tanker",
+            gvw: "Get On Road Price",
+          },
+          {
+            variantName: "BharatBenz 2826R 5775/CBC/Sleeper",
+            gvw: "Get On Road Price",
+          },
+          {
+            variantName: "BharatBenz 2826R 6375/CBC/Sleeper",
+            gvw: "Get On Road Price",
+          },
+        ]
       }
     },
     "/en/trucks/tata/ace-gold": {
@@ -163,8 +229,17 @@ export async function GET(request: Request) {
         "rating": "4.2",
         "reviews": 86,
         "price": "₹3.99 - ₹6.69 Lakh*"
+      },
+      "body": {
+        "truckDetails": [
+
+        ],
+        "truckVariants": [
+
+        ]
       }
     },
+
     "default": {
       "menuItems": [
         {
@@ -184,7 +259,15 @@ export async function GET(request: Request) {
         }
       ],
       "links": [],
-      "overview": {}
+      "overview": {},
+      "body": {
+        "truckDetails": [
+
+        ],
+        "truckVariants": [
+
+        ]
+      }
     }
   }
 
@@ -205,7 +288,7 @@ export async function GET(request: Request) {
     // Find the matching data in navbarData based on the normalized endpoint
     const data = navbarData[endpoint] || navbarData['default'];
 
-    return NextResponse.json({ menuItems: data.menuItems, links: data.links, overview: data.overview });
+    return NextResponse.json({ menuItems: data.menuItems, links: data.links, overview: data.overview, data });
   } catch (error) {
     console.error('Error reading or parsing navbar data:', error);
     return NextResponse.json({ error: 'Failed to fetch navbar data' });
