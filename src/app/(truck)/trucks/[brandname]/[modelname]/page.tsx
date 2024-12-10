@@ -3,10 +3,8 @@ import Breadcrumbs from '@/app/comman/breadCrumbs';
 import { GenerateBreadcrumbs } from '@/app/comman/commanFunctions';
 import Body from '@/app/components/body';
 
-// import Navbar from '@/app/components/navbar';
 import Overview from '@/app/components/overview';
 import { usePathname } from 'next/navigation';
-// import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 
 
@@ -15,7 +13,39 @@ const Page = () => {
   const brand = pathname.split("/")[3];
 
   const [overview, setOverView] = useState();
-  const [data, setData] = useState({ truckDetails: [], truckVariants: []});
+  const [data, setData] = useState(
+    {
+      heading: '',
+      truckDetails: {
+        url: '',
+        details: []
+      },
+      truckVariants: {
+        heading: '',
+        description: '',
+        details: []
+      },
+      truckAlterNative: {
+        footerheading: '',
+        url: '',
+        details: []
+      },
+      truckDealers: {
+        details: []
+      },
+      truckCompetitors: {
+        heading: '',
+        details: []
+      },
+      truckReviews: {
+        heading: '0',
+        performance: 0,
+        maintenance: 0,
+        design: 0,
+        details:[]
+      }
+    }
+  );
   console.log(data);
   useEffect(() => {
     const fetchMenuData = async () => {

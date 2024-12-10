@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import {
     //  PiCarBatteryBold, PiEngine,
-      PiGreaterThanLight, PiVideo } from 'react-icons/pi';
+    PiGreaterThanLight, PiVideo
+} from 'react-icons/pi';
 import TruckSlider from './slidercard';
 // import Chasis from '@/assets/icons/chassis.svg'
 // import Tire from '@/assets/icons/tyre-number.svg'
@@ -23,6 +24,10 @@ import { HiOutlineCurrencyRupee } from 'react-icons/hi';
 import { RiFileTextLine } from 'react-icons/ri';
 import { CiImageOn } from 'react-icons/ci';
 import Image from 'next/image';
+import { useLocation } from '../context/locationContext';
+import Modal from '../comman/modelSelect';
+import { MdOutlineCreate } from 'react-icons/md';
+import RatingCardsOnly from '../comman/ratingCardsOnly';
 type TruckDetail = {
     logo: string;
     value: string;
@@ -33,16 +38,89 @@ type TruckVariant = {
     variantName: string;
     gvw: string;
 };
-
+type AlterNative = {
+    name: string;
+    price: string;
+    offer: string;
+    imageUrl: string;
+}
+type DealerType = {
+    name: string;
+    address: string;
+    contact: string;
+    phone?: string;
+}
+type TruckCompetiters = {
+    model: string;
+    image: string;
+    priceRange: string;
+    comparison: string;
+    offerLink: string;
+    link: string;
+}
+type TruckReviews = {
+    productName: string,
+    reviewerName: string,
+    reviewDate: string,
+    rating: number,
+    heading: string,
+    reviewText: string,
+    classes?: string
+}
 type OverviewProps = {
     data: {
-        truckDetails: TruckDetail[];
-        truckVariants: TruckVariant[];
+        heading: string;
+        truckDetails: {
+            url?: string;
+            details?: TruckDetail[];
+        },
+        truckVariants: {
+            heading: string;
+            description: string;
+            details: TruckVariant[]
+        },
+        truckAlterNative: {
+            footerheading: string;
+            url: string;
+            details: AlterNative[]
+        },
+        truckDealers: {
+            details: DealerType[]
+        },
+        truckCompetitors: {
+            heading: string;
+            details: TruckCompetiters[]
+        },
+        truckReviews: {
+            heading: string;
+            maintenance: number;
+            design: number;
+            performance: number;
+            details: TruckReviews[]
+        }
     };
 };
-const Body: React.FC<OverviewProps> = ({ data = { truckDetails: [], truckVariants: [] } }) => {
+
+const Body: React.FC<OverviewProps> = ({
+    data = {
+        heading: '',
+        truckDetails: { url: '', details: [] },
+        truckVariants: { heading: '', description: '', details: [] },
+        truckAlterNative: { footerheading: '', url: '', details: [] },
+        truckDealers: { details: [] },
+        truckCompetitors: { heading: '', details: [] },
+        truckReviews: { heading: '', performance: 0, design: 0, maintenance: 0, details: [] }
+    }
+}) => {
     console.log(data);
 
+    const { location, handleSelectCitybypass } = useLocation();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
+    const handleSelectCity = (city: { label: string; value: string }) => {
+        handleSelectCitybypass(city)
+    };
     // const truckDetails = [
     //     {
     //         logo: 'Battery Capacity',
@@ -96,6 +174,8 @@ const Body: React.FC<OverviewProps> = ({ data = { truckDetails: [], truckVariant
     };
 
     const [isExpanded, setIsExpanded] = React.useState(false);
+    const previewLength = 100; // Change this value as per your requirement
+    const isLongDescription = data?.truckVariants?.description && data?.truckVariants?.description?.length > previewLength;
     const handleToggle = () => {
         setIsExpanded(!isExpanded);
     };
@@ -188,39 +268,45 @@ const Body: React.FC<OverviewProps> = ({ data = { truckDetails: [], truckVariant
         setRating(rating)
 
     };
+    // Calculate the average rating
+    const totalReviews = data?.truckReviews?.details?.length ?? 0;
+
+    const averageRating = totalReviews > 0
+        ? data.truckReviews.details.reduce((sum, review) => sum + review.rating, 0) / totalReviews
+        : 0;
+
     return (
         <div className="max-w-7xl m-auto  lg:flex border-b-2  rounded-b-md border-gray-100 gap-4 ">
             <div className="w-full lg:w-8/12 xl:w-[73.50%] m-auto  lg:ml-3 md:p-5 xl:p-0 " >
                 <div className='border rounded-[16px] lg:p-5 p-5 mb-3 bg-white'>
-                    <h2 className='pt-17px pr-20px pb-0 pl-20px text-xl font-bold '>Key Specs of BharatBenz 2826R</h2>
+                    <h2 className='pt-17px pr-20px pb-0 pl-20px text-xl font-bold '>Key Specs of {data.heading}</h2>
                     <div className="grid sm:grid-cols-1 md:grid-cols-2  xl:grid-cols-2  pt-4 sm:gap-6 gap-4">
-                        {data?.truckDetails.map((detail, index) => (
+                        {data?.truckDetails?.details && data?.truckDetails?.details.map((item, index) => (
                             <div key={index} className="flex justify-between">
                                 <div className="inline-flex items-center gap-2 text-gray-400">
                                     {/* {detail.icon && detail.icon} */}
-                                    <Image src={detail.icon} alt='' width="20" height="20" />
-                                    <span className=' text-[rgba(36,39,44,.7)]'>{detail.logo}</span>
+                                    <Image src={item.icon} alt='' width="20" height="20" />
+                                    <span className=' text-[rgba(36,39,44,.7)]'>{item.logo}</span>
                                 </div>
-                                <span className='text-sm sm:font-bold text-[#24272c]'>{detail.value}</span>
+                                <span className='text-sm sm:font-bold text-[#24272c]'>{item.value}</span>
                             </div>
                         ))}
                     </div>
-                    <div className='inline-flex m-auto items-baseline  mt-2'>
+                    <Link href={data?.truckDetails?.url ?? '#'} className='inline-flex m-auto items-baseline  mt-2'>
                         <span className='mr-2 text-[#d94025] text-[14px] font-bold'>View All Spaces & Features</span>
                         <div className="relative w-5 h-5 mt-4 bg-[#d94025] rounded-full flex justify-center items-center" >
                             <FaAngleRight className="w-5 h-3 left-[-1px] mr-0  fill-white" />
 
                         </div>
-                    </div>
+                    </Link>
                 </div>
 
                 <div className=' border rounded-[16px]  mb-3 flex flex-col bg-white  gap-2'>
-                    <h2 className='p-[17px 20px 0px] text-xl p-4 font-bold '>BharatBenz 2826R Price List (Variants)</h2>
+                    <h2 className='p-[17px 20px 0px] text-xl p-4 font-bold '>{data.truckVariants.heading} Price List (Variants)</h2>
                     <div className='relative w-full inline-flex justify-between items-start '>
                         <p className={`text-[rgba(36,39,44,.7)] lg:text-[14px] text-[12px] pl-4 sm:pb-0 sm:w-5/6 ${!isExpanded ? 'line-clamp-1  w-4/6 ' : 'pb-3'}`}
-                        >BharatBenz 2826R is offered in 5 variants - the base model of 2826R is 5175/CBC/Sleeper and the top variant is 5175/CBC
-                            {!isExpanded && <span id="dots">...</span>}
-                            {isExpanded && (<span id="more">/Sleeper which come with Kgs.</span>)}
+                        >
+                            {isExpanded ? data.truckVariants?.description : `${data.truckVariants?.description?.slice(0, previewLength)}${isLongDescription ? '...' : ''}`}
                         </p>
                         <span onClick={handleToggle} id="myBtn" className={`absolute right-3  w-20 text-end text-gray-500 underline ${isExpanded && 'bottom-[-10px]  absolute right-2'}`}>
                             {isExpanded ? 'Less' : 'Read more'}
@@ -240,7 +326,7 @@ const Body: React.FC<OverviewProps> = ({ data = { truckDetails: [], truckVariant
                                 </tr>
                             </thead>
                             <tbody>
-                                {data?.truckVariants.slice(0, 2).map((variant, index) => (
+                                {data?.truckVariants?.details && data?.truckVariants?.details?.slice(0, 2).map((variant, index) => (
                                     <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 items-center ">
                                         <td className=" pl-6 sm:px-6 py-4 lg:font-medium lg:text-[17px] text-gray-900 dark:text-white">
                                             {variant.variantName}
@@ -254,7 +340,7 @@ const Body: React.FC<OverviewProps> = ({ data = { truckDetails: [], truckVariant
                                 ))}
 
                                 {showAllVariants &&
-                                    data?.truckVariants.slice(2).map((variant, index) => (
+                                    data?.truckVariants?.details?.slice(2).map((variant, index) => (
                                         <tr key={index + 3} className="bg-white border-b dark:bg-gray-700 dark:border-gray-700 items-center ">
                                             <td className="px-6 py-4 lg:font-medium lg:text-[17px] text-gray-900 dark:text-white ">
                                                 {variant.variantName}
@@ -279,53 +365,107 @@ const Body: React.FC<OverviewProps> = ({ data = { truckDetails: [], truckVariant
                 </div>
                 <div className='border rounded-[16px]  mb-3 flex flex-col p-5 gap-2 bg-white relative'>
                     <h2 className='p-[17px 20px 0px] text-xl font-bold'>
-                        Explore BharatBenz 2826R Alternatives
+                        Explore {data?.heading && data?.heading} Alternatives
                     </h2>
-                    <TruckSlider />
-                    <div className='inline-flex  items-baseline'>
+                    <TruckSlider truckData={data?.truckAlterNative?.details} cards={3} />
+                    <Link href={data?.truckAlterNative?.url} className='inline-flex  items-baseline'>
                         <span className='mr-2 text-[#d94025] text-[14px] font-bold'>View All Populer Trucks</span>
                         <div className="relative w-5 h-5 mt-4 bg-[#d94025] rounded-full flex justify-center items-center" >
                             <FaAngleRight className="w-5 h-3 left-[-1px] mr-0  fill-white" />
                         </div>
-                    </div>
+                    </Link>
                 </div>
 
                 <div className='border rounded-[16px]  mb-3 flex flex-col bg-white  gap-2 lg:p-5 p-5 relative'>
                     <h2 className='p-[17px 20px 0px] text-xl font-bold '>
-                        BharatBenz Trucks Dealers in Mumbai
+                        {data.heading.split(' ')[0]} Trucks Dealers in
+                        <button className=" ml-2 inline-flex gap-3 items-center">{location.label} <MdOutlineCreate className="" onClick={openModal} /></button>
                     </h2>
-                    <DealerSlider />
-                    <div className='inline-flex  items-baseline'>
+                    <DealerSlider truckDelers={data?.truckDealers?.details} cards={3} />
+                    {/* <div className='inline-flex  items-baseline'>
                         <span className='mr-2 text-[#d94025] text-[14px] font-bold'>View All Populer Trucks</span>
                         <div className="relative w-5 h-5 mt-4 bg-[#d94025] rounded-full flex justify-center items-center" >
                             <FaAngleRight className="w-5 h-3 left-[-1px] mr-0  fill-white" />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className='border rounded-[16px]  mb-3 flex flex-col bg-white  gap-2 relative'>
                     <h2 className='p-[17px 20px 0px] text-xl p-4 font-bold '>
-                        Compare 2826R with Competitors
+                        Compare {data.truckCompetitors.heading} with Competitors
                     </h2>
-                    <CompareCard />
+                    <CompareCard data={data?.truckCompetitors?.details} cards={3} />
                     <div className=' text-[10px] items-baseline py-1 rounded-b-lg bg-[#f1f1f1] px-8'>
-                        Ex-showroom price in Mumbai
+                        Ex-showroom price in {location.label}
                     </div>
                 </div>
-                <div className='border rounded-[16px]  mb-3 flex flex-col  bg-white gap-2 relative'>
-                    <h2 className='p-[17px 20px 0px] text-xl p-4  font-bold '>
-                        2826R User Reviews
+                <div className='border rounded-[16px]  mb-3 flex flex-col  bg-white  relative'>
+                    <h2 className='p-[17px 20px 0px] text-xl p-4 font-bold '>
+                        {data.truckReviews.heading} User Reviews
                     </h2>
-                    <div className='lg:flex gap-3 text-[12px]'>
-                        <div className='p-4'>
-                            0 Reviews, Be the first one to rate
+                    {totalReviews > 0 ? (
+                        <>
+                            <div className='lg:grid flex-col grid-cols-3'>
+                                <div className='px-6 text-start '>
+                                    <span className=' inline-flex space-x-3'>
+                                        <Image src={'https://cdn-icons-png.flaticon.com/512/1828/1828884.png'} width={20} height={10} alt="" />
+                                        <span className="ml-2 text-xl font-bold">{averageRating.toFixed(1)} </span>
+                                    </span>
+                                    <div>Based on {data.truckReviews.details.length} User Reviews</div>
+                                </div>
+                                <div className='w-full justify-between lg:block hidden flex-col'>
+                                    <div className="flex text-[rgba(36,39,44,.5)] items-center gap-3">
+                                        <span className=" text-sm w-24">Performance</span>
+                                        <div className="w-full bg-gray-200 rounded-full h-2">
+                                            <div
+                                                className="bg-sky-500 h-full rounded-full"
+                                                style={{ width: `${(data.truckReviews.performance / 5) * 100}%` }} // Full width for rating 5
+                                            ></div>
+                                        </div>
+                                        <span className=" text-sm">{data.truckReviews.performance}</span>
+                                    </div>
+                                    <div className="flex text-[rgba(36,39,44,.5)] items-center gap-3">
+                                        <span className=" text-sm w-24">maintenance</span>
+                                        <div className="w-full bg-gray-200 rounded-full h-2">
+                                            <div
+                                                className="bg-sky-500 h-full rounded-full"
+                                                style={{ width: `${(data.truckReviews.maintenance / 5) * 100}%` }} // Full width for rating 5
+                                            ></div>
+                                        </div>
+                                        <span className=" text-sm">{data.truckReviews.maintenance}</span>
+                                    </div>
+                                    <div className="flex text-[rgba(36,39,44,.5)] items-center gap-3">
+                                        <span className=" text-sm w-24">design</span>
+                                        <div className="w-full bg-gray-200 rounded-full h-2">
+                                            <div
+                                                className="bg-sky-500 h-full rounded-full"
+                                                style={{ width: `${(data.truckReviews.design / 5) * 100}%` }} // Full width for rating 5
+                                            ></div>
+                                        </div>
+                                        <span className=" text-sm">{data.truckReviews.design}</span>
+                                    </div>
+                                </div>
+
+                                <hr className='block lg:hidden' />
+                                <div className='p-4 items-center inline-flex'>
+                                    Rate Now
+                                    <StarRating rating={rating} onChange={handleStarClick} />
+                                </div>
+                            </div>
+                            <RatingCardsOnly data={data.truckReviews.details} slidesShow={3}  />
+                        </>
+                    ) : (
+                        <div className='lg:flex gap-3 text-[12px]'>
+                            <div className='p-4'>
+                                0 Reviews, Be the first one to rate
+                            </div>
+                            <hr className='lg:hidden sm:w-[98%] w-full m-auto' />
+                            <div className='p-4 inline-flex items-center'>
+                                Rate Now
+                                <StarRating rating={rating} onChange={handleStarClick} />
+                            </div>
                         </div>
-                        <hr className='lg:hidden sm:w-[98%] w-full m-auto' />
-                        <div className='p-4 inline-flex items-center'>
-                            Rate Now
-                            <StarRating rating={rating} onChange={handleStarClick} />
-                        </div>
-                    </div>
+                    )}
                 </div>
                 <div className='border rounded-[16px]  mb-3 flex flex-col p-4 bg-white gap-2  relative'>
                     <h2 className='p-[17px 20px 0px] text-xl font-bold '>
@@ -366,9 +506,9 @@ const Body: React.FC<OverviewProps> = ({ data = { truckDetails: [], truckVariant
                     </h2>
                     <MultiTabs />
                 </div>
-            </div>
+            </div >
             {/* secound section */}
-            <div className="w-full lg:w-4/12 xl:w-[25%] h-auto flex flex-col  sm:p-5 xl:p-0 mr-2 gap-2">
+            < div className="w-full lg:w-4/12 xl:w-[25%] h-auto flex flex-col  sm:p-5 xl:p-0 mr-2 gap-2" >
                 <img src='https://tpc.googlesyndication.com/simgad/17644868341984738745' className="brightness-100 lg:block hidden  w-full  object-fill h-[250px]" />
                 {/* <Image src='https://tpc.googlesyndication.com/simgad/17644868341984738745' width={100} className=" lg:block hidden  w-full  object-contain h-[250px]" height={250}  alt='' /> */}
 
@@ -412,8 +552,23 @@ const Body: React.FC<OverviewProps> = ({ data = { truckDetails: [], truckVariant
                     viewAllText="View All Electric Commercial Vehicles"
                     onViewAllClick={handleViewAll}
                 />
-            </div>
-        </div>
+            </div >
+            {isModalOpen && (
+                <>
+                    <Modal
+                        isModalOpen={isModalOpen}
+                        selectedOption={location.value}
+                        options={[
+                            { label: "Jaipur", value: "jaipur" },
+                            { label: "New Delhi", value: "delhi" },
+                            { label: "India", value: "india" }
+                        ]} // Example data
+                        closeModal={closeModal}
+                        handleSelectCity={handleSelectCity}
+                    />
+                </>
+            )}
+        </div >
     )
 }
 
