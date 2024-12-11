@@ -188,7 +188,9 @@ type NavbarItem = {
 type NavbarData = {
   [key: string]: NavbarItem; // Allows dynamic string keys
 };
+
 export async function GET(request: Request) {
+  
   const navbarData: NavbarData = {
     "/en/trucks/bharat-benz/2826-r": {
       "menuItems": [
@@ -739,6 +741,133 @@ export async function GET(request: Request) {
             },
           ],
           url: "/en/electric-trucks",
+        }
+      }
+    },
+    "/en/trucks/bharat-benz/2826-r/price-in-new-delhi": {
+      "menuItems": [
+        {
+          "path": "/en/trucks/bharat-benz/2826-r",
+          "label": "2826R",
+          "activeClass": "border-b-2 p-3 border-red-700"
+        },
+        {
+          "path": "/en/trucks/bharat-benz/2826-r/price-in-new-delhi",
+          "label": "Price",
+          "activeClass": "text-red-700"
+        },
+        {
+          "path": "#",
+          "label": "Compare",
+          "hasDropdown": true
+        },
+        {
+          "path": "/en/trucks/bharat-benz/2826-r/specifications",
+          "label": "Specifications",
+          "activeClass": "text-red-500"
+        }
+      ],
+      "links": [
+        {
+          "href": "/en/bharat-benz-dealers-in-new-delhi.html?model=2826-r",
+          "label": "Dealers",
+          "icon": "https://cdn-icons-png.flaticon.com/512/12341/12341343.png"
+        },
+        {
+          "href": "/en/bharat-benz-service-in-new-delhi.html?model=2826-r",
+          "label": "Service Center",
+          "icon": "https://cdn-icons-png.flaticon.com/512/4410/4410666.png"
+        },
+        {
+          "href": "https://trucks.cardekho.com/en/body-maker.html",
+          "label": "Body Makers",
+          "icon": "https://cdn-icons-png.flaticon.com/512/1085/1085392.png"
+        },
+        {
+          "href": "/en/trucks/bharat-benz/2826-r/videos",
+          "label": "Videos",
+          "icon": "https://cdn-icons-png.flaticon.com/512/2859/2859706.png"
+        },
+        {
+          "href": "/en/trucks/bharat-benz/2826-r/emi-calculator",
+          "label": "EMI Calculator",
+          "icon": "https://cdn-icons-png.flaticon.com/512/6884/6884209.png"
+        }
+      ],
+      "overview": {},
+      "breadcrumb": [
+      ],
+
+      "body": {
+        heading: '',
+        truckDetails: {
+          url: '',
+          details: []
+        },
+        "truckVariants": {
+          heading: '',
+          description: '',
+          details: []
+        },
+        "truckAlterNative": {
+          footerheading: '',
+          url: '',
+          details: [],
+        },
+        "truckDealers": {
+          details: [],
+        },
+        "truckCompetitors": {
+          heading: '',
+          details: []
+        },
+        truckReviews: {
+          heading: '',
+          performance: 0,
+          maintenance: 0,
+          design: 0,
+          details: []
+        },
+        truckOptions: {
+          details: []
+        },
+        truckNews: {
+          details: []
+        },
+        truckUses: {
+          details: []
+        },
+        truckVideo: {
+          heading: '',
+          description: '',
+          details: []
+        },
+        truckMultitab: {
+          tabs: [],
+          details: {
+          }
+        },
+        populerTruck: {
+          heading: "",
+          details: [
+            {
+              name: "",
+              priceRange: "",
+              imageUrl: "",
+            },
+          ],
+          url: "",
+        },
+        ReseachTruck: {
+          heading: "",
+          details: []
+        },
+        ElectricTruck: {
+          heading: "",
+          details: [
+
+          ],
+          url: "",
         }
       }
     },
