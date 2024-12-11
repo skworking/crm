@@ -43,7 +43,56 @@ type TruckReviews = {
   reviewText: string,
   classes?: string
 }
+type TruckOptions = {
+  model: string;
+  image: string;
+}
 
+type TruckNews = {
+  title: string;
+  author: string;
+  image: string;
+  date: string;
+  time: string;
+  description: string;
+  url: string
+}
+type TruckUses = {
+  model: string;
+  image: string;
+}
+type TruckVideo = {
+  title: string,
+  date: string,
+  image: string,
+  description: string,
+  url: string
+}
+
+interface TabItem {
+  title: string;
+  content: string;
+}
+
+type TruckMultiTabDetails = {
+  [key: string]: TabItem[];
+};
+
+type BreadCrumb = {
+  label: string;
+  path: string;
+}
+
+type TruckPopuler = {
+  name: string,
+  priceRange: string,
+  imageUrl: string
+}
+type TruckResearch = {
+  title: string,
+  imageUrl: string,
+  url: string,
+}
 type NavbarItem = {
   menuItems: {
     path: string;
@@ -68,6 +117,8 @@ type NavbarItem = {
     reviews?: number;
     price?: string;
   };
+  breadcrumb: BreadCrumb[]
+
   body: {
     heading: string;
     truckDetails: {
@@ -97,7 +148,40 @@ type NavbarItem = {
       maintenance: number;
       design: number;
       details: TruckReviews[]
+    },
+    truckOptions: {
+      details: TruckOptions[]
+    },
+    truckNews: {
+      details: TruckNews[]
+    },
+    truckUses: {
+      details: TruckUses[]
+    },
+    truckVideo: {
+      heading: string;
+      description: string;
+      details: TruckVideo[]
+    },
+    truckMultitab: {
+      tabs: string[],
+      details: TruckMultiTabDetails
+    },
+    populerTruck: {
+      heading: string;
+      details: TruckPopuler[],
+      url: string
+    },
+    ReseachTruck: {
+      heading: string;
+      details: TruckResearch[]
+    },
+    ElectricTruck: {
+      heading: string;
+      details: TruckPopuler[],
+      url: string
     }
+
   };
 };
 
@@ -182,6 +266,22 @@ export async function GET(request: Request) {
         "reviews": 118,
         "price": "₹8.51 - ₹10.71 Lakh*"
       },
+      "breadcrumb": [
+
+        {
+          "label": "Home",
+          "path": "/"
+        },
+        {
+          "label": "BharatBenz Trucks",
+          "path": "/en/brands/bharat-benz"
+        },
+        {
+          "label": "1917R",
+          "path": "/en/trucks/tata/1917R"
+        }
+      ],
+
       "body": {
         heading: "BharatBenz 2826R",
         truckDetails: {
@@ -411,6 +511,234 @@ export async function GET(request: Request) {
               classes: "line-clamp-3"
             }
           ]
+        },
+        truckOptions: {
+          details: [
+            {
+              model: "MHCV Vehicles",
+              image: "https://truckcdn.cardekho.com/pwa/img/explore/mhcv.jpg",
+            },
+            {
+              image: "https://truckcdn.cardekho.com/pwa/img/explore/trucks.jpg",
+              model: "Trucks",
+            },
+            {
+              model: "Trucks above 40 Lakh",
+              image: "https://truckcdn.cardekho.com/pwa/img/explore/above-40-lakh.jpg",
+            },
+            {
+              image: "https://truckcdn.cardekho.com/pwa/img/explore/fuelType.jpg",
+              model: "Deasel",
+            },
+            {
+              image: "https://truckcdn.cardekho.com/in/tata/signa-1923-k/tata-signa-1923-k-27351.jpg",
+              model: "Man CLA 31.300 EVO 8X2",
+            },
+          ]
+        },
+        truckNews: {
+          details: [
+            {
+              title: "Latest Trucking Technologies: All You Need To Know",
+              image: 'https://truckcdn.cardekho.com/news/25181729745827.jpg',
+              author: "Dheeraj Nair",
+              date: "Oct 23, 2024",
+              time: "10:53 AM",
+              description: "Explore the benefits of using a GPS truck tracking system for your trucking business.",
+              url: "https://truckcdn.cardekho.com/news/25131729661559.jpg"
+            },
+            {
+              title: "Start An Owner-Operator Trucking Business With These Tips: Comprehensive Guide",
+              author: "Dheeraj Nair",
+              image: 'https://truckcdn.cardekho.com/news/25131729661559.jpg',
+              date: "Oct 21, 2024",
+              time: "02:48 PM",
+              description: "Learn the essential tips and strategies to kickstart your own owner-operator trucking business.",
+              url: "/articles/owner-operator-trucking"
+            },
+            {
+              title: "Truck Driver Trip Planning Guide: Everything You Need To Know",
+              author: "Dheeraj Nair",
+              image: 'https://truckcdn.cardekho.com/news/25131729661559.jpg',
+              date: "Oct 20, 2024",
+              time: "10:30 AM",
+              description: "A complete guide for truck drivers to plan their trips effectively and efficiently.",
+              url: "/articles/trip-planning-guide"
+            },
+            {
+              title: "Truck Driver Trip Planning Guide: Everything You Need To Know",
+              author: "Dheeraj Nair",
+              image: 'https://truckcdn.cardekho.com/news/25081729502264.jpg',
+              date: "Oct 20, 2024",
+              time: "10:30 AM",
+              description: "A complete guide for truck drivers to plan their trips effectively and efficiently.",
+              url: "/articles/trip-planning-guide"
+            }
+          ]
+        },
+        truckUses: {
+          details: [
+            {
+              model: "Cement",
+              image: "https://truckcdn.cardekho.com/pwa/img/explore/cement.jpg",
+            },
+            {
+              image: "https://truckcdn.cardekho.com/pwa/img/explore/auto-logistics.jpg",
+              model: "Auto Logistics",
+            },
+            {
+              model: "Beverage",
+              image: "https://truckcdn.cardekho.com/pwa/img/explore/beverage.jpg",
+            },
+            {
+              image: "https://truckcdn.cardekho.com/pwa/img/explore/construction.jpg",
+              model: "Construction",
+            },
+            {
+              image: "https://truckcdn.cardekho.com/pwa/img/explore/fishery.jpg",
+              model: "Fishery",
+            },
+          ]
+        },
+        truckVideo: {
+          heading: "2826R",
+          description: "2826R has video of its detailed review, specs, features explained & more. Watch our Latest video of 2826R to know price, safety features, type of application & more",
+          details: [
+            {
+              title: "Introduction to Engine Oils for Trucks",
+              date: "Feb 03, 2023",
+              image: "https://i2.ytimg.com/vi/vUdLqx8r6Fo/hqdefault.jpg",
+              description: "An overview of the types and benefits of engine oils specifically designed for trucks.",
+              url: "https://youtu.be/H6p3-uu9-rU"
+            },
+            {
+              title: "What makes a good engine oil in today’s era",
+              date: "Feb 03, 2023",
+              image: "https://i2.ytimg.com/vi/H6p3-uu9-rU/hqdefault.jpg",
+              description: "Explore the key characteristics and standards that define quality engine oil in modern times.",
+              url: "https://youtu.be/aJDy44RIkxM"
+            },
+            {
+              title: "What makes a good engine oil in today’s era",
+              date: "Feb 03, 2023",
+              image: "https://i2.ytimg.com/vi/aJDy44RIkxM/hqdefault.jpg",
+              description: "Explore the key characteristics and standards that define quality engine oil in modern times.",
+              url: "https://youtu.be/aJDy44RIkxM"
+            },
+            {
+              title: "What makes a good engine oil in today’s era",
+              date: "Feb 03, 2023",
+              image: "https://i2.ytimg.com/vi/aJDy44RIkxM/hqdefault.jpg",
+              description: "Explore the key characteristics and standards that define quality engine oil in modern times.",
+              url: "https://youtu.be/aJDy44RIkxM"
+            }
+          ]
+        },
+        truckMultitab: {
+          tabs: ['Price', 'Loading', 'Specifications', 'Cabin'],
+          details: {
+            'Price': [
+              { title: 'What is the price of BharatBenz 2826R in Mumbai?', content: 'The Truck prices vary from state to state as per the local taxes and levies. The BharatBenz 2826R price is approximately between ₹41.20 - ₹43.50 Lakh in Mumbai.' },
+              { title: 'What will be the monthly EMI for BharatBenz 2826R?', content: 'The monthly EMI of BharatBenz 2826R will be ₹79,699.00 on an annual rate of interest of 10.5% for a tenure of 5 years & down payment will be ₹4.12 Lakh.' }
+            ],
+            'Loading': [
+              { title: 'What is the fuel tank capacity of BharatBenz 2826R?', content: 'The fuel capacity of BharatBenz 2826R is 380/355 Ltr.' }
+            ],
+            'Specifications': [
+              { title: 'What are the specifications of BharatBenz 2826R?', content: 'The specifications include engine type, horsepower, torque, and dimensions.' }
+            ],
+            'Cabin': [
+              { title: 'What features does the cabin of BharatBenz 2826R have?', content: 'The cabin features air conditioning, comfortable seating, and advanced infotainment systems for a better driving experience.' }
+            ]
+          }
+        },
+        // sidebar content
+        populerTruck: {
+          heading: "Popular BharatBenz Trucks",
+          details: [
+            {
+              name: "BharatBenz 1917R",
+              priceRange: "₹28.35 - ₹30.61 Lakh*",
+              imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/3528c-bs6/bharat-benz-3528c-bs6-64528.jpg",
+            },
+            {
+              name: "BharatBenz 1917R",
+              priceRange: "₹28.35 - ₹30.61 Lakh*",
+              imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/1917r/bharat-benz-1917r.jpg",
+            },
+            {
+              name: "BharatBenz 3528C",
+              priceRange: "₹52.97 - ₹60.60 Lakh*",
+              imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/1217c/bharat-benz-1217c-60162.jpg",
+            },
+            {
+              name: "BharatBenz 3528C",
+              priceRange: "₹28.30 - ₹28.88 Lakh*",
+              imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/4828r/bharat-benz-4828r-41094.jpg",
+            },
+            {
+              name: "BharatBenz 4228C",
+              priceRange: "₹47.70 - ₹48.97 Lakh*",
+              imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/4228r/bharat-benz-4228r-14182.jpg",
+            },
+          ],
+          url: "/en/brands/bharat-benz",
+        },
+        ReseachTruck: {
+          heading: "Further Research",
+          details: [
+            {
+              title: "2826R On Road Price",
+              imageUrl: 'https://cdn-icons-png.flaticon.com/512/13859/13859311.png',
+              url: "/en/trucks/bharat-benz/2826-r/price-in-mumbai",
+            },
+            {
+              title: "2826R Specifications",
+              imageUrl: 'https://cdn-icons-png.flaticon.com/512/2702/2702651.png',
+              url: "/en/trucks/bharat-benz/2826-r/specifications",
+            },
+            {
+              title: "2826R Images",
+              imageUrl: 'https://cdn-icons-png.flaticon.com/512/9284/9284918.png',
+              url: "/en/trucks/bharat-benz/2826-r/images",
+            },
+            {
+              title: "2826R Videos",
+              imageUrl: 'https://cdn-icons-png.flaticon.com/512/14068/14068622.png',
+              url: "/en/trucks/bharat-benz/2826-r/videos",
+            },
+          ]
+        },
+        ElectricTruck: {
+          heading: "Popular Electrick Trucks",
+          details: [
+            {
+              name: "BharatBenz 1917R",
+              priceRange: "₹28.35 - ₹30.61 Lakh*",
+              imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/3528c-bs6/bharat-benz-3528c-bs6-64528.jpg",
+            },
+            {
+              name: "BharatBenz 1917R",
+              priceRange: "₹28.35 - ₹30.61 Lakh*",
+              imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/1917r/bharat-benz-1917r.jpg",
+            },
+            {
+              name: "BharatBenz 3528C",
+              priceRange: "₹52.97 - ₹60.60 Lakh*",
+              imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/1217c/bharat-benz-1217c-60162.jpg",
+            },
+            {
+              name: "BharatBenz 3528C",
+              priceRange: "₹28.30 - ₹28.88 Lakh*",
+              imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/4828r/bharat-benz-4828r-41094.jpg",
+            },
+            {
+              name: "BharatBenz 4228C",
+              priceRange: "₹47.70 - ₹48.97 Lakh*",
+              imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/4228r/bharat-benz-4228r-14182.jpg",
+            },
+          ],
+          url: "/en/electric-trucks",
         }
       }
     },
@@ -469,6 +797,24 @@ export async function GET(request: Request) {
         "reviews": 86,
         "price": "₹3.99 - ₹6.69 Lakh*"
       },
+      "breadcrumb": [
+        {
+          "label": "Home",
+          "path": "/"
+        },
+        {
+          "label": "TRUCKS Trucks",
+          "path": "/en/brands/tata"
+        },
+        {
+          "label": "TATA Ace",
+          "path": "/en/truck/tata-ace"
+        },
+        {
+          "label": "ACE GOLD",
+          "path": "/en/trucks/tata/ace-gold"
+        }
+      ],
       "body": {
         heading: "Tata Ace gold",
         truckDetails: {
@@ -698,7 +1044,115 @@ export async function GET(request: Request) {
               classes: "line-clamp-3"
             }
           ]
+        },
+        truckOptions: {
+          details: [
+            {
+              model: "MHCV Vehicles",
+              image: "https://truckcdn.cardekho.com/pwa/img/explore/mhcv.jpg",
+            },
+            {
+              image: "https://truckcdn.cardekho.com/pwa/img/explore/trucks.jpg",
+              model: "Trucks",
+            },
+            {
+              model: "Trucks above 40 Lakh",
+              image: "https://truckcdn.cardekho.com/pwa/img/explore/above-40-lakh.jpg",
+            },
+            {
+              image: "https://truckcdn.cardekho.com/pwa/img/explore/fuelType.jpg",
+              model: "Deasel",
+            },
+            {
+              image: "https://truckcdn.cardekho.com/in/tata/signa-1923-k/tata-signa-1923-k-27351.jpg",
+              model: "Man CLA 31.300 EVO 8X2",
+            },
+          ]
+        },
+        truckNews: {
+          details: [
+
+          ]
+        },
+        truckUses: {
+          details: [
+            {
+              model: "Cement",
+              image: "https://truckcdn.cardekho.com/pwa/img/explore/cement.jpg",
+            },
+            {
+              image: "https://truckcdn.cardekho.com/pwa/img/explore/auto-logistics.jpg",
+              model: "Auto Logistics",
+            },
+            {
+              model: "Beverage",
+              image: "https://truckcdn.cardekho.com/pwa/img/explore/beverage.jpg",
+            },
+            {
+              image: "https://truckcdn.cardekho.com/pwa/img/explore/construction.jpg",
+              model: "Construction",
+            },
+            {
+              image: "https://truckcdn.cardekho.com/pwa/img/explore/fishery.jpg",
+              model: "Fishery",
+            },
+          ]
+        },
+        truckVideo: {
+          heading: '',
+          description: '',
+          details: []
+        },
+        truckMultitab: {
+          tabs: ['Price', 'Loading', 'Specifications', 'Cabin'],
+          details: {
+
+          }
+        },
+        populerTruck: {
+          heading: "Popular ace-gold Trucks",
+          details: [
+            {
+              name: "ace-gold",
+              priceRange: "₹28.35 - ₹30.61 Lakh*",
+              imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/3528c-bs6/bharat-benz-3528c-bs6-64528.jpg",
+            },
+          ],
+          url: "/en/brands/ace-gold",
+        },
+        ReseachTruck: {
+          heading: "Furthor Research",
+          details: [
+            {
+              title: "2826R On Road Price",
+              imageUrl: '',
+              url: "/en/trucks/bharat-benz/2826-r/price-in-mumbai",
+            },
+            {
+              title: "2826R Specifications",
+              imageUrl: '',
+              url: "/en/trucks/bharat-benz/2826-r/specifications",
+            },
+            {
+              title: "2826R Images",
+              imageUrl: '',
+              url: "/en/trucks/bharat-benz/2826-r/images",
+            },
+            {
+              title: "2826R Videos",
+              imageUrl: '',
+              url: "/en/trucks/bharat-benz/2826-r/videos",
+            },
+          ]
+        },
+        ElectricTruck: {
+          heading: "Popular Electrick Trucks",
+          details: [
+
+          ],
+          url: "/en/electric-trucks",
         }
+
       }
     },
 
@@ -722,6 +1176,9 @@ export async function GET(request: Request) {
       ],
       "links": [],
       "overview": {},
+      "breadcrumb": [
+      ],
+
       "body": {
         heading: '',
         truckDetails: {
@@ -751,6 +1208,47 @@ export async function GET(request: Request) {
           maintenance: 0,
           design: 0,
           details: []
+        },
+        truckOptions: {
+          details: []
+        },
+        truckNews: {
+          details: []
+        },
+        truckUses: {
+          details: []
+        },
+        truckVideo: {
+          heading: '',
+          description: '',
+          details: []
+        },
+        truckMultitab: {
+          tabs: [],
+          details: {
+          }
+        },
+        populerTruck: {
+          heading: "",
+          details: [
+            {
+              name: "",
+              priceRange: "",
+              imageUrl: "",
+            },
+          ],
+          url: "",
+        },
+        ReseachTruck: {
+          heading: "",
+          details: []
+        },
+        ElectricTruck: {
+          heading: "",
+          details: [
+
+          ],
+          url: "",
         }
       }
     }

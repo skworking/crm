@@ -1,6 +1,5 @@
 'use client'
 import Breadcrumbs from '@/app/comman/breadCrumbs';
-import { GenerateBreadcrumbs } from '@/app/comman/commanFunctions';
 import Body from '@/app/components/body';
 
 import Overview from '@/app/components/overview';
@@ -11,7 +10,7 @@ import React, { useEffect, useState } from 'react'
 const Page = () => {
   const pathname = usePathname(); // Get the current pathname
   const brand = pathname.split("/")[3];
-
+  const [breadcrums, setBreadCrum] = useState([])
   const [overview, setOverView] = useState();
   const [data, setData] = useState(
     {
@@ -42,8 +41,42 @@ const Page = () => {
         performance: 0,
         maintenance: 0,
         design: 0,
-        details:[]
+        details: []
+      },
+      truckOptions: {
+        details: []
+      },
+      truckNews: {
+        details: []
+      },
+      truckUses: {
+        details: []
+      },
+      truckVideo: {
+        heading: '',
+        description: '',
+        details: []
+      },
+      truckMultitab: {
+        tabs: [],
+        details: {
+        }
+      },
+      populerTruck: {
+        heading: '',
+        details: [],
+        url: ''
+      },
+      ReseachTruck: {
+        heading: '',
+        details: []
+      },
+      ElectricTruck: {
+        heading: '',
+        details: [],
+        url: ''
       }
+
     }
   );
   console.log(data);
@@ -55,6 +88,7 @@ const Page = () => {
         console.log(data);
 
         setOverView(data.overview);
+        setBreadCrum(data.data.breadcrumb)
         setData(data.data.body);
       } catch (error) {
         console.error('Failed to fetch navbar data:', error);
@@ -64,12 +98,17 @@ const Page = () => {
     fetchMenuData();
   }, [brand]);
 
-  const breadcrumbItems = GenerateBreadcrumbs();
+  // const breadcrumbItems = GenerateBreadcrumbs();
+  // console.log(breadcrumbItems);
+
+  // if (!breadcrumbItems) {
+  //   return <div>Loading page body...</div>;  // or any fallback UI
+  // }
   return (
     <div className='bg-slate-50'>
       <Overview data={overview && overview} />
-      <Breadcrumbs items={breadcrumbItems} />
-      <Body data={data} />
+      <Breadcrumbs items={breadcrums} />
+      <Body data={data && data} />
     </div>
   )
 }

@@ -1,4 +1,5 @@
 
+import Link from "next/link";
 import { FaAngleRight } from "react-icons/fa";
 import Slider from "react-slick";
 
@@ -13,10 +14,11 @@ interface VehicleListCardProps {
     title: string;
     vehicleData: Vehicle[];
     viewAllText: string;
+    url?: string;
     onViewAllClick?: () => void;
 }
 
-const VehicleListCard: React.FC<VehicleListCardProps> = ({ title, vehicleData, viewAllText, onViewAllClick }) => {
+const VehicleListCard: React.FC<VehicleListCardProps> = ({ title, vehicleData, url, viewAllText, onViewAllClick }) => {
     const settings = {
         dots: false,
         infinite: false,
@@ -29,11 +31,11 @@ const VehicleListCard: React.FC<VehicleListCardProps> = ({ title, vehicleData, v
     };
     return (
         <div className=' border rounded-[16px] mb-3 flex flex-col p-3 gap-2  relative bg-white '>
-            <h1 className=' text-xl'>{title}</h1>
+            <h1 className=' font-semibold text-[20px]'>{title}</h1>
 
             <div className="block md:hidden">
                 <Slider {...settings}>
-                    {vehicleData.map((info, index) => (
+                    {vehicleData?.map((info, index) => (
                         <div key={index} className="p-2">
                             <div className="lg:w-full xl:w-[275px] bg-white border rounded-[16px] shadow-md text-center flex flex-col">
                                 <img
@@ -72,7 +74,7 @@ const VehicleListCard: React.FC<VehicleListCardProps> = ({ title, vehicleData, v
             </div>
 
             <ul className="hidden md:block space-y-4 ">
-                {vehicleData.map((info, index) => (
+                {vehicleData?.map((info, index) => (
                     <li key={index} className="lg:flex items-center space-x-2 md:rounded-[16px] border lg:border-none  ">
                         <div className="px-2">
                             <img
@@ -90,12 +92,12 @@ const VehicleListCard: React.FC<VehicleListCardProps> = ({ title, vehicleData, v
                     </li>
                 ))}
             </ul>
-            <div className='inline-flex items-baseline mt-3 cursor-pointer' onClick={onViewAllClick}>
+            <Link href={url ?? '#'} className='inline-flex items-baseline mt-3 cursor-pointer' onClick={onViewAllClick}>
                 <span className='mr-2 text-[#d94025] text-[14px] font-semibold'>{viewAllText}</span>
                 <div className="relative w-5 h-5 bg-[#d94025] rounded-full flex justify-center items-center">
                     <FaAngleRight className="w-5 h-3 left-[-1px] mr-0  fill-white" />
                 </div>
-            </div>
+            </Link>
         </div>
     );
 };

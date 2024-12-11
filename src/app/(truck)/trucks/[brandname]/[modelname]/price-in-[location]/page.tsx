@@ -5,6 +5,8 @@ import Specification from '../specifications/page';
 import Mileage from '../milenge/page';
 import Review from '../reviews/page';
 import PicturesComponent from '../pictures/Page';
+import Breadcrumbs from '@/app/comman/breadCrumbs';
+import { GenerateBreadcrumbs } from '@/app/comman/commanFunctions';
 
 const renderContent = (category: string | undefined) => {
     // make a cases to match endpoints to render the pages dynamic ways
@@ -17,10 +19,12 @@ const renderContent = (category: string | undefined) => {
             return <Review />
         case 'pictures':
             return <PicturesComponent />
-      
+
         default:
+            const breadcrumbItems = GenerateBreadcrumbs();
+            
             return <>
-                languge
+                 <Breadcrumbs items={breadcrumbItems} />
             </>;
     }
 };

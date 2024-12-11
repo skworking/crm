@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { MdMinimize } from 'react-icons/md';
@@ -88,14 +89,22 @@ const TabContent: React.FC<TabContentProps> = ({ activeTab }: { activeTab: strin
     );
 };
 
-const MultiTabs = () => {
-    const [activeTab, setActiveTab] = useState('Price');
 
+interface MultiTabsProps {
+    tabs: string[];
+    tabData: Record<string, TabItem[]>;
+    defaultActiveTab: string;
+}
+
+const MultiTabs: React.FC<MultiTabsProps> = ({tabs, tabData, defaultActiveTab}) => {
+    const [activeTab, setActiveTab] = useState(defaultActiveTab?.toString());
+    console.log(activeTab);
+    
     return (
         <div className="w-full mx-auto  ">
             {/* Tab Navigation */}
             <div className="flex overflow-auto gap-4 px-2">
-                {['Price', 'Loading', 'Specifications', 'Cabin'].map((tab) => (
+                {tabs.map((tab) => (
                     <button
                         key={tab}
                         className={`px-0 ml-2 py-2 focus:outline-none ${activeTab === tab ? 'border-b-2 border-[#d94025] font-medium' : 'text-gray-500'}`}

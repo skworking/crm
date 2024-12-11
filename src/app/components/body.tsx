@@ -5,8 +5,6 @@ import {
     PiGreaterThanLight, PiVideo
 } from 'react-icons/pi';
 import TruckSlider from './slidercard';
-// import Chasis from '@/assets/icons/chassis.svg'
-// import Tire from '@/assets/icons/tyre-number.svg'
 import { FaAngleRight } from 'react-icons/fa'; // Import the necessary icons
 import Link from 'next/link';
 import VehicleListCard from './vehicalListCad';
@@ -18,8 +16,6 @@ import NewsCard from './newscard';
 import UseCard from './usagcard';
 import VideoCard from './videocard';
 import MultiTabs from './tabbar';
-// import { ImPower } from 'react-icons/im';
-// import { GiFuelTank } from 'react-icons/gi';
 import { HiOutlineCurrencyRupee } from 'react-icons/hi';
 import { RiFileTextLine } from 'react-icons/ri';
 import { CiImageOn } from 'react-icons/ci';
@@ -67,6 +63,50 @@ type TruckReviews = {
     reviewText: string,
     classes?: string
 }
+type TruckOptions = {
+    model: string;
+    image: string;
+}
+type TruckNews = {
+    title: string;
+    author: string;
+    image: string;
+    date: string;
+    time: string;
+    description: string;
+    url: string
+}
+type TruckUses = {
+    model: string;
+    image: string;
+}
+type TruckVideo = {
+    title: string,
+    date: string,
+    image: string,
+    description: string,
+    url: string
+}
+
+interface TabItem {
+    title: string;
+    content: string;
+}
+
+type TruckMultiTabDetails = {
+    [key: string]: TabItem[];
+};
+type TruckPopuler = {
+    name: string,
+    priceRange: string,
+    imageUrl: string
+}
+type TruckResearch = {
+    title: string,
+    imageUrl: string,
+    url: string,
+}
+
 type OverviewProps = {
     data: {
         heading: string;
@@ -97,22 +137,57 @@ type OverviewProps = {
             design: number;
             performance: number;
             details: TruckReviews[]
+        },
+        truckOptions: {
+            details: TruckOptions[]
+        },
+        truckNews: {
+            details: TruckNews[]
+        },
+        truckUses: {
+            details: TruckUses[]
+        },
+        truckVideo: {
+            heading: string;
+            description: string;
+            details: TruckVideo[],
+        },
+        truckMultitab: {
+            tabs: string[],
+            details: TruckMultiTabDetails
+        },
+        populerTruck: {
+            heading: string;
+            details: TruckPopuler[],
+            url: string
+        },
+        ReseachTruck: {
+            heading: string;
+            details: TruckResearch[]
+        },
+        ElectricTruck: {
+            heading: string;
+            details: TruckPopuler[],
+            url: string
         }
+
+
     };
 };
 
 const Body: React.FC<OverviewProps> = ({
-    data = {
-        heading: '',
-        truckDetails: { url: '', details: [] },
-        truckVariants: { heading: '', description: '', details: [] },
-        truckAlterNative: { footerheading: '', url: '', details: [] },
-        truckDealers: { details: [] },
-        truckCompetitors: { heading: '', details: [] },
-        truckReviews: { heading: '', performance: 0, design: 0, maintenance: 0, details: [] }
-    }
+    data
+    //  = {
+    //     heading: '',
+    //     truckDetails: { url: '', details: [] },
+    //     truckVariants: { heading: '', description: '', details: [] },
+    //     truckAlterNative: { footerheading: '', url: '', details: [] },
+    //     truckDealers: { details: [] },
+    //     truckCompetitors: { heading: '', details: [] },
+    //     truckReviews: { heading: '', performance: 0, design: 0, maintenance: 0, details: [] }
+    // }
 }) => {
-    console.log(data);
+
 
     const { location, handleSelectCitybypass } = useLocation();
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -203,58 +278,7 @@ const Body: React.FC<OverviewProps> = ({
         },
     ];
 
-    const truckData = [
-        {
-            name: "BharatBenz 1917R",
-            priceRange: "₹28.35 - ₹30.61 Lakh*",
-            imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/3528c-bs6/bharat-benz-3528c-bs6-64528.jpg",
-        },
-        {
-            name: "BharatBenz 1917R",
-            priceRange: "₹28.35 - ₹30.61 Lakh*",
-            imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/1917r/bharat-benz-1917r.jpg",
-        },
-        {
-            name: "BharatBenz 3528C",
-            priceRange: "₹52.97 - ₹60.60 Lakh*",
-            imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/1217c/bharat-benz-1217c-60162.jpg",
-        },
-        {
-            name: "BharatBenz 3528C",
-            priceRange: "₹28.30 - ₹28.88 Lakh*",
-            imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/4828r/bharat-benz-4828r-41094.jpg",
-        },
-        {
-            name: "BharatBenz 4228C",
-            priceRange: "₹47.70 - ₹48.97 Lakh*",
-            imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/4228r/bharat-benz-4228r-14182.jpg",
-        },
-    ];
-
-    // Car data array
-    const carData = [
-        {
-            name: "Mahindra Treo",
-            priceRange: "₹3.6 - ₹3.37 Lakh*",
-            imageUrl: "https://truckcdn.cardekho.com/in/mahindra/treo/mahindra-treo-67242.jpg",
-        },
-        {
-            name: "Tata Ace EV",
-            priceRange: "₹8.2 Lakh*",
-            imageUrl: "https://truckcdn.cardekho.com/in/tata/ace-ev/tata-ace-ev.jpg",
-        },
-        {
-            name: "Maruti Suzuki Swift",
-            priceRange: "₹5.17 - ₹8.41 Lakh*",
-            imageUrl: "https://truckcdn.cardekho.com/in/mahindra/treo-yaari/mahindra-treo-yaari-62610.jpg",
-        },
-        {
-            name: "Mahindra Treo Zor",
-            priceRange: "₹3.13 - ₹3.48 Lakh*",
-            imageUrl: "https://truckcdn.cardekho.com/in/mahindra/treo-zor/mahindra-treo-zor-46219.jpg",
-        },
-
-    ];
+ 
     const handleViewAll = () => {
         console.log("View all vehicles clicked");
         // You can implement navigation or any other logic here
@@ -274,7 +298,9 @@ const Body: React.FC<OverviewProps> = ({
     const averageRating = totalReviews > 0
         ? data.truckReviews.details.reduce((sum, review) => sum + review.rating, 0) / totalReviews
         : 0;
-
+    if (!data) {
+        return <div>Loading page body...</div>;  // or any fallback UI
+    }
     return (
         <div className="max-w-7xl m-auto  lg:flex border-b-2  rounded-b-md border-gray-100 gap-4 ">
             <div className="w-full lg:w-8/12 xl:w-[73.50%] m-auto  lg:ml-3 md:p-5 xl:p-0 " >
@@ -452,7 +478,7 @@ const Body: React.FC<OverviewProps> = ({
                                     <StarRating rating={rating} onChange={handleStarClick} />
                                 </div>
                             </div>
-                            <RatingCardsOnly data={data.truckReviews.details} slidesShow={3}  />
+                            <RatingCardsOnly data={data.truckReviews.details} slidesShow={3} />
                         </>
                     ) : (
                         <div className='lg:flex gap-3 text-[12px]'>
@@ -471,65 +497,68 @@ const Body: React.FC<OverviewProps> = ({
                     <h2 className='p-[17px 20px 0px] text-xl font-bold '>
                         Explore More Truck Options
                     </h2>
-                    <BrandCard />
+                    <BrandCard data={data?.truckOptions?.details} cards={3} />
                 </div>
                 <div className='border rounded-[16px]  mb-3 flex flex-col p-4 bg-white gap-2 relative'>
                     <h2 className='p-[17px 20px 0px] text-xl font-bold '>
-                        BharatBenz 2826R In News
+                        {data.heading} In News
                     </h2>
-                    <NewsCard />
-                    <div className='inline-flex items-baseline'>
-                        <span className='mr-2 text-[#d94025] text-[14px] font-bold'>View All BharatBenz 2826R news</span>
+                    <NewsCard data={data?.truckNews?.details} cards={3} />
+                    <Link href={'/en/news'} className='inline-flex items-baseline'>
+                        <span className='mr-2 text-[#d94025] text-[14px] font-bold'>View All {data.heading} news</span>
                         <div className="relative w-5 h-5 mt-4 bg-[#d94025] rounded-full flex justify-center items-center" >
                             <FaAngleRight className="w-5 h-3 left-[-1px] mr-0  fill-white" />
                         </div>
-                    </div>
+                    </Link>
                 </div>
                 <div className='border rounded-[16px]  mb-3 flex flex-col p-4 bg-white gap-2 relative'>
                     <h2 className='p-[17px 20px 0px] text-xl  font-bold '>
-                        BharatBenz 2826R Usage
+                        {data.heading} Usage
                     </h2>
-                    <UseCard />
+                    <UseCard data={data?.truckUses?.details} cards={3} />
                 </div>
                 <div className='border rounded-[16px]  mb-3 flex flex-col p-4 bg-white gap-2 relative'>
                     <h2 className='p-[17px 20px 0px] text-xl  font-bold '>
-                        Latest 2826R Videos
+                        Latest {data.truckVideo.heading} Videos
                     </h2>
                     <p className='text-sm text-[rgba(36,39,44,.7)] '>
-                        2826R has video of its detailed review, specs, features explained & more. Watch our Latest video of 2826R to know price, safety features, type of application & more
+                        {data.truckVideo.description}
                     </p>
-                    <VideoCard />
+                    <VideoCard data={data.truckVideo.details} />
                 </div>
                 <div className='border rounded-[16px]  mb-3 flex flex-col bg-white relative'>
                     <h2 className='text-xl p-4 font-bold '>
-                        Frequently Asked Questions on BharatBenz 2826R
+                        Frequently Asked Questions on {data?.heading}
                     </h2>
-                    <MultiTabs />
+                    <MultiTabs tabs={data?.truckMultitab?.tabs} tabData={data?.truckMultitab?.details} defaultActiveTab={data?.truckMultitab?.tabs[0] ?? 'Price'} />
                 </div>
             </div >
+            
             {/* secound section */}
             < div className="w-full lg:w-4/12 xl:w-[25%] h-auto flex flex-col  sm:p-5 xl:p-0 mr-2 gap-2" >
                 <img src='https://tpc.googlesyndication.com/simgad/17644868341984738745' className="brightness-100 lg:block hidden  w-full  object-fill h-[250px]" />
                 {/* <Image src='https://tpc.googlesyndication.com/simgad/17644868341984738745' width={100} className=" lg:block hidden  w-full  object-contain h-[250px]" height={250}  alt='' /> */}
 
                 <VehicleListCard
-                    title="Popular BharatBenz Trucks"
-                    vehicleData={truckData}
+                    title={data?.populerTruck?.heading}
+                    vehicleData={data?.populerTruck?.details}
+                    url={data?.populerTruck?.url}
                     viewAllText="View All Commercial Vehicles"
                     onViewAllClick={handleViewAll}
                 />
 
                 <div className='border rounded-[16px]  mb-3 flex flex-col p-3 gap-2 relative bg-white'>
-                    <h1 className=' font-bold text-xl'>Further Research</h1>
+                    <h1 className='font-semibold text-[20px]'>{data.ReseachTruck.heading}</h1>
                     <ul className="space-y-4">
-                        {truckInfo.map((info, index) => (
+                        {data?.ReseachTruck?.details.map((info, index) => (
                             <li key={index} className="flex items-center space-x-4 text-[rgba(36,39,44,.7)]  justify-center">
-                                <span className="text-[rgba(36,39,44,.7)] w-[40px]  text-[20px] ">{info.icon}</span> {/* Icon */}
+                                {/* <span className="text-[rgba(36,39,44,.7)] w-[40px]  text-[20px] ">{info.icon}</span> Icon */}
+                                <Image src={info.imageUrl} width={20} height={20} alt='not found' />
                                 <Link
-                                    href={info.link}
+                                    href={info.url}
                                     title={info.title}
                                     className="w-full lg:w-[calc(100%-40px)] text-[15px]  justify-between flex flex-col gap-2"
-                                    data-lt={info.link}
+                                    data-lt={info.url}
                                 >
                                     <div className='flex items-center justify-between mr-5 ' >
                                         {info.title}
@@ -547,8 +576,9 @@ const Body: React.FC<OverviewProps> = ({
 
 
                 <VehicleListCard
-                    title="Popular Electric Vehicles"
-                    vehicleData={carData}
+                    title={data?.ElectricTruck?.heading}
+                    vehicleData={data?.ElectricTruck?.details}
+                    url={data?.ElectricTruck?.url}
                     viewAllText="View All Electric Commercial Vehicles"
                     onViewAllClick={handleViewAll}
                 />

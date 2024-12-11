@@ -167,6 +167,36 @@ const Home = () => {
       image: 'https://truckcdn.cardekho.com/pwa/img/iconAskForPrice-1.svg',
     },
   ]
+  const video = [
+    {
+      title: "Introduction to Engine Oils for Trucks",
+      date: "Feb 03, 2023",
+      image: "https://i2.ytimg.com/vi/vUdLqx8r6Fo/hqdefault.jpg",
+      description: "An overview of the types and benefits of engine oils specifically designed for trucks.",
+      url: "https://youtu.be/H6p3-uu9-rU"
+    },
+    {
+      title: "What makes a good engine oil in today’s era",
+      date: "Feb 03, 2023",
+      image: "https://i2.ytimg.com/vi/H6p3-uu9-rU/hqdefault.jpg",
+      description: "Explore the key characteristics and standards that define quality engine oil in modern times.",
+      url: "https://youtu.be/aJDy44RIkxM"
+    },
+    {
+      title: "What makes a good engine oil in today’s era",
+      date: "Feb 03, 2023",
+      image: "https://i2.ytimg.com/vi/aJDy44RIkxM/hqdefault.jpg",
+      description: "Explore the key characteristics and standards that define quality engine oil in modern times.",
+      url: "https://youtu.be/aJDy44RIkxM"
+    },
+    {
+      title: "What makes a good engine oil in today’s era",
+      date: "Feb 03, 2023",
+      image: "https://i2.ytimg.com/vi/aJDy44RIkxM/hqdefault.jpg",
+      description: "Explore the key characteristics and standards that define quality engine oil in modern times.",
+      url: "https://youtu.be/aJDy44RIkxM"
+    }
+  ]
   return (
     <div className="max-w-[1440px] m-auto ">
 
@@ -231,7 +261,7 @@ const Home = () => {
             Latest Videos
           </h2>
 
-          <VideoCard />
+          <VideoCard data={video} cards={2}/>
           <ViewAllButton heading="Ev Videos" link="/videos" />
         </div>
         <div className='border rounded-[16px] p-4 mb-3 flex flex-col  bg-white gap-2  relative'>

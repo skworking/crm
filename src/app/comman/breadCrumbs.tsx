@@ -6,14 +6,19 @@ interface BreadcrumbItem {
 }
 
 interface BreadcrumbsProps {
-    items: BreadcrumbItem[];
+    items?: BreadcrumbItem[];
 }
 
 const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items }) => {
+    if (!items) {
+        return (
+            <>breadcrumb loading...</>
+        )
+    }
     return (
         <div className="bg-grey-light max-w-7xl m-auto rounded-md py-4">
             <nav className="flex items-center space-x-2 text-sm" aria-label="breadcrumb">
-                {items.map((item, index) => (
+                {items?.map((item, index) => (
                     <div key={index} className="flex items-center">
                         {index > 0 && <span className="text-gray-400">/</span>}
 
