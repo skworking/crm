@@ -6,7 +6,34 @@ import { VscDebugBreakpointLog } from 'react-icons/vsc';
 import { TbCornerUpRight } from 'react-icons/tb';
 import Image from 'next/image';
 
-
+// const dealershipData = [
+//     {
+//         name: "Wasan Trucking",
+//         address: "Wasan house, 5th floor , Plot No 4, swastik park , Sion - Trombay Road , Chembur 400071",
+//         phone: "+917021662912",
+//         contact: "Contact Dealer"
+//     },
+//     {
+//         name: "Wasan Trucking",
+//         address: "Unit -28, Ajay Mittal ind estate, Building no.1, Mittal estate, Marol Naka, Andheri (East),Mumbai 400059",
+//         contact: "Contact Dealer"
+//     },
+//     {
+//         name: "Wasan Trucking",
+//         address: "Shop no.24, BGTA Godavari Co. society, G1, MMRDA Wadala Truck terminal, Near Wadala RTO, Mumbai 400037",
+//         contact: "Contact Dealer"
+//     },
+//     {
+//         name: "Wasan Trucking",
+//         address: "Wasan House, 5th Floor, Plot No. 4, Swastik Park, Sion Trombay Road, Chembur 400071",
+//         contact: "Contact Dealer"
+//     },
+//     {
+//         name: "Wasan Trucking",
+//         address: "Wasan House, 5th Floor, Plot No. 4, Swastik Park, Sion Trombay Road, Chembur 400071",
+//         contact: "Contact Dealer"
+//     }
+// ];
 interface Card {
     name: string;
     address: string;
@@ -14,7 +41,7 @@ interface Card {
     phone?: string;
 }
 interface CardFormateProps {
-    truckDelers: Card[]; // Accept data as a prop
+    truckDelers?: Card[]; // Accept data as a prop
     cards?: number;
 }
 

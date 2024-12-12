@@ -93,6 +93,11 @@ type TruckResearch = {
   imageUrl: string,
   url: string,
 }
+type TruckTable = {
+  Model: string,
+  Price: string,
+}
+
 type NavbarItem = {
   menuItems: {
     path: string;
@@ -180,6 +185,13 @@ type NavbarItem = {
       heading: string;
       details: TruckPopuler[],
       url: string
+    },
+    TableToggle: {
+      heading: string;
+      content: string[],
+      title: string,
+      columns: string[],
+      details: TruckTable[]
     }
 
   };
@@ -190,7 +202,7 @@ type NavbarData = {
 };
 
 export async function GET(request: Request) {
-  
+
   const navbarData: NavbarData = {
     "/en/trucks/bharat-benz/2826-r": {
       "menuItems": [
@@ -269,7 +281,6 @@ export async function GET(request: Request) {
         "price": "₹8.51 - ₹10.71 Lakh*"
       },
       "breadcrumb": [
-
         {
           "label": "Home",
           "path": "/"
@@ -279,8 +290,8 @@ export async function GET(request: Request) {
           "path": "/en/brands/bharat-benz"
         },
         {
-          "label": "1917R",
-          "path": "/en/trucks/tata/1917R"
+          "label": "2826R",
+          "path": ""
         }
       ],
 
@@ -323,7 +334,7 @@ export async function GET(request: Request) {
           ]
         },
         truckVariants: {
-          heading: "BharatBenz 2826R",
+          heading: "BharatBenz 2826R Price List (Variants)",
           description: " BharatBenz 2826R is offered in 5 variants - the base model of 2826R is 5175/CBC/Sleeper and the top variant is 5175/CBC Sleeper which come with Kgs",
           details: [{
             variantName: "BharatBenz 2826R 5175/CBC/Sleeper Tanker",
@@ -741,10 +752,33 @@ export async function GET(request: Request) {
             },
           ],
           url: "/en/electric-trucks",
+        },
+        TableToggle: {
+          heading: "Tata Ace gold Price in",
+          content: [
+            "Tata Ace gold price starts at Rs ₹3.99 Lakh in Bangalore. The lowest price model is ",
+            "{bold}2100/Petrol CX{/bold}",
+            ". Tata Ace gold is a 4 wheeler commercial vehicle. It is available in 7 variants. The Ace gold is compliant with the BS-VI emission standards. Other key specifications include wheel base of 2100 mm, fuel capacity of 26 litres & Power of 24 hp. Visit Tata Showrooms for best offers & deals. Tata Ace gold competes with ",
+            "{bold}Mahindra Jeeto Price in Bangalore{/bold}",
+            ", ",
+            "{link}https://www.mahindra.com/jeeto{/link}",
+            " and ",
+            "{bold}Maruti Suzuki Super Carry Price in Bangalore{/bold}",
+            "."
+          ],
+          title: "Tata Ace Price List In India",
+          columns: ['Model', 'Price'],
+          details: [
+            { Model: "Tata Ace Gold", Price: "₹3.99 - ₹6.69 Lakh" },
+            { Model: "Tata Ace EV", Price: "From ₹8.72 Lakh" },
+            { Model: "Tata Ace HT+", Price: "From ₹7.19 Lakh" },
+            { Model: "Tata Ace EV 1000", Price: "₹11.27 - ₹11.40 Lakh" },
+            { Model: "Tata Ace Diesel", Price: "From ₹7.00 Lakh" }
+          ]
         }
       }
     },
-    "/en/trucks/bharat-benz/2826-r/price-in-new-delhi": {
+    "/en/trucks/bharat-benz/2826-r/price-in-:city": {
       "menuItems": [
         {
           "path": "/en/trucks/bharat-benz/2826-r",
@@ -752,7 +786,7 @@ export async function GET(request: Request) {
           "activeClass": "border-b-2 p-3 border-red-700"
         },
         {
-          "path": "/en/trucks/bharat-benz/2826-r/price-in-new-delhi",
+          "path": "/en/trucks/bharat-benz/2826-r/price-in-:city",
           "label": "Price",
           "activeClass": "text-red-700"
         },
@@ -796,6 +830,22 @@ export async function GET(request: Request) {
       ],
       "overview": {},
       "breadcrumb": [
+        {
+          "label": "Home",
+          "path": "/"
+        },
+        {
+          "label": "BharatBenz Trucks",
+          "path": "/en/brands/bharat-benz"
+        },
+        {
+          "label": "2826-r",
+          "path": "/en/trucks/bharat-benz/2826-r"
+        },
+        {
+          "label": "On Road Price in :city",
+          "path": ""
+        }
       ],
 
       "body": {
@@ -805,9 +855,14 @@ export async function GET(request: Request) {
           details: []
         },
         "truckVariants": {
-          heading: '',
+          heading: '2826R Mileage (Variant)',
           description: '',
-          details: []
+          details: [
+            {
+              variantName: "BharatBenz 2826R 5175/CBC/Sleeper Tanker",
+              gvw: "Get On Road Price",
+            },
+          ]
         },
         "truckAlterNative": {
           footerheading: '',
@@ -868,6 +923,29 @@ export async function GET(request: Request) {
 
           ],
           url: "",
+        },
+        TableToggle: {
+          heading: "Tata Ace gold Price in",
+          content: [
+            "Tata Ace gold price starts at Rs ₹3.99 Lakh in Bangalore. The lowest price model is ",
+            "{bold}2100/Petrol CX{/bold}",
+            ". Tata Ace gold is a 4 wheeler commercial vehicle. It is available in 7 variants. The Ace gold is compliant with the BS-VI emission standards. Other key specifications include wheel base of 2100 mm, fuel capacity of 26 litres & Power of 24 hp. Visit Tata Showrooms for best offers & deals. Tata Ace gold competes with ",
+            "{bold}Mahindra Jeeto Price in Bangalore{/bold}",
+            ", ",
+            "{link}https://www.mahindra.com/jeeto{/link}",
+            " and ",
+            "{bold}Maruti Suzuki Super Carry Price in Bangalore{/bold}",
+            "."
+          ],
+          title: "Tata Ace Price List In India",
+          columns: ['Model', 'Price'],
+          details: [
+            { Model: "Tata Ace Gold", Price: "₹3.99 - ₹6.69 Lakh" },
+            { Model: "Tata Ace EV", Price: "From ₹8.72 Lakh" },
+            { Model: "Tata Ace HT+", Price: "From ₹7.19 Lakh" },
+            { Model: "Tata Ace EV 1000", Price: "₹11.27 - ₹11.40 Lakh" },
+            { Model: "Tata Ace Diesel", Price: "From ₹7.00 Lakh" }
+          ]
         }
       }
     },
@@ -983,7 +1061,7 @@ export async function GET(request: Request) {
           ]
         },
         truckVariants: {
-          heading: "Tata Ace gold MiniTruck",
+          heading: "Tata Ace gold MiniTruck  Price List (Variants)",
           description: "Tata Ace gold is offered in 7 variants - the base model of Ace gold is 2100/Petrol CX and the top variant is 2250/HT Plus which come with 1950 Kgs.",
           details: [{
             variantName: "Tata Ace gold 2250/CNG",
@@ -1280,8 +1358,30 @@ export async function GET(request: Request) {
 
           ],
           url: "/en/electric-trucks",
+        },
+        TableToggle: {
+          heading: "Tata Ace gold Price in",
+          content: [
+            "Tata Ace gold price starts at Rs ₹3.99 Lakh in Bangalore. The lowest price model is ",
+            "{bold}2100/Petrol CX{/bold}",
+            ". Tata Ace gold is a 4 wheeler commercial vehicle. It is available in 7 variants. The Ace gold is compliant with the BS-VI emission standards. Other key specifications include wheel base of 2100 mm, fuel capacity of 26 litres & Power of 24 hp. Visit Tata Showrooms for best offers & deals. Tata Ace gold competes with ",
+            "{bold}Mahindra Jeeto Price in Bangalore{/bold}",
+            ", ",
+            "{link}https://www.mahindra.com/jeeto{/link}",
+            " and ",
+            "{bold}Maruti Suzuki Super Carry Price in Bangalore{/bold}",
+            "."
+          ],
+          title: "Tata Ace Price List In India",
+          columns: ['Model', 'Price'],
+          details: [
+            { Model: "Tata Ace Gold", Price: "₹3.99 - ₹6.69 Lakh" },
+            { Model: "Tata Ace EV", Price: "From ₹8.72 Lakh" },
+            { Model: "Tata Ace HT+", Price: "From ₹7.19 Lakh" },
+            { Model: "Tata Ace EV 1000", Price: "₹11.27 - ₹11.40 Lakh" },
+            { Model: "Tata Ace Diesel", Price: "From ₹7.00 Lakh" }
+          ]
         }
-
       }
     },
 
@@ -1378,6 +1478,29 @@ export async function GET(request: Request) {
 
           ],
           url: "",
+        },
+        TableToggle: {
+          heading: "Tata Ace gold Price in",
+          content: [
+            "Tata Ace gold price starts at Rs ₹3.99 Lakh in Bangalore. The lowest price model is ",
+            "{bold}2100/Petrol CX{/bold}",
+            ". Tata Ace gold is a 4 wheeler commercial vehicle. It is available in 7 variants. The Ace gold is compliant with the BS-VI emission standards. Other key specifications include wheel base of 2100 mm, fuel capacity of 26 litres & Power of 24 hp. Visit Tata Showrooms for best offers & deals. Tata Ace gold competes with ",
+            "{bold}Mahindra Jeeto Price in Bangalore{/bold}",
+            ", ",
+            "{link}https://www.mahindra.com/jeeto{/link}",
+            " and ",
+            "{bold}Maruti Suzuki Super Carry Price in Bangalore{/bold}",
+            "."
+          ],
+          title: "Tata Ace Price List In India",
+          columns: ['Model', 'Price'],
+          details: [
+            { Model: "Tata Ace Gold", Price: "₹3.99 - ₹6.69 Lakh" },
+            { Model: "Tata Ace EV", Price: "From ₹8.72 Lakh" },
+            { Model: "Tata Ace HT+", Price: "From ₹7.19 Lakh" },
+            { Model: "Tata Ace EV 1000", Price: "₹11.27 - ₹11.40 Lakh" },
+            { Model: "Tata Ace Diesel", Price: "From ₹7.00 Lakh" }
+          ]
         }
       }
     }
@@ -1386,20 +1509,43 @@ export async function GET(request: Request) {
   const url = new URL(request.url);
   // Extract the endpoint from searchParams
   const endpoint = url.searchParams.get('endpoint');
+  console.log("endpoints", endpoint);
 
   if (!endpoint) {
     return NextResponse.json({ error: 'Endpoint query parameter is missing' });
   }
 
-  // const filePath = path.join(process.cwd(), 'public', 'navbarData.json');
+  // try {
+  //   const data = navbarData[endpoint] || navbarData['default'];
+  //   return NextResponse.json({ menuItems: data.menuItems, links: data.links, overview: data.overview, data });
+  // }
   try {
-    // Read the navbarData.json file
-    // const fileData = await fs.readFile(filePath, 'utf-8');
-    // const navbarData = JSON.parse(fileData);
+    // **Step 1: Check for a direct match**
+    if (navbarData[endpoint]) {
+      const data = navbarData[endpoint] || navbarData['default'];
+      return NextResponse.json({ menuItems: data.menuItems, links: data.links, overview: data.overview, data });
+    }
+    // **Step 2: Extract dynamic parts of the URL (brand, model, and city)**
+    const match = endpoint.match(/\/en\/trucks\/([a-zA-Z0-9-]+)\/([a-zA-Z0-9-]+)\/price-in-([a-zA-Z-]+)/);
+    const brand = match ? match[1] : null;
+    const model = match ? match[2] : null;
+    const cityName = match ? match[3] : 'new-delhi'; // Default to 'new-delhi' if not found
 
-    // Find the matching data in navbarData based on the normalized endpoint
-    const data = navbarData[endpoint] || navbarData['default'];
 
+    // **Step 3: Try to find the specific city-based entry**
+    let data = navbarData[`/en/trucks/${brand}/${model}/price-in-${cityName}`];
+    if (!data) {
+      // If specific entry for the city is not found, look for a dynamic route like "price-in-:city"
+      data = navbarData[`/en/trucks/${brand}/${model}/price-in-:city`];
+
+      if (data) {
+        // Replace ":city" placeholder with the actual city name in paths and links
+        data = JSON.parse(JSON.stringify(data).replace(/:city/g, cityName || 'new-delhi'));
+      } else {
+        // If no dynamic route found, fall back to the default
+        data = navbarData['default'];
+      }
+    }
     return NextResponse.json({ menuItems: data.menuItems, links: data.links, overview: data.overview, data });
   } catch (error) {
     console.error('Error reading or parsing navbar data:', error);

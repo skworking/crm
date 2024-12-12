@@ -1,19 +1,81 @@
 "use client";
 
+import Link from "next/link";
 import React, { useState } from "react";
 import { FaAngleRight, FaAngleDown } from "react-icons/fa";
 
 interface ToggleTableProps {
-    content?: JSX.Element[];
+    content?: (string | JSX.Element)[];
     title: string;
     columns: string[];
     data: { [key: string]: string }[];
 }
 
+const renderContent = (text: string | JSX.Element, index: number) => {
+    if (typeof text === 'string') {
+        // Handle {bold} and {link} tags inside the string
+        const boldParts = text.split(/{bold}/);
+        return boldParts.map((part, i) => {
+            if (i % 2 === 1) {
+                // Handle text inside {bold}...{/bold}
+                const boldText = part.split("{/bold}")[0];
+
+                // Handle nested {link} tags inside the bold text
+                const linkParts = boldText.split(/{link}/);
+                const boldContent = linkParts.map((linkPart, j) => {
+                    if (j % 2 === 1) {
+                        // Handle text inside {link}...{/link}
+                        const linkText = linkPart.split("{/link}")[0];
+                        return (
+                            <a
+                                key={`bold-link-${index}-${i}-${j}`}
+                                href={linkText}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{ fontWeight: 'bold' }} // Ensure the link is also bold
+                            >
+                                {linkText}
+                            </a>
+                        );
+                    }
+                    return <Link href={'#'} key={`bold-${index}-${i}-${j}`}>{linkPart}</Link>;
+                });
+
+                return boldContent;
+            }
+
+            // Handle text outside {bold} tags
+            const linkParts = part.split(/{link}/);
+            return linkParts.map((linkPart, j) => {
+                if (j % 2 === 1) {
+                    // Handle text inside {link}...{/link}
+                    const linkText = linkPart.split("{/link}")[0];
+                    return (
+                        <a
+                            key={`link-${index}-${i}-${j}`}
+                            href={linkText}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            {linkText}
+                        </a>
+                    );
+                }
+                return <span key={`span-${index}-${i}-${j}`}>{linkPart}</span>;
+            });
+        });
+    } else {
+        // If it's a JSX.Element, render it directly
+        return text;
+    }
+};
+
 const ToggleTable: React.FC<ToggleTableProps> = ({ content = [], title, columns, data }) => {
     const [showAll, setShowAll] = useState(false);
 
     const handleToggle = () => setShowAll((prev) => !prev);
+    console.log(content);
+
 
     return (
         <div>
@@ -21,9 +83,17 @@ const ToggleTable: React.FC<ToggleTableProps> = ({ content = [], title, columns,
                 className={`${showAll ? "line-clamp-none" : "line-clamp-2"
                     } text-[rgba(36,39,44,.7)] text-base space-y-4 text-[14px] mb-4`}
             >
-                {content.map((paragraph, index) => (
-                    <p key={index}>{paragraph}</p>
+
+                {/* {content.map((paragraph, index) => (
+                     <p key={index}>{paragraph}</p>
+                ))} */}
+
+                {content.map((text, index) => (
+                    <React.Fragment key={index}>
+                        {renderContent(text, index)}
+                    </React.Fragment>
                 ))}
+
             </div>
 
             {showAll && (

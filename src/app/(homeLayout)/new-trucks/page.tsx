@@ -311,9 +311,9 @@ const Page = () => {
                             ariaLabel="Model Selection"
                         />
 
-                        <button className="bg-[#d94025] text-white font-bold text-[20px] px-4 py-2 rounded w-full mt-4">
+                        <div className="bg-[#d94025] cursor-pointer text-white font-bold text-[20px] px-4 py-2 rounded w-full mt-4">
                             Search
-                        </button>
+                        </div>
                     </div>
                 );
             case 'body':
@@ -335,9 +335,9 @@ const Page = () => {
                             ariaLabel="Brand Selection"
                         />
 
-                        <button className="bg-[#d94025] text-white font-bold text-[20px] px-4 py-2 rounded w-full mt-4">
+                        <div className="bg-[#d94025] cursor-pointer text-white font-bold text-[20px] px-4 py-2 rounded w-full mt-4">
                             Search
-                        </button>
+                        </div>
                     </div>
                 );
             case 'budget':

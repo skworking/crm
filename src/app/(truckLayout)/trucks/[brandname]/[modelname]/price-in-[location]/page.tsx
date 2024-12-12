@@ -6,29 +6,28 @@ import Mileage from '../milenge/page';
 import Review from '../reviews/page';
 import PicturesComponent from '../pictures/Page';
 import Breadcrumbs from '@/app/comman/breadCrumbs';
-import { GenerateBreadcrumbs } from '@/app/comman/commanFunctions';
 import Body from '@/app/components/body';
 
 const DynamicContent = () => {
   const pathname = usePathname();
-  const breadcrumbItems = GenerateBreadcrumbs(); // Pass pathname to generate breadcrumbs
-
+  // const breadcrumbItems = GenerateBreadcrumbs(); // Pass pathname to generate breadcrumbs
+  const [breadcrums, setBreadCrum] = useState([])
   const [data, setData] = useState({
-    heading: '',
-    truckDetails: { url: '', details: [] },
-    truckVariants: { heading: '', description: '', details: [] },
-    truckAlterNative: { footerheading: '', url: '', details: [] },
-    truckDealers: { details: [] },
-    truckCompetitors: { heading: '', details: [] },
-    truckReviews: { heading: '0', performance: 0, maintenance: 0, design: 0, details: [] },
-    truckOptions: { details: [] },
-    truckNews: { details: [] },
-    truckUses: { details: [] },
-    truckVideo: { heading: '', description: '', details: [] },
-    truckMultitab: { tabs: [], details: {} },
-    populerTruck: { heading: '', details: [], url: '' },
-    ReseachTruck: { heading: '', details: [] },
-    ElectricTruck: { heading: '', details: [], url: '' }
+    // heading: '',
+    // truckDetails: { url: '', details: [] },
+    // truckVariants: { heading: '', description: '', details: [] },
+    // truckAlterNative: { footerheading: '', url: '', details: [] },
+    // truckDealers: { details: [] },
+    // truckCompetitors: { heading: '', details: [] },
+    // truckReviews: { heading: '0', performance: 0, maintenance: 0, design: 0, details: [] },
+    // truckOptions: { details: [] },
+    // truckNews: { details: [] },
+    // truckUses: { details: [] },
+    // truckVideo: { heading: '', description: '', details: [] },
+    // truckMultitab: { tabs: [], details: {} },
+    // populerTruck: { heading: '', details: [], url: '' },
+    // ReseachTruck: { heading: '', details: [] },
+    // ElectricTruck: { heading: '', details: [], url: '' }
   });
 
   useEffect(() => {
@@ -37,6 +36,7 @@ const DynamicContent = () => {
         const response = await fetch(`/api/navbar?endpoint=${pathname}`);
         const responseData = await response.json();
         console.log('API Response:', responseData);
+        setBreadCrum(responseData.data.breadcrumb)
         setData(responseData.data.body);
       } catch (error) {
         console.error('Failed to fetch navbar data:', error);
@@ -48,8 +48,8 @@ const DynamicContent = () => {
 
   return (
     <>
-      <Breadcrumbs items={breadcrumbItems} />
-      <Body data={data} />
+      <Breadcrumbs items={breadcrums} />
+      <Body data={data } />
     </>
   );
 };

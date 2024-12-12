@@ -4,6 +4,39 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Image from 'next/image';
 
+
+// const truckData = [
+//     {
+//         name: "Tata Signa 5530.S",
+//         price: "From ₹39.03 Lakh*",
+//         offer: "View October offers",
+//         imageUrl: "https://truckcdn.cardekho.com/in/tata/signa-2823-k-rmc-std-6s/tata-signa-2823-k-rmc-std-6s-54500.jpg"
+//     },
+//     {
+//         name: "Tata Signa 3523.TK",
+//         price: "From ₹49.23 Lakh*",
+//         offer: "View October offers",
+//         imageUrl: "https://truckcdn.cardekho.com/in/tata/signa-4223t/tata-signa-4223t-95359.jpg"
+//     },
+//     {
+//         name: "Tata Signa 1923.K",
+//         price: "From ₹28.91 Lakh*",
+//         offer: "View October offers",
+//         imageUrl: "https://truckcdn.cardekho.com/in/tata/signa-2821-k-rmc-std-6s/tata-signa-2821-k-rmc-std-6s.jpg"
+//     },
+//     {
+//         name: "Tata Signa 1923.K",
+//         price: "From ₹28.91 Lakh*",
+//         offer: "View October offers",
+//         imageUrl: "https://truckcdn.cardekho.com/in/tata/407-gold-sfc/tata-407-gold-sfc-15836.jpg"
+//     },
+//     {
+//         name: "Tata Signa 1923.K",
+//         price: "From ₹28.91 Lakh*",
+//         offer: "View October offers",
+//         imageUrl: "https://truckcdn.cardekho.com/in/eicher/pro-2049/eicher-pro-2049-47454.jpg"
+//     },
+// ];
 interface Card {
     name: string;
     price: string;
@@ -11,7 +44,7 @@ interface Card {
     imageUrl: string;
 }
 interface CardFormateProps {
-    truckData: Card[]; // Accept data as a prop
+    truckData?: Card[]; // Accept data as a prop
     cards?: number;
 }
 const TruckSlider: React.FC<CardFormateProps> = ({ truckData, cards }) => {

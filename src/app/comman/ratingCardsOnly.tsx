@@ -14,7 +14,7 @@ interface item {
     reviewText: string;
 }
 interface ListProps {
-    data: item[]
+    data?: item[]
     slidesShow: number;
 }
 const RatingCardsOnly: React.FC<ListProps> = ({ data, slidesShow }) => {
@@ -53,7 +53,7 @@ const RatingCardsOnly: React.FC<ListProps> = ({ data, slidesShow }) => {
         <div className="relative p-4 space-y-2">
           
             <Slider {...settings}>
-                {data.map((item, index) => (
+                {data?.map((item, index) => (
                     <div key={index} className='p-2 '>
                         <div className="border rounded-lg bg-white shadow-md p-4 space-y-2 h-[40vh]">
                             <h2 className='text-[11px] text-[#24272c]'>{item.productName}</h2>

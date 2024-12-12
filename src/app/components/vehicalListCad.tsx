@@ -12,7 +12,7 @@ interface Vehicle {
 
 interface VehicleListCardProps {
     title: string;
-    vehicleData: Vehicle[];
+    vehicleData?: Vehicle[];
     viewAllText: string;
     url?: string;
     onViewAllClick?: () => void;
