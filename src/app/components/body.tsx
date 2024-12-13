@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
     //  PiCarBatteryBold, PiEngine,
     PiGreaterThanLight, PiVideo
@@ -25,7 +25,7 @@ import Modal from '../comman/modelSelect';
 import { MdOutlineCreate } from 'react-icons/md';
 import RatingCardsOnly from '../comman/ratingCardsOnly';
 import ToggleTable from '../comman/toggleTable';
-import { useRouter } from 'next/navigation';
+
 type TruckDetail = {
     logo: string;
     value: string;
@@ -208,22 +208,11 @@ const Body: React.FC<OverviewProps> = ({
     const [isModalOpen, setIsModalOpen] = useState(false);
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
-    const router = useRouter();
-    const [currentPath, setCurrentPath] = useState('');
-    // Set the current path only on the client-side
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            setCurrentPath(window.location.pathname);
-        }
-    }, []);
 
     const handleSelectCity = (city: { label: string; value: string }) => {
 
-        if (typeof window !== 'undefined' && currentPath) {
-            const newPath = currentPath.replace(/\/price-in-\w+$/, `/price-in-${city.value.toLowerCase()}`);
-            router.push(newPath);
-        }
         handleSelectCitybypass(city)
+
     };
 
 
