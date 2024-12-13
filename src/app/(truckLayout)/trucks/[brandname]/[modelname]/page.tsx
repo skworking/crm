@@ -2,6 +2,7 @@
 import Breadcrumbs from '@/app/comman/breadCrumbs';
 import Body from '@/app/components/body';
 
+
 import Overview from '@/app/components/overview';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
@@ -63,11 +64,13 @@ const Page = () => {
         }
       },
       populerTruck: {
+        order: 0,
         heading: '',
         details: [],
         url: ''
       },
       ReseachTruck: {
+        order: 0,
         heading: '',
         details: []
       },

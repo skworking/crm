@@ -12,23 +12,7 @@ const DynamicContent = () => {
   const pathname = usePathname();
   // const breadcrumbItems = GenerateBreadcrumbs(); // Pass pathname to generate breadcrumbs
   const [breadcrums, setBreadCrum] = useState([])
-  const [data, setData] = useState({
-    // heading: '',
-    // truckDetails: { url: '', details: [] },
-    // truckVariants: { heading: '', description: '', details: [] },
-    // truckAlterNative: { footerheading: '', url: '', details: [] },
-    // truckDealers: { details: [] },
-    // truckCompetitors: { heading: '', details: [] },
-    // truckReviews: { heading: '0', performance: 0, maintenance: 0, design: 0, details: [] },
-    // truckOptions: { details: [] },
-    // truckNews: { details: [] },
-    // truckUses: { details: [] },
-    // truckVideo: { heading: '', description: '', details: [] },
-    // truckMultitab: { tabs: [], details: {} },
-    // populerTruck: { heading: '', details: [], url: '' },
-    // ReseachTruck: { heading: '', details: [] },
-    // ElectricTruck: { heading: '', details: [], url: '' }
-  });
+  const [data, setData] = useState({});
 
   useEffect(() => {
     const fetchMenuData = async () => {

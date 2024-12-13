@@ -40,7 +40,7 @@ const footerNavData = [
 
 const FooterNav: React.FC = () => {
     return (
-        <footer className="p-4 m-auto max-w-[1280px] ">
+        <footer className="lg:py-4 lg:px-0 py-4 px-4 m-auto max-w-[1280px] ">
             
             <div className="container  grid grid-cols-1 sm:grid-cols-4  gap-4">
                 {footerNavData.map((item, index) => (

@@ -61,7 +61,7 @@ const footerLinks = [
 const FooterLink = () => {
     return (
         <>
-            <footer className="footer max-w-7xl  m-auto bg-neutral justify-between hidden lg:flex p-4">
+            <footer className="footer max-w-7xl  m-auto bg-neutral justify-between hidden lg:flex lg:py-4 lg:px-0 py-4 px-4">
                 <aside className=" items-center text-[rgba(36,39,44,.5)] text-[12px]">
 
                     <p>Copyright © {new Date().getFullYear()} - All rights reserved</p>
@@ -82,6 +82,7 @@ const FooterLink = () => {
             <p>Copyright © {new Date().getFullYear()} - All rights reserved</p>
             </div>
         </>
+
     );
 };
 

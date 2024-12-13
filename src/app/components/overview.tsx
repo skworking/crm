@@ -15,7 +15,7 @@ interface RecommendedTruck {
 interface propsType {
     image: string[],
     heading?: string;
-    recommendedTruck: RecommendedTruck[];
+    recommendedTruck?: RecommendedTruck[];
     rating?: string;
     reviews?: number;
     price?: string;

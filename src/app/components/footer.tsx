@@ -92,7 +92,7 @@ const Footer = () => {
                 </>
                 )}
             <hr />
-            <footer className="p-4 m-auto max-w-[1280px]">
+            <footer className="lg:py-4 lg:px-0 py-4 px-4 m-auto max-w-[1280px]">
                 <div className="container mx-auto sm:flex sm:flex-row flex-col justify-between space-y-4 sm:space-y-0">
                     {deviceType === 'desktop' ?
                         (

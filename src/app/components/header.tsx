@@ -329,7 +329,7 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                     }}
                 >
                     <div className='max-w-7xl m-auto'>
-                        <div className='sm:p-4 md:flex gap-4 '>
+                        <div className='sm:py-4 md:flex gap-4 '>
                             <Link href='/' className='sm:w-[25%]'>
 
                                 <Image src={'https://truckcdn.cardekho.com/pwa/img/TrucksDekho-NewLogov2.svg'} className='h-[42px]   w-fit text-start' title='truck-dekho logo' width={100} height={100} alt='not found' />
@@ -372,7 +372,7 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                     <nav className="relative max-w-7xl  m-auto flex justify-between">
                         <ul className="flex max-w-6xl flex-wrap space-x-2  md:space-x-6 " onMouseLeave={handleMouseLeave}>
                             {menuData.map((item, index) => (
-                                <li key={index} onMouseEnter={() => handleMenuMouseEnter(index)} className="relative p-2 sm:text-[14px] text-[12px] border-t-[3px]  border-white hover:border-t-[3px] hover:border-[#d94025]">
+                                <li key={index} onMouseEnter={() => handleMenuMouseEnter(index)} className="relative py-2 sm:text-[14px] text-[12px] border-t-[3px]  border-white hover:border-t-[3px] hover:border-[#d94025]">
                                     {item.link ? (
                                         <Link href={item.link} className='flex  transition duration-700' title={item.title}>
                                             {item.title}

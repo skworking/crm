@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import {
     //  PiCarBatteryBold, PiEngine,
-    PiGreaterThanLight, PiVideo
+    PiGreaterThanLight, PiShareNetwork, PiVideo
 } from 'react-icons/pi';
 import TruckSlider from './slidercard';
 import { FaAngleRight } from 'react-icons/fa'; // Import the necessary icons
@@ -115,7 +115,7 @@ type TruckTable = {
 }
 
 type OverviewProps = {
-    data: {
+    data?: {
         heading?: string;
         truckDetails?: {
             url?: string;
@@ -164,11 +164,13 @@ type OverviewProps = {
             details: TruckMultiTabDetails
         },
         populerTruck?: {
+            order: number;
             heading: string;
             details: TruckPopuler[],
             url: string
         },
         ReseachTruck?: {
+            order: number;
             heading: string;
             details: TruckResearch[]
         },
@@ -183,6 +185,13 @@ type OverviewProps = {
             title: string,
             columns: string[],
             details: TruckTable[]
+        },
+        overviewCard?: {
+            image?: string;
+            heading?: string;
+            rating?: string;
+            reviews?: number;
+            price?: string;
         }
 
 
@@ -201,7 +210,7 @@ const Body: React.FC<OverviewProps> = ({
     //     truckReviews: { heading: '', performance: 0, design: 0, maintenance: 0, details: [] }
     // }
 }) => {
-    console.log("type exist data", data.truckDetails);
+
 
 
     const { location, handleSelectCitybypass } = useLocation();
@@ -276,7 +285,7 @@ const Body: React.FC<OverviewProps> = ({
     }
     return (
         <div className="max-w-7xl m-auto  lg:flex border-b-2  rounded-b-md border-gray-100 gap-4 ">
-            <div className="w-full lg:w-8/12 xl:w-[73.50%] m-auto  lg:ml-3 md:p-5 xl:p-0 " >
+            <div className="w-full lg:w-8/12 xl:w-[73.50%] m-auto  md:p-5 xl:p-0 " >
                 {Array.isArray(data.TableToggle?.details) && data.TableToggle.details.length > 0 &&
                     <div className='border rounded-[16px] lg:p-5 p-5 mb-3 bg-white'>
                         <div className='inline-flex gap-3 items-center'>
@@ -289,6 +298,80 @@ const Body: React.FC<OverviewProps> = ({
                             columns={data.TableToggle.columns}
                             data={data.TableToggle.details}
                         />
+                    </div>
+                }
+                {data.overviewCard?.heading &&
+                    <div className='border rounded-[16px] lg:p-5 p-5 mb-3 bg-white'>
+                        <div className='flex'>
+                            <div className="w-5/12 ">
+                                <Image
+                                    data-autofit="true"
+                                    decoding="async"
+                                    alt="BharatBenz 2826R"
+                                    className="w-full lg:h-[200px] object-cover rounded-md  "
+                                    src={data?.overviewCard.image ?? '#'}
+                                    loading="eager"
+                                    width={0} // specify width
+                                    height={0} // specify height
+                                    quality={100} // Adjust quality if desired
+                                    sizes='100vw'
+                                />
+                            </div>
+                            <div className="w-8/12 m-auto ml-9   pb-[0px] px-[22px] md:px-0   " >
+                                <div className="relative">
+                                    <div className="lg:mr-0 flex items-center justify-between">
+                                        <span className="inline-flex items-center">
+                                            <h1 className="inline-flex sm:text-[27px] text-[20px] font-bold">{data?.overviewCard.heading}</h1>
+                                        </span>
+                                        <div className="relative sm:flex hidden w-10 h-10 sm:bg-gray-100 rounded-full  justify-center items-center" >
+                                            <PiShareNetwork className="w-5 h-5 left-[-1px] mr-0 text-gray-500" />
+                                        </div>
+                                    </div>
+                                    <div className="absolute top-0 right-0 sm:hidden w-10 h-10 sm:bg-gray-100 rounded-full  justify-center items-center" >
+                                        <PiShareNetwork className="w-5 h-5 left-[-1px] mr-0 text-gray-500" />
+                                    </div>
+                                </div>
+                                <div className="md:text-[13px]  text-[11px] text-[#24272c] inline-flex">
+                                    {data?.overviewCard.reviews ? (
+                                        <div className="flex items-center gap-2" >
+                                            {data?.overviewCard.rating}
+                                            <Image src={'https://cdn-icons-png.flaticon.com/512/1828/1828884.png'} width={10} height={10} alt="" />
+                                            {data?.overviewCard.reviews} Reviews
+                                        </div>
+                                    ) : ' Be the first one'}
+                                    <span className="ml-1 border p-1 text-[10px] rounded">Rate Now</span>
+                                </div>
+                                <div className="text-[20px] mt-[12px]">
+                                    <span className="">
+                                        {data.overviewCard.price
+                                            ?
+                                            (
+                                                <>
+                                                    <div className="items-center sm:flex gap-3">
+                                                        {data.overviewCard.price}
+
+                                                        <button className="text-sky-500 text-[12px]">Get On Road Price</button>
+                                                    </div>
+                                                    <span className="text-[14px] text-gray-400 inline-flex gap-3">*Ex-showroom Price in {location.label}                                                    </span>
+                                                </>
+                                            )
+                                            :
+                                            <h2>Price Comming Soon</h2>
+                                        }
+                                    </span>
+                                </div>
+                                <div className="lg:flex hidden pt-2 w-full ">
+                                    <button className="m-[0px 13px 10px 0px] lg:w-[240px] w-[calc(100%-57px)] h-[40px] bg-[#d94025] text-white  font-semibold rounded  text-opacity-96">
+                                        View Diwali Offers
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="lg:hidden flex pt-2 w-full ">
+                            <button className="m-[0px 13px 10px 0px] lg:w-[240px] w-[calc(100%-57px)] h-[40px] bg-[#d94025] text-white  font-semibold rounded  text-opacity-96">
+                                View Diwali Offers
+                            </button>
+                        </div>
                     </div>
                 }
                 {Array.isArray(data?.truckDetails?.details) && data?.truckDetails?.details?.length > 0 &&
@@ -538,44 +621,46 @@ const Body: React.FC<OverviewProps> = ({
             </div >
 
             {/* secound section */}
-            < div className="w-full lg:w-4/12 xl:w-[25%] h-auto flex flex-col  sm:p-5 xl:p-0 mr-2 gap-2" >
+            <div className="w-full lg:w-4/12 xl:w-[25%] h-auto flex flex-col  sm:p-5 xl:p-0 mr-2 gap-2" >
                 <img src='https://tpc.googlesyndication.com/simgad/17644868341984738745' className="brightness-100 lg:block hidden  w-full  object-fill h-[250px]" />
                 {/* <Image src='https://tpc.googlesyndication.com/simgad/17644868341984738745' width={100} className=" lg:block hidden  w-full  object-contain h-[250px]" height={250}  alt='' /> */}
-
-                {Array.isArray(data?.populerTruck?.details) && data?.populerTruck?.details.length > 0 &&
-                    <VehicleListCard
-                        title={data?.populerTruck?.heading}
-                        vehicleData={data?.populerTruck?.details}
-                        url={data?.populerTruck?.url}
-                        viewAllText="View All Commercial Vehicles"
-                        onViewAllClick={handleViewAll}
-                    />
-                }
+                <div className={`${data.populerTruck?.order && `order-${data.populerTruck.order}`}`}>
+                    {Array.isArray(data?.populerTruck?.details) && data?.populerTruck?.details.length > 0 &&
+                        <VehicleListCard
+                            title={data?.populerTruck?.heading}
+                            vehicleData={data?.populerTruck?.details}
+                            url={data?.populerTruck?.url}
+                            viewAllText="View All Commercial Vehicles"
+                            onViewAllClick={handleViewAll}
+                        />
+                    }
+                </div>
 
                 {Array.isArray(data?.ReseachTruck?.details) && data?.ReseachTruck?.details.length > 0 &&
+                    <div className={`${data.ReseachTruck?.order && `order-${data.ReseachTruck.order}`}`}>
+                        <div className='border rounded-[16px]  mb-3 flex flex-col p-3 gap-2 relative bg-white'>
+                            <h1 className='font-semibold text-[20px]'>{data?.ReseachTruck?.heading}</h1>
+                            <ul className="space-y-4">
+                                {data?.ReseachTruck?.details.map((info, index) => (
+                                    <li key={index} className="flex items-center space-x-4 text-[rgba(36,39,44,.7)]  justify-center">
+                                        <Image src={info.imageUrl} width={20} height={20} alt='not found' />
+                                        <Link
+                                            href={info.url}
+                                            title={info.title}
+                                            className="w-full lg:w-[calc(100%-40px)] text-[15px]  justify-between flex flex-col gap-2"
+                                            data-lt={info.url}
+                                        >
+                                            <div className='flex items-center justify-between mr-5 ' >
+                                                {info.title}
+                                                <span> <PiGreaterThanLight className="  mr-0 " /></span>
+                                            </div>
 
-                    <div className='border rounded-[16px]  mb-3 flex flex-col p-3 gap-2 relative bg-white'>
-                        <h1 className='font-semibold text-[20px]'>{data?.ReseachTruck?.heading}</h1>
-                        <ul className="space-y-4">
-                            {data?.ReseachTruck?.details.map((info, index) => (
-                                <li key={index} className="flex items-center space-x-4 text-[rgba(36,39,44,.7)]  justify-center">
-                                    <Image src={info.imageUrl} width={20} height={20} alt='not found' />
-                                    <Link
-                                        href={info.url}
-                                        title={info.title}
-                                        className="w-full lg:w-[calc(100%-40px)] text-[15px]  justify-between flex flex-col gap-2"
-                                        data-lt={info.url}
-                                    >
-                                        <div className='flex items-center justify-between mr-5 ' >
-                                            {info.title}
-                                            <span> <PiGreaterThanLight className="  mr-0 " /></span>
-                                        </div>
-
-                                        {index < truckInfo?.length - 1 && <hr className='w-full m-auto' />}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
+                                            {index < truckInfo?.length - 1 && <hr className='w-full m-auto' />}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
                 }
 

@@ -110,7 +110,7 @@ type NavbarItem = {
     label: string;
     icon?: string;
   }[];
-  overview: {
+  overview?: {
     image?: string | string[];
     heading?: string;
     recommendedTruck?: {
@@ -122,10 +122,10 @@ type NavbarItem = {
     reviews?: number;
     price?: string;
   };
-  breadcrumb: BreadCrumb[]
+  breadcrumb?: BreadCrumb[]
 
-  body: {
-    heading: string;
+  body?: {
+    heading?: string;
     truckDetails: {
       url: string;
       details: TruckDetail[]
@@ -168,30 +168,40 @@ type NavbarItem = {
       description: string;
       details: TruckVideo[]
     },
-    truckMultitab: {
+    truckMultitab?: {
       tabs: string[],
       details: TruckMultiTabDetails
     },
-    populerTruck: {
+    populerTruck?: {
+      order?: number,
       heading: string;
       details: TruckPopuler[],
       url: string
     },
-    ReseachTruck: {
+    ReseachTruck?: {
+      order?: number;
       heading: string;
       details: TruckResearch[]
     },
-    ElectricTruck: {
+    ElectricTruck?: {
       heading: string;
       details: TruckPopuler[],
       url: string
     },
-    TableToggle: {
+    TableToggle?: {
       heading: string;
       content: string[],
       title: string,
       columns: string[],
       details: TruckTable[]
+    },
+    overviewCard?: {
+      image?: string,
+      heading?: string;
+      rating?: string;
+      reviews?: number;
+      price?: string;
+
     }
 
   };
@@ -416,7 +426,7 @@ export async function GET(request: Request) {
             }
           ]
         },
-        "truckCompetitors": {
+        truckCompetitors: {
           heading: "3123R",
           details: [
             {
@@ -667,6 +677,7 @@ export async function GET(request: Request) {
         },
         // sidebar content
         populerTruck: {
+          order: 2,
           heading: "Popular BharatBenz Trucks",
           details: [
             {
@@ -698,6 +709,7 @@ export async function GET(request: Request) {
           url: "/en/brands/bharat-benz",
         },
         ReseachTruck: {
+          order: 1,
           heading: "Further Research",
           details: [
             {
@@ -753,29 +765,8 @@ export async function GET(request: Request) {
           ],
           url: "/en/electric-trucks",
         },
-        TableToggle: {
-          heading: "Tata Ace gold Price in",
-          content: [
-            "Tata Ace gold price starts at Rs ₹3.99 Lakh in Bangalore. The lowest price model is ",
-            "{bold}2100/Petrol CX{/bold}",
-            ". Tata Ace gold is a 4 wheeler commercial vehicle. It is available in 7 variants. The Ace gold is compliant with the BS-VI emission standards. Other key specifications include wheel base of 2100 mm, fuel capacity of 26 litres & Power of 24 hp. Visit Tata Showrooms for best offers & deals. Tata Ace gold competes with ",
-            "{bold}Mahindra Jeeto Price in Bangalore{/bold}",
-            ", ",
-            "{link}https://www.mahindra.com/jeeto{/link}",
-            " and ",
-            "{bold}Maruti Suzuki Super Carry Price in Bangalore{/bold}",
-            "."
-          ],
-          title: "Tata Ace Price List In India",
-          columns: ['Model', 'Price'],
-          details: [
-            { Model: "Tata Ace Gold", Price: "₹3.99 - ₹6.69 Lakh" },
-            { Model: "Tata Ace EV", Price: "From ₹8.72 Lakh" },
-            { Model: "Tata Ace HT+", Price: "From ₹7.19 Lakh" },
-            { Model: "Tata Ace EV 1000", Price: "₹11.27 - ₹11.40 Lakh" },
-            { Model: "Tata Ace Diesel", Price: "From ₹7.00 Lakh" }
-          ]
-        }
+
+
       }
     },
     "/en/trucks/bharat-benz/2826-r/price-in-:city": {
@@ -849,7 +840,7 @@ export async function GET(request: Request) {
       ],
 
       "body": {
-        heading: '',
+        heading: 'BharatBenz 2826R',
         truckDetails: {
           url: '',
           details: []
@@ -864,10 +855,41 @@ export async function GET(request: Request) {
             },
           ]
         },
-        "truckAlterNative": {
-          footerheading: '',
-          url: '',
-          details: [],
+        truckAlterNative: {
+          footerheading: "Populer Tippers",
+          url: "/en/popular-truck/tippers",
+          details: [
+            {
+              name: "Tata Signa 5530.S",
+              price: "From ₹39.03 Lakh*",
+              offer: "View October offers",
+              imageUrl: "https://truckcdn.cardekho.com/in/tata/signa-2823-k-rmc-std-6s/tata-signa-2823-k-rmc-std-6s-54500.jpg"
+            },
+            {
+              name: "Tata Signa 3523.TK",
+              price: "From ₹49.23 Lakh*",
+              offer: "View October offers",
+              imageUrl: "https://truckcdn.cardekho.com/in/tata/signa-4223t/tata-signa-4223t-95359.jpg"
+            },
+            {
+              name: "Tata Signa 1923.K",
+              price: "From ₹28.91 Lakh*",
+              offer: "View October offers",
+              imageUrl: "https://truckcdn.cardekho.com/in/tata/signa-2821-k-rmc-std-6s/tata-signa-2821-k-rmc-std-6s.jpg"
+            },
+            {
+              name: "Tata Signa 1923.K",
+              price: "From ₹28.91 Lakh*",
+              offer: "View October offers",
+              imageUrl: "https://truckcdn.cardekho.com/in/tata/407-gold-sfc/tata-407-gold-sfc-15836.jpg"
+            },
+            {
+              name: "Tata Signa 1923.K",
+              price: "From ₹28.91 Lakh*",
+              offer: "View October offers",
+              imageUrl: "https://truckcdn.cardekho.com/in/eicher/pro-2049/eicher-pro-2049-47454.jpg"
+            },
+          ]
         },
         "truckDealers": {
           details: [],
@@ -877,11 +899,65 @@ export async function GET(request: Request) {
           details: []
         },
         truckReviews: {
-          heading: '',
-          performance: 0,
-          maintenance: 0,
-          design: 0,
-          details: []
+          heading: '2826R',
+          performance: 5,
+          maintenance: 4,
+          design: 5,
+          details: [
+            {
+              productName: "Astro Motors Triyaan Navya",
+              reviewerName: "Lakshya Ostwal",
+              reviewDate: "Aug 04, 2024",
+              rating: 4.9,
+              heading: "Great speed with gear changing technology.",
+              reviewText: "Great speed with gear changing technology. The potholes and slopes were the main concern for me when buying an electric vehicle, but they proved me wrong."
+            },
+            {
+              productName: "Tata Magic EV",
+              reviewerName: "Chandrapal Singh",
+              reviewDate: "Aug 16, 2023",
+              rating: 5,
+              heading: "EV magic truck.",
+              reviewText: "Very good quality please I buy me please contact me 9910238194 nice looking EV magic please share me pics and prize.",
+              classes: "line-clamp-3"
+            },
+            {
+              productName: "Force Urbania",
+              reviewerName: "Udit Sarkar",
+              reviewDate: "Dec 23, 2022",
+              rating: 5,
+              heading: "The perfect room on wheels with all the needed features.",
+              reviewText: "Most reliable family tourer, added safety, premium comfort, wide road visibility, punchy low-end torque delivery.",
+              classes: "line-clamp-3"
+            },
+            {
+              productName: "Mahindra Bolero Maxx Pik-Up",
+              reviewerName: "Imran Vhora",
+              reviewDate: "Dec 07, 2022",
+              rating: 4.1,
+              heading: "Best Bolero pickup.",
+              reviewText: "Thar ka baap hai Bolero pickup. Best n best off-roading mileage. Comfortable.",
+              classes: "line-clamp-3"
+            },
+            {
+              productName: "Tata Intra V50",
+              reviewerName: "Neeraj Ahat",
+              reviewDate: "Oct 17, 2022",
+              rating: 4.3,
+              heading: "Capable engine.",
+              reviewText: "I have personally driven quite a few trucks in the 1.5 tonnes segment, but the Tata Intra V50 is quite exceptional. The vehicle is powerful and reliable.",
+              classes: "line-clamp-3"
+            },
+            {
+              productName: "Tata Yodha 2.0",
+              reviewerName: "Sudarshan M",
+              reviewDate: "Oct 11, 2022",
+              rating: 4.3,
+              heading: "A superb package with great capacity pickup.",
+              reviewText: "The Tata Yodha 2.0 is a very good package in the 2 tonnes segment, and I think it is a great package that comes with excellent capacity and performance.",
+              classes: "line-clamp-3"
+            }
+          ]
         },
         truckOptions: {
           details: []
@@ -902,20 +978,64 @@ export async function GET(request: Request) {
           details: {
           }
         },
-        populerTruck: {
-          heading: "",
+
+        ReseachTruck: {
+          order: 1,
+          heading: "Further Research",
           details: [
             {
-              name: "",
-              priceRange: "",
-              imageUrl: "",
+              title: "2826R On Road Price",
+              imageUrl: 'https://cdn-icons-png.flaticon.com/512/13859/13859311.png',
+              url: "/en/trucks/bharat-benz/2826-r/price-in-mumbai",
+            },
+            {
+              title: "2826R Specifications",
+              imageUrl: 'https://cdn-icons-png.flaticon.com/512/2702/2702651.png',
+              url: "/en/trucks/bharat-benz/2826-r/specifications",
+            },
+            {
+              title: "2826R Images",
+              imageUrl: 'https://cdn-icons-png.flaticon.com/512/9284/9284918.png',
+              url: "/en/trucks/bharat-benz/2826-r/images",
+            },
+            {
+              title: "2826R Videos",
+              imageUrl: 'https://cdn-icons-png.flaticon.com/512/14068/14068622.png',
+              url: "/en/trucks/bharat-benz/2826-r/videos",
+            },
+          ]
+        },
+        populerTruck: {
+          order: 2,
+          heading: "Popular BharatBenz Trucks",
+          details: [
+            {
+              name: "BharatBenz 1917R",
+              priceRange: "₹28.35 - ₹30.61 Lakh*",
+              imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/3528c-bs6/bharat-benz-3528c-bs6-64528.jpg",
+            },
+            {
+              name: "BharatBenz 1917R",
+              priceRange: "₹28.35 - ₹30.61 Lakh*",
+              imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/1917r/bharat-benz-1917r.jpg",
+            },
+            {
+              name: "BharatBenz 3528C",
+              priceRange: "₹52.97 - ₹60.60 Lakh*",
+              imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/1217c/bharat-benz-1217c-60162.jpg",
+            },
+            {
+              name: "BharatBenz 3528C",
+              priceRange: "₹28.30 - ₹28.88 Lakh*",
+              imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/4828r/bharat-benz-4828r-41094.jpg",
+            },
+            {
+              name: "BharatBenz 4228C",
+              priceRange: "₹47.70 - ₹48.97 Lakh*",
+              imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/4228r/bharat-benz-4228r-14182.jpg",
             },
           ],
-          url: "",
-        },
-        ReseachTruck: {
-          heading: "",
-          details: []
+          url: "/en/brands/bharat-benz",
         },
         ElectricTruck: {
           heading: "",
@@ -946,6 +1066,319 @@ export async function GET(request: Request) {
             { Model: "Tata Ace EV 1000", Price: "₹11.27 - ₹11.40 Lakh" },
             { Model: "Tata Ace Diesel", Price: "From ₹7.00 Lakh" }
           ]
+        },
+        overviewCard: {
+          image: "https://truckcdn.cardekho.com/in/bharat-benz/2623r/bharat-benz-2623r.jpg?impolicy=resize&imwidth=286",
+          heading: "BharatBenz 2826R",
+          rating: "4.5",
+          reviews: 118,
+          price: "₹8.51 - ₹10.71 Lakh*"
+        }
+      }
+    },
+    "/en/trucks/bharat-benz/2826-r/specifications": {
+      "menuItems": [
+        {
+          "path": "/en/trucks/bharat-benz/2826-r",
+          "label": "2826R",
+          "activeClass": "border-b-2 p-3 border-red-700"
+        },
+        {
+          "path": "/en/trucks/bharat-benz/2826-r/price-in-:city",
+          "label": "Price",
+          "activeClass": "text-red-700"
+        },
+        {
+          "path": "#",
+          "label": "Compare",
+          "hasDropdown": true
+        },
+        {
+          "path": "/en/trucks/bharat-benz/2826-r/specifications",
+          "label": "Specifications",
+          "activeClass": "text-red-500"
+        }
+      ],
+      "links": [
+        {
+          "href": "/en/bharat-benz-dealers-in-new-delhi.html?model=2826-r",
+          "label": "Dealers",
+          "icon": "https://cdn-icons-png.flaticon.com/512/12341/12341343.png"
+        },
+        {
+          "href": "/en/bharat-benz-service-in-new-delhi.html?model=2826-r",
+          "label": "Service Center",
+          "icon": "https://cdn-icons-png.flaticon.com/512/4410/4410666.png"
+        },
+        {
+          "href": "https://trucks.cardekho.com/en/body-maker.html",
+          "label": "Body Makers",
+          "icon": "https://cdn-icons-png.flaticon.com/512/1085/1085392.png"
+        },
+        {
+          "href": "/en/trucks/bharat-benz/2826-r/videos",
+          "label": "Videos",
+          "icon": "https://cdn-icons-png.flaticon.com/512/2859/2859706.png"
+        },
+        {
+          "href": "/en/trucks/bharat-benz/2826-r/emi-calculator",
+          "label": "EMI Calculator",
+          "icon": "https://cdn-icons-png.flaticon.com/512/6884/6884209.png"
+        }
+      ],
+      "breadcrumb": [
+        {
+          "label": "Home",
+          "path": "/"
+        },
+        {
+          "label": "BharatBenz Trucks",
+          "path": "/en/brands/bharat-benz"
+        },
+        {
+          "label": "2826-r",
+          "path": "/en/trucks/bharat-benz/2826-r"
+        },
+        {
+          "label": "Specifications",
+          "path": ""
+        }
+      ],
+
+      body: {
+        heading: 'BharatBenz 2826R',
+        truckDetails: {
+          url: '',
+          details: []
+        },
+        "truckVariants": {
+          heading: '2826R Mileage (Variant)',
+          description: '',
+          details: [
+            {
+              variantName: "BharatBenz 2826R 5175/CBC/Sleeper Tanker",
+              gvw: "Get On Road Price",
+            },
+          ]
+        },
+        truckAlterNative: {
+          footerheading: "Populer Tippers",
+          url: "/en/popular-truck/tippers",
+          details: [
+            {
+              name: "Tata Signa 5530.S",
+              price: "From ₹39.03 Lakh*",
+              offer: "View October offers",
+              imageUrl: "https://truckcdn.cardekho.com/in/tata/signa-2823-k-rmc-std-6s/tata-signa-2823-k-rmc-std-6s-54500.jpg"
+            },
+            {
+              name: "Tata Signa 3523.TK",
+              price: "From ₹49.23 Lakh*",
+              offer: "View October offers",
+              imageUrl: "https://truckcdn.cardekho.com/in/tata/signa-4223t/tata-signa-4223t-95359.jpg"
+            },
+            {
+              name: "Tata Signa 1923.K",
+              price: "From ₹28.91 Lakh*",
+              offer: "View October offers",
+              imageUrl: "https://truckcdn.cardekho.com/in/tata/signa-2821-k-rmc-std-6s/tata-signa-2821-k-rmc-std-6s.jpg"
+            },
+            {
+              name: "Tata Signa 1923.K",
+              price: "From ₹28.91 Lakh*",
+              offer: "View October offers",
+              imageUrl: "https://truckcdn.cardekho.com/in/tata/407-gold-sfc/tata-407-gold-sfc-15836.jpg"
+            },
+            {
+              name: "Tata Signa 1923.K",
+              price: "From ₹28.91 Lakh*",
+              offer: "View October offers",
+              imageUrl: "https://truckcdn.cardekho.com/in/eicher/pro-2049/eicher-pro-2049-47454.jpg"
+            },
+          ]
+        },
+        "truckDealers": {
+          details: [],
+        },
+        "truckCompetitors": {
+          heading: '',
+          details: []
+        },
+        truckReviews: {
+          heading: '2826R',
+          performance: 5,
+          maintenance: 4,
+          design: 5,
+          details: [
+            {
+              productName: "Astro Motors Triyaan Navya",
+              reviewerName: "Lakshya Ostwal",
+              reviewDate: "Aug 04, 2024",
+              rating: 4.9,
+              heading: "Great speed with gear changing technology.",
+              reviewText: "Great speed with gear changing technology. The potholes and slopes were the main concern for me when buying an electric vehicle, but they proved me wrong."
+            },
+            {
+              productName: "Tata Magic EV",
+              reviewerName: "Chandrapal Singh",
+              reviewDate: "Aug 16, 2023",
+              rating: 5,
+              heading: "EV magic truck.",
+              reviewText: "Very good quality please I buy me please contact me 9910238194 nice looking EV magic please share me pics and prize.",
+              classes: "line-clamp-3"
+            },
+            {
+              productName: "Force Urbania",
+              reviewerName: "Udit Sarkar",
+              reviewDate: "Dec 23, 2022",
+              rating: 5,
+              heading: "The perfect room on wheels with all the needed features.",
+              reviewText: "Most reliable family tourer, added safety, premium comfort, wide road visibility, punchy low-end torque delivery.",
+              classes: "line-clamp-3"
+            },
+            {
+              productName: "Mahindra Bolero Maxx Pik-Up",
+              reviewerName: "Imran Vhora",
+              reviewDate: "Dec 07, 2022",
+              rating: 4.1,
+              heading: "Best Bolero pickup.",
+              reviewText: "Thar ka baap hai Bolero pickup. Best n best off-roading mileage. Comfortable.",
+              classes: "line-clamp-3"
+            },
+            {
+              productName: "Tata Intra V50",
+              reviewerName: "Neeraj Ahat",
+              reviewDate: "Oct 17, 2022",
+              rating: 4.3,
+              heading: "Capable engine.",
+              reviewText: "I have personally driven quite a few trucks in the 1.5 tonnes segment, but the Tata Intra V50 is quite exceptional. The vehicle is powerful and reliable.",
+              classes: "line-clamp-3"
+            },
+            {
+              productName: "Tata Yodha 2.0",
+              reviewerName: "Sudarshan M",
+              reviewDate: "Oct 11, 2022",
+              rating: 4.3,
+              heading: "A superb package with great capacity pickup.",
+              reviewText: "The Tata Yodha 2.0 is a very good package in the 2 tonnes segment, and I think it is a great package that comes with excellent capacity and performance.",
+              classes: "line-clamp-3"
+            }
+          ]
+        },
+        truckOptions: {
+          details: []
+        },
+        truckNews: {
+          details: []
+        },
+        truckUses: {
+          details: []
+        },
+        truckVideo: {
+          heading: '',
+          description: '',
+          details: []
+        },
+        truckMultitab: {
+          tabs: [],
+          details: {
+          }
+        },
+
+        ReseachTruck: {
+          order: 1,
+          heading: "Further Research",
+          details: [
+            {
+              title: "2826R On Road Price",
+              imageUrl: 'https://cdn-icons-png.flaticon.com/512/13859/13859311.png',
+              url: "/en/trucks/bharat-benz/2826-r/price-in-mumbai",
+            },
+            {
+              title: "2826R Specifications",
+              imageUrl: 'https://cdn-icons-png.flaticon.com/512/2702/2702651.png',
+              url: "/en/trucks/bharat-benz/2826-r/specifications",
+            },
+            {
+              title: "2826R Images",
+              imageUrl: 'https://cdn-icons-png.flaticon.com/512/9284/9284918.png',
+              url: "/en/trucks/bharat-benz/2826-r/images",
+            },
+            {
+              title: "2826R Videos",
+              imageUrl: 'https://cdn-icons-png.flaticon.com/512/14068/14068622.png',
+              url: "/en/trucks/bharat-benz/2826-r/videos",
+            },
+          ]
+        },
+        populerTruck: {
+          order: 2,
+          heading: "Popular BharatBenz Trucks",
+          details: [
+            {
+              name: "BharatBenz 1917R",
+              priceRange: "₹28.35 - ₹30.61 Lakh*",
+              imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/3528c-bs6/bharat-benz-3528c-bs6-64528.jpg",
+            },
+            {
+              name: "BharatBenz 1917R",
+              priceRange: "₹28.35 - ₹30.61 Lakh*",
+              imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/1917r/bharat-benz-1917r.jpg",
+            },
+            {
+              name: "BharatBenz 3528C",
+              priceRange: "₹52.97 - ₹60.60 Lakh*",
+              imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/1217c/bharat-benz-1217c-60162.jpg",
+            },
+            {
+              name: "BharatBenz 3528C",
+              priceRange: "₹28.30 - ₹28.88 Lakh*",
+              imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/4828r/bharat-benz-4828r-41094.jpg",
+            },
+            {
+              name: "BharatBenz 4228C",
+              priceRange: "₹47.70 - ₹48.97 Lakh*",
+              imageUrl: "https://truckcdn.cardekho.com/in/bharat-benz/4228r/bharat-benz-4228r-14182.jpg",
+            },
+          ],
+          url: "/en/brands/bharat-benz",
+        },
+        ElectricTruck: {
+          heading: "",
+          details: [
+
+          ],
+          url: "",
+        },
+        TableToggle: {
+          heading: "Tata Ace gold Price in",
+          content: [
+            "Tata Ace gold price starts at Rs ₹3.99 Lakh in Bangalore. The lowest price model is ",
+            "{bold}2100/Petrol CX{/bold}",
+            ". Tata Ace gold is a 4 wheeler commercial vehicle. It is available in 7 variants. The Ace gold is compliant with the BS-VI emission standards. Other key specifications include wheel base of 2100 mm, fuel capacity of 26 litres & Power of 24 hp. Visit Tata Showrooms for best offers & deals. Tata Ace gold competes with ",
+            "{bold}Mahindra Jeeto Price in Bangalore{/bold}",
+            ", ",
+            "{link}https://www.mahindra.com/jeeto{/link}",
+            " and ",
+            "{bold}Maruti Suzuki Super Carry Price in Bangalore{/bold}",
+            "."
+          ],
+          title: "Tata Ace Price List In India",
+          columns: ['Model', 'Price'],
+          details: [
+            { Model: "Tata Ace Gold", Price: "₹3.99 - ₹6.69 Lakh" },
+            { Model: "Tata Ace EV", Price: "From ₹8.72 Lakh" },
+            { Model: "Tata Ace HT+", Price: "From ₹7.19 Lakh" },
+            { Model: "Tata Ace EV 1000", Price: "₹11.27 - ₹11.40 Lakh" },
+            { Model: "Tata Ace Diesel", Price: "From ₹7.00 Lakh" }
+          ]
+        },
+        overviewCard: {
+          image: "https://truckcdn.cardekho.com/in/bharat-benz/2623r/bharat-benz-2623r.jpg?impolicy=resize&imwidth=286",
+          heading: "BharatBenz 2826R",
+          rating: "4.5",
+          reviews: 118,
+          price: "₹8.51 - ₹10.71 Lakh*"
         }
       }
     },
