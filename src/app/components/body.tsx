@@ -25,6 +25,7 @@ import Modal from '../comman/modelSelect';
 import { MdOutlineCreate } from 'react-icons/md';
 import RatingCardsOnly from '../comman/ratingCardsOnly';
 import ToggleTable from '../comman/toggleTable';
+import DynamicTextWithLinks from '../comman/contentList';
 
 type TruckDetail = {
     logo: string;
@@ -113,6 +114,10 @@ type TruckTable = {
     Model: string,
     Price: string,
 }
+interface BoldLink {
+    text: string;
+    url: string;
+}
 
 type OverviewProps = {
     data?: {
@@ -182,6 +187,7 @@ type OverviewProps = {
         TableToggle?: {
             heading: string;
             content: string[],
+            linkmap: BoldLink[],
             title: string,
             columns: string[],
             details: TruckTable[]
@@ -192,6 +198,11 @@ type OverviewProps = {
             rating?: string;
             reviews?: number;
             price?: string;
+        },
+        truckSpecification?: {
+            heading: string,
+            content: string[],
+            linkmap: BoldLink[],
         }
 
 
@@ -294,6 +305,7 @@ const Body: React.FC<OverviewProps> = ({
                         </div>
                         <ToggleTable
                             content={data.TableToggle.content}
+                            links={data.TableToggle.linkmap}
                             title={data.TableToggle.title}
                             columns={data.TableToggle.columns}
                             data={data.TableToggle.details}
@@ -374,6 +386,12 @@ const Body: React.FC<OverviewProps> = ({
                         </div>
                     </div>
                 }
+                {data?.truckSpecification && data?.truckSpecification &&
+                    <div className='border rounded-[16px] lg:p-5 p-5 mb-3 bg-white'>
+                        <h2 className='pt-17px pr-20px pb-0 pl-20px text-xl font-bold '>{data?.truckSpecification.heading}</h2>
+                        <DynamicTextWithLinks content={data?.truckSpecification?.content} links={data?.truckSpecification?.linkmap} />
+                    </div>
+                }
                 {Array.isArray(data?.truckDetails?.details) && data?.truckDetails?.details?.length > 0 &&
                     <div className='border rounded-[16px] lg:p-5 p-5 mb-3 bg-white'>
                         <h2 className='pt-17px pr-20px pb-0 pl-20px text-xl font-bold '>Key Specs of {data?.heading}</h2>
@@ -398,72 +416,74 @@ const Body: React.FC<OverviewProps> = ({
                         </Link>
                     </div>
                 }
-                <div className=' border rounded-[16px]  mb-3 flex flex-col bg-white  gap-2'>
-                    <h2 className='p-[17px 20px 0px] text-xl p-4 font-bold '>{data?.truckVariants?.heading}</h2>
-                    {data.truckVariants?.description &&
-                        <div className='relative w-full inline-flex justify-between items-start '>
-                            <p className={`text-[rgba(36,39,44,.7)] lg:text-[14px] text-[12px] pl-4 sm:pb-0 sm:w-5/6 ${!isExpanded ? 'line-clamp-1  w-4/6 ' : 'pb-3'}`}
-                            >
-                                {isExpanded ? data.truckVariants?.description : `${data?.truckVariants?.description?.slice(0, previewLength)}${isLongDescription ? '...' : ''}`}
-                            </p>
-                            <span onClick={handleToggle} id="myBtn" className={`absolute right-3  w-20 text-end text-gray-500 underline ${isExpanded && 'bottom-[-10px]  absolute right-2'}`}>
-                                {isExpanded ? 'Less' : 'Read more'}
-                            </span>
-                        </div>
-                    }
-                    <div className="relative overflow-x-auto">
-                        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead className="text-xs w-full  text-gray-400 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                <tr className=''>
-                                    <th scope="col" className="px-6 py-3 text-[rgba(36,39,44,.7)]">
-                                        Variants
-                                    </th>
-                                    <th scope="col" className="px-6 py-3 text-[rgba(36,39,44,.7)]">
-                                        GVW
-                                    </th>
+                {Array.isArray(data?.truckVariants?.details) && data?.truckVariants?.details &&
+                    <div className=' border rounded-[16px]  mb-3 flex flex-col bg-white  gap-2'>
+                        <h2 className='p-[17px 20px 0px] text-xl p-4 font-bold '>{data?.truckVariants?.heading}</h2>
+                        {data.truckVariants?.description &&
+                            <div className='relative w-full inline-flex justify-between items-start '>
+                                <p className={`text-[rgba(36,39,44,.7)] lg:text-[14px] text-[12px] pl-4 sm:pb-0 sm:w-5/6 ${!isExpanded ? 'line-clamp-1  w-4/6 ' : 'pb-3'}`}
+                                >
+                                    {isExpanded ? data.truckVariants?.description : `${data?.truckVariants?.description?.slice(0, previewLength)}${isLongDescription ? '...' : ''}`}
+                                </p>
+                                <span onClick={handleToggle} id="myBtn" className={`absolute right-3  w-20 text-end text-gray-500 underline ${isExpanded && 'bottom-[-10px]  absolute right-2'}`}>
+                                    {isExpanded ? 'Less' : 'Read more'}
+                                </span>
+                            </div>
+                        }
+                        <div className="relative overflow-x-auto">
+                            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <thead className="text-xs w-full  text-gray-400 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                    <tr className=''>
+                                        <th scope="col" className="px-6 py-3 text-[rgba(36,39,44,.7)]">
+                                            Variants
+                                        </th>
+                                        <th scope="col" className="px-6 py-3 text-[rgba(36,39,44,.7)]">
+                                            GVW
+                                        </th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {data?.truckVariants?.details && data?.truckVariants?.details?.slice(0, 2).map((variant, index) => (
-                                    <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 items-center ">
-                                        <td className=" pl-6 sm:px-6 py-4 lg:font-medium lg:text-[17px] text-gray-900 dark:text-white">
-                                            {variant.variantName}
-                                        </td>
-                                        <td className=" sm:px-6 py-4 ">
-                                            <button className="text-[#d94025] text-[11px]  sm:text-[14px] lg:border p-2 lg:rounded-md lg:border-[#d94025]">
-                                                {variant.gvw}
-                                            </button>
-                                        </td>
                                     </tr>
-                                ))}
-
-                                {showAllVariants &&
-                                    data?.truckVariants?.details?.slice(2).map((variant, index) => (
-                                        <tr key={index + 3} className="bg-white border-b dark:bg-gray-700 dark:border-gray-700 items-center ">
-                                            <td className="px-6 py-4 lg:font-medium lg:text-[17px] text-gray-900 dark:text-white ">
+                                </thead>
+                                <tbody>
+                                    {data?.truckVariants?.details && data?.truckVariants?.details?.slice(0, 2).map((variant, index) => (
+                                        <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 items-center ">
+                                            <td className=" pl-6 sm:px-6 py-4 lg:font-medium lg:text-[17px] text-gray-900 dark:text-white">
                                                 {variant.variantName}
                                             </td>
-                                            <td className="px-6 py-4 ">
-                                                <button className="text-[#d94025]  text-[11px] sm:text-[14px] lg:border p-2 lg:rounded-md lg:border-[#d94025]">
+                                            <td className=" sm:px-6 py-4 ">
+                                                <button className="text-[#d94025] text-[11px]  sm:text-[14px] lg:border p-2 lg:rounded-md lg:border-[#d94025]">
                                                     {variant.gvw}
                                                 </button>
                                             </td>
                                         </tr>
                                     ))}
 
-                            </tbody>
-                        </table>
-                        {Array.isArray(data?.truckVariants?.details) && data?.truckVariants?.details.length > 2 &&
-                            <div className='inline-flex  items-baseline  m-2 px-5 cursor-pointer' onClick={handleShowAllVariants}>
-                                <span className='mr-2 text-[#d94025] font-bold'>{showAllVariants ? 'View All Varients' : 'View Less Varients'}</span>
-                                <div className="relative w-5 h-5 mt-4 bg-[#d94025] rounded-full flex justify-center items-center" >
-                                    <FaAngleRight className="w-5 h-3 left-[-1px] mr-0  fill-white" />
+                                    {showAllVariants &&
+                                        data?.truckVariants?.details?.slice(2).map((variant, index) => (
+                                            <tr key={index + 3} className="bg-white border-b dark:bg-gray-700 dark:border-gray-700 items-center ">
+                                                <td className="px-6 py-4 lg:font-medium lg:text-[17px] text-gray-900 dark:text-white ">
+                                                    {variant.variantName}
+                                                </td>
+                                                <td className="px-6 py-4 ">
+                                                    <button className="text-[#d94025]  text-[11px] sm:text-[14px] lg:border p-2 lg:rounded-md lg:border-[#d94025]">
+                                                        {variant.gvw}
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))}
+
+                                </tbody>
+                            </table>
+                            {Array.isArray(data?.truckVariants?.details) && data?.truckVariants?.details.length > 2 &&
+                                <div className='inline-flex  items-baseline  m-2 px-5 cursor-pointer' onClick={handleShowAllVariants}>
+                                    <span className='mr-2 text-[#d94025] font-bold'>{showAllVariants ? 'View All Varients' : 'View Less Varients'}</span>
+                                    <div className="relative w-5 h-5 mt-4 bg-[#d94025] rounded-full flex justify-center items-center" >
+                                        <FaAngleRight className="w-5 h-3 left-[-1px] mr-0  fill-white" />
+                                    </div>
                                 </div>
-                            </div>
-                        }
+                            }
+                        </div>
                     </div>
-                </div>
+                }
                 {Array.isArray(data?.truckAlterNative?.details) && data?.truckAlterNative?.details.length > 0 &&
                     < div className='border rounded-[16px]  mb-3 flex flex-col p-5 gap-2 bg-white relative'>
                         <h2 className='p-[17px 20px 0px] text-xl font-bold'>

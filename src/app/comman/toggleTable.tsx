@@ -4,8 +4,13 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { FaAngleRight, FaAngleDown } from "react-icons/fa";
 
+interface BoldLink {
+    text: string;
+    url: string;
+}
 interface ToggleTableProps {
     content?: (string | JSX.Element)[];
+    links?: BoldLink[];
     title: string;
     columns: string[];
     data: { [key: string]: string }[];
@@ -70,11 +75,11 @@ const renderContent = (text: string | JSX.Element, index: number) => {
     }
 };
 
-const ToggleTable: React.FC<ToggleTableProps> = ({ content = [], title, columns, data }) => {
+const ToggleTable: React.FC<ToggleTableProps> = ({ content = [], links = [], title, columns, data }) => {
     const [showAll, setShowAll] = useState(false);
 
     const handleToggle = () => setShowAll((prev) => !prev);
-    console.log(content);
+    console.log(content,links);
 
 
     return (
@@ -87,7 +92,13 @@ const ToggleTable: React.FC<ToggleTableProps> = ({ content = [], title, columns,
                 {/* {content.map((paragraph, index) => (
                      <p key={index}>{paragraph}</p>
                 ))} */}
+                {/* if(content.type === string[]){
+                    <DynamicTextWithLinks content={content} links={links} />
+                }else{
 
+                } */}
+
+                
                 {content.map((text, index) => (
                     <React.Fragment key={index}>
                         {renderContent(text, index)}

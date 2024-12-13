@@ -97,6 +97,10 @@ type TruckTable = {
   Model: string,
   Price: string,
 }
+interface BoldLink {
+  text: string;
+  url: string;
+}
 
 type NavbarItem = {
   menuItems: {
@@ -110,6 +114,7 @@ type NavbarItem = {
     label: string;
     icon?: string;
   }[];
+
   overview?: {
     image?: string | string[];
     heading?: string;
@@ -191,6 +196,7 @@ type NavbarItem = {
     TableToggle?: {
       heading: string;
       content: string[],
+      linkmap: BoldLink[],
       title: string,
       columns: string[],
       details: TruckTable[]
@@ -201,8 +207,13 @@ type NavbarItem = {
       rating?: string;
       reviews?: number;
       price?: string;
-
+    },
+    truckSpecification?: {
+      heading: string,
+      content: string[],
+      linkmap: BoldLink[],
     }
+
 
   };
 };
@@ -1047,15 +1058,11 @@ export async function GET(request: Request) {
         TableToggle: {
           heading: "Tata Ace gold Price in",
           content: [
-            "Tata Ace gold price starts at Rs ₹3.99 Lakh in Bangalore. The lowest price model is ",
-            "{bold}2100/Petrol CX{/bold}",
-            ". Tata Ace gold is a 4 wheeler commercial vehicle. It is available in 7 variants. The Ace gold is compliant with the BS-VI emission standards. Other key specifications include wheel base of 2100 mm, fuel capacity of 26 litres & Power of 24 hp. Visit Tata Showrooms for best offers & deals. Tata Ace gold competes with ",
-            "{bold}Mahindra Jeeto Price in Bangalore{/bold}",
-            ", ",
-            "{link}https://www.mahindra.com/jeeto{/link}",
-            " and ",
-            "{bold}Maruti Suzuki Super Carry Price in Bangalore{/bold}",
-            "."
+            "{bold}BharatBenz 2623R price {/bold} starts at Rs ₹35.97 Lakh in New Delhi. The lowest price model is CBC/5275. BharatBenz 2623R is a 6 wheeler commercial vehicle. It is available in 2 variants. The 2623R is compliant with the BS-VI emission standards. Other key specifications include wheel base of 5275 mm, fuel capacity of 380 litres & Power of 241. Visit BharatBenz Showrooms for best offers & deals. BharatBenz 2623R competes with Tata Signa 2823.K HD 9S Price in New Delhi, Tata Signa 5525.S Price in New Delhi and Tata Signa 5530.S 4x2 Price in New Delhi"
+
+          ],
+          linkmap: [
+            { text: "BharatBenz 2623R price", url: "https://example.com/bharatbenz-2623r" },
           ],
           title: "Tata Ace Price List In India",
           columns: ['Model', 'Price'],
@@ -1350,35 +1357,22 @@ export async function GET(request: Request) {
           ],
           url: "",
         },
-        TableToggle: {
-          heading: "Tata Ace gold Price in",
-          content: [
-            "Tata Ace gold price starts at Rs ₹3.99 Lakh in Bangalore. The lowest price model is ",
-            "{bold}2100/Petrol CX{/bold}",
-            ". Tata Ace gold is a 4 wheeler commercial vehicle. It is available in 7 variants. The Ace gold is compliant with the BS-VI emission standards. Other key specifications include wheel base of 2100 mm, fuel capacity of 26 litres & Power of 24 hp. Visit Tata Showrooms for best offers & deals. Tata Ace gold competes with ",
-            "{bold}Mahindra Jeeto Price in Bangalore{/bold}",
-            ", ",
-            "{link}https://www.mahindra.com/jeeto{/link}",
-            " and ",
-            "{bold}Maruti Suzuki Super Carry Price in Bangalore{/bold}",
-            "."
-          ],
-          title: "Tata Ace Price List In India",
-          columns: ['Model', 'Price'],
-          details: [
-            { Model: "Tata Ace Gold", Price: "₹3.99 - ₹6.69 Lakh" },
-            { Model: "Tata Ace EV", Price: "From ₹8.72 Lakh" },
-            { Model: "Tata Ace HT+", Price: "From ₹7.19 Lakh" },
-            { Model: "Tata Ace EV 1000", Price: "₹11.27 - ₹11.40 Lakh" },
-            { Model: "Tata Ace Diesel", Price: "From ₹7.00 Lakh" }
-          ]
-        },
+
         overviewCard: {
           image: "https://truckcdn.cardekho.com/in/bharat-benz/2623r/bharat-benz-2623r.jpg?impolicy=resize&imwidth=286",
           heading: "BharatBenz 2826R",
           rating: "4.5",
           reviews: 118,
           price: "₹8.51 - ₹10.71 Lakh*"
+        },
+        truckSpecification: {
+          heading: "Key Specifications of BharatBenz 2826R",
+          content: [
+            "The {bold}BharatBenz 4828R{/bold} is available in 1 variants. The BharatBenz 4828R offers in 7200 cc. Its payload capacity is 32500 Kgs, GVW 47500 kg and wheelbase is 6575 mm. 4828R is a 16 wheeler commercial vehicle.",
+          ],
+          linkmap: [
+            { text: "BharatBenz 4828R", url: "https://example.com/bharatbenz-4828r" },
+          ]
         }
       }
     },
@@ -1805,6 +1799,9 @@ export async function GET(request: Request) {
             "{bold}Maruti Suzuki Super Carry Price in Bangalore{/bold}",
             "."
           ],
+          linkmap:[
+            
+          ],
           title: "Tata Ace Price List In India",
           columns: ['Model', 'Price'],
           details: [
@@ -1925,6 +1922,7 @@ export async function GET(request: Request) {
             "{bold}Maruti Suzuki Super Carry Price in Bangalore{/bold}",
             "."
           ],
+          linkmap:[],
           title: "Tata Ace Price List In India",
           columns: ['Model', 'Price'],
           details: [

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import Breadcrumbs from '@/app/comman/breadCrumbs';
 import { usePathname } from 'next/navigation';
+import Body from '@/app/components/body';
 
 const Specification = () => {
   const pathname = usePathname();
@@ -33,6 +34,7 @@ const Specification = () => {
       <div className="max-w-7xl m-auto  lg:flex border-b-2  rounded-b-md border-gray-100 gap-4 ">
         <h2 className='text-xl font-bold '>{data?.heading ?? ''} Specifications</h2>
       </div>
+      <Body data={data} />
     </div>
   )
 }
