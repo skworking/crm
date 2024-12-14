@@ -26,6 +26,8 @@ import { MdOutlineCreate } from 'react-icons/md';
 import RatingCardsOnly from '../comman/ratingCardsOnly';
 import ToggleTable from '../comman/toggleTable';
 import DynamicTextWithLinks from '../comman/contentList';
+import KeySpecification from '../comman/keySpecification';
+import Scrollspy from '../comman/scrollspy';
 
 type TruckDetail = {
     logo: string;
@@ -118,6 +120,14 @@ interface BoldLink {
     text: string;
     url: string;
 }
+interface specific {
+    category: string,
+    specs?: {
+        name: string,
+        value: string
+    }[]
+}
+
 
 type OverviewProps = {
     data?: {
@@ -203,8 +213,19 @@ type OverviewProps = {
             heading: string,
             content: string[],
             linkmap: BoldLink[],
+        },
+        keySpecification?: {
+            heading: string,
+            details: {
+                name: string,
+                value: string,
+            }[]
+        },
+        scrollSpyFetaures?: {
+            order: number,
+            heading: string,
+            details: specific[]
         }
-
 
     };
 };
@@ -222,6 +243,7 @@ const Body: React.FC<OverviewProps> = ({
     // }
 }) => {
 
+    console.log(data);
 
 
     const { location, handleSelectCitybypass } = useLocation();
@@ -294,6 +316,8 @@ const Body: React.FC<OverviewProps> = ({
     if (!data) {
         return <div>Loading page body...</div>;  // or any fallback UI
     }
+
+
     return (
         <div className="max-w-7xl m-auto  lg:flex border-b-2  rounded-b-md border-gray-100 gap-4 ">
             <div className="w-full lg:w-8/12 xl:w-[73.50%] m-auto  md:p-5 xl:p-0 " >
@@ -386,12 +410,27 @@ const Body: React.FC<OverviewProps> = ({
                         </div>
                     </div>
                 }
+
                 {data?.truckSpecification && data?.truckSpecification &&
                     <div className='border rounded-[16px] lg:p-5 p-5 mb-3 bg-white'>
                         <h2 className='pt-17px pr-20px pb-0 pl-20px text-xl font-bold '>{data?.truckSpecification.heading}</h2>
                         <DynamicTextWithLinks content={data?.truckSpecification?.content} links={data?.truckSpecification?.linkmap} />
                     </div>
                 }
+
+                {Array.isArray(data.keySpecification?.details) && data.keySpecification.details.length > 0 &&
+                    <div>
+                        <KeySpecification data={data.keySpecification.details} heading={data.keySpecification.heading} />
+                    </div>
+                }
+
+                {data.scrollSpyFetaures?.details &&
+                    <div>
+                        <Scrollspy data={data.scrollSpyFetaures} />
+                    </div>
+                }
+
+
                 {Array.isArray(data?.truckDetails?.details) && data?.truckDetails?.details?.length > 0 &&
                     <div className='border rounded-[16px] lg:p-5 p-5 mb-3 bg-white'>
                         <h2 className='pt-17px pr-20px pb-0 pl-20px text-xl font-bold '>Key Specs of {data?.heading}</h2>

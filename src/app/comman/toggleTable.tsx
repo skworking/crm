@@ -16,70 +16,64 @@ interface ToggleTableProps {
     data: { [key: string]: string }[];
 }
 
-const renderContent = (text: string | JSX.Element, index: number) => {
-    if (typeof text === 'string') {
-        // Handle {bold} and {link} tags inside the string
-        const boldParts = text.split(/{bold}/);
-        return boldParts.map((part, i) => {
-            if (i % 2 === 1) {
-                // Handle text inside {bold}...{/bold}
-                const boldText = part.split("{/bold}")[0];
 
-                // Handle nested {link} tags inside the bold text
-                const linkParts = boldText.split(/{link}/);
-                const boldContent = linkParts.map((linkPart, j) => {
-                    if (j % 2 === 1) {
-                        // Handle text inside {link}...{/link}
-                        const linkText = linkPart.split("{/link}")[0];
-                        return (
-                            <a
-                                key={`bold-link-${index}-${i}-${j}`}
-                                href={linkText}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={{ fontWeight: 'bold' }} // Ensure the link is also bold
-                            >
-                                {linkText}
-                            </a>
-                        );
-                    }
-                    return <Link href={'#'} key={`bold-${index}-${i}-${j}`}>{linkPart}</Link>;
-                });
-
-                return boldContent;
-            }
-
-            // Handle text outside {bold} tags
-            const linkParts = part.split(/{link}/);
-            return linkParts.map((linkPart, j) => {
-                if (j % 2 === 1) {
-                    // Handle text inside {link}...{/link}
-                    const linkText = linkPart.split("{/link}")[0];
-                    return (
-                        <a
-                            key={`link-${index}-${i}-${j}`}
-                            href={linkText}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            {linkText}
-                        </a>
-                    );
-                }
-                return <span key={`span-${index}-${i}-${j}`}>{linkPart}</span>;
-            });
-        });
-    } else {
-        // If it's a JSX.Element, render it directly
-        return text;
-    }
-};
 
 const ToggleTable: React.FC<ToggleTableProps> = ({ content = [], links = [], title, columns, data }) => {
+
+    const renderContent = (text: string | JSX.Element) => {
+        if (typeof text === 'string') {
+            const regex = /\{bold\}([\s\S]*?)\{\/bold\}/g;
+            const elements: React.ReactNode[] = [];
+            let lastIndex = 0;
+            let match: RegExpExecArray | null;
+
+            while ((match = regex.exec(text)) !== null) {
+                const boldText = match[1]; // Text inside {bold}...{/bold}
+                const start = match.index;
+                const end = regex.lastIndex;
+
+                // Add plain text before the bold content
+                if (start > lastIndex) {
+                    elements.push(text.slice(lastIndex, start));
+                }
+
+                // Find the corresponding link for the bold text
+                const link = links?.find((link) => link.text === boldText);
+
+                if (link) {
+                    // Add the bold content as a link
+                    elements.push(
+                        <Link
+                            href={link.url}
+                            key={boldText}
+                            className="text-blue-500 font-bold underline"
+                        >
+                            {boldText}
+                        </Link>
+                    );
+                } else {
+                    // Add bold text without a link if not found
+                    elements.push(<strong key={boldText}>{boldText}</strong>);
+                }
+
+                lastIndex = end;
+            }
+
+            // Add remaining plain text after the last bold match
+            if (lastIndex < text.length) {
+                elements.push(text.slice(lastIndex));
+            }
+
+            return elements;
+        } else {
+            // If it's a JSX.Element, render it directly
+            return text;
+        }
+    };
     const [showAll, setShowAll] = useState(false);
 
     const handleToggle = () => setShowAll((prev) => !prev);
-    console.log(content,links);
+    console.log(content, links);
 
 
     return (
@@ -98,10 +92,10 @@ const ToggleTable: React.FC<ToggleTableProps> = ({ content = [], links = [], tit
 
                 } */}
 
-                
+
                 {content.map((text, index) => (
                     <React.Fragment key={index}>
-                        {renderContent(text, index)}
+                        {renderContent(text)}
                     </React.Fragment>
                 ))}
 

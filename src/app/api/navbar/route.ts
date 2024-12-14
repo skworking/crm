@@ -101,6 +101,13 @@ interface BoldLink {
   text: string;
   url: string;
 }
+interface specific {
+  category: string,
+  specs?: {
+    name: string,
+    value: string
+  }[]
+}
 
 type NavbarItem = {
   menuItems: {
@@ -135,40 +142,42 @@ type NavbarItem = {
       url: string;
       details: TruckDetail[]
     };
-    truckVariants: {
+    truckVariants?: {
       heading: string;
       description: string;
       details: TruckVariant[]
     };
-    truckAlterNative: {
+    truckAlterNative?: {
+      order?:number
       footerheading: string;
       url: string;
       details: AlterNativeDetails[]
     };
-    truckDealers: {
+    truckDealers?: {
       details: TruckDelers[]
     };
-    truckCompetitors: {
+    truckCompetitors?: {
       heading: string;
       details: TruckCompetiters[]
     };
-    truckReviews: {
+    truckReviews?: {
+      order?:number
       heading: string;
       performance: number;
       maintenance: number;
       design: number;
       details: TruckReviews[]
     },
-    truckOptions: {
+    truckOptions?: {
       details: TruckOptions[]
     },
-    truckNews: {
+    truckNews?: {
       details: TruckNews[]
     },
-    truckUses: {
+    truckUses?: {
       details: TruckUses[]
     },
-    truckVideo: {
+    truckVideo?: {
       heading: string;
       description: string;
       details: TruckVideo[]
@@ -213,7 +222,18 @@ type NavbarItem = {
       content: string[],
       linkmap: BoldLink[],
     }
-
+    keySpecification?: {
+      heading: string,
+      details: {
+        name: string,
+        value: string,
+      }[]
+    },
+    scrollSpyFetaures?: {
+      order:number,
+      heading: string,
+      details: specific[]
+    }
 
   };
 };
@@ -1058,7 +1078,7 @@ export async function GET(request: Request) {
         TableToggle: {
           heading: "Tata Ace gold Price in",
           content: [
-            "{bold}BharatBenz 2623R price {/bold} starts at Rs ₹35.97 Lakh in New Delhi. The lowest price model is CBC/5275. BharatBenz 2623R is a 6 wheeler commercial vehicle. It is available in 2 variants. The 2623R is compliant with the BS-VI emission standards. Other key specifications include wheel base of 5275 mm, fuel capacity of 380 litres & Power of 241. Visit BharatBenz Showrooms for best offers & deals. BharatBenz 2623R competes with Tata Signa 2823.K HD 9S Price in New Delhi, Tata Signa 5525.S Price in New Delhi and Tata Signa 5530.S 4x2 Price in New Delhi"
+            "{bold}BharatBenz 2623R price{/bold} starts at Rs ₹35.97 Lakh in New Delhi. The lowest price model is CBC/5275. BharatBenz 2623R is a 6 wheeler commercial vehicle. It is available in 2 variants. The 2623R is compliant with the BS-VI emission standards. Other key specifications include wheel base of 5275 mm, fuel capacity of 380 litres & Power of 241. Visit BharatBenz Showrooms for best offers & deals. BharatBenz 2623R competes with Tata Signa 2823.K HD 9S Price in New Delhi, Tata Signa 5525.S Price in New Delhi and Tata Signa 5530.S 4x2 Price in New Delhi"
 
           ],
           linkmap: [
@@ -1158,17 +1178,18 @@ export async function GET(request: Request) {
           url: '',
           details: []
         },
-        "truckVariants": {
-          heading: '2826R Mileage (Variant)',
-          description: '',
-          details: [
-            {
-              variantName: "BharatBenz 2826R 5175/CBC/Sleeper Tanker",
-              gvw: "Get On Road Price",
-            },
-          ]
-        },
+        // "truckVariants": {
+        //   heading: '2826R Mileage (Variant)',
+        //   description: '',
+        //   details: [
+        //     {
+        //       variantName: "BharatBenz 2826R 5175/CBC/Sleeper Tanker",
+        //       gvw: "Get On Road Price",
+        //     },
+        //   ]
+        // },
         truckAlterNative: {
+          order:2,
           footerheading: "Populer Tippers",
           url: "/en/popular-truck/tippers",
           details: [
@@ -1212,6 +1233,7 @@ export async function GET(request: Request) {
           details: []
         },
         truckReviews: {
+          order:1,
           heading: '2826R',
           performance: 5,
           maintenance: 4,
@@ -1372,6 +1394,138 @@ export async function GET(request: Request) {
           ],
           linkmap: [
             { text: "BharatBenz 4828R", url: "https://example.com/bharatbenz-4828r" },
+          ]
+        },
+        keySpecification: {
+          heading: 'Key Specifications of BharatBenz 2826R',
+          details: [
+            {
+              name: 'Battery Capacity',
+              value: '120 Ah',
+              // icon: "https://cdn-icons-png.flaticon.com/512/2087/2087628.png"
+            },
+            {
+              name: 'Number of Tyre',
+              value: '10',
+              // icon: "https://cdn-icons-png.flaticon.com/512/4606/4606838.png"
+            },
+            {
+              name: 'Power',
+              value: '250 hp',
+              // icon: "https://cdn-icons-png.flaticon.com/512/3596/3596171.png"
+            },
+            {
+              name: 'Engine',
+              value: '6700 cc',
+              // icon: "https://cdn-icons-png.flaticon.com/512/8049/8049675.png"
+            },
+            {
+              name: 'Fuel Tank',
+              value: '380/355 Ltr',
+              // icon: "https://cdn-icons-png.flaticon.com/512/4906/4906874.png"
+            },
+            {
+              name: 'Chassis Type',
+              value: 'Chassis with Cabin',
+              // icon: "https://cdn-icons-png.flaticon.com/512/810/810006.png"
+
+            },
+          ]
+        },
+        scrollSpyFetaures: {
+          order:1,
+          heading: "BharatBenz 2826R Specs & Features",
+          details: [
+            {
+              category: "Performance",
+              specs: [
+                { name: "Max Power", value: "241 hp" },
+                { name: "Displacement (cc)", value: "7200 cc" },
+                { name: "Fuel Tank (Litres)", value: "380 Ltr" },
+                { name: "Engine", value: "OM 926" },
+                { name: "Fuel Type", value: "Diesel" },
+                { name: "Emission Norms", value: "BS-VI" },
+                { name: "Max Torque", value: "850 Nm" },
+                { name: "Mileage", value: "4.25 kmpl" },
+                { name: "Gradeability (%)", value: "27 %" },
+                { name: "Max Speed (km/h)", value: "80" },
+                { name: "Engine Cylinders", value: "6" },
+                { name: "Turning Radius (mm)", value: "22700" },
+                { name: "Battery Capacity", value: "120 Ah" },
+                { name: "Product Type", value: "L5N (High Speed Goods Carrier)" },
+              ]
+            },
+            {
+              category: "Dimension",
+              specs: [
+                { name: "Overall Length (mm)", value: "9885" },
+                { name: "Overall Width (mm)", value: "2490" },
+                { name: "Overall Height (mm)", value: "2930" },
+                { name: "Ground Clearance (mm)", value: "230" },
+                { name: "Wheelbase (mm)", value: "5275 mm" },
+              ]
+            },
+            {
+              category: "Transmission & Loading Capacity",
+              specs: [
+                { name: "Transmission", value: "Manual" },
+                { name: "Payload (Kgs)", value: "16000 Kgs" },
+                { name: "GVW / GCW (Kgs)", value: "25500 kg" },
+                { name: "Gear Box", value: "6 Forward + 1 Reverse" },
+                { name: "Clutch", value: "Mechanical, synchromesh gears Single dry plate, hydraulic control" },
+                { name: "Power Steering", value: "Yes" },
+              ]
+            },
+            {
+              category: "Features",
+              specs: [
+                { name: "Steering", value: "Hydraulic assisted power steering" },
+                { name: "A/C", value: "Optional" },
+                { name: "Cruise Control", value: "No" },
+                { name: "Seat Type", value: "Standard" },
+                { name: "Driver Information Display", value: "Yes" },
+                { name: "Seating Capacity", value: "D+1" },
+                { name: "Seat Belts", value: "Yes" },
+              ]
+            },
+            {
+              category: "Brakes & Suspension",
+              specs: [
+                { name: "Brakes", value: "Drum Brakes" },
+                { name: "Front Axle", value: "IF7.0" },
+                { name: "Front Suspension", value: "Parabolic leaf spring" },
+                { name: "Rear Axle", value: "IR440+" },
+                { name: "Rear Suspension", value: "Semi elliptic" },
+                { name: "ABS", value: "Yes" },
+                { name: "Parking Brakes", value: "Yes" },
+              ]
+            },
+            {
+              category: "Body Option & Cabin Type",
+              specs: [
+                { name: "Chassis Type", value: "Chassis with Cabin" },
+                { name: "Body Option", value: "Customizable body" },
+                { name: "Cabin Type", value: "Sleeper Cabin" },
+                { name: "Tiltable Cabin", value: "Yes" },
+              ]
+            },
+            {
+              category: "Tyres",
+              specs: [
+                { name: "Number of Tyre", value: "6" },
+                { name: "Rear Tyre", value: "295/80R22.5" },
+                { name: "Front Tyre", value: "295/80R22.5" },
+              ]
+            },
+            {
+              category: "Others",
+              specs: [
+
+                { name: "Chassis", value: "Yes" },
+                { name: "Battery(Volts)", value: "24V" }
+              ]
+            }
+
           ]
         }
       }
@@ -1799,8 +1953,8 @@ export async function GET(request: Request) {
             "{bold}Maruti Suzuki Super Carry Price in Bangalore{/bold}",
             "."
           ],
-          linkmap:[
-            
+          linkmap: [
+
           ],
           title: "Tata Ace Price List In India",
           columns: ['Model', 'Price'],
@@ -1922,7 +2076,7 @@ export async function GET(request: Request) {
             "{bold}Maruti Suzuki Super Carry Price in Bangalore{/bold}",
             "."
           ],
-          linkmap:[],
+          linkmap: [],
           title: "Tata Ace Price List In India",
           columns: ['Model', 'Price'],
           details: [
