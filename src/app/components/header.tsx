@@ -129,7 +129,7 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
 
         },
         { title: "Electric Commercial Vehicles", link: "/en/electric-trucks" },
-        { title: "Used Truck", link: "/used-truck" },
+        { title: "Used Truck", link: "/used-trucks" },
         { title: "Compare", link: "/compare" },
         {
             title: "Dealers & Services",
