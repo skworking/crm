@@ -8,6 +8,7 @@ import MhcvComponent from '@/app/components/(pages)/mhcv';
 import ScvComponent from '@/app/components/(pages)/scv';
 import ServiceComponent from '@/app/components/(pages)/service';
 import SpareComponent from '@/app/components/(pages)/spareparts';
+import UsedTruck from '@/app/components/(pages)/usedTruck';
 import { usePathname } from 'next/navigation';
 import React from 'react'
 
@@ -30,6 +31,8 @@ const renderContent = (category: string | undefined) => {
             return <BodyMarkerComponent />
         case 'latest-truck':
             return <LatestTruckComponent />
+        case 'used-trucks':
+            return <UsedTruck />
         default:
             return <h1>Not Found page</h1>;
     }
