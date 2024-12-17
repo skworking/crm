@@ -49,47 +49,50 @@ const UsedTruck = () => {
                 point: "Examine the vehicle in broad daylight",
             },
             {
-                point:"Make a thorough examination by viewing the chassis, suspension, electric wiring, body quality, sealants, oil filters, air filter, transmission and finally of the engine. Look specially for signs of rusting or broken joints and welds. An under the vehicle inspection is best."
+                point: "Make a thorough examination by viewing the chassis, suspension, electric wiring, body quality, sealants, oil filters, air filter, transmission and finally of the engine. Look specially for signs of rusting or broken joints and welds. An under the vehicle inspection is best."
             },
             {
-                point:"Check the cargo bed for rust, broken joints, weak plates etc. Assess rigidity and quality."
+                point: "Check the cargo bed for rust, broken joints, weak plates etc. Assess rigidity and quality."
             },
             {
-                point:"Check fluids viz. engine oil, brake fluid, coolant, power steering fluids and transmission fluids."
+                point: "Check fluids viz. engine oil, brake fluid, coolant, power steering fluids and transmission fluids."
             },
             {
-                point:"Check all the tire treads and understand whether the tires on the vehicle have been the relevant ones for the application used till now and will be the relevant ones for the application you would be using the vehicle for. Assess after how many more kilometers of use the tires would need replacement."
+                point: "Check all the tire treads and understand whether the tires on the vehicle have been the relevant ones for the application used till now and will be the relevant ones for the application you would be using the vehicle for. Assess after how many more kilometers of use the tires would need replacement."
             },
             {
-                point:"With the above in mind, start the vehicle, let it idle and then accelerate and listen carefully to the engine sound for any issues."
+                point: "With the above in mind, start the vehicle, let it idle and then accelerate and listen carefully to the engine sound for any issues."
             },
             {
-                point:" Now drive the vehicle around on road, off-road to assess power, smoothness of transmission, chassis noise, engine heat, vehicle vibration and finally the suspension and engine quality."
+                point: " Now drive the vehicle around on road, off-road to assess power, smoothness of transmission, chassis noise, engine heat, vehicle vibration and finally the suspension and engine quality."
             }
         ]
     }
     return (
-        <div className='relative space-y-2'>
+        <div className='relative flex-col space-y-10'>
             <div className={`w-full  lg:h-[600px] h-[200px] relative `}>
                 {/* Background Image */}
                 <Image
                     src={"https://truckcdn.cardekho.com/pwa/img/banner_ute.png"}
                     alt={"title"}
                     fill
+                    // className="h-20 w-full rounded-t-md object-contain"
+                    // heig?ht={0}
+                    // width?={0}
                     sizes="100vw"
-                    className="object-cover w-full h-full"
+                    className="object-cover w-full h-[50%]"
                 />
 
                 {/* Red Circle & Text Content */}
-                <div className="absolute max-w-7xl inset-0 flex items-center overflow-hidden m-auto ">
+                <div className="absolute max-w-7xl inset-0 flex items-center lg:overflow-visible overflow-hidden m-auto ">
                     <div className="relative lg:ml-[50px] flex items-center  justify-center lg:w-[600px] lg:h-[600px] w-[350px] h-[350px] bg-[#d94025] bg-opacity-[.95] mix-blend-multiply rounded-full lg:bottom-20"></div>
 
                     {/* Title */}
                     <div className="absolute hidden lg:flex flex-col inset-y-20 items-start max-w-3xl p-4 m-auto">
-                        <h1 className="text-white font-bold lg:text-[49px] text-[20px] px-7">
+                        <h1 className="text-white font-serif lg:text-[48px] text-[20px] px-7">
                             Interested in buying used trucks
                         </h1>
-                        {truckOffers.map((item,index) => {
+                        {truckOffers.map((item, index) => {
                             return (
                                 <div key={index} className="text-white inline-flex items-center font-bold text-[20px] px-7">
                                     <span className='m-2 rounded-full bg-white  '>
@@ -116,27 +119,32 @@ const UsedTruck = () => {
                 </div>
 
             </div>
-            <div className='m-auto bg-white'>
+
+            <div className='border-2 shadow-md rounded-md m-auto bg-white p-2'>
                 <div className='max-w-7xl m-auto gap-2'>
                     <h2 className='text-2xl text-center p-4'>What happens next</h2>
-                    <div className='max-w-7xl lg:flex border-2  rounded-md border-gray-100 gap-6'>
+                    <div className='max-w-7xl lg:flex border-2 shadow-md rounded-md border-gray-300 gap-6'>
                         <div className="lg:grid grid-cols-2 space-y-4 gap-4 p-4">
                             {processSteps.map((item, index) => (
-                                <div key={index} className="lg:inline-flex items-center border-b-[1px]">
+                                <div key={index} className="lg:flex items-center space-x-2">
                                     <span className="sm:m-2 sm:w-[25px] sm:h-[25px] text-center bg-black rounded-full ">
                                         <span className='m-2 lg:m-0 text-white'>{index + 1}</span>
                                     </span>
-                                    <span>{item}</span>
+                                    <span className='pb-2  w-full'>
+                                        {item}
+                                        <hr />
+                                    </span>
                                 </div>
                             ))}
                         </div>
                     </div>
                 </div>
             </div>
-            <div className='max-w-7xl p-4 border-2 m-auto bg-white rounded-md border-gray-100'>
+            <div className='max-w-7xl m-auto'>
+            <div className=' p-5 border-2 mb-4 bg-white rounded-lg  border-gray-200'>
                 <h2 className='text-2xl text-start '>{usedDetails.heading}</h2>
                 <div className='space-y-3'>
-                    {usedDetails.desc.map((item,index) => {
+                    {usedDetails.desc.map((item, index) => {
                         return (
                             <div key={index} className='flex-col text-[rgba(36,39,44,.7)]'>
                                 {item}
@@ -171,6 +179,7 @@ const UsedTruck = () => {
                     })}
                 </div>
 
+            </div>
             </div>
         </div>
     )

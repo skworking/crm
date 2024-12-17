@@ -1,5 +1,7 @@
-import { useState } from "react";
-import { TextField, MenuItem, Select, Checkbox, FormControlLabel, Button, InputLabel, FormControl, SelectChangeEvent } from "@mui/material";
+import { useEffect, useState } from "react";
+import { TextField, MenuItem, Select, Checkbox, FormControlLabel, Button, InputLabel, FormControl, SelectChangeEvent, Typography } from "@mui/material";
+import { red } from "@mui/material/colors";
+import { FaWhatsapp } from "react-icons/fa";
 
 interface FormData {
   name: string;
@@ -26,28 +28,13 @@ const BuyTruckForm: React.FC = () => {
     whatsappUpdates: false,
   });
 
-  // const handleChange = (
-  //   // e: React.ChangeEvent<HTMLInputElement| HTMLTextAreaElement | HTMLSelectElement | SelectChangeEvent>
-  //   e: SelectChangeEvent | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | SelectChangeEvent>,
-  // ) => {
-
-  //   const { name, value, type, checked } = e.target;
-  //   console.log(name, value, type, checked);
-
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [name]: type === "checkbox" ? checked : value,
-  //   }));
-  // };
-
-  // Handle input changes (for text inputs, checkboxes, etc.)
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
     console.log(e.target);
 
     setFormData((prevData) => ({
       ...prevData,
-      [name]: type === "checkbox" ? (e.target as HTMLInputElement).checked  : value,
+      [name]: type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
     }));
   };
 
@@ -65,9 +52,22 @@ const BuyTruckForm: React.FC = () => {
     e.preventDefault();
     console.log(formData);
   };
+  const [isFormValid, setIsFormValid] = useState<boolean>(false);
+  useEffect(() => {
+    const isValidName = formData.name.trim().length > 0;
+    const isValidMobileNumber = /^[0-9]{10}$/.test(formData.mobileNumber); // 10-digit number check
+    const isValidPincode = formData.pincode.trim().length > 0;
+    const isValidTonnage = formData.tonnage.trim().length > 0;
+    const isValidBudget = formData.budget.trim().length > 0;
+    const isValidFuelType = formData.fuelType.trim().length > 0;
+    const isValidBrandModel = formData.brandModel.trim().length > 0;
 
+    const allValid = isValidName && isValidMobileNumber && isValidPincode && isValidTonnage && isValidBudget && isValidFuelType && isValidBrandModel;
+
+    setIsFormValid(allValid);
+  }, [formData]);
   return (
-    <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full mx-auto">
+    <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full mx-auto relative">
       <h2 className="text-2xl font-semibold mb-2">Buy Used Truck</h2>
       <p className="text-gray-600 mb-4">
         We only ask these once and your details are safe with us
@@ -162,11 +162,15 @@ const BuyTruckForm: React.FC = () => {
           />
         </div>
 
-
         <FormControlLabel
           control={
             <Checkbox
               name="bulkBuying"
+              sx={{
+                '&.Mui-checked': {
+                  color: red[600],
+                },
+              }}
               checked={formData.bulkBuying}
               onChange={handleInputChange}
             />
@@ -179,24 +183,48 @@ const BuyTruckForm: React.FC = () => {
         <FormControlLabel
           control={
             <Checkbox
+              sx={{
+                '&.Mui-checked': {
+                  color: red[600],
+                },
+              }}
               name="whatsappUpdates"
               checked={formData.whatsappUpdates}
               onChange={handleInputChange}
             />
           }
-          label="Allow updates on WhatsApp"
+          // label="Allow updates on WhatsApp"
+          label={
+            <div className="inline-flex items-baseline gap-1">
+              <div>
+                <Typography variant="body1">
+                  Allow updates on WhatsApp
+                </Typography>
+                <Typography variant="body2" sx={{ color: 'gray' }}>
+                  you can opt out anytime
+                </Typography>
+              </div>
+              <FaWhatsapp className="text-green-600" />
+            </div>
+          }
         />
-
 
         <Button
           type="submit"
           variant="contained"
-          color="primary"
           fullWidth
           size="large"
+          disabled={!isFormValid} // Button is disabled if form is not valid
+          sx={{
+            backgroundColor: isFormValid ? red[600] : 'gray',
+            '&:hover': {
+              backgroundColor: isFormValid ? red[700] : 'gray',
+            },
+          }}
         >
           Submit
         </Button>
+        
       </form>
 
       <p className="text-center text-sm text-gray-600 mt-4">
