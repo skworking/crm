@@ -9,6 +9,7 @@ import Breadcrumbs from '@/app/comman/breadCrumbs';
 import VehicleListCard from '../vehicalListCad';
 import ToolsCard from '@/app/comman/toolsCard';
 import { IoLocation } from 'react-icons/io5';
+import { useRouter } from 'next/navigation';
 
 interface OptionType {
     value?: string;
@@ -139,11 +140,16 @@ const BodyMarkerComponent = () => {
             image: 'https://truckcdn.cardekho.com/pwa/img/iconAskForPrice-1.svg',
         },
     ]
-
+    const router = useRouter();
     const handleChange = (event: React.SyntheticEvent, newValue: OptionType | null) => {
 
         if (newValue && !newValue.isHeader) {
             SetBodyMakerCity(newValue?.value ?? null);
+            // if (bodyMakerCity) {
+            //     const cityName = newValue.value === 'new-delhi' ? 'new-delhi' : encodeURIComponent(newValue?.value?.toString() ?? '');
+            //     router.push(`/en/body-maker-in-${cityName}`)
+            // }
+            router.push(`${newValue?.value ? `/en/body-maker-in-${encodeURIComponent(newValue.value.toString())}` : ''}`)
         }
     };
     return (
@@ -260,10 +266,10 @@ const BodyMarkerComponent = () => {
                                     )}
                                     ListboxProps={{
                                         style: {
-                                          maxHeight: 150, // Set the fixed height for the dropdown
-                                          overflowY: 'auto', // Enable vertical scrolling
+                                            maxHeight: 150, // Set the fixed height for the dropdown
+                                            overflowY: 'auto', // Enable vertical scrolling
                                         },
-                                      }}
+                                    }}
 
                                     renderOption={(props, option) =>
                                         option.isHeader ? (
@@ -279,7 +285,7 @@ const BodyMarkerComponent = () => {
                                                 component="li"
                                                 {...props}
                                                 sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
-                                                // className='flex gap-1 items-center'
+                                            // className='flex gap-1 items-center'
                                             >
                                                 {/* <LocationOnIcon fontSize="small" /> */}
                                                 {option.label}
@@ -294,7 +300,12 @@ const BodyMarkerComponent = () => {
                                     <div
                                         key={index}
                                         className="flex-shrink-0 items-center text-center bg-white border-[1px] shadow-lg cursor-pointer rounded-lg "
-                                        onClick={() => { SetBodyMakerCity(city?.value ?? '') }}
+                                        onClick={() => {
+                                            SetBodyMakerCity(city?.value ?? '')
+                                            if (bodyMakerCity) {
+                                                router.push(`${city?.value ?`/en/body-maker-in-${city.value}` : ''}`);
+                                            }
+                                        }}
                                     >
                                         <Image
                                             width={0}

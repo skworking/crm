@@ -110,13 +110,13 @@ interface specific {
 }
 
 type NavbarItem = {
-  menuItems: {
+  menuItems?: {
     path: string;
     label: string;
     activeClass?: string;
     hasDropdown?: boolean;
   }[];
-  links: {
+  links?: {
     href: string;
     label: string;
     icon?: string;
@@ -148,7 +148,7 @@ type NavbarItem = {
       details: TruckVariant[]
     };
     truckAlterNative?: {
-      order?:number
+      order?: number
       footerheading: string;
       url: string;
       details: AlterNativeDetails[]
@@ -161,7 +161,7 @@ type NavbarItem = {
       details: TruckCompetiters[]
     };
     truckReviews?: {
-      order?:number
+      order?: number
       heading: string;
       performance: number;
       maintenance: number;
@@ -230,7 +230,7 @@ type NavbarItem = {
       }[]
     },
     scrollSpyFetaures?: {
-      order:number,
+      order: number,
       heading: string,
       details: specific[]
     }
@@ -1189,7 +1189,7 @@ export async function GET(request: Request) {
         //   ]
         // },
         truckAlterNative: {
-          order:2,
+          order: 2,
           footerheading: "Populer Tippers",
           url: "/en/popular-truck/tippers",
           details: [
@@ -1233,7 +1233,7 @@ export async function GET(request: Request) {
           details: []
         },
         truckReviews: {
-          order:1,
+          order: 1,
           heading: '2826R',
           performance: 5,
           maintenance: 4,
@@ -1433,7 +1433,7 @@ export async function GET(request: Request) {
           ]
         },
         scrollSpyFetaures: {
-          order:1,
+          order: 1,
           heading: "BharatBenz 2826R Specs & Features",
           details: [
             {
@@ -1969,6 +1969,28 @@ export async function GET(request: Request) {
       }
     },
 
+
+    // use for body-maker content
+    "/en/body-maker-in-:city": {
+      "breadcrumb": [
+        {
+          "label": "Home",
+          "path": "/"
+        },
+        {
+          "label": "New Trucks",
+          "path": "/en/new-trucks"
+        },
+        {
+          "label": "Body Markers",
+          "path": "/en/body-maker"
+        },
+        {
+          "label": ":city",
+          "path": ""
+        }
+      ],
+    },
     "default": {
       "menuItems": [
         {
@@ -2100,40 +2122,101 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: 'Endpoint query parameter is missing' });
   }
 
-  // try {
-  //   const data = navbarData[endpoint] || navbarData['default'];
-  //   return NextResponse.json({ menuItems: data.menuItems, links: data.links, overview: data.overview, data });
-  // }
   try {
     // **Step 1: Check for a direct match**
     if (navbarData[endpoint]) {
       const data = navbarData[endpoint] || navbarData['default'];
       return NextResponse.json({ menuItems: data.menuItems, links: data.links, overview: data.overview, data });
     }
-    // **Step 2: Extract dynamic parts of the URL (brand, model, and city)**
-    const match = endpoint.match(/\/en\/trucks\/([a-zA-Z0-9-]+)\/([a-zA-Z0-9-]+)\/price-in-([a-zA-Z-]+)/);
-    const brand = match ? match[1] : null;
-    const model = match ? match[2] : null;
-    const cityName = match ? match[3] : 'new-delhi'; // Default to 'new-delhi' if not found
 
+    // **Step 2: Extract dynamic parts of the URL for truck-specific routes**
+    const truckMatch = endpoint.match(/\/en\/trucks\/([a-zA-Z0-9-]+)\/([a-zA-Z0-9-]+)\/price-in-([a-zA-Z-]+)/);
+    const brand = truckMatch ? truckMatch[1] : null;
+    const model = truckMatch ? truckMatch[2] : null;
+    const cityName = truckMatch ? truckMatch[3] : null;
 
-    // **Step 3: Try to find the specific city-based entry**
-    let data = navbarData[`/en/trucks/${brand}/${model}/price-in-${cityName}`];
-    if (!data) {
-      // If specific entry for the city is not found, look for a dynamic route like "price-in-:city"
-      data = navbarData[`/en/trucks/${brand}/${model}/price-in-:city`];
+    // **Step 3: Extract dynamic parts of the URL for body-maker routes**
+    const bodyMakerMatch = endpoint.match(/\/en\/body-maker-in-([a-zA-Z-]+)/);
+    const bodyMakerCity = bodyMakerMatch ? bodyMakerMatch[1] : null;
+    console.log("city",bodyMakerCity);
+    
+    let data = null;
 
-      if (data) {
-        // Replace ":city" placeholder with the actual city name in paths and links
-        data = JSON.parse(JSON.stringify(data).replace(/:city/g, cityName || 'new-delhi'));
-      } else {
-        // If no dynamic route found, fall back to the default
-        data = navbarData['default'];
+    // **Step 4: Try to find the specific entry for trucks**
+    if (brand && model) {
+      data = navbarData[`/en/trucks/${brand}/${model}/price-in-${cityName}`];
+      if (!data) {
+        // Look for a dynamic route like "price-in-:city"
+        data = navbarData[`/en/trucks/${brand}/${model}/price-in-:city`];
+        if (data) {
+          // Replace ":city" placeholder with the actual city name in paths and links
+          data = JSON.parse(JSON.stringify(data).replace(/:city/g, cityName || 'new-delhi'));
+        } else {
+          // Fall back to default if no city-specific data is found
+          data = navbarData['default'];
+        }
       }
     }
+    // **Step 5: Try to find the specific entry for body-maker routes**
+    else if (bodyMakerCity) {
+      data = navbarData[`/en/body-maker-in-${bodyMakerCity}`];
+      if (!data) {
+        // Look for a dynamic route like "body-maker-in-:city"
+        data = navbarData[`/en/body-maker-in-:city`];
+        if (data) {
+          // Replace ":city" placeholder with the actual city name in paths and links
+          data = JSON.parse(JSON.stringify(data).replace(/:city/g, bodyMakerCity));
+        } else {
+          // Fall back to default if no city-specific data is found
+          data = navbarData['default'];
+        }
+      }
+    } else {
+      // If neither trucks nor body-maker paths match, return the default
+      data = navbarData['default'];
+    }
+
     return NextResponse.json({ menuItems: data.menuItems, links: data.links, overview: data.overview, data });
+
   } catch (error) {
     console.error('Error reading or parsing navbar data:', error);
     return NextResponse.json({ error: 'Failed to fetch navbar data' });
   }
+
+
+  // try {
+  //   // **Step 1: Check for a direct match**
+  //   if (navbarData[endpoint]) {
+  //     const data = navbarData[endpoint] || navbarData['default'];
+  //     return NextResponse.json({ menuItems: data.menuItems, links: data.links, overview: data.overview, data });
+  //   }
+  //   // **Step 2: Extract dynamic parts of the URL (brand, model, and city)**
+  //   const match = endpoint.match(/\/en\/trucks\/([a-zA-Z0-9-]+)\/([a-zA-Z0-9-]+)\/price-in-([a-zA-Z-]+)/);
+  //   const brand = match ? match[1] : null;
+  //   const model = match ? match[2] : null;
+  //   const cityName = match ? match[3] : 'new-delhi'; // Default to 'new-delhi' if not found
+
+
+  //   // **Step 3: Try to find the specific city-based entry**
+  //   let data = navbarData[`/en/trucks/${brand}/${model}/price-in-${cityName}`];
+  //   if (!data) {
+  //     // If specific entry for the city is not found, look for a dynamic route like "price-in-:city"
+  //     data = navbarData[`/en/trucks/${brand}/${model}/price-in-:city`];
+
+  //     if (data) {
+  //       // Replace ":city" placeholder with the actual city name in paths and links
+  //       data = JSON.parse(JSON.stringify(data).replace(/:city/g, cityName || 'new-delhi'));
+  //     } else {
+  //       // If no dynamic route found, fall back to the default
+  //       data = navbarData['default'];
+  //     }
+  //   }
+  //   return NextResponse.json({ menuItems: data.menuItems, links: data.links, overview: data.overview, data });
+  // } catch (error) {
+  //   console.error('Error reading or parsing navbar data:', error);
+  //   return NextResponse.json({ error: 'Failed to fetch navbar data' });
+  // }
+
+
+
 }
