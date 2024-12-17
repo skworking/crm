@@ -18,7 +18,7 @@ const News = () => {
     const newObject = { "label": "New Trucks", "path": "/en/new-trucks" };
     const breadcrumbItems = GenerateBreadcrumbs();
     breadcrumbItems.splice(1, 0, newObject);
-    
+
     const carData = [
         {
             name: "Mahindra Treo",
@@ -94,7 +94,7 @@ const News = () => {
             imageUrl: "https://truckcdn.cardekho.com/news/25891732939573.jpg", // Add actual image URL if available
             name: "Dheeraj Nair",
             date: "Nov 30, 2024 09:32 AM",
-            url:'/en/news/detail/top-7-technologies-for-logistical-fleet-efficiency-2592'
+            url: '/en/news/detail/top-7-technologies-for-logistical-fleet-efficiency-2592'
         },
         {
             id: 2,
@@ -162,22 +162,22 @@ const News = () => {
             id: 8,
             heading: "Switch Mobility Joins Hands With Vertelo For Rapid Electric Vehicle Adoption",
             description:
-              "With this strategic partnership, Switch Mobility will offer its cutting-edge EV technology, and Vertelo will lease and fund the electric commercial vehicles.",
+                "With this strategic partnership, Switch Mobility will offer its cutting-edge EV technology, and Vertelo will lease and fund the electric commercial vehicles.",
             profile: "K",
             imageUrl: "https://truckcdn.cardekho.com/news/25821732702775.jpg",
             name: "Ketan Birla",
             date: "Nov 27, 2024 03:43 PM",
-          },
-          {
+        },
+        {
             id: 9,
             heading: "Mahindra Zeo: Through the Urban Jungle",
             description:
-              "We drove the Mahindra Zeo in real-world conditions and achieved a range of over 170kms. And that’s not all, there are more features worth exploring.",
+                "We drove the Mahindra Zeo in real-world conditions and achieved a range of over 170kms. And that’s not all, there are more features worth exploring.",
             profile: "R",
             imageUrl: "https://truckcdn.cardekho.com/news/25811732781251.jpg",
             name: "Ritvik Gupta",
             date: "Nov 27, 2024 01:40 PM",
-          },
+        },
     ]
 
     const handleDropdownChange = (event: SelectChangeEvent<string | null>) => {
@@ -214,11 +214,18 @@ const News = () => {
                                     },
                                 }}
                             >
-                                {bodyOptions.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                        {option.label}
-                                    </MenuItem>
-                                ))}
+                                
+                                {bodyOptions.map((option) =>
+                                    option.isHeader ? (
+                                        <MenuItem disabled key={option.label}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ) : (
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    )
+                                )}
                             </Select>
                         </FormControl>
                         <button className="bg-[#d94025] text-white font-medium text-[20px] sm:px-4 px-0  rounded sm:w-1/3 w-full">Search</button>

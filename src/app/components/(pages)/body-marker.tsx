@@ -3,17 +3,18 @@ import { GenerateBreadcrumbs } from '@/app/comman/commanFunctions';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react'
 import Dropdown from '@/app/comman/dorpdown';
-import { SelectChangeEvent } from '@mui/material';
+import { Autocomplete, Box, InputAdornment, MenuItem, SelectChangeEvent, TextField } from '@mui/material';
 import { useLocation } from '@/app/context/locationContext';
 import Breadcrumbs from '@/app/comman/breadCrumbs';
 import VehicleListCard from '../vehicalListCad';
-import BrandToggleList from '@/app/comman/brandToggleList';
 import ToolsCard from '@/app/comman/toolsCard';
+import { IoLocation } from 'react-icons/io5';
 
 interface OptionType {
     value?: string;
     label: string;
     isHeader?: boolean;
+    icon?: string,
 }
 
 const BodyMarkerComponent = () => {
@@ -22,25 +23,30 @@ const BodyMarkerComponent = () => {
 
     const breadcrumbItems = GenerateBreadcrumbs();
     breadcrumbItems.splice(1, 0, { label: "New Trucks", path: "/en/new-trucks" });
-    const brandOptions: OptionType[] = [
-        { label: 'POPULAR brands', isHeader: true },
-        { value: 'ashok_leyland', label: 'Ashok Leyland' },
-        { value: 'tata', label: 'Tata' },
-        { value: 'mahindra', label: 'Mahindra' },
-        { value: 'eicher', label: 'Eicher' },
-    ];
-    const cityOptions: OptionType[] = [
+
+    const locationOptions: OptionType[] = [
         { label: 'Populer Cities', isHeader: true },
-        { value: 'india', label: 'India' },
+        { value: 'hydrabad', label: 'Hyderabad' },
         { value: 'new delhi', label: 'New Delhi' },
         { value: 'jaypur', label: 'Jaypur' },
         { value: 'kanpur', label: 'Kanpur' },
     ];
 
+    const cityOptions: OptionType[] = [
+        { label: 'Populer Cities', isHeader: true },
+        { value: 'hydrabad', label: 'Hyderabad', icon: "https://truckcdn.cardekho.com/pwa/img/IconCityNew/hyderabad.svg" },
+        { value: 'new delhi', label: 'New Delhi', icon: "https://truckcdn.cardekho.com/pwa/img/IconCityNew/new-delhi.svg" },
+        { value: 'surat', label: 'Surat', icon: "https://truckcdn.cardekho.com/pwa/img/IconCityNew/surat.svg" },
+        { value: 'mumbai', label: 'Mumbai', icon: "https://truckcdn.cardekho.com/pwa/img/IconCityNew/mumbai.svg" },
+        { value: 'bangalore', label: 'Bangalore', icon: "https://truckcdn.cardekho.com/pwa/img/IconCityNew/bangalore.svg" },
+        { value: 'pune', label: 'pune', icon: "https://truckcdn.cardekho.com/pwa/img/IconCityNew/pune.svg" },
+        { value: 'kolkata', label: 'Kolkata', icon: "https://truckcdn.cardekho.com/pwa/img/IconCityNew/kolkata.svg" },
+    ];
 
-    const [selectedBrand, setSelectedBrand] = useState<string | null>('');
+
+
     const [selectedCity, setSelectedCity] = useState<string | null>(location.label);
-
+    const [bodyMakerCity, SetBodyMakerCity] = useState<string | null>(null)
     useEffect(() => {
         setSelectedCity(location.label); // Update selected city when location changes
     }, [location]);
@@ -50,14 +56,11 @@ const BodyMarkerComponent = () => {
 
         const value = event.target.value ?? '';
         switch (type) {
-            case 'brand':
-                setSelectedBrand(value);
 
-                break;
-            case 'city':
+            case 'location':
 
                 const selectedValue = value;
-                const selectedCity = cityOptions.find((city) => city.value === selectedValue);
+                const selectedCity = locationOptions.find((city) => city.value === selectedValue);
                 console.log(selectedCity);
 
                 if (selectedCity) {
@@ -98,26 +101,6 @@ const BodyMarkerComponent = () => {
         },
     ];
 
-    const brandInfo = [
-        {
-            icon: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/ashok-leyland.jpg',
-            title: 'Ashok Leyland',
-            link: '/truck-specs/ashok-leyland',
-        },
-        {
-            icon: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/tata.jpg',
-            title: 'Tata',
-            link: '/truck-specs/tata',
-        },
-        {
-            icon: 'https://truckcdn.cardekho.com/pwa/img/brandLogo_168x84/eicher.jpg',
-            title: 'Eicher',
-            link: '/truck-specs/eicher',
-        },
-
-    
-    ];
-
     const toolsArray = [
         {
             heading: 'Dealers',
@@ -156,6 +139,13 @@ const BodyMarkerComponent = () => {
             image: 'https://truckcdn.cardekho.com/pwa/img/iconAskForPrice-1.svg',
         },
     ]
+
+    const handleChange = (event: React.SyntheticEvent, newValue: OptionType | null) => {
+
+        if (newValue && !newValue.isHeader) {
+            SetBodyMakerCity(newValue?.value ?? null);
+        }
+    };
     return (
         <div className='relative'>
             <div className='lg:h-[400px] h-[200px] relative w-full'>
@@ -187,18 +177,11 @@ const BodyMarkerComponent = () => {
 
                     <div className='max-w-7xl'>
                         <div className="relative z-5  p-4  gap-4 lg:flex">
-                            <Dropdown
-                                options={brandOptions}
-                                value={selectedBrand}
-                                onChange={(e) => handleDropdownChange(e, 'brand')}
-                                placeholder="Select Brand"
-                                ariaLabel="Brand Selection"
-                            />
 
                             <Dropdown
-                                options={cityOptions}
+                                options={locationOptions}
                                 value={selectedCity}
-                                onChange={(e) => handleDropdownChange(e, 'city')}
+                                onChange={(e) => handleDropdownChange(e, 'location')}
                                 placeholder="Select City"
                                 ariaLabel="Model Selection"
                             />
@@ -217,18 +200,11 @@ const BodyMarkerComponent = () => {
 
                     <div className='lg:w-full'>
                         <div className="relative z-5 bg-white p-4  gap-4 lg:flex">
-                            <Dropdown
-                                options={brandOptions}
-                                value={selectedBrand}
-                                onChange={(e) => handleDropdownChange(e, 'brand')}
-                                placeholder="Select Brand"
-                                ariaLabel="Brand Selection"
-                            />
 
                             <Dropdown
-                                options={cityOptions}
+                                options={locationOptions}
                                 value={selectedCity}
-                                onChange={(e) => handleDropdownChange(e, 'city')}
+                                onChange={(e) => handleDropdownChange(e, 'location')}
                                 placeholder="Select Model"
                                 ariaLabel="Model Selection"
                             />
@@ -255,25 +231,87 @@ const BodyMarkerComponent = () => {
                 <div className="lg:flex border-b-2  rounded-b-md border-gray-100 gap-4 ">
                     <div className="w-full lg:w-8/12 xl:w-[73.50%] space-y-4 mb-4 md:p-5 xl:p-0 " >
                         <h2 className='p-[17px 20px 0px] text-xl lg:text-[30px] font-bold mb-5 '>
-                            Truck Spare Parts
+                            Trucks Body Makers in india
                         </h2>
-                        <BrandToggleList
-                            title="Truck Spare Parts by Brand"
-                            data={brandInfo}
-                            gridcols="grid-cols-4"  // Customize the number of columns
-                            gap="gap-6"             // Customize the gap between items
-                            pad="p-4"               // Customize padding
-                            initialVisible={2}      // Show 6 items initially
-                        />
 
-                        <div className='border rounded-[16px]  mb-3 flex flex-col p-4 bg-white gap-2  relative'>
-                            <h2 className='p-[17px 20px 0px] text-xl font-bold '>
-                                Truck Service Centers in India
-                            </h2>
-                            <p className='text-[rgba(36,39,44,.7)]'>
-                                TrucksDekho lists 8476 truck dealers in India spread across 702 cities. Complete listing of Dealerships available across 37 brands. Locate authorized truck showrooms in your own city in India by just clicking on your preferred truck brand.
-                            </p>
+                        <div className={`border rounded-[16px] p-4 mb-3 flex flex-col  bg-white gap-2  relative bg-[url('https://stimg.cardekho.com/pwa/img/cityBackground.svg')] bg-contain bg-no-repeat h-[500px]`}>
+                            <div className='flex justify-between gap-2'>
+                                <h2 className='p-[17px 20px 0px]  text-xl font-bold '>
+                                    {cityOptions.length} Body Makers
+                                </h2>
+                                <Autocomplete
+                                    options={cityOptions}
+                                    getOptionLabel={(option) => option.label}
+                                    value={cityOptions.find(option => option.value === bodyMakerCity) || null}
+                                    onChange={handleChange}
+                                    renderInput={(params) => (
+                                        <TextField {...params} label="Search your city"
+                                            variant="outlined"
+                                            InputProps={{
+                                                ...params.InputProps,
+                                                startAdornment: (
+                                                    <InputAdornment position="start">
+                                                        <IoLocation />
+                                                    </InputAdornment>
+                                                ),
+                                            }}
+                                        />
+
+                                    )}
+                                    ListboxProps={{
+                                        style: {
+                                          maxHeight: 150, // Set the fixed height for the dropdown
+                                          overflowY: 'auto', // Enable vertical scrolling
+                                        },
+                                      }}
+
+                                    renderOption={(props, option) =>
+                                        option.isHeader ? (
+                                            <MenuItem
+                                                disabled
+                                                key={option.label}
+                                                sx={{ fontWeight: 'bold', backgroundColor: '#f0f0f0' }}
+                                            >
+                                                {option.label}
+                                            </MenuItem>
+                                        ) : (
+                                            <Box
+                                                component="li"
+                                                {...props}
+                                                sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
+                                                // className='flex gap-1 items-center'
+                                            >
+                                                {/* <LocationOnIcon fontSize="small" /> */}
+                                                {option.label}
+                                            </Box>
+                                        )
+                                    }
+                                    sx={{ width: 500 }} // Custom width
+                                />
+                            </div>
+                            <div className="grid lg:grid-cols-6 md:grid-cols-4 grid-cols-2 gap-2">
+                                {cityOptions.filter((city) => !city.isHeader).map((city, index) => (
+                                    <div
+                                        key={index}
+                                        className="flex-shrink-0 items-center text-center bg-white border-[1px] shadow-lg cursor-pointer rounded-lg "
+                                        onClick={() => { SetBodyMakerCity(city?.value ?? '') }}
+                                    >
+                                        <Image
+                                            width={0}
+                                            height={0}
+                                            sizes='100vw'
+                                            src={`${city?.icon}`}
+                                            alt={city.label}
+                                            className="w-[120px] h-[120px] object-cover m-auto rounded-full mb-4"
+                                        />
+
+                                        <p className="text-[12px] ">{city.value}</p>
+
+                                    </div>
+                                ))}
+                            </div>
                         </div>
+
                         <div className='border rounded-[16px] p-4 mb-3 flex flex-col  bg-white gap-2  relative'>
                             <h2 className='p-[17px 20px 0px]  text-xl font-bold '>
                                 Tools & Services
