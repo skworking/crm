@@ -1,6 +1,7 @@
 'use client'
 
 import Breadcrumbs from '@/app/comman/breadCrumbs';
+import BodyMakerIn from '@/app/components/(pages)/body-maker-in/page';
 import BodyMarkerComponent from '@/app/components/(pages)/body-marker';
 import DealersComponent from '@/app/components/(pages)/dealers';
 import LatestTruckComponent from '@/app/components/(pages)/latestTruck';
@@ -10,16 +11,40 @@ import ScvComponent from '@/app/components/(pages)/scv';
 import ServiceComponent from '@/app/components/(pages)/service';
 import SpareComponent from '@/app/components/(pages)/spareparts';
 import UsedTruck from '@/app/components/(pages)/usedTruck';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
+
+
+interface City {
+    label: string;
+    path: string
+}
+
+interface TruckData {
+    page: string;
+    banner?: string;
+    body: Record<string, string>;
+    breadcrumb?: City[];
+}
 const DynamicContent = () => {
     const pathname = usePathname();
-    // const breadcrumbItems = GenerateBreadcrumbs(); // Pass pathname to generate breadcrumbs
-    const [breadcrums, setBreadCrum] = useState([])
-    // const [data, setData] = useState({});
-    console.log(breadcrums);
-    
+    const [breadcrums, setBreadCrum] = useState<City[]>([])
+    const [data, setData] = useState<TruckData | null>(null)
+
+    const renderContentPage = (category: string) => {
+
+        switch (category) {
+            case 'body-maker-in':
+                return <BodyMakerIn /* data={data && data} */ /* city={data?.breadcrumb && data?.breadcrumb || [{ label: "new-delhi", path: "" }]} */ />
+
+            default:
+                return "Page Not Found";
+        }
+    };
+
+
     useEffect(() => {
         const fetchMenuData = async () => {
             try {
@@ -27,7 +52,7 @@ const DynamicContent = () => {
                 const responseData = await response.json();
                 console.log('API Response:', responseData);
                 setBreadCrum(responseData.data.breadcrumb)
-                // setData(responseData.data.body);
+                setData(responseData.data.body);
             } catch (error) {
                 console.error('Failed to fetch navbar data:', error);
             }
@@ -36,9 +61,20 @@ const DynamicContent = () => {
         fetchMenuData();
     }, [pathname]);
 
+
     return (
         <>
+            {data?.banner &&
+                <Image
+                    width={0}
+                    height={0}
+                    sizes="100vw"
+                    className="object-cover  w-[1024px] m-auto my-5 h-[100px] "
+                    src={data.banner}
+                    alt='' />
+            }
             <Breadcrumbs items={breadcrums} />
+            {renderContentPage(data?.page ?? '')}
         </>
     );
 };

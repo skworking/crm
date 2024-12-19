@@ -137,8 +137,10 @@ type NavbarItem = {
   breadcrumb?: BreadCrumb[]
 
   body?: {
+    banner?: string,
+    page?: string,
     heading?: string;
-    truckDetails: {
+    truckDetails?: {
       url: string;
       details: TruckDetail[]
     };
@@ -233,6 +235,13 @@ type NavbarItem = {
       order: number,
       heading: string,
       details: specific[]
+    },
+    truckTools?: {
+      heading?: string,
+      details?: {
+        heading?: string,
+        image?: string
+      }[]
     }
 
   };
@@ -1990,6 +1999,82 @@ export async function GET(request: Request) {
           "path": ""
         }
       ],
+      body: {
+        banner: "https://tpc.googlesyndication.com/simgad/6722130308841076667",
+        page: "body-maker-in",
+        heading: "Trucks Body Makers in india",
+        truckDealers: {
+          details: [
+            {
+              name: "Wasan Trucking",
+              address: "Wasan house, 5th floor , Plot No 4, swastik park , Sion - Trombay Road , Chembur 400071",
+              phone: "+917021662912",
+              contact: "Contact Dealer"
+            },
+            {
+              name: "Wasan Trucking",
+              address: "Unit -28, Ajay Mittal ind estate, Building no.1, Mittal estate, Marol Naka, Andheri (East),Mumbai 400059",
+              contact: "Contact Dealer"
+            },
+            {
+              name: "Wasan Trucking",
+              address: "Shop no.24, BGTA Godavari Co. society, G1, MMRDA Wadala Truck terminal, Near Wadala RTO, Mumbai 400037",
+              contact: "Contact Dealer"
+            },
+            {
+              name: "Wasan Trucking",
+              address: "Wasan House, 5th Floor, Plot No. 4, Swastik Park, Sion Trombay Road, Chembur 400071",
+              contact: "Contact Dealer"
+            },
+            {
+              name: "Wasan Trucking",
+              address: "Wasan House, 5th Floor, Plot No. 4, Swastik Park, Sion Trombay Road, Chembur 400071",
+              contact: "Contact Dealer"
+            }
+          ]
+        },
+        truckTools: {
+          heading: "Tools & Services",
+          details: [
+            {
+              heading: 'Dealers',
+              image: 'https://truckcdn.cardekho.com/pwa/img/iconDealers-1.svg',
+            },
+            {
+              heading: 'Service Centers',
+              image: 'https://truckcdn.cardekho.com/pwa/img/iconServiceCenters-1.svg',
+            },
+            {
+              heading: 'Spare Parts',
+              image: 'https://truckcdn.cardekho.com/pwa/img/iconSpareParts-1.svg',
+            },
+            {
+              heading: 'Body Makers',
+              image: 'https://truckcdn.cardekho.com/pwa/img/iconBodyMakers-1.svg',
+            },
+            {
+              heading: 'Videos',
+              image: 'https://truckcdn.cardekho.com/pwa/img/iconVideos-1.svg',
+            },
+            {
+              heading: 'Brochures',
+              image: 'https://truckcdn.cardekho.com/pwa/img/iconBrochures-1.svg',
+            },
+            {
+              heading: 'Emi Calculator',
+              image: 'https://truckcdn.cardekho.com/pwa/img/iconEmiCalculator-1.svg',
+            },
+            {
+              heading: 'Compare Trucks',
+              image: 'https://truckcdn.cardekho.com/pwa/img/iconCompareTrucks-1.svg',
+            },
+            {
+              heading: 'Ask For Price',
+              image: 'https://truckcdn.cardekho.com/pwa/img/iconAskForPrice-1.svg',
+            },
+          ]
+        }
+      }
     },
     "default": {
       "menuItems": [
@@ -2138,8 +2223,8 @@ export async function GET(request: Request) {
     // **Step 3: Extract dynamic parts of the URL for body-maker routes**
     const bodyMakerMatch = endpoint.match(/\/en\/body-maker-in-([a-zA-Z-]+)/);
     const bodyMakerCity = bodyMakerMatch ? bodyMakerMatch[1] : null;
-    console.log("city",bodyMakerCity);
-    
+    console.log("city", bodyMakerCity);
+
     let data = null;
 
     // **Step 4: Try to find the specific entry for trucks**
@@ -2182,41 +2267,6 @@ export async function GET(request: Request) {
     console.error('Error reading or parsing navbar data:', error);
     return NextResponse.json({ error: 'Failed to fetch navbar data' });
   }
-
-
-  // try {
-  //   // **Step 1: Check for a direct match**
-  //   if (navbarData[endpoint]) {
-  //     const data = navbarData[endpoint] || navbarData['default'];
-  //     return NextResponse.json({ menuItems: data.menuItems, links: data.links, overview: data.overview, data });
-  //   }
-  //   // **Step 2: Extract dynamic parts of the URL (brand, model, and city)**
-  //   const match = endpoint.match(/\/en\/trucks\/([a-zA-Z0-9-]+)\/([a-zA-Z0-9-]+)\/price-in-([a-zA-Z-]+)/);
-  //   const brand = match ? match[1] : null;
-  //   const model = match ? match[2] : null;
-  //   const cityName = match ? match[3] : 'new-delhi'; // Default to 'new-delhi' if not found
-
-
-  //   // **Step 3: Try to find the specific city-based entry**
-  //   let data = navbarData[`/en/trucks/${brand}/${model}/price-in-${cityName}`];
-  //   if (!data) {
-  //     // If specific entry for the city is not found, look for a dynamic route like "price-in-:city"
-  //     data = navbarData[`/en/trucks/${brand}/${model}/price-in-:city`];
-
-  //     if (data) {
-  //       // Replace ":city" placeholder with the actual city name in paths and links
-  //       data = JSON.parse(JSON.stringify(data).replace(/:city/g, cityName || 'new-delhi'));
-  //     } else {
-  //       // If no dynamic route found, fall back to the default
-  //       data = navbarData['default'];
-  //     }
-  //   }
-  //   return NextResponse.json({ menuItems: data.menuItems, links: data.links, overview: data.overview, data });
-  // } catch (error) {
-  //   console.error('Error reading or parsing navbar data:', error);
-  //   return NextResponse.json({ error: 'Failed to fetch navbar data' });
-  // }
-
 
 
 }

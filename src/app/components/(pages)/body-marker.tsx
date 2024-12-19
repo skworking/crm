@@ -36,7 +36,7 @@ const BodyMarkerComponent = () => {
     const cityOptions: OptionType[] = [
         { label: 'Populer Cities', isHeader: true },
         { value: 'hydrabad', label: 'Hyderabad', icon: "https://truckcdn.cardekho.com/pwa/img/IconCityNew/hyderabad.svg" },
-        { value: 'new delhi', label: 'New Delhi', icon: "https://truckcdn.cardekho.com/pwa/img/IconCityNew/new-delhi.svg" },
+        { value: 'new-delhi', label: 'New Delhi', icon: "https://truckcdn.cardekho.com/pwa/img/IconCityNew/new-delhi.svg" },
         { value: 'surat', label: 'Surat', icon: "https://truckcdn.cardekho.com/pwa/img/IconCityNew/surat.svg" },
         { value: 'mumbai', label: 'Mumbai', icon: "https://truckcdn.cardekho.com/pwa/img/IconCityNew/mumbai.svg" },
         { value: 'bangalore', label: 'Bangalore', icon: "https://truckcdn.cardekho.com/pwa/img/IconCityNew/bangalore.svg" },
@@ -145,11 +145,8 @@ const BodyMarkerComponent = () => {
 
         if (newValue && !newValue.isHeader) {
             SetBodyMakerCity(newValue?.value ?? null);
-            // if (bodyMakerCity) {
-            //     const cityName = newValue.value === 'new-delhi' ? 'new-delhi' : encodeURIComponent(newValue?.value?.toString() ?? '');
-            //     router.push(`/en/body-maker-in-${cityName}`)
-            // }
-            router.push(`${newValue?.value ? `/en/body-maker-in-${encodeURIComponent(newValue.value.toString())}` : ''}`)
+            
+            router.push(`${newValue?.value ? `/en/body-maker-in-${newValue.value}` : ''}`)
         }
     };
     return (
@@ -302,9 +299,8 @@ const BodyMarkerComponent = () => {
                                         className="flex-shrink-0 items-center text-center bg-white border-[1px] shadow-lg cursor-pointer rounded-lg "
                                         onClick={() => {
                                             SetBodyMakerCity(city?.value ?? '')
-                                            if (bodyMakerCity) {
-                                                router.push(`${city?.value ?`/en/body-maker-in-${city.value}` : ''}`);
-                                            }
+                                            router.push(`${city?.value ? `/en/body-maker-in-${city.value}` : ''}`);
+
                                         }}
                                     >
                                         <Image

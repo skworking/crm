@@ -21,6 +21,11 @@ export const LocationProvider = ({ children }) => {
       if (newPath !== currentPath) {
         router.push(newPath); // Use router.replace if you don't want to keep history
       }
+    } else if (currentPath.includes('/body-maker-in-')) {
+      const newPath = currentPath.replace(/\/body-maker-in-[^/]+/, `/body-maker-in-${city.value.toLowerCase()}`)
+      if (newPath !== currentPath) {
+        router.push(newPath); // Use router.replace if you don't want to keep history
+      }
     }
   }
 

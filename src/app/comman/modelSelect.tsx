@@ -5,7 +5,7 @@ import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 interface ModalProps {
     isModalOpen: boolean;
-    options: { label: string; value: string }[];
+    options: { label: string; value: string, isHeader?: boolean }[];
     selectedOption: string;
     handleSelectCity: (city: { label: string; value: string }) => void;
     closeModal: () => void;
@@ -29,15 +29,15 @@ const Modal: React.FC<ModalProps> = ({
         setOpen(true); // Open the dropdown when the user interacts with it
     };
     const handleChange = (event: SelectChangeEvent<string>) => {
-        
+
         const selectedValue = event.target.value;
         const selectedCity = options.find((city) => city.value === selectedValue);
-        
+
         if (selectedCity) {
-          handleSelectCity(selectedCity);
+            handleSelectCity(selectedCity);
         }
         closeModal(); // Close modal after selection
-      };
+    };
     return (
         <>
             {isModalOpen && (
@@ -72,7 +72,7 @@ const Modal: React.FC<ModalProps> = ({
                                     value={selectedOption}
                                     onChange={handleChange}
                                     displayEmpty
-                                    open={open} 
+                                    open={open}
                                     onOpen={handleDropdownOpen}
                                     onClose={() => setOpen(false)}
                                     inputProps={{ "aria-label": "Without label" }}
@@ -94,11 +94,18 @@ const Modal: React.FC<ModalProps> = ({
                                         },
                                     }}
                                 >
-                                    {options.map((city) => (
-                                        <MenuItem key={city.value} value={city.value}>
-                                            {city.label}
-                                        </MenuItem>
-                                    ))}
+                                    {options.map((city) =>
+                                        city.isHeader ? (
+                                            <MenuItem disabled key={city.label}>
+                                                {city.label}
+                                            </MenuItem>
+                                        ) : (
+                                            <MenuItem key={city.value} value={city.value}>
+                                                {city.label}
+                                            </MenuItem>
+                                        )
+                                    )}
+                                   
                                 </Select>
 
                             </FormControl>

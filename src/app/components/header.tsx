@@ -120,9 +120,9 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                     ]
                 },
                 {
-                    title:"series",
-                    subMenu:[
-                        {title:"Tata Ace",link:"/en/truck/tata-ace"}
+                    title: "series",
+                    subMenu: [
+                        { title: "Tata Ace", link: "/en/truck/tata-ace" }
                     ]
                 }
             ],
@@ -427,7 +427,7 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                                                                 <li key={nestedIndex} className="border-[1px]">
                                                                     <Link href={nestedItem.link} title={nestedItem.title}>
                                                                         <label className="block px-4 py-2 hover:bg-gray-100 text-[rgba(36,39,44,.7)]">
-                                                                            {nestedItem.title} 
+                                                                            {nestedItem.title}
                                                                         </label>
                                                                     </Link>
                                                                 </li>
@@ -455,9 +455,15 @@ const Header: React.FC<HeaderProps> = ({ isSticky }) => {
                                 isModalOpen={isModalOpen}
                                 selectedOption={location.value}
                                 options={[
-                                    { label: "Jaipur", value: "jaipur" },
-                                    { label: "New Delhi", value: "delhi" },
-                                    { label: "India", value: "india" }
+                                    { value: '', label: 'Populer Cities', isHeader: true },
+                                    { label: "Indore", value: "indore" },
+                                    { value: 'hydrabad', label: 'Hyderabad' },
+                                    { value: 'new-delhi', label: 'New Delhi' },
+                                    { value: 'surat', label: 'Surat' },
+                                    { value: 'mumbai', label: 'Mumbai' },
+                                    { value: 'bangalore', label: 'Bangalore' },
+                                    { value: 'pune', label: 'pune' },
+                                    { value: 'kolkata', label: 'Kolkata' },
                                 ]} // Example data
                                 closeModal={closeModal}
                                 handleSelectCity={handleSelectCity}
